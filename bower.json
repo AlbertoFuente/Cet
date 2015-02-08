@@ -16,7 +16,6 @@
     "tests"
   ],
   "devDependencies": {
-    "materialize": "~0.95.1",
-    "gulp": "~3.8.10"
+    "materialize": "~0.95.1"
   }
 }
