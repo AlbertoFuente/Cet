@@ -55,14 +55,14 @@ function tableEffects(trClass, tdClass, eventName, table, status) {
                 if (isNumeric) {
                     val.sort(function(a, b){return a-b});
                 } else {
-                    val.sort();
+                    val.reverse();
                 }
                 printNewBody(val, column);
             } else {
                 if (isNumeric) {
                     val.sort(function(a, b){return b-a});
                 } else {
-                    val.reverse();
+                    val.sort();
                 }
                 printNewBody(val, column);
             }
