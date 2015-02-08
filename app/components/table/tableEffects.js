@@ -49,7 +49,6 @@ function tableEffects(trClass, tdClass, eventName, table, status) {
                     "value": tds[i].childNodes[0].value
                 });
                 val.push(tds[i].childNodes[0].value);
-                console.log(val);
             }
 
             if (status === "down") {
@@ -58,7 +57,6 @@ function tableEffects(trClass, tdClass, eventName, table, status) {
                 } else {
                     val.sort();
                 }
-                console.log(val);
                 printNewBody(val, column);
             } else {
                 if (isNumeric) {
@@ -66,7 +64,6 @@ function tableEffects(trClass, tdClass, eventName, table, status) {
                 } else {
                     val.reverse();
                 }
-                console.log(val);
                 printNewBody(val, column);
             }
             break;
