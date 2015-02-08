@@ -1,4 +1,4 @@
-function tableEffects(trClass, tdClass, eventName, table, status) {
+function tableEffects(trClass, tdClass, eventName, table, status, thisHolder) {
     var tr = $("."+trClass),
         td = $("."+tdClass),
         char = tdClass.slice(-1),
@@ -20,26 +20,8 @@ function tableEffects(trClass, tdClass, eventName, table, status) {
                 i = 0,
                 column = [],
                 val = [],
-                newColumn = [],
                 num = /^\d+$/,
                 isNumeric = false;
-
-            function printNewBody(val, column) {
-                var tableBody = table.childNodes[1],
-                    i = 0;
-
-                $(tableBody).empty();
-
-                for (i; i < val.length; i++) {
-                    for (var j = 0; j < column.length; j++) {
-                        if (val[i] === column[j].value) {
-                            newColumn.push(column[j].tr);
-                        }
-                    }
-                }
-
-                $(tableBody).append(newColumn);
-            }
 
             for (i; i < tds.length; i++) {
                 isNumeric = !!num.test(tds[i].childNodes[0].value);
@@ -57,14 +39,14 @@ function tableEffects(trClass, tdClass, eventName, table, status) {
                 } else {
                     val.reverse();
                 }
-                printNewBody(val, column);
+                thisHolder.printNewBody(val, column, table);
             } else {
                 if (isNumeric) {
                     val.sort(function(a, b){return b-a});
                 } else {
                     val.sort();
                 }
-                printNewBody(val, column);
+                thisHolder.printNewBody(val, column, table);
             }
             break;
     }

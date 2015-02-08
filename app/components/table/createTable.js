@@ -40,6 +40,24 @@
             }
         };
 
+        this.printNewBody = function (val, column, table) {
+            var tableBody = table.childNodes[1],
+                newColumn = [],
+                i = 0;
+
+            $(tableBody).empty();
+
+            for (i; i < val.length; i++) {
+                for (var j = 0; j < column.length; j++) {
+                    if (val[i] === column[j].value) {
+                        newColumn.push(column[j].tr);
+                    }
+                }
+            }
+
+            $(tableBody).append(newColumn);
+        };
+
         /**
          * table constructor
          * @param _cetTable {Object}
@@ -168,7 +186,7 @@
                         }
                     }
 
-                    tableEffects(thClass, tdClass, eventName, table, status);
+                    tableEffects(thClass, tdClass, eventName, table, status, thisHolder);
                 });
 
                 // datepicker
