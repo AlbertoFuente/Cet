@@ -133,39 +133,42 @@
                 $(inputs).hover(function () {
                     var trClass = this.parentNode.parentNode.className,
                         tdClass = this.parentNode.className,
-                        event = "hover";
-                    tableEffects(trClass,tdClass,event);
+                        eventName = "hover";
+                    tableEffects(trClass,tdClass,eventName);
                 });
                 // mouse out
                 $(inputs).mouseout(function () {
                     var trClass = this.parentNode.parentNode.className,
                         tdClass = this.parentNode.className,
-                        event = "out";
-                    tableEffects(trClass,tdClass,event);
+                        eventName = "out";
+                    tableEffects(trClass,tdClass,eventName);
                 });
                 // icon sort
                 $(icons).click(function() {
                    var thClass = this.parentNode.className,
                        tdNum = thClass.slice(-1),
                        tdClass = "td" + tdNum,
-                       event = "sort",
+                       eventName = "sort",
                        downClass = "mdi-hardware-keyboard-arrow-down sortIcon",
                        upClass = "mdi-hardware-keyboard-arrow-up sortIcon",
                        ics = table.getElementsByTagName('i'),
-                       i = 0;
+                       i = 0,
+                       status = "down";
 
                     // check class
                     if (this.className === downClass) {
                         for (i; i < ics.length; i++) {
                             ics[i].className = upClass;
+                            status = "up";
                         }
                     } else {
                         for (i; i < ics.length; i++) {
                             ics[i].className = downClass;
+                            status = "down";
                         }
                     }
 
-                    tableEffects(thClass, tdClass, event);
+                    tableEffects(thClass, tdClass, eventName, table, status);
                 });
 
                 // datepicker

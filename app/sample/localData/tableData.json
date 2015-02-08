@@ -4,7 +4,7 @@
       "th1": "Name",
       "th2": "Description",
       "th3": "Creation Date",
-      "th4": "Ranking"
+      "th4": "Contributors"
     },
     "body": {
       "tr1": {
@@ -14,17 +14,17 @@
           "edit": false
         },
         "td2": {
-          "data": "Description",
+          "data": "AngularJS, commonly referred to as Angular, is an open-source web application framework maintained by Google and a community of individual developers and corporations to address many of the challenges encountered in developing single-page applications. Its goal is to simplify both development and testing of such applications by providing a framework for client-side model–view–controller (MVC) architecture, along with components commonly used in rich internet applications.",
           "type": "text",
           "edit": true
         },
         "td3": {
-          "data": "23 October, 2009",
+          "data": "09 July, 2010",
           "type": "date",
           "edit": true
         },
         "td4": {
-          "data": "500",
+          "data": "450",
           "type": "text",
           "edit": true
         }
@@ -36,17 +36,17 @@
           "edit": false
         },
         "td2": {
-          "data": "Description",
+          "data": "Ember.js is an open-source client-side JavaScript web application framework based on the model-view-controller (MVC) software architectural pattern. It allows developers to create scalable single-page applications by incorporating common idioms and best practices into a framework that provides a rich object model, declarative two-way data binding, computed properties, automatically-updating templates powered by Handlebars.js, and a router for managing application state.",
           "type": "text",
           "edit": true
         },
         "td3": {
-          "data": "23 October, 2009",
+          "data": "23 December, 2011",
           "type": "date",
           "edit": true
         },
         "td4": {
-          "data": "400",
+          "data": "403",
           "type": "text",
           "edit": true
         }
@@ -58,17 +58,17 @@
           "edit": false
         },
         "td2": {
-          "data": "Description",
+          "data": "Backbone.js is a JavaScript library with a RESTful JSON interface and is based on the model–view–presenter (MVP) and Actor model application design paradigm. Backbone is known for being lightweight, as its only dependency is on one JavaScript library, Underscore.js. It is designed for developing single-page web applications, and for keeping various parts of web applications (e.g. multiple clients and the server) synchronized. Backbone was created by Jeremy Ashkenas, who is also known for CoffeeScript.",
           "type": "text",
           "edit": true
         },
         "td3": {
-          "data": "23 October, 2009",
+          "data": "20 March, 2010",
           "type": "date",
           "edit": true
         },
         "td4": {
-          "data": "300",
+          "data": "247",
           "type": "text",
           "edit": true
         }
@@ -80,17 +80,17 @@
           "edit": false
         },
         "td2": {
-          "data": "Description",
+          "data": "Knockout was developed and is maintained as an open source project by Steve Sanderson, a Microsoft employee. As the author said, it continues exactly as-is, and will evolve in whatever direction I and its user community wishes to take it, and stressed, this isn’t a Microsoft product.",
           "type": "text",
           "edit": true
         },
         "td3": {
-          "data": "23 October, 2009",
+          "data": "05 July, 2010",
           "type": "date",
           "edit": true
         },
         "td4": {
-          "data": "200",
+          "data": "49",
           "type": "text",
           "edit": true
         }
@@ -102,17 +102,17 @@
           "edit": false
         },
         "td2": {
-          "data": "Description",
+          "data": "Meteor, or MeteorJS is an open-source real-time JavaScript web application framework written on top of Node.js. While production-ready and used by a number of high-profile startups, Meteor allows for very rapid prototyping and produces cross-platform (web, Android, iOS) code.[6] It integrates tightly with MongoDB and uses the Distributed Data Protocol and a publish–subscribe pattern to automatically propagate data changes to clients in real-time without requiring the developer to write any synchronization code. On the client, Meteor depends on jQuery and can be used with any JavaScript UI widget library.",
           "type": "text",
           "edit": true
         },
         "td3": {
-          "data": "23 October, 2009",
+          "data": "23 October, 2012",
           "type": "date",
           "edit": true
         },
         "td4": {
-          "data": "350",
+          "data": "177",
           "type": "text",
           "edit": true
         }
