@@ -6,14 +6,14 @@ function tableEffects(trClass, tdClass, event) {
 
     switch (event) {
         case "hover":
-            tr.attr('style', 'background: rgba(15, 151, 249, 0.21)');
-            td.attr('style', 'background: rgba(15, 151, 249, 0.21)');
-            th.attr('style', 'background: rgb(15, 151, 249); color: white');
+            tr.addClass('blueBackgroundAlpha');
+            td.addClass('blueBackgroundAlpha');
+            th.addClass('blueBackground');
             break;
         case "out":
-            tr.removeAttr('style');
-            td.removeAttr('style');
-            th.removeAttr('style');
+            tr.removeClass('blueBackgroundAlpha');
+            td.removeClass('blueBackgroundAlpha');
+            th.removeClass('blueBackground');
             break;
 
     }
