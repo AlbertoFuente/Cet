@@ -1,0 +1,22 @@
+{
+  "name": "Cet",
+  "version": "0.0.0",
+  "homepage": "https://github.com/AlbertoFuente/Cet",
+  "authors": [
+    "AlbertoFuente"
+  ],
+  "description": "Custom Editable Table",
+  "main": "Cet",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "materialize": "~0.95.1",
+    "gulp": "~3.8.10"
+  }
+}

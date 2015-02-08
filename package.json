@@ -1,0 +1,24 @@
+{
+  "name": "Cet",
+  "version": "1.0.0",
+  "description": "Custom Editable Table",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AlbertoFuente/Cet.git"
+  },
+  "author": "AlbertoFuente",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlbertoFuente/Cet/issues"
+  },
+  "homepage": "https://github.com/AlbertoFuente/Cet",
+  "devDependencies": {
+    "gulp-concat": "^2.4.3",
+    "gulp-uglify": "^1.1.0",
+    "gulp-watch": "^4.1.0"
+  }
+}
