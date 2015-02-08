@@ -115,8 +115,13 @@
 
                 _cetTable.container.appendChild(table);
 
-                // events
-                var inputs = table.getElementsByTagName('input');
+                /**
+                 * Events
+                 * @type {NodeList}
+                 */
+
+                var inputs = table.getElementsByTagName('input'),
+                    icons = table.getElementsByTagName('i');
                 //  change
                 $(inputs).change(function () {
                     var parentClass = this.parentNode.className,
@@ -137,6 +142,30 @@
                         tdClass = this.parentNode.className,
                         event = "out";
                     tableEffects(trClass,tdClass,event);
+                });
+                // icon sort
+                $(icons).click(function() {
+                   var thClass = this.parentNode.className,
+                       tdNum = thClass.slice(-1),
+                       tdClass = "td" + tdNum,
+                       event = "sort",
+                       downClass = "mdi-hardware-keyboard-arrow-down sortIcon",
+                       upClass = "mdi-hardware-keyboard-arrow-up sortIcon",
+                       ics = table.getElementsByTagName('i'),
+                       i = 0;
+
+                    // check class
+                    if (this.className === downClass) {
+                        for (i; i < ics.length; i++) {
+                            ics[i].className = upClass;
+                        }
+                    } else {
+                        for (i; i < ics.length; i++) {
+                            ics[i].className = downClass;
+                        }
+                    }
+
+                    tableEffects(thClass, tdClass, event);
                 });
 
                 // datepicker
