@@ -65,6 +65,12 @@
             $(tableBody).append(newColumn);
         };
 
+        /**
+         * mouse effects
+         * @param element
+         * @param eventName
+         */
+
         this.mouseEffects = function (element, eventName) {
             var trClass = element.parentNode.parentNode.className,
                 tdClass = element.parentNode.className;
@@ -234,8 +240,18 @@
                 }
             }
         };
-        // TODO: get fireBase data
+        // get fireBase data
         this.fireBaseData = function (url) {
+            if (url !== undefined) {
+                var myFirebaseRef = new Firebase(url);
+
+                myFirebaseRef.on("value", function(response) {
+                    _cetTable.tableData = response.val();
+                    thisHolder.tableConstructor(_cetTable);
+                }, function (errorObject) {
+                   throw new Error("The read failed: " + errorObject.code);
+                });
+            }
 
         };
         // TODO: get api rest data

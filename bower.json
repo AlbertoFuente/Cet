@@ -16,6 +16,8 @@
     "tests"
   ],
   "devDependencies": {
-    "materialize": "~0.95.1"
+    "materialize": "~0.95.1",
+    "firebase": "~2.1.2",
+    "jquery": "~2.1.3"
   }
 }
