@@ -51,7 +51,10 @@ function tableEffects(trClass, tdClass, eventName, table, status, thisHolder) {
 
             // hover & mouse out
             var inputs = table.getElementsByTagName('input');
-
+            //  change
+            $(inputs).change(function () {
+                thisHolder.inputChange(this);
+            });
             // hover
             $(inputs).hover(function () {
                 thisHolder.mouseEffects(this, "hover");
