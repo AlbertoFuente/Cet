@@ -1,4 +1,4 @@
-(function () {
+(function ($) {
 
     /**
      * create table function
@@ -40,6 +40,13 @@
             }
         };
 
+        /**
+         * Print New table Body
+         * @param val
+         * @param column
+         * @param table
+         */
+
         this.printNewBody = function (val, column, table) {
             var tableBody = table.childNodes[1],
                 newColumn = [],
@@ -56,6 +63,12 @@
             }
 
             $(tableBody).append(newColumn);
+        };
+
+        this.mouseEffects = function (element, eventName) {
+            var trClass = element.parentNode.parentNode.className,
+                tdClass = element.parentNode.className;
+            tableEffects(trClass,tdClass,eventName);
         };
 
         /**
@@ -149,17 +162,11 @@
                 });
                 // hover
                 $(inputs).hover(function () {
-                    var trClass = this.parentNode.parentNode.className,
-                        tdClass = this.parentNode.className,
-                        eventName = "hover";
-                    tableEffects(trClass,tdClass,eventName);
+                    thisHolder.mouseEffects(this, "hover");
                 });
                 // mouse out
                 $(inputs).mouseout(function () {
-                    var trClass = this.parentNode.parentNode.className,
-                        tdClass = this.parentNode.className,
-                        eventName = "out";
-                    tableEffects(trClass,tdClass,eventName);
+                    thisHolder.mouseEffects(this, "out");
                 });
                 // icon sort
                 $(icons).click(function() {
@@ -273,4 +280,4 @@
             createTable(_cetTable);
         }
     });
-})();
+})(jQuery);

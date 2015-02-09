@@ -48,6 +48,22 @@ function tableEffects(trClass, tdClass, eventName, table, status, thisHolder) {
                 }
                 thisHolder.printNewBody(val, column, table);
             }
+
+            // hover & mouse out
+            var inputs = table.getElementsByTagName('input');
+
+            // hover
+            $(inputs).hover(function () {
+                thisHolder.mouseEffects(this, "hover");
+            });
+            // mouse out
+            $(inputs).mouseout(function (){
+                thisHolder.mouseEffects(this, "out");
+            });
+
+            // datepicker
+            $('.datepicker').pickadate();
+
             break;
     }
 }
