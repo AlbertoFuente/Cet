@@ -7,8 +7,10 @@ var gulp = require('gulp'),
 gulp.task('default', function () {
 
     gulp.src([
+        'app/components/table/tableServices.js',
         'app/components/table/createTable.js',
         'app/components/table/tableEffects.js'
+
     ])
         .pipe(concat('cet.min.js'))
         .pipe(uglify())
@@ -19,7 +21,8 @@ gulp.task('watch', function () {
 
     gulp.watch([
         'app/components/table/createTable.js',
-        'app/components/table/tableEffects.js'
+        'app/components/table/tableEffects.js',
+        'app/components/table/tableServices.js'
     ], function() {
         gulp.start('default');
     });

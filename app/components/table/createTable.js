@@ -227,76 +227,28 @@ function createTable(_cetTable) {
         }
     };
 
-    /**
-     * get local data
-     * @param url - url local data
-     */
-
-    this.getLocalData = function (url) {
-        if (url !== undefined) {
-            if (localStorage.getItem("_tableData")) {
-
-                _cetTable.tableData = JSON.parse(localStorage.getItem("_tableData"));
-                thisHolder.tableConstructor(_cetTable);
-
-            } else {
-                $.ajax({
-                    url: url,
-                    method: 'GET',
-                    dataType: 'json',
-                    success: function (response) {
-                        if (response !== undefined) {
-                            _cetTable.tableData = response;
-                            thisHolder.tableConstructor(_cetTable);
-                        }
-                    },
-                    error: function () {
-                        throw new Error("Could not load the data inside the " + url + " file");
-                    }
-                });
-            }
-        }
-    };
-    // get fireBase data
-    this.fireBaseData = function (url) {
-        if (url !== undefined) {
-            var myFirebaseRef = new Firebase(url);
-
-            myFirebaseRef.on("value", function(response) {
-                _cetTable.tableData = response.val();
-                thisHolder.tableConstructor(_cetTable);
-            }, function (errorObject) {
-               throw new Error("The read failed: " + errorObject.code);
-            });
-        }
-
-    };
-    // TODO: get api rest data
-    this.apiRestData = function (url) {
-
-
-    };
 
     if (_cetTable !== undefined) {
         // Detect type of data service
         if (_cetTable.dataOptions.localData) {
             if (_cetTable.localDataUrl !== '') {
                 _cetTable.mode = 1;
-                this.getLocalData(_cetTable.localDataUrl);
+                getLocalData(_cetTable, thisHolder);
             } else {
                 alert('You must add _cetTable.localDataUrl in config.js');
             }
         } else if (_cetTable.dataOptions.fireBase) {
             if (_cetTable.fireBaseUrl !== '') {
                 _cetTable.mode = 2;
-                this.fireBaseData(_cetTable.fireBaseUrl);
+                fireBaseData(_cetTable, thisHolder);
+
             } else {
                 alert('You must add _cetTable.fireBaseUrl in config.js');
             }
         } else if (_cetTable.dataOptions.apiRest) {
             if (_cetTable.apiRestUrl !== '') {
                 _cetTable.mode = 3;
-                this.apiRestData(_cetTable.apiRestUrl);
+                apiRestData(_cetTable.apiRestUrl);
             } else {
                 alert('You must add _cetTable.apiRestUrl in config.js');
             }
