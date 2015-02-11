@@ -24,4 +24,6 @@ _cetTable.sortable = true;
 // div container
 _cetTable.container = document.getElementById('tableContainer');
 
+createTable(_cetTable);
+
 
