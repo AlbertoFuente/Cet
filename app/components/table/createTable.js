@@ -16,10 +16,11 @@ function createTable(_cetTable) {
 
     this.modifyData = function (trParent, tdParent, val, mode) {
 
+        _cetTable.tableData[0].body[trParent][tdParent].data = val;
+
         switch (mode) {
             case 1:
                 // mode 1 - localData
-                _cetTable.tableData[0].body[trParent][tdParent].data = val;
                 // save it in localStorage
                 if (window.localStorage) {
                     localStorage.setItem("_tableData", JSON.stringify(_cetTable.tableData));
@@ -31,8 +32,6 @@ function createTable(_cetTable) {
                 // mode 2 - fireBase
                 if (_cetTable.fireBaseUrl !== '') {
                     var fireUrl = new Firebase(_cetTable.fireBaseUrl);
-
-                    _cetTable.tableData[0].body[trParent][tdParent].data = val;
 
                     fireUrl.set(_cetTable.tableData);
                 }
