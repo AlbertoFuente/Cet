@@ -7,14 +7,14 @@
 var _cetTable = {};
 // config type of data service
 _cetTable.dataOptions = {
-    'localData': false, // mode 1
-    'fireBase': true, // mode 2
+    'localData': true, // mode 1
+    'fireBase': false, // mode 2
     'apiRest': false   // mode 3
 };
 // localData url
 _cetTable.localDataUrl = 'localData/tableData.json';
 // fireBase url
-_cetTable.fireBaseUrl = 'https://frametable.firebaseio.com/';
+_cetTable.fireBaseUrl = '';
 // apiRest url
 _cetTable.apiRestUrl = '';
 // display table effects

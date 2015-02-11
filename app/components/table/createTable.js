@@ -88,7 +88,7 @@ function createTable(_cetTable) {
 
     this.inputChange = function (element) {
         var parentClass = element.parentNode.className,
-            val = $(element).val(),
+            val = element.value,
             trClass = element.parentNode.parentNode.className;
         thisHolder.modifyData(trClass,parentClass, val, _cetTable.mode);
     };
@@ -306,9 +306,9 @@ function createTable(_cetTable) {
 
 
 /**
- * Import config.js (table {object} configuration)
+ *  import config.js
+ * @type {HTMLElement}
  */
-
 var imported = document.createElement('script');
 imported.src = '../config/config.js';
 document.head.appendChild(imported);
