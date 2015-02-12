@@ -5,6 +5,11 @@
  */
 
 var _cetTable = {};
+// add header title
+_cetTable.header = true;
+_cetTable.title = "Table Title";
+// add options to header
+_cetTable.options = true;
 // config type of data service
 _cetTable.dataOptions = {
     'localData': true, // mode 1

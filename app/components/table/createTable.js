@@ -99,8 +99,49 @@ function createTable(_cetTable) {
      */
 
     this.tableConstructor = function (_cetTable) {
+
         if (_cetTable !== undefined) {
-            if (_cetTable.container.childNodes.length === 0) {
+            if (_cetTable.header) {
+
+                var tableHeader = document.createElement('div');
+                    tableHeader.className = 'tableHeader';
+
+                var tableHeaderTitle = document.createElement('label');
+                    tableHeaderTitle.className = 'tableHeaderTitle';
+                    tableHeaderTitle.innerHTML = _cetTable.title;
+
+                if (_cetTable.options) {
+                    var tableHeaderOptions = document.createElement('button');
+                        tableHeaderOptions.className = 'normalButton mdi-navigation-menu';
+                    tableHeader.appendChild(tableHeaderOptions);
+
+                    var optionsContainer = document.createElement('div');
+                        optionsContainer.className = "optionsContainer";
+                        optionsContainer.style.display = "none";
+
+                    tableHeaderOptions.onclick = function () {
+
+                        var elementPosition = this.getBoundingClientRect();
+
+                        optionsContainer.style.top = (elementPosition.top + 38) + "px";
+                        optionsContainer.style.left = (elementPosition.left - 164) + "px";
+
+                        if (this.className === 'normalButton mdi-navigation-menu') {
+                            this.className = 'clickedButton mdi-navigation-menu';
+                            optionsContainer.style.display = "block";
+                        } else {
+                            this.className = 'normalButton mdi-navigation-menu';
+                            optionsContainer.style.display = "none";
+                        }
+                    }
+                }
+
+                tableHeader.appendChild(tableHeaderTitle);
+                _cetTable.container.appendChild(tableHeader);
+                document.body.appendChild(optionsContainer);
+            }
+
+            if (_cetTable.container.childNodes.length === 1) {
                 // table
                 var table = document.createElement('table');
                 table.id = 'cetTable';
@@ -255,11 +296,11 @@ function createTable(_cetTable) {
     }
 }
 
-
 /**
  *  import config.js
  * @type {HTMLElement}
  */
+
 var imported = document.createElement('script');
 imported.src = '../config/config.js';
 document.head.appendChild(imported);
