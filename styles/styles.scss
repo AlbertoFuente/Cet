@@ -5,3 +5,68 @@
   cursor: pointer;
 }
 
+.tableHeader {
+  width: 100%;
+  height: auto;
+  background: #f2f2f2;
+  border-bottom: 1px solid #d0d0d0;
+  padding: 15px;
+  label {
+    color: #000000;
+    font-size: 1.2em;
+    font-weight: bold;
+  }
+  .normalButton {
+    width: auto;
+    height: auto;
+    float: right;
+    font-size: 1.5em;
+    border: 1px solid transparent;
+    background: transparent;
+    padding-top: 0;
+    padding-bottom: 5px;
+    position: absolute;
+    left: auto;
+    right: 15px;
+    top: 12px;
+    z-index: 1000;
+  }
+  .clickedButton {
+    width: auto;
+    height: auto;
+    float: right;
+    font-size: 1.5em;
+    background: #f2f2f2;
+    padding-top: 0;
+    padding-bottom: 5px;
+    border-top: 1px solid rgb(203, 203, 203);
+    border-left: 1px solid rgb(203, 203, 203);
+    border-right: 1px solid rgb(203, 203, 203);
+    border-bottom: none;
+    -webkit-border-top-left-radius: 3px;
+    -webkit-border-top-right-radius: 3px;
+    -moz-border-radius-topleft: 3px;
+    -moz-border-radius-topright: 3px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    position: absolute;
+    left: auto;
+    right: 15px;
+    top: 12px;
+    z-index: 1000;
+  }
+}
+
+.optionsContainer {
+  width: 200px;
+  height: 100px;
+  background: #f2f2f2;
+  border: 1px solid rgb(203, 203, 203);
+  -webkit-border-radius: 3px;
+  -webkit-border-top-right-radius: 0;
+  -moz-border-radius: 3px;
+  -moz-border-radius-topright: 0;
+  border-radius: 3px;
+  border-top-right-radius: 0;
+  position: absolute;
+}
