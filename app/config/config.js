@@ -10,6 +10,9 @@ _cetTable.header = true;
 _cetTable.title = "Table Title";
 // add options to header
 _cetTable.options = true;
+_cetTable.listOptions = {
+    'graphs': true
+};
 // config type of data service
 _cetTable.dataOptions = {
     'localData': true, // mode 1

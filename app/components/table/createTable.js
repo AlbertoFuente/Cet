@@ -119,6 +119,10 @@ function createTable(_cetTable) {
                         optionsContainer.className = "optionsContainer";
                         optionsContainer.style.display = "none";
 
+                    if (_cetTable.listOptions !== undefined && typeof _cetTable.listOptions === 'object') {
+                        listTableOptions(_cetTable, optionsContainer);
+                    }
+
                     tableHeaderOptions.onclick = function () {
 
                         var elementPosition = this.getBoundingClientRect();
