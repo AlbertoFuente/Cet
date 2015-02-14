@@ -139,4 +139,35 @@
       float: right;
       margin-bottom: 10px; }
 
+.gModal {
+  position: absolute;
+  width: 700px;
+  height: 400px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-box-shadow: 0 0 8px 0 rgba(50, 50, 50, 0.5);
+  -moz-box-shadow: 0 0 8px 0 rgba(50, 50, 50, 0.5);
+  box-shadow: 0 0 8px 0 rgba(50, 50, 50, 0.5);
+  left: 20%;
+  top: 10%;
+  background: white; }
+  .gModal .gHeader {
+    width: 100%;
+    height: 40px;
+    background: #f2f2f2;
+    border-bottom: 1px solid #d0d0d0;
+    padding: 10px; }
+    .gModal .gHeader button {
+      float: right;
+      border: none;
+      background: transparent;
+      font-size: 1.5em;
+      color: black;
+      margin-top: -7px; }
+  .gModal .gContent {
+    width: 100%;
+    height: 370px;
+    padding: 10px; }
+
 /*# sourceMappingURL=styles.css.map */
