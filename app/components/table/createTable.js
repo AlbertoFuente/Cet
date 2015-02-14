@@ -120,7 +120,7 @@ function createTable(_cetTable) {
                         optionsContainer.style.display = "none";
 
                     if (_cetTable.listOptions !== undefined && typeof _cetTable.listOptions === 'object') {
-                        listTableOptions(_cetTable, optionsContainer);
+                        listTableOptions(_cetTable, optionsContainer, tableHeader);
                     }
 
                     tableHeaderOptions.onclick = function () {

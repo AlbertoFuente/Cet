@@ -1,4 +1,13 @@
 /**
+ * close modal
+ * @param modal
+ */
+
+function closeModal (modal) {
+    modal.style.display = 'none';
+}
+
+/**
  * open modal
  * @param type - type of modal content
  * @param cet
@@ -16,6 +25,9 @@ function openModal(type, cet) {
     // close modal button
     var closeButton = document.createElement('button');
         closeButton.className = 'closeButton mdi-content-clear';
+    closeButton.onclick = function () {
+        closeModal(modal);
+    };
     // content container
     var modalContainer = document.createElement('div');
         modalContainer.className = '_cetTableContent';
@@ -101,12 +113,25 @@ function openModal(type, cet) {
 }
 
 /**
+ * close menu
+ * @param container
+ * @param tableHeader
+ */
+
+function closeMenu(container, tableHeader) {
+    container.style.display= 'none';
+    var button = tableHeader.childNodes[0];
+    button.className = 'normalButton mdi-navigation-menu';
+}
+
+/**
  * list table options
  * @param cet - _cetTable {object}
  * @param container - _cetTable.container
+ * @param tableHeader - table header
  */
 
-function listTableOptions(cet, container) {
+function listTableOptions(cet, container, tableHeader) {
     var selectedType = null;
     // options menu list
     var ul = document.createElement('u');
@@ -123,7 +148,8 @@ function listTableOptions(cet, container) {
 
         li.onclick = function () {
             openModal(selectedType, cet);
-        }
+            closeMenu(container, tableHeader);
+        };
     }
     container.appendChild(ul);
 }
