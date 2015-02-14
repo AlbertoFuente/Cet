@@ -140,40 +140,38 @@ function closeMenu(container, tableHeader) {
  */
 
 function listTableOptions(cet, container, tableHeader) {
-    var selectedType = null;
     // options menu list
     var ul = document.createElement('u');
         ul.className = 'optionsList';
-    var li = null,
-        liLabel = null;
     // graphs
     if (cet.listOptions.graphs) {
-        selectedType = 'graph';
-        li = document.createElement('li');
-        li.className = 'optionsLi';
-        liLabel = document.createElement('label');
-        liLabel.innerHTML = 'Show Graph Panel';
-        li.appendChild(liLabel);
-        ul.appendChild(li);
+        var selectedTypeG = 'graph';
+        var liG = document.createElement('li');
+            liG.className = 'optionsLi';
+        var liLabelG = document.createElement('label');
+            liLabelG.innerHTML = 'Show Graph Panel';
+        liG.appendChild(liLabelG);
+        ul.appendChild(liG);
 
-        li.onclick = function () {
-            openModal(selectedType, cet);
+        liG.onclick = function () {
+            openModal(selectedTypeG, cet);
             closeMenu(container, tableHeader);
         };
     }
     if (cet.listOptions.downloads) {
-        selectedType = 'downloads';
-        li = document.createElement('li');
-        li.className = 'optionsLi';
-        liLabel = document.createElement('label');
-        liLabel.innerHTML = 'Show Downloads Panel';
-        li.appendChild(liLabel);
-        ul.appendChild(li);
+        var selectedTypeD = 'downloads';
+        var liD = document.createElement('li');
+            liD.className = 'optionsLi';
+        var liLabelD = document.createElement('label');
+            liLabelD.innerHTML = 'Show Downloads Panel';
+        liD.appendChild(liLabelD);
+        ul.appendChild(liD);
 
-        li.onclick = function () {
-            openModal(selectedType, cet);
+        liD.onclick = function () {
+            openModal(selectedTypeD, cet);
             closeMenu(container, tableHeader);
         };
+
     }
     container.appendChild(ul);
 }
