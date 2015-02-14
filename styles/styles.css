@@ -167,7 +167,12 @@
       margin-top: -7px; }
   .gModal .gContent {
     width: 100%;
-    height: 370px;
+    height: 100%;
+    margin: 0;
     padding: 10px; }
+    .gModal .gContent svg {
+      width: 100%;
+      height: 100%;
+      display: block; }
 
 /*# sourceMappingURL=styles.css.map */
