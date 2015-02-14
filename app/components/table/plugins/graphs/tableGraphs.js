@@ -1,4 +1,75 @@
 /**
+ * Show modal graph
+ * @param graphType
+ * @param xData
+ * @param yData
+ */
+
+function showGraphModal(graphType, xData, yData) {
+    var gModal = document.createElement('div');
+        gModal.className = 'gModal';
+    var gHeader = document.createElement('div');
+        gHeader.className = 'gHeader';
+    var closeButton = document.createElement('button');
+        closeButton.className = 'closeButton mdi-content-clear';
+
+    closeButton.onclick = function () {
+        closeModal(gModal);
+    };
+
+    var gContent = document.createElement('div');
+        gContent.className = 'gContent';
+    var svgContent = document.createElement('svg');
+
+    gContent.appendChild(svgContent);
+    gHeader.appendChild(closeButton);
+    gModal.appendChild(gHeader);
+    gModal.appendChild(gContent);
+
+    switch (graphType) {
+        case 'Bar chart':
+            // prepare data
+            var data = [];
+                data.push({'key': 'Table Bar Chart', 'values': []});
+
+            $.each(xData, function(i) {
+                data[0].values.push({
+                    'label': xData[i],
+                    'value': parseInt(yData[i])
+                });
+            });
+            console.log(data);
+            // print graph
+            nv.addGraph(function() {
+                var chart = nv.models.discreteBarChart()
+                        .x(function(d) { return d.label })    //Specify the data accessors.
+                        .y(function(d) { return d.value })
+                        .staggerLabels(true)    //Too many bars and not enough room? Try staggering labels.
+                        .tooltips(true)        //Don't show tooltips
+                        .showValues(true)       //...instead, show the bar value right on top of each bar.
+                    ;
+
+                d3.select('.gContent svg')
+                    .datum(data)
+                    .call(chart);
+
+                nv.utils.windowResize(chart.update);
+
+                return chart;
+            });
+
+            break;
+        case 'Line chart':
+            break;
+        case 'Pie chart':
+            break;
+        case 'Scatter chart':
+            break;
+    }
+    document.body.appendChild(gModal);
+}
+
+/**
  * prepare the data for print the graph
  * @param cet
  * @param selecteds
@@ -92,7 +163,8 @@ function prepareGraphData (cet, selecteds, modalContainer) {
     // check if everything is ok
     if (compareArrays.sameLength) {
         if (compareArrays.xAxisIsNum !== compareArrays.yAxisIsNum) {
-            console.log('OOOOKKK');
+            modalContainer.parentNode.style.display = 'none';
+            showGraphModal(graphType, xData, yData);
         } else {
             showError(modalContainer);
         }
