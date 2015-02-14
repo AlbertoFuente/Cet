@@ -102,6 +102,14 @@ function openModal(type, cet) {
                 done.innerHTML = 'DONE';
             modalContainer.appendChild(done);
 
+            done.onclick = function () {
+                var selecteds = {};
+                    selecteds.xAxis = selectXType.value;
+                    selecteds.yAxis = selectYType.value;
+                    selecteds.type = selectType.value;
+              prepareGraphData(cet, selecteds, modalContainer);
+            };
+
             break;
     }
 
