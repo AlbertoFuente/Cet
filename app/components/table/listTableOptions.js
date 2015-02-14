@@ -144,13 +144,29 @@ function listTableOptions(cet, container, tableHeader) {
     // options menu list
     var ul = document.createElement('u');
         ul.className = 'optionsList';
+    var li = null,
+        liLabel = null;
     // graphs
     if (cet.listOptions.graphs) {
         selectedType = 'graph';
-        var li = document.createElement('li');
-            li.className = 'optionsLi';
-        var liLabel = document.createElement('label');
-            liLabel.innerHTML = 'Show Graph Panel';
+        li = document.createElement('li');
+        li.className = 'optionsLi';
+        liLabel = document.createElement('label');
+        liLabel.innerHTML = 'Show Graph Panel';
+        li.appendChild(liLabel);
+        ul.appendChild(li);
+
+        li.onclick = function () {
+            openModal(selectedType, cet);
+            closeMenu(container, tableHeader);
+        };
+    }
+    if (cet.listOptions.downloads) {
+        selectedType = 'downloads';
+        li = document.createElement('li');
+        li.className = 'optionsLi';
+        liLabel = document.createElement('label');
+        liLabel.innerHTML = 'Show Downloads Panel';
         li.appendChild(liLabel);
         ul.appendChild(li);
 

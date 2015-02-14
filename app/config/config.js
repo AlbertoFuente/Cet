@@ -11,7 +11,8 @@ _cetTable.title = "Table Title";
 // add options to header
 _cetTable.options = true;
 _cetTable.listOptions = {
-    'graphs': true
+    'graphs': true,
+    'downloads': true
 };
 // config type of data service
 _cetTable.dataOptions = {

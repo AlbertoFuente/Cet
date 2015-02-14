@@ -61,6 +61,32 @@ function showGraphModal(graphType, xData, yData) {
 
             break;
         case 'Line chart':
+            var dataLine = [];
+            dataLine.push({'key': 'Scatter Chart', 'values': []});
+
+            $.each(xData, function(i) {
+                dataLine[0].values.push({
+                    'area': false,
+                    'label': xData[i],
+                    'value': parseInt(yData[i])
+                });
+            });
+            nv.addGraph(function() {
+                var chart = nv.models.lineWithFocusChart();
+
+                chart.xAxis.tickFormat(d3.format(',f'));
+                chart.x2Axis.tickFormat(d3.format(',f'));
+                chart.yAxis.tickFormat(d3.format(',.2f'));
+                chart.y2Axis.tickFormat(d3.format(',.2f'));
+
+                d3.select('#chart svg')
+                    .datum(dataLine)
+                    .call(chart);
+
+                nv.utils.windowResize(chart.update);
+
+                return chart;
+            });
             break;
         case 'Pie chart':
             var dataDonut = [];
@@ -92,6 +118,39 @@ function showGraphModal(graphType, xData, yData) {
             });
             break;
         case 'Scatter chart':
+            var dataScater = [];
+            dataScater.push({'key': 'Scatter Chart', 'values': []});
+
+            $.each(xData, function(i) {
+                dataScater[0].values.push({
+                    'label': xData[i],
+                    'value': parseInt(yData[i])
+                });
+            });
+
+            nv.addGraph(function() {
+                var chart = nv.models.scatterChart()
+                    .showDistX(true)
+                    .showDistY(true)
+                    .useVoronoi(true)
+                    .color(d3.scale.category10().range())
+                    .duration(300);
+
+                chart.xAxis.tickFormat(d3.format('.02f'));
+                chart.yAxis.tickFormat(d3.format('.02f'));
+                chart.tooltipContent(function(key) {
+                    return '<h2>' + key + '</h2>';
+                });
+
+                d3.select('#chart svg')
+                    .datum(dataScater)
+                    .call(chart);
+
+                nv.utils.windowResize(chart.update);
+
+                chart.dispatch.on('stateChange', function(e) { ('New State:', JSON.stringify(e)); });
+                return chart;
+            });
             break;
     }
     document.body.appendChild(gModal);
