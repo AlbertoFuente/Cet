@@ -19,6 +19,7 @@ function showGraphModal(graphType, xData, yData) {
 
     var gContent = document.createElement('div');
         gContent.className = 'gContent';
+        gContent.id = 'chart';
     var svgContent = document.createElement('svg');
 
     gContent.appendChild(svgContent);
@@ -38,23 +39,23 @@ function showGraphModal(graphType, xData, yData) {
                     'value': parseInt(yData[i])
                 });
             });
-            console.log(data);
+
             // print graph
             nv.addGraph(function() {
                 var chart = nv.models.discreteBarChart()
-                        .x(function(d) { return d.label })    //Specify the data accessors.
+                        .x(function(d) { return d.label })
                         .y(function(d) { return d.value })
-                        .staggerLabels(true)    //Too many bars and not enough room? Try staggering labels.
-                        .tooltips(true)        //Don't show tooltips
-                        .showValues(true)       //...instead, show the bar value right on top of each bar.
-                    ;
+                        .staggerLabels(true)
+                        //.staggerLabels(historicalBarChart[0].values.length > 8)
+                        .tooltips(true)
+                        .showValues(true)
+                        .duration(250);
 
-                d3.select('.gContent svg')
+                d3.select('#chart svg')
                     .datum(data)
                     .call(chart);
 
                 nv.utils.windowResize(chart.update);
-
                 return chart;
             });
 
@@ -62,6 +63,33 @@ function showGraphModal(graphType, xData, yData) {
         case 'Line chart':
             break;
         case 'Pie chart':
+            var dataDonut = [];
+            $.each(xData, function(i) {
+                dataDonut.push({
+                    'label': xData[i],
+                    'value': parseInt(yData[i])
+                });
+            });
+            console.log(dataDonut);
+            //Donut chart example
+            nv.addGraph(function() {
+                var chart = nv.models.pieChart()
+                        .x(function(d) { return d.label })
+                        .y(function(d) { return d.value })
+                        .showLabels(true)     //Display pie labels
+                        .labelThreshold(.05)  //Configure the minimum slice size for labels to show up
+                        .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
+                        .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
+                        .donutRatio(0.35)     //Configure how big you want the donut hole size to be.
+                    ;
+
+                d3.select("#chart svg")
+                    .datum(dataDonut)
+                    .transition().duration(350)
+                    .call(chart);
+
+                return chart;
+            });
             break;
         case 'Scatter chart':
             break;
