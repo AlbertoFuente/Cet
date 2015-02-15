@@ -132,7 +132,12 @@ function createTable(_cetTable) {
 
                         if (this.className === 'normalButton mdi-navigation-menu') {
                             this.className = 'clickedButton mdi-navigation-menu';
-                            optionsContainer.style.display = "block";
+                            if ($(document).find('optionsContainer')) {
+                                document.body.appendChild(optionsContainer);
+                                optionsContainer.style.display = "block";
+                            } else {
+                                optionsContainer.style.display = "block";
+                            }
                         } else {
                             this.className = 'normalButton mdi-navigation-menu';
                             optionsContainer.style.display = "none";
@@ -142,7 +147,6 @@ function createTable(_cetTable) {
 
                 tableHeader.appendChild(tableHeaderTitle);
                 _cetTable.container.appendChild(tableHeader);
-                document.body.appendChild(optionsContainer);
             }
 
             if (_cetTable.container.childNodes.length === 1) {

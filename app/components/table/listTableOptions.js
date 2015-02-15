@@ -4,7 +4,7 @@
  */
 
 function closeModal (modal) {
-    modal.style.display = 'none';
+    $(modal).remove();
 }
 
 /**
@@ -141,7 +141,7 @@ function closeMenu(container, tableHeader) {
 
 function listTableOptions(cet, container, tableHeader) {
     // options menu list
-    var ul = document.createElement('u');
+    var ul = document.createElement('ul');
         ul.className = 'optionsList';
     // graphs
     if (cet.listOptions.graphs) {
