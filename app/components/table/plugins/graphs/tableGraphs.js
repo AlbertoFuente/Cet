@@ -46,7 +46,6 @@ function showGraphModal(graphType, xData, yData) {
                         .x(function(d) { return d.label })
                         .y(function(d) { return d.value })
                         .staggerLabels(true)
-                        //.staggerLabels(historicalBarChart[0].values.length > 8)
                         .tooltips(true)
                         .showValues(true)
                         .duration(250);
@@ -62,7 +61,7 @@ function showGraphModal(graphType, xData, yData) {
             break;
         case 'Line chart':
             var dataLine = [];
-            dataLine.push({'key': 'Scatter Chart', 'values': []});
+            dataLine.push({'key': 'Line Chart', 'values': []});
 
             $.each(xData, function(i) {
                 dataLine[0].values.push({
@@ -96,7 +95,7 @@ function showGraphModal(graphType, xData, yData) {
                     'value': parseInt(yData[i])
                 });
             });
-            console.log(dataDonut);
+
             //Donut chart example
             nv.addGraph(function() {
                 var chart = nv.models.pieChart()
@@ -106,8 +105,7 @@ function showGraphModal(graphType, xData, yData) {
                         .labelThreshold(.05)  //Configure the minimum slice size for labels to show up
                         .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
                         .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
-                        .donutRatio(0.35)     //Configure how big you want the donut hole size to be.
-                    ;
+                        .donutRatio(0.35);   //Configure how big you want the donut hole size to be.
 
                 d3.select("#chart svg")
                     .datum(dataDonut)
@@ -148,7 +146,6 @@ function showGraphModal(graphType, xData, yData) {
 
                 nv.utils.windowResize(chart.update);
 
-                chart.dispatch.on('stateChange', function(e) { ('New State:', JSON.stringify(e)); });
                 return chart;
             });
             break;
