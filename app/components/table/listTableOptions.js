@@ -146,6 +146,13 @@ function listTableOptions(cet, container, tableHeader) {
     var selectedType = null,
         optionText = null;
 
+    /**
+     * create menu option
+     * @param type
+     * @param text
+     * @param parent
+     */
+
     function createOption(type, text, parent) {
         var li = document.createElement('li');
             li.className = 'optionsLi';
@@ -157,12 +164,15 @@ function listTableOptions(cet, container, tableHeader) {
             closeMenu(container, tableHeader);
         }
     }
+
     // graphs
     if (cet.listOptions.graphs) {
         selectedType = 'graph';
         optionText = 'Show graph panel';
         createOption(selectedType, optionText, ul);
     }
+
+    // downloads
     if (cet.listOptions.downloads) {
         selectedType = 'downloads';
         optionText = 'Show Downloads Panel';
