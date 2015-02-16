@@ -36,65 +36,51 @@ function openModal(type, cet) {
         case 'graph':
             modalHeaderTitle.innerHTML = 'Config graph options';
 
-            // options
-            var selectTypeLabel = document.createElement('label');
-                selectTypeLabel.className = 'selectTypeLabel';
-                selectTypeLabel.innerHTML = 'Select graph type: ';
-            modalContainer.appendChild(selectTypeLabel);
+            function createConfigOption (selectTitle, options, parent, selectId, select) {
+                // options
+                var selectTypeLabel = document.createElement('label');
+                selectTypeLabel.innerHTML = selectTitle;
+                parent.appendChild(selectTypeLabel);
 
-            var selectType = document.createElement('select');
-                selectType.className = 'browser-default';
-            var options = ['Bar chart', 'Line chart', 'Pie chart', 'Scatter chart'],
-                xOptions = [],
-                i = 0,
-                j = 0,
-                p = 0;
+                var i = 0;
+                    select.id = selectId;
 
-            for (i; i < options.length; i++) {
-                var op = document.createElement('option');
+                for (i; i < options.length; i++) {
+                    var op = document.createElement('option');
                     op.value = options[i];
                     op.innerHTML = options[i];
-                selectType.appendChild(op);
+                    select.appendChild(op);
+                }
+                parent.appendChild(select);
             }
-            modalContainer.appendChild(selectType);
-
-            var selectXaxisLabel = document.createElement('label');
-                selectXaxisLabel.className = 'selectXaxisLabel';
-                selectXaxisLabel.innerHTML = 'Select X axis: ';
-            modalContainer.appendChild(selectXaxisLabel);
-
-            var selectXType = document.createElement('select');
-            selectXType.className = 'browser-default';
+            // select graph
+            var selectTitle = 'Select graph type: ',
+                selectType = document.createElement('select'),
+                selectTypeId = 'selectType',
+                optionsGraphs = ['Bar chart', 'Line chart', 'Pie chart', 'Scatter chart'];
+            createConfigOption(selectTitle, optionsGraphs, modalContainer, selectTypeId, selectType);
+            // select x Axis option
+            var selectXaxisTitle = 'Select X axis: ',
+                selectXType = document.createElement('select'),
+                selectXId = 'selectXaxis',
+                xOptions = [];
 
             var table = cet.tableData[0].head;
 
             $.each(table, function (key,val) {
                 xOptions.push(val);
             });
+            createConfigOption(selectXaxisTitle, xOptions, modalContainer, selectXId, selectXType);
+            // select y Axis option
+            var selectYaxisTitle = 'Select Y axis: ',
+                selectYType = document.createElement('select'),
+                selectYId = 'selectYaxis',
+                yOptions = [];
 
-            for (j; j < xOptions.length; j++) {
-                var xOp = document.createElement('option');
-                xOp.value = xOptions[j];
-                xOp.innerHTML = xOptions[j];
-                selectXType.appendChild(xOp);
-            }
-            modalContainer.appendChild(selectXType);
-
-            var selectYaxisLabel = document.createElement('label');
-            selectYaxisLabel.className = 'selectYaxisLabel';
-            selectYaxisLabel.innerHTML = 'Select Y axis: ';
-            modalContainer.appendChild(selectYaxisLabel);
-
-            var selectYType = document.createElement('select');
-            selectYType.className = 'browser-default';
-
-            for (p; p < xOptions.length; p++) {
-                var yOp = document.createElement('option');
-                yOp.value = xOptions[p];
-                yOp.innerHTML = xOptions[p];
-                selectYType.appendChild(yOp);
-            }
-            modalContainer.appendChild(selectYType);
+            $.each(table, function (key,val) {
+                yOptions.push(val);
+            });
+            createConfigOption(selectYaxisTitle, yOptions, modalContainer, selectYId, selectYType);
 
             // done button
             var done = document.createElement('a');
