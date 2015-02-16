@@ -143,34 +143,30 @@ function listTableOptions(cet, container, tableHeader) {
     // options menu list
     var ul = document.createElement('ul');
         ul.className = 'optionsList';
+    var selectedType = null,
+        optionText = null;
+
+    function createOption(type, text, parent) {
+        var li = document.createElement('li');
+            li.className = 'optionsLi';
+            li.innerHTML = text;
+        parent.appendChild(li);
+
+        li.onclick = function () {
+            openModal(type, cet);
+            closeMenu(container, tableHeader);
+        }
+    }
     // graphs
     if (cet.listOptions.graphs) {
-        var selectedTypeG = 'graph';
-        var liG = document.createElement('li');
-            liG.className = 'optionsLi';
-        var liLabelG = document.createElement('label');
-            liLabelG.innerHTML = 'Show Graph Panel';
-        liG.appendChild(liLabelG);
-        ul.appendChild(liG);
-
-        liG.onclick = function () {
-            openModal(selectedTypeG, cet);
-            closeMenu(container, tableHeader);
-        };
+        selectedType = 'graph';
+        optionText = 'Show graph panel';
+        createOption(selectedType, optionText, ul);
     }
     if (cet.listOptions.downloads) {
-        var selectedTypeD = 'downloads';
-        var liD = document.createElement('li');
-            liD.className = 'optionsLi';
-        var liLabelD = document.createElement('label');
-            liLabelD.innerHTML = 'Show Downloads Panel';
-        liD.appendChild(liLabelD);
-        ul.appendChild(liD);
-
-        liD.onclick = function () {
-            openModal(selectedTypeD, cet);
-            closeMenu(container, tableHeader);
-        };
+        selectedType = 'downloads';
+        optionText = 'Show Downloads Panel';
+        createOption(selectedType, optionText, ul);
 
     }
     container.appendChild(ul);
