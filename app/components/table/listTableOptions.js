@@ -96,7 +96,38 @@ function openModal(type, cet) {
                     selecteds.type = selectType.value;
               prepareGraphData(cet, selecteds, modalContainer);
             };
+            break;
+        case 'downloads':
+            // table downloads function
+            tableDownloads();
 
+            modalHeaderTitle.innerHTML = 'Config Downloads Options';
+            var sDownloadLabel = document.createElement('label');
+                sDownloadLabel.innerHTML = 'Download Options: ';
+            var selectDownload = document.createElement('select');
+
+            if (typeof cet.downloadOptions === 'object') {
+                $.each(cet.downloadOptions, function (key, val) {
+                    if (val) {
+                        var option = document.createElement('option');
+                            option.value = key;
+                            option.innerHTML = key;
+                        selectDownload.appendChild(option);
+                    }
+                });
+            }
+            var downButton = document.createElement('button');
+                downButton.className = 'doneButton waves-effect waves-light btn';
+                downButton.innerHTML = 'DOWNLOAD';
+
+            downButton.onclick = function () {
+                var selected = selectDownload.value;
+                selectedOption(selected);
+            };
+
+            modalContainer.appendChild(sDownloadLabel);
+            modalContainer.appendChild(selectDownload);
+            modalContainer.appendChild(downButton);
             break;
     }
 

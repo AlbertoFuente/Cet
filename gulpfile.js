@@ -7,6 +7,7 @@ var gulp = require('gulp'),
 gulp.task('default', function () {
 
     gulp.src([
+        'app/components/table/plugins/downloads/tableDownloads.js',
         'app/components/table/plugins/graphs/tableGraphs.js',
         'app/components/table/listTableOptions.js',
         'app/components/table/tableServices.js',
@@ -25,7 +26,8 @@ gulp.task('watch', function () {
         'app/components/table/tableEffects.js',
         'app/components/table/tableServices.js',
         'app/components/table/listTableOptions.js',
-        'app/components/table/plugins/graphs/tableGraphs.js'
+        'app/components/table/plugins/graphs/tableGraphs.js',
+        'app/components/table/plugins/downloads/tableDownloads.js'
     ], function() {
         gulp.start('default');
     });

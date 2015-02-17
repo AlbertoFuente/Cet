@@ -14,6 +14,19 @@ _cetTable.listOptions = {
     'graphs': true,
     'downloads': true
 };
+// download options
+_cetTable.downloadOptions = {
+    'json': true,
+    'xml': true,
+    'sql': true,
+    'txt': true,
+    'csv': true,
+    'xsl': true,
+    'word': true,
+    'ppt': true,
+    'png': true,
+    'pdf': true
+};
 // config type of data service
 _cetTable.dataOptions = {
     'localData': true, // mode 1
