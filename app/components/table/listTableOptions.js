@@ -53,6 +53,9 @@ function openModal(type, cet) {
                 }
                 parent.appendChild(select);
             }
+            
+            var table = cet.tableData[0].head;
+            
             // select graph
             var selectTitle = 'Select graph type: ',
                 selectType = document.createElement('select'),
@@ -64,8 +67,6 @@ function openModal(type, cet) {
                 selectXType = document.createElement('select'),
                 selectXId = 'selectXaxis',
                 xOptions = [];
-
-            var table = cet.tableData[0].head;
 
             $.each(table, function (key,val) {
                 xOptions.push(val);
@@ -83,12 +84,12 @@ function openModal(type, cet) {
             createConfigOption(selectYaxisTitle, yOptions, modalContainer, selectYId, selectYType);
 
             // done button
-            var done = document.createElement('a');
-                done.className = 'doneButton waves-effect waves-light btn';
-                done.innerHTML = 'DONE';
-            modalContainer.appendChild(done);
+            var doneButton = document.createElement('a');
+                doneButton.className = 'doneButton waves-effect waves-light btn';
+                doneButton.innerHTML = 'DONE';
+            modalContainer.appendChild(doneButton);
 
-            done.onclick = function () {
+            doneButton.onclick = function () {
                 var selecteds = {};
                     selecteds.xAxis = selectXType.value;
                     selecteds.yAxis = selectYType.value;
@@ -163,7 +164,6 @@ function listTableOptions(cet, container, tableHeader) {
         selectedType = 'downloads';
         optionText = 'Show Downloads Panel';
         createOption(selectedType, optionText, ul);
-
     }
     container.appendChild(ul);
 }
