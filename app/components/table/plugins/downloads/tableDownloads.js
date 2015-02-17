@@ -5,27 +5,27 @@
 function tableDownloads () {
     // import table Export
     var importTbExport = document.createElement('script');
-    importTbExport.src = '../../bower-components/table-export/tableExport.js';
+    importTbExport.src = '../../bower_components/table-export/tableExport.js';
     document.head.appendChild(importTbExport);
     // import base64
     var b64 = document.createElement('script');
-    b64.src = '../../bower-components/table-export/jquery.base64.js';
+    b64.src = '../../bower_components/table-export/jquery.base64.js';
     document.head.appendChild(b64);
     // html 2 canvas
     var html2Canvas = document.createElement('script');
-    html2Canvas.src = '../../bower-components/table-export/html2canvas.js';
+    html2Canvas.src = '../../bower_components/table-export/html2canvas.js';
     document.head.appendChild(html2Canvas);
     // jspdf
     var jspdf = document.createElement('script');
-    jspdf.src = '../../bower-components/table-export/jspdf/jspdf.js';
+    jspdf.src = '../../bower_components/table-export/jspdf/jspdf.js';
     document.head.appendChild(jspdf);
     // jspdf base64
     var jspdfB64 = document.createElement('script');
-    jspdfB64.src = '../../bower-components/table-export/jspdf/libs/base64.js';
+    jspdfB64.src = '../../bower_components/table-export/jspdf/libs/base64.js';
     document.head.appendChild(jspdfB64);
     // jspdf sprintf
     var sprintF = document.createElement('script');
-    sprintF.src = '../../bower-components/table-export/jspdf/libs/sprintf.js';
+    sprintF.src = '../../bower_components/table-export/jspdf/libs/sprintf.js';
     document.head.appendChild(sprintF);
 }
 
