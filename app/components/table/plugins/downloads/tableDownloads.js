@@ -55,7 +55,7 @@ function selectedOption (selected) {
         case 'xsl':
             tableId.tableExport({type:'excel',escape:'false'});
             break;
-        case 'word':
+        case 'doc':
             tableId.tableExport({type:'doc',escape:'false'});
             break;
         case 'ppt':
