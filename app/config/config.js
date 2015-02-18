@@ -22,7 +22,7 @@ _cetTable.downloadOptions = {
     'txt': true,
     'csv': true,
     'xsl': true,
-    'word': true,
+    'doc': true,
     'ppt': true,
     'png': true,
     'pdf': true
