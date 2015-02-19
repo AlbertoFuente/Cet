@@ -51,13 +51,12 @@ function createTable(_cetTable) {
 
     _cetTable.printNewBody = function (val, column, table) {
         var tableBody = table.childNodes[1],
-            newColumn = [],
-            i = 0;
+            newColumn = [];
 
         $(tableBody).empty();
 
-        for (i; i < val.length; i++) {
-            for (var j = 0; j < column.length; j++) {
+        for (let i = 0; i < val.length; i++) {
+            for (let j = 0; j < column.length; j++) {
                 if (val[i] === column[j].value) {
                     newColumn.push(column[j].tr);
                 }
