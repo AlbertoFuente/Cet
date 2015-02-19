@@ -3,7 +3,9 @@ var gulp = require('gulp'),
     concat = require('gulp-concat'),
     uglify = require('gulp-uglify'),
     watch = require('gulp-watch'),
-    babel = require("gulp-babel");
+    babel = require("gulp-babel"),
+    sass = require('gulp-sass'),
+    minifyCSS = require('gulp-minify-css');
 
 gulp.task('default', function () {
 
@@ -16,9 +18,16 @@ gulp.task('default', function () {
         'app/components/table/createTable.js'
     ])
         .pipe(concat('cet.min.js'))
-        .pipe(uglify())
         .pipe(babel())
+        .pipe(uglify())
         .pipe(gulp.dest('js/'))
+});
+
+gulp.task('sass', function () {
+    gulp.src('styles/styles.scss')
+        .pipe(sass())
+        .pipe(minifyCSS({keepBreaks:true}))
+        .pipe(gulp.dest('styles.min.css'))
 });
 
 gulp.task('watch', function () {
@@ -34,5 +43,10 @@ gulp.task('watch', function () {
         gulp.start('default');
     });
 
+    gulp.watch([
+        'styles/styles.scss'
+    ], function() {
+        gulp.start('sass');
+    });
 });
 
