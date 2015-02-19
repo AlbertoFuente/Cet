@@ -190,23 +190,26 @@ function createTable(_cetTable) {
                         td.className = k;
 
                         if (v.data !== undefined && v.type !== undefined) {
-                            var input = document.createElement('input');
-                            input.className = "input_"+k;
-
-                            if (v.type === "date") {
-                                $(input).addClass('datepicker picker__input');
-                                input.type = "text";
-                                input.value = v.data;
-                                input.setAttribute('placeholder', v.data);
+                            if (v.edit) {
+                                var input = document.createElement('input');
+                                input.className = "input_"+k;
+                                if (v.type === "date") {
+                                    $(input).addClass('datepicker picker__input');
+                                    input.type = "text";
+                                    input.value = v.data;
+                                    input.setAttribute('placeholder', v.data);
+                                } else {
+                                    input.type = v.type;
+                                    input.value = v.data;
+                                }
+                                td.appendChild(input);
                             } else {
-                                input.type = v.type;
-                                input.value = v.data;
+                                var noEditLabel = document.createElement('span');
+                                    noEditLabel.innerHTML = v.data;
+                                td.appendChild(noEditLabel);
                             }
-                            if (!v.edit) {
-                                input.setAttribute('disabled', 'disabled');
-                            }
-                            td.appendChild(input);
                         }
+
                         tr.appendChild(td);
                     });
                     tableBody.appendChild(tr);
