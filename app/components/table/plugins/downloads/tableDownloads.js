@@ -38,34 +38,34 @@ function selectedOption (selected) {
     var tableId = $('#cetTable');
     switch (selected) {
         case 'json':
-            tableId.tableExport({type:'json',escape:'false'});
+            tableId.tableExport({type:selected,escape:'false'});
             break;
         case 'xml':
-            tableId.tableExport({type:'xml',escape:'false'});
+            tableId.tableExport({type:selected,escape:'false'});
             break;
         case 'sql':
-            tableId.tableExport({type:'sql'});
+            tableId.tableExport({type:selected});
             break;
         case 'txt':
-            tableId.tableExport({type:'txt',escape:'false'});
+            tableId.tableExport({type:selected,escape:'false'});
             break;
         case 'csv':
-            tableId.tableExport({type:'csv',escape:'false'});
+            tableId.tableExport({type:selected,escape:'false'});
             break;
         case 'xsl':
             tableId.tableExport({type:'excel',escape:'false'});
             break;
         case 'doc':
-            tableId.tableExport({type:'doc',escape:'false'});
+            tableId.tableExport({type:selected,escape:'false'});
             break;
         case 'ppt':
             tableId.tableExport({type:'powerpoint',escape:'false'});
             break;
         case 'png':
-            tableId.tableExport({type:'png',escape:'false'});
+            tableId.tableExport({type:selected,escape:'false'});
             break;
         case 'pdf':
-            tableId.tableExport({type:'pdf',pdfFontSize:'7',escape:'false'});
+            tableId.tableExport({type:selected,pdfFontSize:'7',escape:'false'});
             break;
     }
 
