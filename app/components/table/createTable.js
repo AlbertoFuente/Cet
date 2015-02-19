@@ -162,9 +162,11 @@ function createTable(_cetTable) {
 
                 $.each(headContent, function (key, val) {
                     var th = document.createElement('th');
-                    th.className = key;
-                    th.innerHTML = val;
+                        th.className = key;
+                    var thLabel = document.createElement('span');
+                        thLabel.innerHTML = val;
                     th.setAttribute('data-field', val);
+                    th.appendChild(thLabel);
 
                     if (_cetTable.sortable) {
                         var sortIcon = document.createElement('i');
@@ -206,6 +208,7 @@ function createTable(_cetTable) {
                             } else {
                                 var noEditLabel = document.createElement('span');
                                     noEditLabel.innerHTML = v.data;
+                                    noEditLabel.value = v.data;
                                 td.appendChild(noEditLabel);
                             }
                         }
