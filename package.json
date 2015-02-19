@@ -18,6 +18,7 @@
   "homepage": "https://github.com/AlbertoFuente/Cet",
   "devDependencies": {
     "gulp": "^3.8.10",
+    "gulp-babel": "^4.0.0",
     "gulp-concat": "^2.4.3",
     "gulp-uglify": "^1.1.0",
     "gulp-watch": "^4.1.0"

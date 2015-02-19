@@ -2,7 +2,8 @@
 var gulp = require('gulp'),
     concat = require('gulp-concat'),
     uglify = require('gulp-uglify'),
-    watch = require('gulp-watch');
+    watch = require('gulp-watch'),
+    babel = require("gulp-babel");
 
 gulp.task('default', function () {
 
@@ -13,7 +14,7 @@ gulp.task('default', function () {
         'app/components/table/tableServices.js',
         'app/components/table/createTable.js',
         'app/components/table/tableEffects.js'
-    ])
+    ]).pipe(babel())
         .pipe(concat('cet.min.js'))
         .pipe(uglify())
         .pipe(gulp.dest('js/'))
