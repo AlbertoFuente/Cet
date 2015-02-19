@@ -4,7 +4,6 @@
  */
 
 function createTable(_cetTable) {
-    var thisHolder = this;
 
     /**
      * modify data
@@ -14,7 +13,7 @@ function createTable(_cetTable) {
      * @param mode - mode {1, 2, 3}
      */
 
-    this.modifyData = function (trParent, tdParent, val, mode) {
+    function modifyData (trParent, tdParent, val, mode) {
 
         _cetTable.tableData[0].body[trParent][tdParent].data = val;
 
@@ -41,7 +40,7 @@ function createTable(_cetTable) {
                 // TODO: APIREST MODE
                 break;
         }
-    };
+    }
 
     /**
      * Print New table Body
@@ -50,7 +49,7 @@ function createTable(_cetTable) {
      * @param table
      */
 
-    this.printNewBody = function (val, column, table) {
+    _cetTable.printNewBody = function (val, column, table) {
         var tableBody = table.childNodes[1],
             newColumn = [],
             i = 0;
@@ -74,7 +73,7 @@ function createTable(_cetTable) {
      * @param eventName
      */
 
-    this.mouseEffects = function (element, eventName) {
+    _cetTable.mouseEffects = function (element, eventName) {
         var trClass = element.parentNode.parentNode.className,
             tdClass = element.parentNode.className;
         tableEffects(trClass,tdClass,eventName);
@@ -85,11 +84,11 @@ function createTable(_cetTable) {
      * @param element
      */
 
-    this.inputChange = function (element) {
+    _cetTable.inputChange = function (element) {
         var parentClass = element.parentNode.className,
             val = element.value,
             trClass = element.parentNode.parentNode.className;
-        thisHolder.modifyData(trClass,parentClass, val, _cetTable.mode);
+        modifyData(trClass,parentClass, val, _cetTable.mode);
     };
 
     /**
@@ -98,7 +97,7 @@ function createTable(_cetTable) {
      * @returns {_cetTable.container|*}
      */
 
-    this.tableConstructor = function (_cetTable) {
+    _cetTable.tableConstructor = function (_cetTable) {
 
         if (_cetTable !== undefined) {
             if (_cetTable.header) {
@@ -232,15 +231,15 @@ function createTable(_cetTable) {
                     icons = table.getElementsByTagName('i');
                 //  change
                 $(inputs).change(function () {
-                    thisHolder.inputChange(this);
+                    _cetTable.inputChange(this);
                 });
                 // hover
                 $(inputs).hover(function () {
-                    thisHolder.mouseEffects(this, "hover");
+                    _cetTable.mouseEffects(this, "hover");
                 });
                 // mouse out
                 $(inputs).mouseout(function () {
-                    thisHolder.mouseEffects(this, "out");
+                    _cetTable.mouseEffects(this, "out");
                 });
                 // icon sort
                 $(icons).click(function() {
@@ -267,7 +266,7 @@ function createTable(_cetTable) {
                         }
                     }
 
-                    tableEffects(thClass, tdClass, eventName, table, status, thisHolder);
+                    tableEffects(thClass, tdClass, eventName, table, status);
                 });
 
                 // datepicker
@@ -287,14 +286,14 @@ function createTable(_cetTable) {
         if (_cetTable.dataOptions.localData) {
             if (_cetTable.localDataUrl !== '') {
                 _cetTable.mode = 1;
-                getLocalData(_cetTable, thisHolder);
+                getLocalData(_cetTable);
             } else {
                 alert('You must add _cetTable.localDataUrl in config.js');
             }
         } else if (_cetTable.dataOptions.fireBase) {
             if (_cetTable.fireBaseUrl !== '') {
                 _cetTable.mode = 2;
-                fireBaseData(_cetTable, thisHolder);
+                fireBaseData(_cetTable);
 
             } else {
                 alert('You must add _cetTable.fireBaseUrl in config.js');

@@ -1,15 +1,14 @@
 /**
  * get local data
  * @param cet
- * @param thisHolder
  */
 
-function getLocalData (cet, thisHolder) {
+function getLocalData (cet) {
     if (cet !== undefined) {
         if (localStorage.getItem("_tableData")) {
 
             cet.tableData = JSON.parse(localStorage.getItem("_tableData"));
-            thisHolder.tableConstructor(cet);
+            cet.tableConstructor(cet);
 
         } else {
             $.ajax({
@@ -19,7 +18,7 @@ function getLocalData (cet, thisHolder) {
                 success: function (response) {
                     if (response !== undefined) {
                         cet.tableData = response;
-                        thisHolder.tableConstructor(cet);
+                        cet.tableConstructor(cet);
                     }
                 },
                 error: function () {
@@ -33,16 +32,15 @@ function getLocalData (cet, thisHolder) {
 /**
  * get firebase data
  * @param cet
- * @param thisHolder
  */
 
-function fireBaseData (cet, thisHolder) {
+function fireBaseData (cet) {
     if (cet !== undefined) {
         var myFirebaseRef = new Firebase(cet.fireBaseUrl);
 
         myFirebaseRef.on("value", function(response) {
             cet.tableData = response.val();
-            thisHolder.tableConstructor(cet);
+            cet.tableConstructor(cet);
         }, function (errorObject) {
             throw new Error("The read failed: " + errorObject.code);
         });

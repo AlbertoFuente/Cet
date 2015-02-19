@@ -1,4 +1,4 @@
-function tableEffects(trClass, tdClass, eventName, table, status, thisHolder) {
+function tableEffects(trClass, tdClass, eventName, table, status) {
     var tr = $("."+trClass),
         td = $("."+tdClass),
         char = tdClass.slice(-1),
@@ -39,29 +39,29 @@ function tableEffects(trClass, tdClass, eventName, table, status, thisHolder) {
                 } else {
                     val.reverse();
                 }
-                thisHolder.printNewBody(val, column, table);
+                _cetTable.printNewBody(val, column, table);
             } else {
                 if (isNumeric) {
                     val.sort(function(a, b){return b-a});
                 } else {
                     val.sort();
                 }
-                thisHolder.printNewBody(val, column, table);
+                _cetTable.printNewBody(val, column, table);
             }
 
             // hover & mouse out
             var inputs = table.getElementsByTagName('input');
             //  change
             $(inputs).change(function () {
-                thisHolder.inputChange(this);
+                _cetTable.inputChange(this);
             });
             // hover
             $(inputs).hover(function () {
-                thisHolder.mouseEffects(this, "hover");
+                _cetTable.mouseEffects(this, "hover");
             });
             // mouse out
             $(inputs).mouseout(function (){
-                thisHolder.mouseEffects(this, "out");
+                _cetTable.mouseEffects(this, "out");
             });
 
             // datepicker

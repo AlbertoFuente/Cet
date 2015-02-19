@@ -12,11 +12,12 @@ gulp.task('default', function () {
         'app/components/table/plugins/graphs/tableGraphs.js',
         'app/components/table/listTableOptions.js',
         'app/components/table/tableServices.js',
-        'app/components/table/createTable.js',
-        'app/components/table/tableEffects.js'
-    ]).pipe(babel())
+        'app/components/table/tableEffects.js',
+        'app/components/table/createTable.js'
+    ])
         .pipe(concat('cet.min.js'))
         .pipe(uglify())
+        .pipe(babel())
         .pipe(gulp.dest('js/'))
 });
 
