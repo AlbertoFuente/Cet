@@ -227,16 +227,23 @@ function createTable(_cetTable) {
                  */
 
                 var inputs = table.getElementsByTagName('input'),
-                    icons = table.getElementsByTagName('i');
+                    icons = table.getElementsByTagName('i'),
+                    spans = table.getElementsByTagName('span');
                 //  change
                 $(inputs).change(function () {
                     _cetTable.inputChange(this);
                 });
                 // hover
+                $(spans).hover(function () {
+                    _cetTable.mouseEffects(this, "hover");
+                });
                 $(inputs).hover(function () {
                     _cetTable.mouseEffects(this, "hover");
                 });
                 // mouse out
+                $(spans).mouseout(function () {
+                    _cetTable.mouseEffects(this, "out");
+                });
                 $(inputs).mouseout(function () {
                     _cetTable.mouseEffects(this, "out");
                 });
