@@ -121,15 +121,15 @@ function createTable(_cetTable) {
                         listTableOptions(_cetTable, optionsContainer, tableHeader);
                     }
 
-                    tableHeaderOptions.onclick = function () {
+                    tableHeaderOptions.onclick = () => {
 
-                        var elementPosition = this.getBoundingClientRect();
+                        var elementPosition = tableHeaderOptions.getBoundingClientRect();
 
                         optionsContainer.style.top = (elementPosition.top + 38) + "px";
                         optionsContainer.style.left = (elementPosition.left - 164) + "px";
 
-                        if (this.className === 'normalButton mdi-navigation-menu') {
-                            this.className = 'clickedButton mdi-navigation-menu';
+                        if (tableHeaderOptions.className === 'normalButton mdi-navigation-menu') {
+                            tableHeaderOptions.className = 'clickedButton mdi-navigation-menu';
                             if ($(document).find('optionsContainer')) {
                                 document.body.appendChild(optionsContainer);
                                 optionsContainer.style.display = "block";
@@ -137,7 +137,7 @@ function createTable(_cetTable) {
                                 optionsContainer.style.display = "block";
                             }
                         } else {
-                            this.className = 'normalButton mdi-navigation-menu';
+                            tableHeaderOptions.className = 'normalButton mdi-navigation-menu';
                             optionsContainer.style.display = "none";
                         }
                     }
