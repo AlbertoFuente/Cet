@@ -158,21 +158,24 @@ function createTable(_cetTable) {
                 var tableHead = document.createElement('tHead'),
                     headContent = _cetTable.tableData.head || _cetTable.tableData[0].head;
 
-                $.each(headContent, (key, val) => {
-                    var th = document.createElement('th');
-                        th.className = key;
-                    var thLabel = document.createElement('span');
-                        thLabel.innerHTML = val;
-                    th.setAttribute('data-field', val);
-                    th.appendChild(thLabel);
+                for (let k in headContent) {
+                    if (headContent.hasOwnProperty(k) && typeof headContent[k] !== 'function') {
+                        var th = document.createElement('th');
+                        th.className = k;
+                        var thLabel = document.createElement('span');
+                        thLabel.innerHTML = headContent[k];
+                        thLabel.value = headContent[k];
+                        th.setAttribute('data-field', headContent[k]);
+                        th.appendChild(thLabel);
 
-                    if (_cetTable.sortable) {
-                        var sortIcon = document.createElement('i');
-                        sortIcon.className = 'mdi-hardware-keyboard-arrow-down sortIcon';
-                        th.appendChild(sortIcon);
+                        if (_cetTable.sortable) {
+                            var sortIcon = document.createElement('i');
+                            sortIcon.className = 'mdi-hardware-keyboard-arrow-down sortIcon';
+                            th.appendChild(sortIcon);
+                        }
+                        tableHead.appendChild(th);
                     }
-                    tableHead.appendChild(th);
-                });
+                }
                 table.appendChild(tableHead);
 
                 // END HEAD
@@ -182,39 +185,43 @@ function createTable(_cetTable) {
                 var tableBody = document.createElement('tBody'),
                     bodyContent = _cetTable.tableData.body || _cetTable.tableData[0].body;
 
-                $.each(bodyContent, (key, val) => {
-                    var tr = document.createElement('tr');
-                    tr.className = key;
-                    $.each(val, (k, v) => {
-                        var td = document.createElement('td');
-                        td.className = k;
+                for (let key in bodyContent) {
+                    if (bodyContent.hasOwnProperty(key) && typeof bodyContent[key] !== 'function') {
+                        var tr = document.createElement('tr');
+                        tr.className = key;
 
-                        if (v.data !== undefined && v.type !== undefined) {
-                            if (v.edit) {
-                                var input = document.createElement('input');
-                                input.className = "input_"+k;
-                                if (v.type === "date") {
-                                    $(input).addClass('datepicker picker__input');
-                                    input.type = "text";
-                                    input.value = v.data;
-                                    input.setAttribute('placeholder', v.data);
+                        for (let p in bodyContent[key]) {
+                            var td = document.createElement('td');
+                            td.className = p;
+
+                            if (bodyContent[key][p].data !== undefined && bodyContent[key][p].type !== undefined) {
+                                if (bodyContent[key][p].edit) {
+                                    var input = document.createElement('input');
+                                    input.className = "input_"+bodyContent[key][p];
+                                    if (bodyContent[key][p].type === "date") {
+                                        $(input).addClass('datepicker picker__input');
+                                        input.type = "text";
+                                        input.value = bodyContent[key][p].data;
+                                        input.setAttribute('placeholder', bodyContent[key][p].data);
+                                    } else {
+                                        input.type = bodyContent[key][p].type;
+                                        input.value = bodyContent[key][p].data;
+                                    }
+                                    td.appendChild(input);
                                 } else {
-                                    input.type = v.type;
-                                    input.value = v.data;
+                                    var noEditLabel = document.createElement('span');
+                                    noEditLabel.innerHTML = bodyContent[key][p].data;
+                                    noEditLabel.value = bodyContent[key][p].data;
+                                    td.appendChild(noEditLabel);
                                 }
-                                td.appendChild(input);
-                            } else {
-                                var noEditLabel = document.createElement('span');
-                                    noEditLabel.innerHTML = v.data;
-                                    noEditLabel.value = v.data;
-                                td.appendChild(noEditLabel);
                             }
-                        }
 
-                        tr.appendChild(td);
-                    });
-                    tableBody.appendChild(tr);
-                });
+                            tr.appendChild(td);
+                        }
+                        tableBody.appendChild(tr);
+                    }
+                }
+
                 table.appendChild(tableBody);
 
                 // END BODY
