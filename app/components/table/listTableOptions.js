@@ -66,7 +66,7 @@ function openModal(type, cet) {
                 selectXId = 'selectXaxis',
                 xOptions = [];
 
-            $.each(table, function (key,val) {
+            $.each(table, (key,val) => {
                 xOptions.push(val);
             });
             createConfigOption(selectXaxisTitle, xOptions, modalContainer, selectXId, selectXType);
@@ -76,7 +76,7 @@ function openModal(type, cet) {
                 selectYId = 'selectYaxis',
                 yOptions = [];
 
-            $.each(table, function (key,val) {
+            $.each(table, (key,val) => {
                 yOptions.push(val);
             });
             createConfigOption(selectYaxisTitle, yOptions, modalContainer, selectYId, selectYType);
@@ -105,7 +105,7 @@ function openModal(type, cet) {
             var selectDownload = document.createElement('select');
 
             if (typeof cet.downloadOptions === 'object') {
-                $.each(cet.downloadOptions, function (key, val) {
+                $.each(cet.downloadOptions, (key, val) => {
                     if (val) {
                         var option = document.createElement('option');
                             option.value = key;
@@ -175,7 +175,7 @@ function listTableOptions(cet, container, tableHeader) {
             li.innerHTML = text;
         parent.appendChild(li);
 
-        li.onclick = function () {
+        li.onclick = () => {
             openModal(type, cet);
             closeMenu(container, tableHeader);
         }

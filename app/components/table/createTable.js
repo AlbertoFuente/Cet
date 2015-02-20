@@ -158,7 +158,7 @@ function createTable(_cetTable) {
                 var tableHead = document.createElement('tHead'),
                     headContent = _cetTable.tableData.head || _cetTable.tableData[0].head;
 
-                $.each(headContent, function (key, val) {
+                $.each(headContent, (key, val) => {
                     var th = document.createElement('th');
                         th.className = key;
                     var thLabel = document.createElement('span');
@@ -182,10 +182,10 @@ function createTable(_cetTable) {
                 var tableBody = document.createElement('tBody'),
                     bodyContent = _cetTable.tableData.body || _cetTable.tableData[0].body;
 
-                $.each(bodyContent, function (key, val) {
+                $.each(bodyContent, (key, val) => {
                     var tr = document.createElement('tr');
                     tr.className = key;
-                    $.each(val, function (k, v) {
+                    $.each(val, (k, v) => {
                         var td = document.createElement('td');
                         td.className = k;
 

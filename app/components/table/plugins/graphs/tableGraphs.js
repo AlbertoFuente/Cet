@@ -13,7 +13,7 @@ function showGraphModal(graphType, xData, yData) {
     var closeButton = document.createElement('button');
         closeButton.className = 'closeButton mdi-content-clear';
 
-    closeButton.onclick = function () {
+    closeButton.onclick = () => {
         closeModal(gModal);
     };
 
@@ -33,7 +33,7 @@ function showGraphModal(graphType, xData, yData) {
             var data = [];
                 data.push({'key': 'Table Bar Chart', 'values': []});
 
-            $.each(xData, function(i) {
+            $.each(xData, (i) => {
                 data[0].values.push({
                     'label': xData[i],
                     'value': parseInt(yData[i])
@@ -63,7 +63,7 @@ function showGraphModal(graphType, xData, yData) {
             var dataLine = [];
             dataLine.push({'key': 'Line Chart', 'values': []});
 
-            $.each(xData, function(i) {
+            $.each(xData, (i) => {
                 dataLine[0].values.push({
                     'area': false,
                     'label': xData[i],
@@ -89,7 +89,7 @@ function showGraphModal(graphType, xData, yData) {
             break;
         case 'Pie chart':
             var dataDonut = [];
-            $.each(xData, function(i) {
+            $.each(xData, (i) => {
                 dataDonut.push({
                     'label': xData[i],
                     'value': parseInt(yData[i])
@@ -119,7 +119,7 @@ function showGraphModal(graphType, xData, yData) {
             var dataScater = [];
             dataScater.push({'key': 'Scatter Chart', 'values': []});
 
-            $.each(xData, function(i) {
+            $.each(xData, (i) => {
                 dataScater[0].values.push({
                     'label': xData[i],
                     'value': parseInt(yData[i])
@@ -174,7 +174,7 @@ function prepareGraphData (cet, selecteds, modalContainer) {
 
     // tableHead
 
-    $.each(tableHead, function (key, val) {
+    $.each(tableHead, (key, val) => {
        if (val === xAxis) {
            xNum = key.slice(-1);
        }
@@ -185,7 +185,7 @@ function prepareGraphData (cet, selecteds, modalContainer) {
 
     // tableBody
 
-    $.each(tableBody, function (key, val) {
+    $.each(tableBody, (key, val) => {
         $.each(val, function (k, v) {
             var tdNumX = 'td'+xNum,
                 tdNumY = 'td'+yNum;
@@ -207,11 +207,9 @@ function prepareGraphData (cet, selecteds, modalContainer) {
         compareArrays.sameLength = true;
     }
     // text or number
-    var i = 0,
-        j = 0,
-        num = /^\d+$/;
+    const num = /^\d+$/;
     // xData
-    for (i; i < xData.length; i++) {
+    for (let i = 0; i < xData.length; i++) {
         if (num.test(xData[i])) {
             compareArrays.xAxisIsNum = true;
         } else {
@@ -220,7 +218,7 @@ function prepareGraphData (cet, selecteds, modalContainer) {
         }
     }
     // yData
-    for (j; j < yData.length; j++) {
+    for (let j = 0; j < yData.length; j++) {
         if (num.test(yData[j])) {
             compareArrays.yAxisIsNum = true;
         } else {
