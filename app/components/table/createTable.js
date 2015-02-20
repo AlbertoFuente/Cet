@@ -49,7 +49,7 @@ function createTable(_cetTable) {
      * @param table
      */
 
-    _cetTable.printNewBody = function (val, column, table) {
+    _cetTable.printNewBody = (val, column, table) => {
         var tableBody = table.childNodes[1],
             newColumn = [];
 
@@ -72,7 +72,7 @@ function createTable(_cetTable) {
      * @param eventName
      */
 
-    _cetTable.mouseEffects = function (element, eventName) {
+    _cetTable.mouseEffects = (element, eventName) => {
         var trClass = element.parentNode.parentNode.className,
             tdClass = element.parentNode.className;
         tableEffects(trClass,tdClass,eventName);
@@ -83,7 +83,7 @@ function createTable(_cetTable) {
      * @param element
      */
 
-    _cetTable.inputChange = function (element) {
+    _cetTable.inputChange = (element) => {
         var parentClass = element.parentNode.className,
             val = element.value,
             trClass = element.parentNode.parentNode.className;
@@ -96,7 +96,7 @@ function createTable(_cetTable) {
      * @returns {_cetTable.container|*}
      */
 
-    _cetTable.tableConstructor = function (_cetTable) {
+    _cetTable.tableConstructor = (_cetTable) => {
 
         if (_cetTable !== undefined) {
             if (_cetTable.header) {
