@@ -249,17 +249,15 @@ function createTable(_cetTable) {
                         downClass = "mdi-hardware-keyboard-arrow-down sortIcon",
                         upClass = "mdi-hardware-keyboard-arrow-up sortIcon",
                         ics = table.getElementsByTagName('i'),
-                        i = 0,
                         status = "down";
-
                     // check class
                     if (this.className === downClass) {
-                        for (i; i < ics.length; i++) {
+                        for (let i = 0; i < ics.length; i++) {
                             ics[i].className = upClass;
                             status = "up";
                         }
                     } else {
-                        for (i; i < ics.length; i++) {
+                        for (let i = 0; i < ics.length; i++) {
                             ics[i].className = downClass;
                             status = "down";
                         }

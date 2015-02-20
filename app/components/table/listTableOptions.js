@@ -41,11 +41,9 @@ function openModal(type, cet) {
                 var selectTypeLabel = document.createElement('label');
                 selectTypeLabel.innerHTML = selectTitle;
                 parent.appendChild(selectTypeLabel);
+                select.id = selectId;
 
-                var i = 0;
-                    select.id = selectId;
-
-                for (i; i < options.length; i++) {
+                for (let i = 0; i < options.length; i++) {
                     var op = document.createElement('option');
                     op.value = options[i];
                     op.innerHTML = options[i];

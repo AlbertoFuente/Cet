@@ -17,13 +17,12 @@ function tableEffects(trClass, tdClass, eventName, table, status) {
             break;
         case "sort":
             var tds = table.getElementsByClassName(tdClass),
-                i = 0,
                 column = [],
                 val = [],
-                num = /^\d+$/,
                 isNumeric = false;
+            const num = /^\d+$/;
 
-            for (i; i < tds.length; i++) {
+            for (let i = 0; i < tds.length; i++) {
                 isNumeric = !!num.test(tds[i].childNodes[0].value);
 
                 column.push({
@@ -35,14 +34,14 @@ function tableEffects(trClass, tdClass, eventName, table, status) {
 
             if (status === "down") {
                 if (isNumeric) {
-                    val.sort(function(a, b){return a-b});
+                    val.sort((a, b) => a-b);
                 } else {
                     val.reverse();
                 }
                 _cetTable.printNewBody(val, column, table);
             } else {
                 if (isNumeric) {
-                    val.sort(function(a, b){return b-a});
+                    val.sort((a, b) => b-a);
                 } else {
                     val.sort();
                 }
