@@ -13,7 +13,7 @@ function createTable(_cetTable) {
      * @param mode - mode {1, 2, 3}
      */
 
-    function modifyData (trParent, tdParent, val, mode) {
+    _cetTable.modifyData = (trParent, tdParent, val, mode) => {
 
         _cetTable.tableData[0].body[trParent][tdParent].data = val;
 
@@ -40,7 +40,7 @@ function createTable(_cetTable) {
                 // TODO: APIREST MODE
                 break;
         }
-    }
+    };
 
     /**
      * Print New table Body
@@ -87,7 +87,7 @@ function createTable(_cetTable) {
         var parentClass = element.parentNode.className,
             val = element.value,
             trClass = element.parentNode.parentNode.className;
-        modifyData(trClass,parentClass, val, _cetTable.mode);
+        _cetTable.modifyData(trClass,parentClass, val, _cetTable.mode);
     };
 
     /**
