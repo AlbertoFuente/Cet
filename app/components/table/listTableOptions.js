@@ -25,7 +25,7 @@ function openModal(type, cet) {
     // close modal button
     var closeButton = document.createElement('button');
         closeButton.className = 'closeButton mdi-content-clear';
-    closeButton.onclick = function () {
+    closeButton.onclick = () => {
         closeModal(modal);
     };
     // content container
@@ -66,9 +66,10 @@ function openModal(type, cet) {
                 selectXId = 'selectXaxis',
                 xOptions = [];
 
-            $.each(table, (key,val) => {
-                xOptions.push(val);
-            });
+            for (let k in table) {
+                xOptions.push(table[k]);
+            }
+
             createConfigOption(selectXaxisTitle, xOptions, modalContainer, selectXId, selectXType);
             // select y Axis option
             var selectYaxisTitle = 'Select Y axis: ',
@@ -76,9 +77,10 @@ function openModal(type, cet) {
                 selectYId = 'selectYaxis',
                 yOptions = [];
 
-            $.each(table, (key,val) => {
-                yOptions.push(val);
-            });
+            for (let k in table) {
+                yOptions.push(table[k]);
+            }
+
             createConfigOption(selectYaxisTitle, yOptions, modalContainer, selectYId, selectYType);
 
             // done button
@@ -87,7 +89,7 @@ function openModal(type, cet) {
                 doneButton.innerHTML = 'DONE';
             modalContainer.appendChild(doneButton);
 
-            doneButton.onclick = function () {
+            doneButton.onclick = () => {
                 var selecteds = {};
                     selecteds.xAxis = selectXType.value;
                     selecteds.yAxis = selectYType.value;
@@ -105,20 +107,20 @@ function openModal(type, cet) {
             var selectDownload = document.createElement('select');
 
             if (typeof cet.downloadOptions === 'object') {
-                $.each(cet.downloadOptions, (key, val) => {
-                    if (val) {
+                for (let k in cet.downloadOptions) {
+                    if (cet.downloadOptions[k]) {
                         var option = document.createElement('option');
-                            option.value = key;
-                            option.innerHTML = key;
+                        option.value = k;
+                        option.innerHTML = k;
                         selectDownload.appendChild(option);
                     }
-                });
+                }
             }
             var downButton = document.createElement('button');
                 downButton.className = 'doneButton waves-effect waves-light btn';
                 downButton.innerHTML = 'DOWNLOAD';
 
-            downButton.onclick = function () {
+            downButton.onclick = () => {
                 var selected = selectDownload.value;
                 selectedOption(selected);
             };
