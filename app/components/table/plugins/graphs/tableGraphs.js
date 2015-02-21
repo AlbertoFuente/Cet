@@ -5,6 +5,7 @@
 function showModal () {
     var gModal = document.createElement('div');
     gModal.className = 'gModal';
+    gModal.id = 'gModal';
     var gHeader = document.createElement('div');
     gHeader.className = 'gHeader';
     var closeButton = document.createElement('button');
@@ -42,12 +43,12 @@ function showGraph(graphType, xData, yData) {
             var data = [];
                 data.push({'key': 'Table Bar Chart', 'values': []});
 
-            $.each(xData, (i) => {
+            for (let i in xData) {
                 data[0].values.push({
                     'label': xData[i],
                     'value': parseInt(yData[i])
                 });
-            });
+            }
 
             // print graph
             nv.addGraph(function() {
@@ -72,13 +73,14 @@ function showGraph(graphType, xData, yData) {
             var dataLine = [];
             dataLine.push({'key': 'Line Chart', 'values': []});
 
-            $.each(xData, (i) => {
+            for (let i in xData) {
                 dataLine[0].values.push({
                     'area': false,
                     'label': xData[i],
                     'value': parseInt(yData[i])
                 });
-            });
+            }
+
             nv.addGraph(function() {
                 var chart = nv.models.lineWithFocusChart();
 
@@ -98,12 +100,12 @@ function showGraph(graphType, xData, yData) {
             break;
         case 'Pie chart':
             var dataDonut = [];
-            $.each(xData, (i) => {
+            for (let i in xData) {
                 dataDonut.push({
                     'label': xData[i],
                     'value': parseInt(yData[i])
                 });
-            });
+            }
 
             //Donut chart example
             nv.addGraph(function() {
@@ -128,12 +130,12 @@ function showGraph(graphType, xData, yData) {
             var dataScater = [];
             dataScater.push({'key': 'Scatter Chart', 'values': []});
 
-            $.each(xData, (i) => {
+            for (let i in xData) {
                 dataScater[0].values.push({
                     'label': xData[i],
                     'value': parseInt(yData[i])
                 });
-            });
+            }
 
             nv.addGraph(function() {
                 var chart = nv.models.scatterChart()
