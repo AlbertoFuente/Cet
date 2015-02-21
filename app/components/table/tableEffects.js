@@ -1,19 +1,26 @@
 function tableEffects(trClass, tdClass, eventName, table, status) {
-    var tr = $('.'+trClass),
-        td = $('.'+tdClass),
-        char = tdClass.slice(-1),
-        th = $('.th'+char);
+    var tr = document.getElementsByClassName(trClass),
+        td = document.getElementsByClassName(tdClass),
+        tdChar = tdClass.slice(-1),
+        thClass = 'th'+tdChar,
+        th = document.getElementsByClassName(thClass);
 
     switch (eventName) {
         case "hover":
-            tr.attr('style', 'background: rgba(15, 151, 249, 0.21)');
-            td.attr('style', 'background: rgba(15, 151, 249, 0.21)');
-            th.attr('style', 'background: rgb(15, 151, 249); color: white');
+            th[0].setAttribute('style', 'background: rgb(15, 151, 249); color: white');
+            tr[0].setAttribute('style', 'background: rgba(15, 151, 249, 0.21)');
+            for (let i = 0; i < td.length; i++) {
+                td[i].setAttribute('style', 'background: rgba(15, 151, 249, 0.21)');
+            }
             break;
         case "out":
-            tr.removeAttr('style');
-            td.removeAttr('style');
-            th.removeAttr('style');
+            th[0].removeAttribute('style');
+            tr[0].removeAttribute('style');
+            for (let i = 0; i < td.length; i++) {
+                if (td[i].hasAttribute('style')) {
+                    td[i].removeAttribute('style');
+                }
+            }
             break;
         case "sort":
             var tds = table.getElementsByClassName(tdClass),
