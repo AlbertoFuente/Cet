@@ -1,11 +1,12 @@
-
 var gulp = require('gulp'),
     concat = require('gulp-concat'),
     uglify = require('gulp-uglify'),
     watch = require('gulp-watch'),
     babel = require("gulp-babel"),
     sass = require('gulp-sass'),
-    minifyCSS = require('gulp-minify-css');
+    minifyCSS = require('gulp-minify-css'),
+    jslint = require('gulp-jslint'),
+    rename = require('gulp-rename');
 
 gulp.task('default', function () {
 
@@ -19,6 +20,10 @@ gulp.task('default', function () {
     ])
         .pipe(concat('cet.min.js'))
         .pipe(babel())
+        .pipe(jslint())
+        .on('error', function (error) {
+            console.error(String(error));
+        })
         .pipe(uglify())
         .pipe(gulp.dest('js/'))
 });
@@ -27,7 +32,8 @@ gulp.task('sass', function () {
     gulp.src('styles/styles.scss')
         .pipe(sass())
         .pipe(minifyCSS({keepBreaks:true}))
-        .pipe(gulp.dest('styles.min.css'))
+        .pipe(rename('styles.min.css'))
+        .pipe(gulp.dest('css'))
 });
 
 gulp.task('watch', function () {
