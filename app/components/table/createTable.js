@@ -218,10 +218,11 @@ function createTable(_cetTable) {
                                     td.appendChild(input);
                                 } else {
                                     var noEditLabel = document.createElement('span');
-                                    noEditLabel.className = 'noEditableField tooltipped';
+                                    noEditLabel.className = 'noEditableField';
                                     noEditLabel.innerHTML = bodyContent[key][p].data;
                                     noEditLabel.value = bodyContent[key][p].data;
                                     if (_cetTable.tooltips){
+                                        noEditLabel.className = noEditLabel.className + ' tooltipped';
                                         noEditLabel.setAttribute('data-position', 'bottom');
                                         noEditLabel.setAttribute('data-delay', '30');
                                         noEditLabel.setAttribute('data-tooltip', bodyContent[key][p].data);
