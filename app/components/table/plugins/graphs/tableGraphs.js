@@ -1,31 +1,40 @@
 /**
- * Show modal graph
- * @param graphType
- * @param xData
- * @param yData
+ * Show modal
  */
 
-function showGraphModal(graphType, xData, yData) {
+function showModal () {
     var gModal = document.createElement('div');
-        gModal.className = 'gModal';
+    gModal.className = 'gModal';
     var gHeader = document.createElement('div');
-        gHeader.className = 'gHeader';
+    gHeader.className = 'gHeader';
     var closeButton = document.createElement('button');
-        closeButton.className = 'closeButton mdi-content-clear';
+    closeButton.className = 'closeButton mdi-content-clear';
 
     closeButton.onclick = () => {
         closeModal(gModal);
     };
 
     var gContent = document.createElement('div');
-        gContent.className = 'gContent';
-        gContent.id = 'chart';
+    gContent.className = 'gContent';
+    gContent.id = 'chart';
     var svgContent = document.createElement('svg');
 
     gContent.appendChild(svgContent);
     gHeader.appendChild(closeButton);
     gModal.appendChild(gHeader);
     gModal.appendChild(gContent);
+
+    document.body.appendChild(gModal);
+}
+
+/**
+ * Show modal graph
+ * @param graphType
+ * @param xData
+ * @param yData
+ */
+
+function showGraph(graphType, xData, yData) {
 
     switch (graphType) {
         case 'Bar chart':
@@ -150,7 +159,6 @@ function showGraphModal(graphType, xData, yData) {
             });
             break;
     }
-    document.body.appendChild(gModal);
 }
 
 /**
@@ -243,7 +251,8 @@ function prepareGraphData (cet, selecteds, modalContainer) {
     if (compareArrays.sameLength) {
         if (compareArrays.xAxisIsNum !== compareArrays.yAxisIsNum) {
             modalContainer.parentNode.style.display = 'none';
-            showGraphModal(graphType, xData, yData);
+            showModal();
+            showGraph(graphType, xData, yData);
         } else {
             showError(modalContainer);
         }

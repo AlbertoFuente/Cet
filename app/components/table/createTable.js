@@ -256,49 +256,59 @@ function createTable(_cetTable) {
                 var inputs = table.getElementsByTagName('input'),
                     icons = table.getElementsByTagName('i'),
                     spans = table.getElementsByTagName('span');
-                //  change
-                $(inputs).change(function () {
-                    _cetTable.inputChange(this);
-                });
-                // hover
-                $(spans).hover(function () {
-                    _cetTable.mouseEffects(this, 'hover');
-                });
-                $(inputs).hover(function () {
-                    _cetTable.mouseEffects(this, 'hover');
-                });
-                // mouse out
-                $(spans).mouseout(function () {
-                    _cetTable.mouseEffects(this, 'out');
-                });
-                $(inputs).mouseout(function () {
-                    _cetTable.mouseEffects(this, 'out');
-                });
-                // icon sort
-                $(icons).click(function() {
-                    var thClass = this.parentNode.className,
-                        tdNum = thClass.slice(-1),
-                        tdClass = 'td' + tdNum,
-                        eventName = 'sort',
-                        downClass = 'mdi-hardware-keyboard-arrow-down sortIcon',
-                        upClass = 'mdi-hardware-keyboard-arrow-up sortIcon',
-                        ics = table.getElementsByTagName('i'),
-                        status = 'down';
-                    // check class
-                    if (this.className === downClass) {
-                        for (let i = 0; i < ics.length; i++) {
-                            ics[i].className = upClass;
-                            status = 'up';
-                        }
-                    } else {
-                        for (let i = 0; i < ics.length; i++) {
-                            ics[i].className = downClass;
-                            status = 'down';
-                        }
+                // inputs events
+                for (let i = 0; i < inputs.length; i++) {
+                    // change
+                    inputs[i].onchange = () => {
+                        _cetTable.inputChange(inputs[i]);
+                    };
+                    // hover
+                    inputs[i].onmouseover = () => {
+                        _cetTable.mouseEffects(inputs[i], 'hover');
+                    };
+                    // out
+                    inputs[i].onmouseout = () => {
+                        _cetTable.mouseEffects(inputs[i], 'out');
                     }
-
-                    tableEffects(thClass, tdClass, eventName, table, status);
-                });
+                }
+                // spans events
+                for (let i = 0; i < spans.length; i++) {
+                    // hover
+                    spans[i].onmouseover = () => {
+                        _cetTable.mouseEffects(spans[i], 'hover');
+                    };
+                    // out
+                    spans[i].onmouseout = () => {
+                        _cetTable.mouseEffects(spans[i], 'out');
+                    }
+                }
+                // icons events
+                for (let i = 0; i < icons.length; i++) {
+                    // click
+                    icons[i].onclick = () => {
+                        var thClass = icons[i].parentNode.className,
+                            tdNum = thClass.slice(-1),
+                            tdClass = 'td' + tdNum,
+                            eventName = 'sort',
+                            downClass = 'mdi-hardware-keyboard-arrow-down sortIcon',
+                            upClass = 'mdi-hardware-keyboard-arrow-up sortIcon',
+                            ics = table.getElementsByTagName('i'),
+                            status = 'down';
+                        // check class
+                        if (icons[i].className === downClass) {
+                            for (let i = 0; i < ics.length; i++) {
+                                ics[i].className = upClass;
+                                status = 'up';
+                            }
+                        } else {
+                            for (let i = 0; i < ics.length; i++) {
+                                ics[i].className = downClass;
+                                status = 'down';
+                            }
+                        }
+                        tableEffects(thClass, tdClass, eventName, table, status);
+                    }
+                }
 
                 // datepicker
                 $('.datepicker').pickadate();

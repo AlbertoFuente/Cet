@@ -51,24 +51,32 @@ function tableEffects(trClass, tdClass, eventName, table, status) {
             // hover & mouse out
             var inputs = table.getElementsByTagName('input'),
                 spans = table.getElementsByTagName('span');
-            //  change
-            $(inputs).change(function () {
-                _cetTable.inputChange(this);
-            });
-            // hover
-            $(spans).hover(function () {
-                _cetTable.mouseEffects(this, "hover");
-            });
-            $(inputs).hover(function () {
-                _cetTable.mouseEffects(this, "hover");
-            });
-            // mouse out
-            $(spans).mouseout(function (){
-                _cetTable.mouseEffects(this, "out");
-            });
-            $(inputs).mouseout(function (){
-                _cetTable.mouseEffects(this, "out");
-            });
+            // inputs events
+            for (let i = 0; i < inputs.length; i++) {
+                // change
+                inputs[i].onchange = () => {
+                    _cetTable.inputChange(inputs[i]);
+                };
+                // hover
+                inputs[i].onmouseover = () => {
+                    _cetTable.mouseEffects(inputs[i], 'hover');
+                };
+                // out
+                inputs[i].onmouseout = () => {
+                    _cetTable.mouseEffects(inputs[i], 'out');
+                }
+            }
+            // spans events
+            for (let i = 0; i < spans.length; i++) {
+                // hover
+                spans[i].onmouseover = () => {
+                    _cetTable.mouseEffects(spans[i], 'hover');
+                };
+                // out
+                spans[i].onmouseout = () => {
+                    _cetTable.mouseEffects(spans[i], 'out');
+                }
+            }
 
             // datepicker
             $('.datepicker').pickadate();
