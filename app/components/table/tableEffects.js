@@ -1,3 +1,12 @@
+/**
+ * Table effects
+ * @param trClass
+ * @param tdClass
+ * @param eventName
+ * @param table
+ * @param status
+ */
+
 function tableEffects(trClass, tdClass, eventName, table, status) {
     var tr = document.getElementsByClassName(trClass),
         td = document.getElementsByClassName(tdClass),
@@ -7,15 +16,27 @@ function tableEffects(trClass, tdClass, eventName, table, status) {
 
     switch (eventName) {
         case "hover":
-            th[0].setAttribute('style', 'background: rgb(15, 151, 249); color: white');
-            tr[0].setAttribute('style', 'background: rgba(15, 151, 249, 0.21)');
+            for (let i = 0; i < th.length; i++) {
+                th[i].setAttribute('style', 'background: rgb(15, 151, 249); color: white');
+            }
+            for (let i = 0; i < tr.length; i++) {
+                tr[i].setAttribute('style', 'background: rgba(15, 151, 249, 0.21)');
+            }
             for (let i = 0; i < td.length; i++) {
                 td[i].setAttribute('style', 'background: rgba(15, 151, 249, 0.21)');
             }
             break;
         case "out":
-            th[0].removeAttribute('style');
-            tr[0].removeAttribute('style');
+            for (let i = 0; i < th.length; i++) {
+                if (th[i].hasAttribute('style')) {
+                    th[i].removeAttribute('style');
+                }
+            }
+            for (let i = 0; i < tr.length; i++) {
+                if (tr[i].hasAttribute('style')) {
+                    tr[i].removeAttribute('style');
+                }
+            }
             for (let i = 0; i < td.length; i++) {
                 if (td[i].hasAttribute('style')) {
                     td[i].removeAttribute('style');
