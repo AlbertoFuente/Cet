@@ -1,5 +1,6 @@
 /**
  * Table effects
+ *
  * @param trClass
  * @param tdClass
  * @param eventName
