@@ -225,12 +225,17 @@ function createTable(_cetTable) {
                                         noEditLabel.className = noEditLabel.className + ' tooltipped';
                                         noEditLabel.setAttribute('data-position', 'bottom');
                                         noEditLabel.setAttribute('data-delay', '30');
-                                        noEditLabel.setAttribute('data-tooltip', bodyContent[key][p].data);
+                                        td.appendChild(noEditLabel);
+                                        var labelParent = noEditLabel.parentNode.className,
+                                            sliceNum = labelParent.slice(-1),
+                                            thClass = 'th' + sliceNum,
+                                            thText = tableHead.getElementsByClassName(thClass)[0].innerText;
+                                        noEditLabel.setAttribute('data-tooltip', thText + ': ' + bodyContent[key][p].data);
+                                    } else {
+                                        td.appendChild(noEditLabel);
                                     }
-                                    td.appendChild(noEditLabel);
                                 }
                             }
-
                             tr.appendChild(td);
                         }
                         tableBody.appendChild(tr);

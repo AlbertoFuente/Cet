@@ -174,7 +174,6 @@ function prepareGraphData (cet, selecteds, modalContainer) {
 
     // tableHead
     for (let key in tableHead) {
-        console.log(tableHead[key]);
         if (tableHead[key] === xAxis) {
             xNum = key.slice(-1);
         }
