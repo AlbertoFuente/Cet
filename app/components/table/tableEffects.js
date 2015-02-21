@@ -1,8 +1,8 @@
 function tableEffects(trClass, tdClass, eventName, table, status) {
-    var tr = $("."+trClass),
-        td = $("."+tdClass),
+    var tr = $('.'+trClass),
+        td = $('.'+tdClass),
         char = tdClass.slice(-1),
-        th = $(".th"+char);
+        th = $('.th'+char);
 
     switch (eventName) {
         case "hover":

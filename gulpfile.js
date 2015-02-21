@@ -11,12 +11,13 @@ var gulp = require('gulp'),
 gulp.task('default', function () {
 
     gulp.src([
-        'app/components/table/plugins/downloads/tableDownloads.js',
-        'app/components/table/plugins/graphs/tableGraphs.js',
-        'app/components/table/listTableOptions.js',
+        'app/config/config.js',
+        'app/components/table/createTable.js',
         'app/components/table/tableServices.js',
         'app/components/table/tableEffects.js',
-        'app/components/table/createTable.js'
+        'app/components/table/listTableOptions.js',
+        'app/components/table/plugins/graphs/tableGraphs.js',
+        'app/components/table/plugins/downloads/tableDownloads.js'
     ])
         .pipe(concat('cet.min.js'))
         .pipe(babel())
@@ -48,6 +49,7 @@ gulp.task('sass', function () {
 gulp.task('watch', function () {
 
     gulp.watch([
+        'app/config/config.js',
         'app/components/table/createTable.js',
         'app/components/table/tableEffects.js',
         'app/components/table/tableServices.js',

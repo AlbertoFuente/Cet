@@ -14,6 +14,8 @@ _cetTable.listOptions = {
     'graphs': true,
     'downloads': true
 };
+// tooltips
+_cetTable.tooltips = true;
 // download options
 _cetTable.downloadOptions = {
     'json': true,
@@ -47,5 +49,3 @@ _cetTable.sortable = true;
 _cetTable.container = document.getElementById('tableContainer');
 
 createTable(_cetTable);
-
-

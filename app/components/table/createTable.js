@@ -198,7 +198,14 @@ function createTable(_cetTable) {
                             if (bodyContent[key][p].data !== undefined && bodyContent[key][p].type !== undefined) {
                                 if (bodyContent[key][p].edit) {
                                     var input = document.createElement('input');
-                                    input.className = 'input_edit';
+                                    if (_cetTable.tooltips) {
+                                        input.className = 'input_edit tooltipped';
+                                        input.setAttribute('data-position', 'bottom');
+                                        input.setAttribute('data-delay', '30');
+                                        input.setAttribute('data-tooltip', 'Edit field: ' + bodyContent[key][p].data);
+                                    } else {
+                                        input.className = 'input_edit';
+                                    }
                                     if (bodyContent[key][p].type === 'date') {
                                         input.className = input.className + ' datepicker picker__input';
                                         input.type = 'text';
@@ -213,6 +220,9 @@ function createTable(_cetTable) {
                                     var noEditLabel = document.createElement('span');
                                     noEditLabel.innerHTML = bodyContent[key][p].data;
                                     noEditLabel.value = bodyContent[key][p].data;
+                                    noEditLabel.setAttribute('data-position', 'bottom');
+                                    noEditLabel.setAttribute('data-delay', '30');
+                                    noEditLabel.setAttribute('data-tooltip', bodyContent[key][p].data);
                                     td.appendChild(noEditLabel);
                                 }
                             }
@@ -292,7 +302,6 @@ function createTable(_cetTable) {
         }
     };
 
-
     if (_cetTable !== undefined) {
         // Detect type of data service
         if (_cetTable.dataOptions.localData) {
@@ -320,13 +329,3 @@ function createTable(_cetTable) {
         }
     }
 }
-
-/**
- *  import config.js
- * @type {HTMLElement}
- */
-
-var imported = document.createElement('script');
-imported.src = '../config/config.js';
-document.head.appendChild(imported);
-
