@@ -20,7 +20,16 @@ gulp.task('default', function () {
     ])
         .pipe(concat('cet.min.js'))
         .pipe(babel())
-        .pipe(jslint())
+        .pipe(jslint({
+            node: true,
+            evil: true,
+            nomen: true,
+            vars: true,
+            global: [],
+            predef: [],
+            reporter: 'default',
+            errorsOnly: false
+        }))
         .on('error', function (error) {
             console.error(String(error));
         })
@@ -55,4 +64,3 @@ gulp.task('watch', function () {
         gulp.start('sass');
     });
 });
-
