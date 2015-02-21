@@ -173,33 +173,31 @@ function prepareGraphData (cet, selecteds, modalContainer) {
         compareArrays = {};
 
     // tableHead
-
-    $.each(tableHead, (key, val) => {
-       if (val === xAxis) {
-           xNum = key.slice(-1);
-       }
-        if (val === yAxis) {
+    for (let key in tableHead) {
+        console.log(tableHead[key]);
+        if (tableHead[key] === xAxis) {
+            xNum = key.slice(-1);
+        }
+        if (tableHead[key] === yAxis) {
             yNum = key.slice(-1);
         }
-    });
+    }
 
     // tableBody
-
-    $.each(tableBody, (key, val) => {
-        $.each(val, function (k, v) {
+    for (let key in tableBody) {
+        for (let k in tableBody[key]) {
             var tdNumX = 'td'+xNum,
                 tdNumY = 'td'+yNum;
-
             // save xAxis data
             if (tdNumX === k) {
-                xData.push(v.data);
+                xData.push(tableBody[key][k].data);
             }
             // save yAxis data
             if (tdNumY === k) {
-                yData.push(v.data);
+                yData.push(tableBody[key][k].data);
             }
-        });
-    });
+        }
+    }
 
     // compare arrays
     // array length
@@ -232,7 +230,7 @@ function prepareGraphData (cet, selecteds, modalContainer) {
      * @param cont
      */
 
-    function showError (cont) {
+    var showError = (cont) => {
         var errLabel = document.createElement('label');
             errLabel.className = 'errLabel';
             errLabel.innerHTML = 'Impossible to construct a graph of the selected data, try another selection.';
@@ -240,7 +238,7 @@ function prepareGraphData (cet, selecteds, modalContainer) {
         setTimeout(function () {
             cont.removeChild(errLabel);
         }, 5000);
-    }
+    };
 
     // check if everything is ok
     if (compareArrays.sameLength) {

@@ -36,7 +36,7 @@ function openModal(type, cet) {
         case 'graph':
             modalHeaderTitle.innerHTML = 'Config graph options';
 
-            function createConfigOption (selectTitle, options, parent, selectId, select) {
+            var createConfigOption = (selectTitle, options, parent, selectId, select) => {
                 // options
                 var selectTypeLabel = document.createElement('label');
                 selectTypeLabel.innerHTML = selectTitle;
@@ -50,7 +50,7 @@ function openModal(type, cet) {
                     select.appendChild(op);
                 }
                 parent.appendChild(select);
-            }
+            };
             
             var table = cet.tableData[0].head;
             
@@ -171,7 +171,7 @@ function listTableOptions(cet, container, tableHeader) {
      * @param parent
      */
 
-    function createOption(type, text, parent) {
+    var createOption = (type, text, parent) => {
         var li = document.createElement('li');
             li.className = 'optionsLi';
             li.innerHTML = text;
@@ -181,7 +181,7 @@ function listTableOptions(cet, container, tableHeader) {
             openModal(type, cet);
             closeMenu(container, tableHeader);
         }
-    }
+    };
 
     // graphs
     if (cet.listOptions.graphs) {
