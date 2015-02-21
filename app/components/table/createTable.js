@@ -22,7 +22,7 @@ function createTable(_cetTable) {
                 // mode 1 - localData
                 // save it in localStorage
                 if (window.localStorage) {
-                    localStorage.setItem("_tableData", JSON.stringify(_cetTable.tableData));
+                    localStorage.setItem('_tableData', JSON.stringify(_cetTable.tableData));
                 } else {
                     throw new Error("Your browser don't support LocalStorage!");
                 }
@@ -53,7 +53,7 @@ function createTable(_cetTable) {
         var tableBody = table.childNodes[1],
             newColumn = [];
 
-        $(tableBody).empty();
+        tableBody.innerHTML = null;
 
         for (let i = 0; i < val.length; i++) {
             for (let j = 0; j < column.length; j++) {
@@ -62,8 +62,9 @@ function createTable(_cetTable) {
                 }
             }
         }
-
-        $(tableBody).append(newColumn);
+        for (let i = 0; i < newColumn.length; i++) {
+            tableBody.appendChild(newColumn[i]);
+        }
     };
 
     /**
@@ -114,8 +115,9 @@ function createTable(_cetTable) {
                     tableHeader.appendChild(tableHeaderOptions);
 
                     var optionsContainer = document.createElement('div');
-                        optionsContainer.className = "optionsContainer";
-                        optionsContainer.style.display = "none";
+                        optionsContainer.className = 'optionsContainer';
+                        optionsContainer.id = 'optionsContainer';
+                        optionsContainer.style.display = 'none';
 
                     if (_cetTable.listOptions !== undefined && typeof _cetTable.listOptions === 'object') {
                         listTableOptions(_cetTable, optionsContainer, tableHeader);
@@ -125,20 +127,20 @@ function createTable(_cetTable) {
 
                         var elementPosition = tableHeaderOptions.getBoundingClientRect();
 
-                        optionsContainer.style.top = (elementPosition.top + 38) + "px";
-                        optionsContainer.style.left = (elementPosition.left - 164) + "px";
+                        optionsContainer.style.top = (elementPosition.top + 38) + 'px';
+                        optionsContainer.style.left = (elementPosition.left - 164) + 'px';
 
                         if (tableHeaderOptions.className === 'normalButton mdi-navigation-menu') {
                             tableHeaderOptions.className = 'clickedButton mdi-navigation-menu';
-                            if ($(document).find('optionsContainer')) {
-                                document.body.appendChild(optionsContainer);
-                                optionsContainer.style.display = "block";
+                            if (document.getElementById('optionsContainer')) {
+                                optionsContainer.style.display = 'block';
                             } else {
-                                optionsContainer.style.display = "block";
+                                document.body.appendChild(optionsContainer);
+                                optionsContainer.style.display = 'block';
                             }
                         } else {
                             tableHeaderOptions.className = 'normalButton mdi-navigation-menu';
-                            optionsContainer.style.display = "none";
+                            optionsContainer.style.display = 'none';
                         }
                     }
                 }
@@ -193,14 +195,13 @@ function createTable(_cetTable) {
                         for (let p in bodyContent[key]) {
                             var td = document.createElement('td');
                             td.className = p;
-
                             if (bodyContent[key][p].data !== undefined && bodyContent[key][p].type !== undefined) {
                                 if (bodyContent[key][p].edit) {
                                     var input = document.createElement('input');
-                                    input.className = "input_"+bodyContent[key][p];
-                                    if (bodyContent[key][p].type === "date") {
-                                        $(input).addClass('datepicker picker__input');
-                                        input.type = "text";
+                                    input.className = 'input_edit';
+                                    if (bodyContent[key][p].type === 'date') {
+                                        input.className = input.className + ' datepicker picker__input';
+                                        input.type = 'text';
                                         input.value = bodyContent[key][p].data;
                                         input.setAttribute('placeholder', bodyContent[key][p].data);
                                     } else {
@@ -242,38 +243,38 @@ function createTable(_cetTable) {
                 });
                 // hover
                 $(spans).hover(function () {
-                    _cetTable.mouseEffects(this, "hover");
+                    _cetTable.mouseEffects(this, 'hover');
                 });
                 $(inputs).hover(function () {
-                    _cetTable.mouseEffects(this, "hover");
+                    _cetTable.mouseEffects(this, 'hover');
                 });
                 // mouse out
                 $(spans).mouseout(function () {
-                    _cetTable.mouseEffects(this, "out");
+                    _cetTable.mouseEffects(this, 'out');
                 });
                 $(inputs).mouseout(function () {
-                    _cetTable.mouseEffects(this, "out");
+                    _cetTable.mouseEffects(this, 'out');
                 });
                 // icon sort
                 $(icons).click(function() {
                     var thClass = this.parentNode.className,
                         tdNum = thClass.slice(-1),
-                        tdClass = "td" + tdNum,
-                        eventName = "sort",
-                        downClass = "mdi-hardware-keyboard-arrow-down sortIcon",
-                        upClass = "mdi-hardware-keyboard-arrow-up sortIcon",
+                        tdClass = 'td' + tdNum,
+                        eventName = 'sort',
+                        downClass = 'mdi-hardware-keyboard-arrow-down sortIcon',
+                        upClass = 'mdi-hardware-keyboard-arrow-up sortIcon',
                         ics = table.getElementsByTagName('i'),
-                        status = "down";
+                        status = 'down';
                     // check class
                     if (this.className === downClass) {
                         for (let i = 0; i < ics.length; i++) {
                             ics[i].className = upClass;
-                            status = "up";
+                            status = 'up';
                         }
                     } else {
                         for (let i = 0; i < ics.length; i++) {
                             ics[i].className = downClass;
-                            status = "down";
+                            status = 'down';
                         }
                     }
 
