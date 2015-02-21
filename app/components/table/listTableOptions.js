@@ -4,7 +4,8 @@
  */
 
 function closeModal (modal) {
-    $(modal).remove();
+    var modalId = document.getElementById(modal.id);
+    modalId.remove();
 }
 
 /**
