@@ -37,7 +37,10 @@ function createTable(_cetTable) {
                 break;
             case 3:
                 // mode 3 - apiRest
-                // TODO: APIREST MODE
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.open("POST", _cetTable.apiRestPostUrl);
+                xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+                xmlhttp.send(JSON.stringify(_cetTable.tableData));
                 break;
         }
     };
@@ -341,7 +344,7 @@ function createTable(_cetTable) {
         } else if (_cetTable.dataOptions.apiRest) {
             if (_cetTable.apiRestUrl !== '') {
                 _cetTable.mode = 3;
-                apiRestData(_cetTable.apiRestUrl);
+                apiRestData(_cetTable.apiRestGetUrl);
             } else {
                 alert('You must add _cetTable.apiRestUrl in config.js');
             }

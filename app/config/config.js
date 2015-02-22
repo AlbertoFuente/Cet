@@ -40,7 +40,8 @@ _cetTable.localDataUrl = 'localData/tableData.json';
 // fireBase url
 _cetTable.fireBaseUrl = '';
 // apiRest url
-_cetTable.apiRestUrl = '';
+_cetTable.apiRestGetUrl = '';
+_cetTable.apiRestPostUrl = '';
 // display table effects
 _cetTable.effects = true;
 // sort table
