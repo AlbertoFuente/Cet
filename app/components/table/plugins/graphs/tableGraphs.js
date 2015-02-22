@@ -210,7 +210,12 @@ function prepareGraphData (cet, selecteds, modalContainer) {
         if (compareArrays.xAxisIsNum !== compareArrays.yAxisIsNum) {
             modalContainer.parentNode.style.display = 'none';
             showModal();
-            showGraph(graphType, xData, yData);
+
+            if (compareArrays.xAxisIsNum) {
+                showGraph(graphType, yData, xData);
+            } else {
+                showGraph(graphType, xData, yData);
+            }
         } else {
             showError(modalContainer);
         }
