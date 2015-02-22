@@ -76,7 +76,7 @@ function createTable(_cetTable) {
     _cetTable.mouseEffects = (element, eventName) => {
         var trClass = element.parentNode.parentNode.className,
             tdClass = element.parentNode.className;
-        tableEffects(trClass,tdClass,eventName);
+        tableEffects(trClass,tdClass,eventName, null, null);
     };
 
     /**

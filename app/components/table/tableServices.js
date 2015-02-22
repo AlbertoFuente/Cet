@@ -47,8 +47,24 @@ function fireBaseData (cet) {
 
 }
 
-// TODO: get api rest data
+/**
+ * API REST DATA
+ * @param url
+ */
+
 function apiRestData (url) {
+    var xmlhttp = new XMLHttpRequest();
 
-
+    xmlhttp.onreadystatechange = () => {
+        if (xmlhttp.readyState === 4) {
+            if (xmlhttp.status === 200) {
+                cet.tableData = JSON.parse(xmlhttp.responseText);
+                cet.tableConstructor(cet);
+            } else {
+                throw new Error("Could not load the data inside the " + cet.localDataUrl + " file");
+            }
+        }
+    };
+    xmlhttp.open("GET", url, false);
+    xmlhttp.send();
 }
