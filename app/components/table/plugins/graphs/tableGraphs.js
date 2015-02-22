@@ -15,9 +15,11 @@ function showModal () {
         closeModal(gModal);
     };
 
-    var gContent = document.createElement('div');
+    var gContent = document.createElement('canvas');
     gContent.className = 'gContent';
     gContent.id = 'chart';
+    gContent.width = '700';
+    gContent.height = '350';
     var svgContent = document.createElement('svg');
 
     gContent.appendChild(svgContent);
@@ -40,125 +42,59 @@ function showGraph(graphType, xData, yData) {
     switch (graphType) {
         case 'Bar chart':
             // prepare data
-            var data = [];
-                data.push({'key': 'Table Bar Chart', 'values': []});
-
+            var data = {
+                'labels': [],
+                'datasets': [{
+                    'data': [],
+                    'label': 'title A',
+                    'fillColor': 'rgba(220,220,220,0.5)',
+                    'strokeColor': 'rgba(220,220,220,0.8)',
+                    'highlightFill': 'rgba(220,220,220,0.75)',
+                    'highlightStroke': 'rgba(220,220,220,1)'
+                }]
+            };
             for (let i in xData) {
-                data[0].values.push({
-                    'label': xData[i],
-                    'value': parseInt(yData[i])
-                });
+                data.labels.push(xData[i]);
+            }
+            for (let i in yData) {
+                data.datasets[0].data.push(parseInt(yData[i]));
             }
 
             // print graph
-            nv.addGraph(function() {
-                var chart = nv.models.discreteBarChart()
-                        .x(function(d) { return d.label })
-                        .y(function(d) { return d.value })
-                        .staggerLabels(true)
-                        .tooltips(true)
-                        .showValues(true)
-                        .duration(250);
-
-                d3.select('#chart svg')
-                    .datum(data)
-                    .call(chart);
-
-                nv.utils.windowResize(chart.update);
-                return chart;
-            });
+            var bar = document.getElementById("chart").getContext("2d");
+            var BarChart = new Chart(bar).Bar(data);
 
             break;
         case 'Line chart':
-            var dataLine = [];
-            dataLine.push({'key': 'Line Chart', 'values': []});
-
+            // prepare data
+            var dataLine = {
+                'labels': [],
+                'datasets': [{
+                    'data': [],
+                    'label': 'title A',
+                    'fillColor': 'rgba(220,220,220,0.5)',
+                    'strokeColor': 'rgba(220,220,220,0.8)',
+                    'highlightFill': 'rgba(220,220,220,0.75)',
+                    'highlightStroke': 'rgba(220,220,220,1)'
+                }]
+            };
             for (let i in xData) {
-                dataLine[0].values.push({
-                    'area': false,
-                    'label': xData[i],
-                    'value': parseInt(yData[i])
-                });
+                dataLine.labels.push(xData[i]);
+            }
+            for (let i in yData) {
+                dataLine.datasets[0].data.push(parseInt(yData[i]));
             }
 
-            nv.addGraph(function() {
-                var chart = nv.models.lineWithFocusChart();
+            // print graph
+            var line = document.getElementById("chart").getContext("2d");
+            var LineChart = new Chart(line).Line(dataLine);
 
-                chart.xAxis.tickFormat(d3.format(',f'));
-                chart.x2Axis.tickFormat(d3.format(',f'));
-                chart.yAxis.tickFormat(d3.format(',.2f'));
-                chart.y2Axis.tickFormat(d3.format(',.2f'));
-
-                d3.select('#chart svg')
-                    .datum(dataLine)
-                    .call(chart);
-
-                nv.utils.windowResize(chart.update);
-
-                return chart;
-            });
             break;
         case 'Pie chart':
-            var dataDonut = [];
-            for (let i in xData) {
-                dataDonut.push({
-                    'label': xData[i],
-                    'value': parseInt(yData[i])
-                });
-            }
 
-            //Donut chart example
-            nv.addGraph(function() {
-                var chart = nv.models.pieChart()
-                        .x(function(d) { return d.label })
-                        .y(function(d) { return d.value })
-                        .showLabels(true)     //Display pie labels
-                        .labelThreshold(.05)  //Configure the minimum slice size for labels to show up
-                        .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
-                        .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
-                        .donutRatio(0.35);   //Configure how big you want the donut hole size to be.
-
-                d3.select("#chart svg")
-                    .datum(dataDonut)
-                    .transition().duration(350)
-                    .call(chart);
-
-                return chart;
-            });
             break;
         case 'Scatter chart':
-            var dataScater = [];
-            dataScater.push({'key': 'Scatter Chart', 'values': []});
 
-            for (let i in xData) {
-                dataScater[0].values.push({
-                    'label': xData[i],
-                    'value': parseInt(yData[i])
-                });
-            }
-
-            nv.addGraph(function() {
-                var chart = nv.models.scatterChart()
-                    .showDistX(true)
-                    .showDistY(true)
-                    .useVoronoi(true)
-                    .color(d3.scale.category10().range())
-                    .duration(300);
-
-                chart.xAxis.tickFormat(d3.format('.02f'));
-                chart.yAxis.tickFormat(d3.format('.02f'));
-                chart.tooltipContent(function(key) {
-                    return '<h2>' + key + '</h2>';
-                });
-
-                d3.select('#chart svg')
-                    .datum(dataScater)
-                    .call(chart);
-
-                nv.utils.windowResize(chart.update);
-
-                return chart;
-            });
             break;
     }
 }
