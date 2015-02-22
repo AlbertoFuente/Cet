@@ -7,7 +7,7 @@
   ],
   "description": "Custom Editable Table",
   "main": "Cet",
-  "license": "MIT",g
+  "license": "MIT",
   "ignore": [
     "**/.*",
     "node_modules",
