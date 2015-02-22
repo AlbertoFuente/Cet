@@ -20,9 +20,7 @@ function showModal () {
     gContent.id = 'chart';
     gContent.width = '700';
     gContent.height = '350';
-    var svgContent = document.createElement('svg');
 
-    gContent.appendChild(svgContent);
     gHeader.appendChild(closeButton);
     gModal.appendChild(gHeader);
     gModal.appendChild(gContent);
