@@ -9,22 +9,21 @@ function getLocalData (cet) {
 
             cet.tableData = JSON.parse(localStorage.getItem("_tableData"));
             cet.tableConstructor(cet);
-
         } else {
-            $.ajax({
-                url: cet.localDataUrl,
-                method: 'GET',
-                dataType: 'json',
-                success: function (response) {
-                    if (response !== undefined) {
-                        cet.tableData = response;
+            var xmlhttp = new XMLHttpRequest();
+
+            xmlhttp.onreadystatechange = () => {
+                if (xmlhttp.readyState === 4) {
+                    if (xmlhttp.status === 200) {
+                        cet.tableData = JSON.parse(xmlhttp.responseText);
                         cet.tableConstructor(cet);
+                    } else {
+                        throw new Error("Could not load the data inside the " + cet.localDataUrl + " file");
                     }
-                },
-                error: function () {
-                    throw new Error("Could not load the data inside the " + cet.localDataUrl + " file");
                 }
-            });
+            };
+            xmlhttp.open("GET", cet.localDataUrl, false);
+            xmlhttp.send();
         }
     }
 }
