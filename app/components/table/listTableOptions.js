@@ -59,7 +59,7 @@ function openModal(type, cet) {
             var selectTitle = 'Select graph type: ',
                 selectType = document.createElement('select'),
                 selectTypeId = 'selectType',
-                optionsGraphs = ['Bar chart', 'Line chart', 'Pie chart', 'Scatter chart'];
+                optionsGraphs = ['Bar chart', 'Line chart', 'Pie chart', 'Polar Area chart'];
             createConfigOption(selectTitle, optionsGraphs, modalContainer, selectTypeId, selectType);
             // select x Axis option
             var selectXaxisTitle = 'Select X axis: ',

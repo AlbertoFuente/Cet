@@ -91,10 +91,30 @@ function showGraph(graphType, xData, yData) {
 
             break;
         case 'Pie chart':
-
+            var dataPie = [];
+            for (let i in xData) {
+                dataPie.push({
+                    'label': xData[i],
+                    'value': parseInt(yData[i]),
+                    'color': 'rgba(220,220,220,0.5)',
+                    'highlight': 'rgba(220,220,220,0.75)'});
+            }
+            // print graph
+            var pie = document.getElementById("chart").getContext("2d");
+            var myPieChart = new Chart(pie).Doughnut(dataPie);
             break;
-        case 'Scatter chart':
-
+        case 'Polar Area chart':
+            var dataPolar = [];
+            for (let i in xData) {
+                dataPolar.push({
+                    'label': xData[i],
+                    'value': parseInt(yData[i]),
+                    'color': 'rgba(220,220,220,0.5)',
+                    'highlight': 'rgba(220,220,220,0.75)'});
+            }
+            // print graph
+            var polar = document.getElementById("chart").getContext("2d");
+            var myPolarChart = new Chart(polar).PolarArea(dataPolar);
             break;
     }
 }
