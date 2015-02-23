@@ -89,6 +89,12 @@ function showGraph(graphType, xData, yData) {
             var bar = document.getElementById("chart").getContext("2d");
             var BarChart = new Chart(bar).Bar(data);
 
+            for (let i in xData) {
+                BarChart.datasets[0].bars[i].fillColor = colors(i);
+                BarChart.datasets[0].bars[i].strokeColor = colors(i);
+            }
+            BarChart.update();
+
             break;
         case 'Line chart':
             // prepare data
@@ -97,8 +103,8 @@ function showGraph(graphType, xData, yData) {
                 'datasets': [{
                     'data': [],
                     'label': 'title A',
-                    'fillColor': 'rgba(220,220,220,0.5)',
-                    'strokeColor': 'rgba(220,220,220,0.8)',
+                    'fillColor': 'rgba(244, 67, 54, 0.5)',
+                    'strokeColor': 'rgba(244, 67, 54, 0.8)',
                     'highlightFill': 'rgba(220,220,220,0.75)',
                     'highlightStroke': 'rgba(220,220,220,1)'
                 }]
