@@ -37,6 +37,29 @@ function showModal () {
 
 function showGraph(graphType, xData, yData) {
 
+    var colors = (index) => {
+        var colors = [
+            'rgba(244, 67, 54, 0.5)',
+            'rgba(233, 30, 99, 0.5)',
+            'rgba(156, 39, 176, 0.5)',
+            'rgba(103, 58, 183, 0.5)',
+            'rgba(63, 81, 181, 0.5)',
+            'rgba(33, 150, 143, 0.5)',
+            'rgba(3, 169, 244, 0.5)',
+            'rgba(0, 188, 212, 0.5)',
+            'rgba(0, 150, 136, 0.5)',
+            'rgba(76, 175, 80, 0.5)',
+            'rgba(139, 195, 74, 0.5)',
+            'rgba(205, 220, 57, 0.5)',
+            'rgba(255, 235, 59, 0.5)',
+            'rgba(255, 193, 7, 0.5)',
+            'rgba(255, 152, 0, 0.5)',
+            'rgba(255, 87, 34, 0.5)',
+            'rgba(121, 85, 72, 0.5)'];
+
+        return colors[index];
+    };
+
     switch (graphType) {
         case 'Bar chart':
             // prepare data
@@ -94,8 +117,8 @@ function showGraph(graphType, xData, yData) {
                 dataPie.push({
                     'label': xData[i],
                     'value': parseInt(yData[i]),
-                    'color': 'rgba(220,220,220,0.5)',
-                    'highlight': 'rgba(220,220,220,0.75)'});
+                    'color': colors(i),
+                    'highlight': colors(i)});
             }
             // print graph
             var pie = document.getElementById("chart").getContext("2d");
@@ -107,8 +130,8 @@ function showGraph(graphType, xData, yData) {
                 dataPolar.push({
                     'label': xData[i],
                     'value': parseInt(yData[i]),
-                    'color': 'rgba(220,220,220,0.5)',
-                    'highlight': 'rgba(220,220,220,0.75)'});
+                    'color': colors(i),
+                    'highlight': colors(i)});
             }
             // print graph
             var polar = document.getElementById("chart").getContext("2d");
