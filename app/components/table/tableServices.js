@@ -61,7 +61,7 @@ function apiRestData (url) {
                 cet.tableData = JSON.parse(xmlhttp.responseText);
                 cet.tableConstructor(cet);
             } else {
-                throw new Error("Could not load the data inside the " + cet.localDataUrl + " file");
+                throw new Error("Could not load the data inside the " + url + " file");
             }
         }
     };
