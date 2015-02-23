@@ -57,7 +57,11 @@ function showGraph(graphType, xData, yData) {
             'rgba(255, 87, 34, 0.5)',
             'rgba(121, 85, 72, 0.5)'];
 
-        return colors[index];
+        if (index > colors.length) {
+            return colors[Math.floor(Math.random() * colors.length)];
+        } else {
+            return colors[index];
+        }
     };
 
     switch (graphType) {
