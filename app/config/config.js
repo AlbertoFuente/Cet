@@ -29,6 +29,8 @@ _cetTable.downloadOptions = {
     'png': true,
     'pdf': true
 };
+// search
+_cetTable.search = true;
 // config type of data service
 _cetTable.dataOptions = {
     'localData': true, // mode 1

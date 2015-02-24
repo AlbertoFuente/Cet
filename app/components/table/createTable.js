@@ -112,6 +112,26 @@ function createTable(_cetTable) {
                     tableHeaderTitle.className = 'tableHeaderTitle';
                     tableHeaderTitle.innerHTML = _cetTable.title;
 
+                if (_cetTable.search) {
+
+                    var searchDiv = document.createElement('div');
+                        searchDiv.className = 'input-field col s6 searchTable';
+                    var icon = document.createElement('i');
+                        icon.className = 'mdi-action-search prefix';
+                    var searchInput = document.createElement('input');
+                        searchInput.className = 'validate';
+                        searchInput.type = 'text';
+                        searchInput.id = 'icon_prefix';
+                    var inputLabel = document.createElement('label');
+                        inputLabel.setAttribute('for', 'icon_prefix');
+
+                    searchDiv.appendChild(icon);
+                    searchDiv.appendChild(searchInput);
+                    searchDiv.appendChild(inputLabel);
+
+                    tableHeader.appendChild(searchDiv);
+                }
+
                 if (_cetTable.options) {
                     var tableHeaderOptions = document.createElement('button');
                         tableHeaderOptions.className = 'normalButton mdi-navigation-menu';
