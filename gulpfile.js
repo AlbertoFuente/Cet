@@ -17,7 +17,8 @@ gulp.task('default', function () {
         'app/components/table/tableEffects.js',
         'app/components/table/listTableOptions.js',
         'app/components/table/plugins/graphs/tableGraphs.js',
-        'app/components/table/plugins/downloads/tableDownloads.js'
+        'app/components/table/plugins/downloads/tableDownloads.js',
+        'app/components/table/plugins/searcher/tableSearcher.js'
     ])
         .pipe(concat('cet.min.js'))
         .pipe(babel())
@@ -55,7 +56,8 @@ gulp.task('watch', function () {
         'app/components/table/tableServices.js',
         'app/components/table/listTableOptions.js',
         'app/components/table/plugins/graphs/tableGraphs.js',
-        'app/components/table/plugins/downloads/tableDownloads.js'
+        'app/components/table/plugins/downloads/tableDownloads.js',
+        'app/components/table/plugins/searcher/tableSearcher.js'
     ], function() {
         gulp.start('default');
     });
