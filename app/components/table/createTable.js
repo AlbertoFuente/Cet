@@ -116,6 +116,7 @@ function createTable(_cetTable) {
 
                     var searchDiv = document.createElement('div');
                         searchDiv.className = 'input-field col s6 searchTable';
+
                     var icon = document.createElement('i');
                         icon.className = 'mdi-action-search prefix';
                     var searchInput = document.createElement('input');
@@ -130,6 +131,10 @@ function createTable(_cetTable) {
                     searchDiv.appendChild(inputLabel);
 
                     tableHeader.appendChild(searchDiv);
+
+                    searchInput.onchange = () => {
+                        tableSearcher(searchInput.value, _cetTable.tableData);
+                    }
                 }
 
                 if (_cetTable.options) {
