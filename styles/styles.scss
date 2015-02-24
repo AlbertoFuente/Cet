@@ -197,3 +197,19 @@
     }
   }
 }
+
+.searchTable {
+  width: 200px;
+  position: absolute;
+  right: 60px;
+  top: 10px;
+  height: 30px;
+  input {
+    position: absolute;
+    height: 30px;
+    top: -15px;
+  }
+  i {
+    margin-top: -15px;
+  }
+}
