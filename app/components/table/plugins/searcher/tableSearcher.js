@@ -52,10 +52,16 @@ function tableSearcher (val, tableData) {
                 }
             }
         }
-        cleanTable();
-        refreshTable(obj.newData);
+        try {
+            cleanTable();
+        } finally {
+            refreshTable(obj.newData);
+        }
     } else {
-        cleanTable();
-        refreshTable(obj.defaultData);
+        try {
+            cleanTable();
+        } finally {
+            refreshTable(obj.defaultData);
+        }
     }
 }

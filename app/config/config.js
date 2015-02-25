@@ -30,7 +30,7 @@ _cetTable.downloadOptions = {
     'pdf': true
 };
 // search
-_cetTable.search = false;
+_cetTable.search = true;
 // config type of data service
 _cetTable.dataOptions = {
     'localData': true, // mode 1
