@@ -12,7 +12,7 @@ function tableSearcher (val, tableData) {
     var refreshTable = (obj) => {
         var table = document.getElementById('cetTable'),
             tableBody = table.childNodes[1];
-        console.log(obj);
+
         for (let i  = 0; i < obj.length; i++) {
             for (let j in tableBody.childNodes) {
                 if (obj[i].tr !== tableBody.childNodes[j].className) {
