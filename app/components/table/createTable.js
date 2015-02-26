@@ -95,6 +95,39 @@ function createTable(_cetTable) {
     };
 
     /**
+     * Show pager
+     * @param obj
+     */
+
+    _cetTable.showPager = (obj) => {
+        // calc num of panels
+        var calcPages = (num) => {
+            return Math.round(num.length / _cetTable.limitRows);
+        };
+        // create pager container
+        let container = document.createElement('div');
+            container.className = 'pagerContainer';
+        // btn left
+        let btnLeft = document.createElement('button');
+            btnLeft.className = 'mdi-hardware-keyboard-arrow-left directionBtn';
+        container.appendChild(btnLeft);
+        // number buttons
+        let number = calcPages(obj.tr);
+        for (let i = 1; i <= number; i++) {
+            let numBtn = document.createElement('button');
+                numBtn.innerText = i.toString();
+                numBtn.className = 'numberBtn';
+            container.appendChild(numBtn);
+        }
+        // btn right
+        let btnRight = document.createElement('button');
+            btnRight.className = 'mdi-hardware-keyboard-arrow-right directionBtn';
+        container.appendChild(btnRight);
+
+        _cetTable.container.appendChild(container);
+    };
+
+    /**
      * table constructor
      * @param _cetTable {Object}
      * @returns {_cetTable.container|*}
@@ -215,7 +248,9 @@ function createTable(_cetTable) {
 
                 var tableBody = document.createElement('tBody'),
                     bodyContent = _cetTable.tableData.body || _cetTable.tableData[0].body,
-                    pager = false;
+                    pager = false,
+                    trObj = {};
+                    trObj.tr = [];
 
                 _cetTable.limitRows > 0 ? pager = true : pager = false;
 
@@ -271,6 +306,8 @@ function createTable(_cetTable) {
                             tr.appendChild(td);
                         }
                         if (pager) {
+                            trObj.tr.push(tr);
+                            trObj.tbBody = tableBody;
                             let num = tr.className.slice(-1);
                             if (num <= _cetTable.limitRows) {
                                 tableBody.appendChild(tr);
@@ -282,6 +319,10 @@ function createTable(_cetTable) {
                 }
 
                 table.appendChild(tableBody);
+
+                if (pager) {
+                    _cetTable.showPager(trObj);
+                }
 
                 // END BODY
 
