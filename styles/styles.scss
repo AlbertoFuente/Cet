@@ -213,3 +213,9 @@
     margin-top: -15px;
   }
 }
+
+.cet-table-cnt{
+  tr,td,th{
+    transition:all 0.2s ease;
+  }
+}

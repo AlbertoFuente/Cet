@@ -175,6 +175,7 @@ function createTable(_cetTable) {
 
                 tableHeader.appendChild(tableHeaderTitle);
                 _cetTable.container.appendChild(tableHeader);
+                _cetTable.container.className = 'cet-table-cnt';
             }
 
             if (_cetTable.container.childNodes.length === 1) {
