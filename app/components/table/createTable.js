@@ -214,7 +214,10 @@ function createTable(_cetTable) {
                 // BODY
 
                 var tableBody = document.createElement('tBody'),
-                    bodyContent = _cetTable.tableData.body || _cetTable.tableData[0].body;
+                    bodyContent = _cetTable.tableData.body || _cetTable.tableData[0].body,
+                    pager = false;
+
+                _cetTable.limitRows > 0 ? pager = true : pager = false;
 
                 for (let key in bodyContent) {
                     if (bodyContent.hasOwnProperty(key) && typeof bodyContent[key] !== 'function') {
@@ -267,7 +270,14 @@ function createTable(_cetTable) {
                             }
                             tr.appendChild(td);
                         }
-                        tableBody.appendChild(tr);
+                        if (pager) {
+                            let num = tr.className.slice(-1);
+                            if (num <= _cetTable.limitRows) {
+                                tableBody.appendChild(tr);
+                            }
+                        } else {
+                            tableBody.appendChild(tr);
+                        }
                     }
                 }
 

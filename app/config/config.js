@@ -30,7 +30,9 @@ _cetTable.downloadOptions = {
     'pdf': true
 };
 // search
-_cetTable.search = true;
+_cetTable.search = false;
+// limit rows and add pager
+_cetTable.limitRows = 3;
 // config type of data service
 _cetTable.dataOptions = {
     'localData': true, // mode 1
