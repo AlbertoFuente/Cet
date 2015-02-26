@@ -213,6 +213,16 @@
     margin-top: -15px;
   }
 }
+.pagerContainer {
+  position: absolute;
+  top: auto;
+  left: auto;
+  right: 0;
+  bottom: 0;
+  float: left;
+  width: auto;
+  height: auto;
+}
 
 .cet-table-cnt{
   tr,td,th{
