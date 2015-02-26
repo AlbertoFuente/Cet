@@ -251,6 +251,7 @@ function createTable(_cetTable) {
                     pager = false,
                     trObj = {};
                     trObj.tr = [];
+                    trObj.pages = [];
 
                 _cetTable.limitRows > 0 ? pager = true : pager = false;
 

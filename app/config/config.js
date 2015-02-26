@@ -32,7 +32,7 @@ _cetTable.downloadOptions = {
 // search
 _cetTable.search = false;
 // limit rows and add pager
-_cetTable.limitRows = 3;
+_cetTable.limitRows = 0;
 // config type of data service
 _cetTable.dataOptions = {
     'localData': true, // mode 1
