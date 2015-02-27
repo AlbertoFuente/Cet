@@ -3,7 +3,7 @@
  * @type {Object} defaultConfig - config Object
  * @private
  */
-var CetTable = (function(cet){
+var CET = (function(cet){
 
     cet.defaultConfig = {};
     // add header title
@@ -32,6 +32,8 @@ var CetTable = (function(cet){
     };
     // search
     cet.defaultConfig.search = true;
+    // limit rows and add pager
+    cet.defaultConfig.limitRows = 0;
     // config type of data service
     cet.defaultConfig.dataOptions = {
         'localData': true, // mode 1
@@ -53,4 +55,4 @@ var CetTable = (function(cet){
     cet.defaultConfig.container = document.getElementById('tableContainer');
 
     return cet;
-})(CetTable || {});
+})(CET || {});
