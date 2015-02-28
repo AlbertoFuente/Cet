@@ -4,3 +4,7 @@ bower_components
 .sass-cache
 css
 js
+.idea/
+styles/styles.css
+styles/styles.css.map
+
