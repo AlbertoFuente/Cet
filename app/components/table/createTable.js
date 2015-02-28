@@ -125,6 +125,17 @@ var CET = (function(cet){
             container.appendChild(btnRight);
 
             _cetTable.container.appendChild(container);
+
+            // new table structure
+            let count = 0;
+
+            for (let j = 0; j < obj.tr.length; j++) {
+                let m = j % _cetTable.limitRows;
+                if (m === 0) {
+                    count++;
+                }
+                obj.pages.push({'page': count, 'tr': obj.tr[j]});
+            }
         };
 
         /**
