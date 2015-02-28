@@ -33,7 +33,7 @@ var CET = (function(cet){
     // search
     cet.defaultConfig.search = true;
     // limit rows and add pager
-    cet.defaultConfig.limitRows = 0;
+    cet.defaultConfig.limitRows = 3;
     // config type of data service
     cet.defaultConfig.dataOptions = {
         'localData': true, // mode 1

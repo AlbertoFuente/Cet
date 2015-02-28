@@ -148,27 +148,71 @@ var CET = (function(cet){
                     }
                 }
             };
-            // get actual page
-            let actualPage = (oldTrs) => {
-                //console.log(obj);
+            // remove body
+            let removeBody = () => {
+                for (let i in _cetTable.container.childNodes) {
+                    if (typeof _cetTable.container.childNodes[i] === 'object') {
+                        if (_cetTable.container.childNodes[i].id === 'cetTable') {
+                            for (let f in _cetTable.container.childNodes[i].childNodes[1].childNodes) {
+                                if (typeof _cetTable.container.childNodes[i].childNodes[1].childNodes[f] === 'object') {
+                                    _cetTable.container.childNodes[i].childNodes[1].childNodes[f].style.display = 'none';
+                                }
+                            }
+                        }
+                    }
+                }
             };
-            // put new view
-            let newView = (oldTrs, newTrs) => {
+            // get actual page
+            let actualPage = (oldTrs, direction) => {
+                let page = null;
+
+                for (let i = 0 ; i < oldTrs.length; i++) {
+                    obj.pages.map((a) => {
+                        if (a.tr.className === oldTrs[i].className) {
+                            page = a.page;
+                        }
+                    });
+                }
+
+                switch (direction) {
+                    case 'prev':
+                        if (page !== 1) {
+                            removeBody();
+                            let newPage = page - 1;
+                            obj.pages.map((a) => {
+                                if (newPage === a.page) {
+                                    console.log(_cetTable.container.childNodes[1].childNodes[1]);
+                                    _cetTable.container.childNodes[1].childNodes[1].appendChild(a.tr);
+                                }
+                            });
+                        }
+                        break;
+                    case 'next':
+                        break;
+                    case 'num':
+                        break;
+                }
 
             };
+
             btnLeft.onclick = () => {
-                try {
-                    let old = oldView(),
-                        page = actualPage(old);
-                } finally {
-                    //newView(old, page);
-                }
+                let direction = 'prev',
+                    old = oldView(),
+                    page = actualPage(old, direction);
             };
             numBtn.onclick = () => {
                 let old = oldView();
             };
             btnRight.onclick = () => {
-                let old = oldView();
+                let direction = 'next',
+                    old = null,
+                    page = null;
+                try {
+                    old = oldView();
+                    page = actualPage(old, direction);
+                } finally {
+                    //newView(old, page);
+                }
             }
         };
 
@@ -479,7 +523,7 @@ var CET = (function(cet){
         //TODO extend cet.defaultConfig
         config = config || cet.defaultConfig;
         createTable(config);
-    }
+    };
 
     return cet;
 })(CET || {});
