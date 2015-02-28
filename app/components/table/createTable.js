@@ -113,10 +113,11 @@ var CET = (function(cet){
             container.appendChild(btnLeft);
             // number buttons
             let number = calcPages(obj.tr);
+            let numBtn = null;
             for (let i = 1; i <= number; i++) {
-                let numBtn = document.createElement('button');
-                    numBtn.innerText = i.toString();
-                    numBtn.className = 'numberBtn';
+                numBtn = document.createElement('button');
+                numBtn.innerText = i.toString();
+                numBtn.className = 'numberBtn';
                 container.appendChild(numBtn);
             }
             // btn right
@@ -135,6 +136,39 @@ var CET = (function(cet){
                     count++;
                 }
                 obj.pages.push({'page': count, 'tr': obj.tr[j]});
+            }
+            // buttons events
+            // get actual trs
+            let oldView = () => {
+                for (let i in _cetTable.container.childNodes) {
+                    if (typeof _cetTable.container.childNodes[i] === 'object') {
+                        if (_cetTable.container.childNodes[i].id === 'cetTable') {
+                            return _cetTable.container.childNodes[i].childNodes[1].childNodes;
+                        }
+                    }
+                }
+            };
+            // get actual page
+            let actualPage = (oldTrs) => {
+                //console.log(obj);
+            };
+            // put new view
+            let newView = (oldTrs, newTrs) => {
+
+            };
+            btnLeft.onclick = () => {
+                try {
+                    let old = oldView(),
+                        page = actualPage(old);
+                } finally {
+                    //newView(old, page);
+                }
+            };
+            numBtn.onclick = () => {
+                let old = oldView();
+            };
+            btnRight.onclick = () => {
+                let old = oldView();
             }
         };
 
