@@ -321,13 +321,13 @@ var CET = (function(cet){
 
                     table.appendChild(tableBody);
 
-                    if (pager) {
-                        _cetTable.showPager(trObj);
-                    }
-
                     // END BODY
 
                     _cetTable.container.appendChild(table);
+
+                    if (pager) {
+                        _cetTable.showPager(trObj);
+                    }
 
                     /**
                      * Events
