@@ -214,14 +214,19 @@
   }
 }
 .pagerContainer {
-  position: absolute;
-  top: auto;
-  left: auto;
-  right: 0;
-  bottom: 0;
-  float: left;
-  width: auto;
-  height: auto;
+  float:right;
+  margin-top: 5px;
+  button {
+    border: none;
+    background: transparent;
+    float: left;
+    &:hover {
+      color: rgb(15, 151, 249);
+    }
+    &:active {
+      color: rgb(15, 151, 249);
+    }
+  }
 }
 
 .cet-table-cnt{
