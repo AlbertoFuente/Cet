@@ -67,14 +67,14 @@ function tableEffects(trClass, tdClass, eventName, table, status) {
                 } else {
                     val.reverse();
                 }
-                _cetTable.printNewBody(val, column, table);
+                CET.defaultConfig.printNewBody(val, column, table);
             } else {
                 if (isNumeric) {
                     val.sort((a, b) => b-a);
                 } else {
                     val.sort();
                 }
-                _cetTable.printNewBody(val, column, table);
+                CET.defaultConfig.printNewBody(val, column, table);
             }
 
             // hover & mouse out
@@ -84,26 +84,26 @@ function tableEffects(trClass, tdClass, eventName, table, status) {
             for (let i = 0; i < inputs.length; i++) {
                 // change
                 inputs[i].onchange = () => {
-                    _cetTable.inputChange(inputs[i]);
+                    CET.defaultConfig.inputChange(inputs[i]);
                 };
                 // hover
                 inputs[i].onmouseover = () => {
-                    _cetTable.mouseEffects(inputs[i], 'hover');
+                    CET.defaultConfig.mouseEffects(inputs[i], 'hover');
                 };
                 // out
                 inputs[i].onmouseout = () => {
-                    _cetTable.mouseEffects(inputs[i], 'out');
+                    CET.defaultConfig.mouseEffects(inputs[i], 'out');
                 }
             }
             // spans events
             for (let i = 0; i < spans.length; i++) {
                 // hover
                 spans[i].onmouseover = () => {
-                    _cetTable.mouseEffects(spans[i], 'hover');
+                    CET.defaultConfig.mouseEffects(spans[i], 'hover');
                 };
                 // out
                 spans[i].onmouseout = () => {
-                    _cetTable.mouseEffects(spans[i], 'out');
+                    CET.defaultConfig.mouseEffects(spans[i], 'out');
                 }
             }
 
