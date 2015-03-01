@@ -152,12 +152,9 @@ var CET = (function(cet){
             };
             // remove body
             let removeBody = (old) => {
-                for (let i in old) {
-                    if (typeof old[i] === 'object') {
-                        console.log(old[i]);
-                        old[i].remove();
-                    }
-                }
+               for (let i = 0; i < old.length;) {
+                   old[i].remove();
+               }
             };
             // get actual page
             let actualPage = (oldTrs, direction) => {
