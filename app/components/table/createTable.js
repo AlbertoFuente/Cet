@@ -157,7 +157,7 @@ var CET = (function(cet){
                }
             };
             // get actual page
-            let actualPage = (oldTrs, direction) => {
+            let actualPage = (oldTrs, direction, ev) => {
                 let page = null;
 
                 for (let i = 0 ; i < oldTrs.length; i++) {
@@ -192,6 +192,14 @@ var CET = (function(cet){
                         }
                         break;
                     case 'num':
+                        let num = parseInt(ev.srcElement.innerHTML);
+                        console.log(num);
+                        removeBody(oldTrs);
+                        obj.pages.map((a) => {
+                            if (num === a.page) {
+                                _cetTable.container.childNodes[1].childNodes[1].appendChild(a.tr);
+                            }
+                        });
                         break;
                 }
 
@@ -202,8 +210,10 @@ var CET = (function(cet){
                     old = oldView(),
                     page = actualPage(old, direction);
             };
-            numBtn.onclick = () => {
-                let old = oldView();
+            numBtn.onclick = (e) => {
+                let num = 'num',
+                    old = oldView(),
+                    page = actualPage(old, num, e);
             };
             btnRight.onclick = () => {
                 let direction = 'next',
