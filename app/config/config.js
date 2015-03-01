@@ -31,7 +31,7 @@ var CET = (function(cet){
         'pdf': true
     };
     // search
-    cet.defaultConfig.search = true;
+    cet.defaultConfig.search = false;
     // limit rows and add pager
     cet.defaultConfig.limitRows = 0;
     // config type of data service
