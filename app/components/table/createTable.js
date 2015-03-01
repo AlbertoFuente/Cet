@@ -114,6 +114,8 @@ var CET = (function(cet){
             // number buttons
             let number = calcPages(obj.tr);
             let numBtn = null;
+            obj.numPages = number;
+
             for (let i = 1; i <= number; i++) {
                 numBtn = document.createElement('button');
                 numBtn.innerText = i.toString();
@@ -149,16 +151,11 @@ var CET = (function(cet){
                 }
             };
             // remove body
-            let removeBody = () => {
-                for (let i in _cetTable.container.childNodes) {
-                    if (typeof _cetTable.container.childNodes[i] === 'object') {
-                        if (_cetTable.container.childNodes[i].id === 'cetTable') {
-                            for (let f in _cetTable.container.childNodes[i].childNodes[1].childNodes) {
-                                if (typeof _cetTable.container.childNodes[i].childNodes[1].childNodes[f] === 'object') {
-                                    _cetTable.container.childNodes[i].childNodes[1].childNodes[f].style.display = 'none';
-                                }
-                            }
-                        }
+            let removeBody = (old) => {
+                for (let i in old) {
+                    if (typeof old[i] === 'object') {
+                        console.log(old[i]);
+                        old[i].remove();
                     }
                 }
             };
@@ -176,18 +173,10 @@ var CET = (function(cet){
 
                 switch (direction) {
                     case 'prev':
-                        if (page !== 1) {
-                            removeBody();
-                            let newPage = page - 1;
-                            obj.pages.map((a) => {
-                                if (newPage === a.page) {
-                                    console.log(_cetTable.container.childNodes[1].childNodes[1]);
-                                    _cetTable.container.childNodes[1].childNodes[1].appendChild(a.tr);
-                                }
-                            });
-                        }
+                            removeBody(oldTrs);
                         break;
                     case 'next':
+                            removeBody(oldTrs);
                         break;
                     case 'num':
                         break;
@@ -205,14 +194,8 @@ var CET = (function(cet){
             };
             btnRight.onclick = () => {
                 let direction = 'next',
-                    old = null,
-                    page = null;
-                try {
-                    old = oldView();
+                    old = oldView(),
                     page = actualPage(old, direction);
-                } finally {
-                    //newView(old, page);
-                }
             }
         };
 
