@@ -170,10 +170,26 @@ var CET = (function(cet){
 
                 switch (direction) {
                     case 'prev':
+                        if (page !== 1) {
                             removeBody(oldTrs);
+                            let newPage = page - 1;
+                            obj.pages.map((a) => {
+                                if (newPage === a.page) {
+                                    _cetTable.container.childNodes[1].childNodes[1].appendChild(a.tr);
+                                }
+                            });
+                        }
                         break;
                     case 'next':
+                        if (page !== obj.numPages) {
                             removeBody(oldTrs);
+                            let newPage = page + 1;
+                            obj.pages.map((a) => {
+                                if (newPage === a.page) {
+                                    _cetTable.container.childNodes[1].childNodes[1].appendChild(a.tr);
+                                }
+                            });
+                        }
                         break;
                     case 'num':
                         break;
