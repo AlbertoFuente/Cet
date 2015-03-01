@@ -121,6 +121,11 @@ var CET = (function(cet){
                 numBtn.innerText = i.toString();
                 numBtn.className = 'numberBtn';
                 container.appendChild(numBtn);
+                numBtn.onclick = (e) => {
+                    let num = 'num',
+                        old = oldView(),
+                        page = actualPage(old, num, e);
+                };
             }
             // btn right
             let btnRight = document.createElement('button');
@@ -193,7 +198,6 @@ var CET = (function(cet){
                         break;
                     case 'num':
                         let num = parseInt(ev.srcElement.innerHTML);
-                        console.log(num);
                         removeBody(oldTrs);
                         obj.pages.map((a) => {
                             if (num === a.page) {
@@ -204,16 +208,11 @@ var CET = (function(cet){
                 }
 
             };
-
+            // direction buttons
             btnLeft.onclick = () => {
                 let direction = 'prev',
                     old = oldView(),
                     page = actualPage(old, direction);
-            };
-            numBtn.onclick = (e) => {
-                let num = 'num',
-                    old = oldView(),
-                    page = actualPage(old, num, e);
             };
             btnRight.onclick = () => {
                 let direction = 'next',
