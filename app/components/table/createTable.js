@@ -218,7 +218,11 @@ var CET = (function(cet){
                 let direction = 'next',
                     old = oldView(),
                     page = actualPage(old, direction);
-            }
+            };
+            _cetTable.pager = {
+                'numberPages': obj.numPages,
+                'pages': obj.pages
+            };
         };
 
         /**
