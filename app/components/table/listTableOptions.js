@@ -147,8 +147,12 @@ function openModal(type, cet) {
 
 function closeMenu(container, tableHeader) {
     container.style.display= 'none';
-    var button = tableHeader.childNodes[1];
-    button.className = 'normalButton mdi-navigation-menu';
+    var button = tableHeader.childNodes;
+    for (let i in button) {
+        if (button[i].tagName === 'BUTTON') {
+            button[i].className = 'normalButton mdi-navigation-menu';
+        }
+    }
 }
 
 /**
