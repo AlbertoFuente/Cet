@@ -83,26 +83,26 @@ function tableEffects(trClass, tdClass, eventName, table, status) {
             // inputs events
             for (let i = 0; i < inputs.length; i++) {
                 // change
-                inputs[i].onchange = () => {
+                inputs[i].parentNode.onchange = () => {
                     CET.defaultConfig.inputChange(inputs[i]);
                 };
                 // hover
-                inputs[i].onmouseover = () => {
+                inputs[i].parentNode.onmouseover = () => {
                     CET.defaultConfig.mouseEffects(inputs[i], 'hover');
                 };
                 // out
-                inputs[i].onmouseout = () => {
+                inputs[i].parentNode.onmouseout = () => {
                     CET.defaultConfig.mouseEffects(inputs[i], 'out');
                 }
             }
             // spans events
             for (let i = 0; i < spans.length; i++) {
                 // hover
-                spans[i].onmouseover = () => {
+                spans[i].parentNode.onmouseover = () => {
                     CET.defaultConfig.mouseEffects(spans[i], 'hover');
                 };
                 // out
-                spans[i].onmouseout = () => {
+                spans[i].parentNode.onmouseout = () => {
                     CET.defaultConfig.mouseEffects(spans[i], 'out');
                 }
             }

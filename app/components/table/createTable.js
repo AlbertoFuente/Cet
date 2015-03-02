@@ -442,22 +442,22 @@ var CET = (function(cet){
                             _cetTable.inputChange(inputs[i]);
                         };
                         // hover
-                        inputs[i].onmouseover = () => {
+                        inputs[i].parentNode.onmouseover = () => {
                             _cetTable.mouseEffects(inputs[i], 'hover');
                         };
                         // out
-                        inputs[i].onmouseout = () => {
+                        inputs[i].parentNode.onmouseout = () => {
                             _cetTable.mouseEffects(inputs[i], 'out');
                         }
                     }
                     // spans events
                     for (let i = 0; i < spans.length; i++) {
                         // hover
-                        spans[i].onmouseover = () => {
+                        spans[i].parentNode.onmouseover = () => {
                             _cetTable.mouseEffects(spans[i], 'hover');
                         };
                         // out
-                        spans[i].onmouseout = () => {
+                        spans[i].parentNode.onmouseout = () => {
                             _cetTable.mouseEffects(spans[i], 'out');
                         }
                     }
