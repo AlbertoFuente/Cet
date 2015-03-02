@@ -147,7 +147,7 @@ function openModal(type, cet) {
 
 function closeMenu(container, tableHeader) {
     container.style.display= 'none';
-    var button = tableHeader.childNodes[0];
+    var button = tableHeader.childNodes[1];
     button.className = 'normalButton mdi-navigation-menu';
 }
 
