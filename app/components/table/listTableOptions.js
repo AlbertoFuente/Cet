@@ -3,10 +3,10 @@
  * @param modal
  */
 
-function closeModal (modal) {
-    var modalId = document.getElementById(modal.id);
+var closeModal = (modal) => {
+    let modalId = document.getElementById(modal.id);
     modalId.remove();
-}
+};
 
 /**
  * open modal
@@ -14,23 +14,23 @@ function closeModal (modal) {
  * @param cet
  */
 
-function openModal(type, cet) {
+var openModal = (type, cet) => {
     // create modal container
-    var modal = document.createElement('div');
+    let modal = document.createElement('div');
         modal.id = '_cetTableModal';
     // modal header
-    var modalHeader = document.createElement('div');
+    let modalHeader = document.createElement('div');
         modalHeader.className = '_cetTableModalHeader';
     // modal header title
-    var modalHeaderTitle = document.createElement('label');
+    let modalHeaderTitle = document.createElement('label');
     // close modal button
-    var closeButton = document.createElement('button');
+    let closeButton = document.createElement('button');
         closeButton.className = 'closeButton mdi-content-clear';
     closeButton.onclick = () => {
         closeModal(modal);
     };
     // content container
-    var modalContainer = document.createElement('div');
+    let modalContainer = document.createElement('div');
         modalContainer.className = '_cetTableContent';
 
     switch (type) {
@@ -39,13 +39,13 @@ function openModal(type, cet) {
 
             var createConfigOption = (selectTitle, options, parent, selectId, select) => {
                 // options
-                var selectTypeLabel = document.createElement('label');
+                let selectTypeLabel = document.createElement('label');
                 selectTypeLabel.innerHTML = selectTitle;
                 parent.appendChild(selectTypeLabel);
                 select.id = selectId;
 
                 for (let i = 0; i < options.length; i++) {
-                    var op = document.createElement('option');
+                    let op = document.createElement('option');
                     op.value = options[i];
                     op.innerHTML = options[i];
                     select.appendChild(op);
@@ -53,16 +53,16 @@ function openModal(type, cet) {
                 parent.appendChild(select);
             };
             
-            var table = cet.tableData[0].head;
+            let table = cet.tableData[0].head;
             
             // select graph
-            var selectTitle = 'Select graph type: ',
+            let selectTitle = 'Select graph type: ',
                 selectType = document.createElement('select'),
                 selectTypeId = 'selectType',
                 optionsGraphs = ['Bar chart', 'Line chart', 'Pie chart', 'Polar Area chart'];
             createConfigOption(selectTitle, optionsGraphs, modalContainer, selectTypeId, selectType);
             // select x Axis option
-            var selectXaxisTitle = 'Select X axis: ',
+            let selectXaxisTitle = 'Select X axis: ',
                 selectXType = document.createElement('select'),
                 selectXId = 'selectXaxis',
                 xOptions = [];
@@ -73,7 +73,7 @@ function openModal(type, cet) {
 
             createConfigOption(selectXaxisTitle, xOptions, modalContainer, selectXId, selectXType);
             // select y Axis option
-            var selectYaxisTitle = 'Select Y axis: ',
+            let selectYaxisTitle = 'Select Y axis: ',
                 selectYType = document.createElement('select'),
                 selectYId = 'selectYaxis',
                 yOptions = [];
@@ -85,13 +85,13 @@ function openModal(type, cet) {
             createConfigOption(selectYaxisTitle, yOptions, modalContainer, selectYId, selectYType);
 
             // done button
-            var doneButton = document.createElement('a');
+            let doneButton = document.createElement('a');
                 doneButton.className = 'doneButton waves-effect waves-light btn';
                 doneButton.innerHTML = 'DONE';
             modalContainer.appendChild(doneButton);
 
             doneButton.onclick = () => {
-                var selecteds = {};
+                let selecteds = {};
                     selecteds.xAxis = selectXType.value;
                     selecteds.yAxis = selectYType.value;
                     selecteds.type = selectType.value;
@@ -103,26 +103,26 @@ function openModal(type, cet) {
             tableDownloads();
 
             modalHeaderTitle.innerHTML = 'Config Downloads Options';
-            var sDownloadLabel = document.createElement('label');
+            let sDownloadLabel = document.createElement('label');
                 sDownloadLabel.innerHTML = 'Download Options: ';
-            var selectDownload = document.createElement('select');
+            let selectDownload = document.createElement('select');
 
             if (typeof cet.downloadOptions === 'object') {
                 for (let k in cet.downloadOptions) {
                     if (cet.downloadOptions[k]) {
-                        var option = document.createElement('option');
+                        let option = document.createElement('option');
                         option.value = k;
                         option.innerHTML = k;
                         selectDownload.appendChild(option);
                     }
                 }
             }
-            var downButton = document.createElement('button');
+            let downButton = document.createElement('button');
                 downButton.className = 'doneButton waves-effect waves-light btn';
                 downButton.innerHTML = 'DOWNLOAD';
 
             downButton.onclick = () => {
-                var selected = selectDownload.value;
+                let selected = selectDownload.value;
                 selectedOption(selected);
             };
 
@@ -137,7 +137,7 @@ function openModal(type, cet) {
     modal.appendChild(modalHeader);
     modal.appendChild(modalContainer);
     document.body.appendChild(modal);
-}
+};
 
 /**
  * close menu
@@ -145,15 +145,15 @@ function openModal(type, cet) {
  * @param tableHeader
  */
 
-function closeMenu(container, tableHeader) {
+var closeMenu = (container, tableHeader) => {
     container.style.display= 'none';
-    var button = tableHeader.childNodes;
+    let button = tableHeader.childNodes;
     for (let i in button) {
         if (button[i].tagName === 'BUTTON') {
             button[i].className = 'normalButton mdi-navigation-menu';
         }
     }
-}
+};
 
 /**
  * list table options
@@ -162,11 +162,11 @@ function closeMenu(container, tableHeader) {
  * @param tableHeader - table header
  */
 
-function listTableOptions(cet, container, tableHeader) {
+var listTableOptions = (cet, container, tableHeader) => {
     // options menu list
-    var ul = document.createElement('ul');
+    let ul = document.createElement('ul');
         ul.className = 'optionsList';
-    var selectedType = null,
+    let selectedType = null,
         optionText = null;
 
     /**
@@ -177,7 +177,7 @@ function listTableOptions(cet, container, tableHeader) {
      */
 
     var createOption = (type, text, parent) => {
-        var li = document.createElement('li');
+        let li = document.createElement('li');
             li.className = 'optionsLi';
             li.innerHTML = text;
         parent.appendChild(li);
@@ -202,4 +202,4 @@ function listTableOptions(cet, container, tableHeader) {
         createOption(selectedType, optionText, ul);
     }
     container.appendChild(ul);
-}
+};
