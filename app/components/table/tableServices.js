@@ -3,14 +3,14 @@
  * @param cet
  */
 
-function getLocalData (cet) {
+var getLocalData = (cet) => {
     if (cet !== undefined) {
         if (localStorage.getItem("_tableData")) {
 
             cet.tableData = JSON.parse(localStorage.getItem("_tableData"));
             cet.tableConstructor(cet);
         } else {
-            var xmlhttp = new XMLHttpRequest();
+            let xmlhttp = new XMLHttpRequest();
 
             xmlhttp.onreadystatechange = () => {
                 if (xmlhttp.readyState === 4) {
@@ -26,16 +26,16 @@ function getLocalData (cet) {
             xmlhttp.send();
         }
     }
-}
+};
 
 /**
  * get firebase data
  * @param cet
  */
 
-function fireBaseData (cet) {
+var fireBaseData = (cet) => {
     if (cet !== undefined) {
-        var myFirebaseRef = new Firebase(cet.fireBaseUrl);
+        let myFirebaseRef = new Firebase(cet.fireBaseUrl);
 
         myFirebaseRef.on("value", function(response) {
             cet.tableData = response.val();
@@ -45,15 +45,15 @@ function fireBaseData (cet) {
         });
     }
 
-}
+};
 
 /**
  * API REST DATA
  * @param url
  */
 
-function apiRestData (url) {
-    var xmlhttp = new XMLHttpRequest();
+var apiRestData = (url) => {
+    let xmlhttp = new XMLHttpRequest();
 
     xmlhttp.onreadystatechange = () => {
         if (xmlhttp.readyState === 4) {
@@ -67,4 +67,4 @@ function apiRestData (url) {
     };
     xmlhttp.open("GET", url, false);
     xmlhttp.send();
-}
+};
