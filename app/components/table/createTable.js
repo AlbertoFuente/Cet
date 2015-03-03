@@ -370,25 +370,39 @@ var CET = ((cet) => {
                                 td.className = p;
                                 if (bodyContent[key][p].data !== undefined && bodyContent[key][p].type !== undefined) {
                                     if (bodyContent[key][p].edit) {
-                                        let input = document.createElement('input');
+                                        let input = document.createElement('input'),
+                                            span = document.createElement('span');
+                                        span.style.display = 'none';
                                         if (_cetTable.tooltips) {
                                             input.className = 'input_edit tooltipped';
                                             input.setAttribute('data-position', 'bottom');
                                             input.setAttribute('data-delay', '30');
                                             input.setAttribute('data-tooltip', 'Edit field: ' + bodyContent[key][p].data);
+                                            input.setAttribute('value', bodyContent[key][p].data);
+                                            span.innerHTML = bodyContent[key][p].data;
+                                            span.setAttribute('value', bodyContent[key][p].data);
                                         } else {
                                             input.className = 'input_edit';
+                                            input.setAttribute('value', bodyContent[key][p].data);
+                                            span.innerHTML = bodyContent[key][p].data;
+                                            span.setAttribute('value', bodyContent[key][p].data);
                                         }
                                         if (bodyContent[key][p].type === 'date') {
                                             input.className = input.className + ' datepicker picker__input';
                                             input.type = 'text';
-                                            input.value = bodyContent[key][p].data;
+                                            input.setAttribute('value', bodyContent[key][p].data);
                                             input.setAttribute('placeholder', bodyContent[key][p].data);
+                                            span.innerHTML = bodyContent[key][p].data;
+                                            span.setAttribute('value', bodyContent[key][p].data);
                                         } else {
                                             input.type = bodyContent[key][p].type;
-                                            input.value = bodyContent[key][p].data;
+                                            input.setAttribute('value', bodyContent[key][p].data);
+                                            span.innerHTML = bodyContent[key][p].data;
+                                            span.setAttribute('value', bodyContent[key][p].data);
                                         }
+
                                         td.appendChild(input);
+                                        td.appendChild(span);
                                     } else {
                                         let noEditLabel = document.createElement('span');
                                         noEditLabel.className = 'noEditableField';
