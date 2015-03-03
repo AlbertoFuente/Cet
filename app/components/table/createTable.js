@@ -3,7 +3,7 @@
  * @param _cetTable {Object}
  */
 var CET = (function(cet){
-    function createTable(_cetTable) {
+    var createTable = (_cetTable) => {
 
         /**
          * modify data
