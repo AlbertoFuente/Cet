@@ -449,6 +449,9 @@ var CET = ((cet) => {
                             _cetTable.inputChange(inputs[i]);
                         };
                         // hover
+                        inputs[i].onmouseover = () => {
+                            _cetTable.mouseEffects(inputs[i], 'hover');
+                        };
                         inputs[i].parentNode.onmouseover = () => {
                             _cetTable.mouseEffects(inputs[i], 'hover');
                         };
@@ -460,6 +463,9 @@ var CET = ((cet) => {
                     // spans events
                     for (let i = 0; i < spans.length; i++) {
                         // hover
+                        spans[i].onmouseover = () => {
+                            _cetTable.mouseEffects(spans[i], 'hover');
+                        };
                         spans[i].parentNode.onmouseover = () => {
                             _cetTable.mouseEffects(spans[i], 'hover');
                         };

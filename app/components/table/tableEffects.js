@@ -87,6 +87,9 @@ var tableEffects = (trClass, tdClass, eventName, table, status) => {
                     CET.defaultConfig.inputChange(inputs[i]);
                 };
                 // hover
+                inputs[i].onmouseover = () => {
+                    CET.defaultConfig.mouseEffects(inputs[i], 'hover');
+                };
                 inputs[i].parentNode.onmouseover = () => {
                     CET.defaultConfig.mouseEffects(inputs[i], 'hover');
                 };
@@ -98,6 +101,9 @@ var tableEffects = (trClass, tdClass, eventName, table, status) => {
             // spans events
             for (let i = 0; i < spans.length; i++) {
                 // hover
+                spans[i].onmouseover = () => {
+                    CET.defaultConfig.mouseEffects(spans[i], 'hover');
+                };
                 spans[i].parentNode.onmouseover = () => {
                     CET.defaultConfig.mouseEffects(spans[i], 'hover');
                 };
