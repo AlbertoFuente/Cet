@@ -4,13 +4,13 @@
  * @param tableData
  */
 
-function tableSearcher (val, tableData) {
-    var obj = {};
+var tableSearcher = (val, tableData) => {
+    let obj = {};
         obj.defaultData = tableData[0].body;
         obj.newData = [];
 
     var refreshTable = (obj) => {
-        var table = document.getElementById('cetTable'),
+        let table = document.getElementById('cetTable'),
             tableBody = table.childNodes[1];
 
         for (let i  = 0; i < obj.length; i++) {
@@ -30,8 +30,8 @@ function tableSearcher (val, tableData) {
         }
     };
 
-    var cleanTable  = () => {
-        var table = document.getElementById('cetTable'),
+    var cleanTable = () => {
+        let table = document.getElementById('cetTable'),
             tableBody = table.childNodes[1];
         for (let i in tableBody.childNodes) {
             if (typeof tableBody.childNodes[i] === 'object') {
@@ -40,7 +40,7 @@ function tableSearcher (val, tableData) {
         }
     };
 
-    var lowerVal = val.toLowerCase();
+    let lowerVal = val.toLowerCase();
 
     if (val != '') {
         for (let i in obj.defaultData) {
@@ -64,4 +64,4 @@ function tableSearcher (val, tableData) {
             refreshTable(obj.defaultData);
         }
     }
-}
+};
