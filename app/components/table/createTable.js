@@ -53,7 +53,7 @@ var CET = (function(cet){
          */
 
         _cetTable.printNewBody = (val, column, table) => {
-            var tableBody = table.childNodes[1],
+            let tableBody = table.childNodes[1],
                 newColumn = [];
 
             tableBody.innerHTML = null;
@@ -77,7 +77,7 @@ var CET = (function(cet){
          */
 
         _cetTable.mouseEffects = (element, eventName) => {
-            var trClass = element.parentNode.parentNode.className,
+            let trClass = element.parentNode.parentNode.className,
                 tdClass = element.parentNode.className;
             tableEffects(trClass,tdClass,eventName, null, null);
         };
@@ -88,7 +88,7 @@ var CET = (function(cet){
          */
 
         _cetTable.inputChange = (element) => {
-            var parentClass = element.parentNode.className,
+            let parentClass = element.parentNode.className,
                 val = element.value,
                 trClass = element.parentNode.parentNode.className;
             _cetTable.modifyData(trClass,parentClass, val, _cetTable.mode);
@@ -101,7 +101,7 @@ var CET = (function(cet){
 
         _cetTable.showPager = (obj) => {
             // calc num of panels
-            var calcPages = (num) => {
+            let calcPages = (num) => {
                 return Math.round(num.length / _cetTable.limitRows);
             };
             // create pager container
@@ -236,25 +236,25 @@ var CET = (function(cet){
             if (_cetTable !== undefined) {
                 if (_cetTable.header) {
 
-                    var tableHeader = document.createElement('div');
+                    let tableHeader = document.createElement('div');
                         tableHeader.className = 'tableHeader';
 
-                    var tableHeaderTitle = document.createElement('label');
+                    let tableHeaderTitle = document.createElement('label');
                         tableHeaderTitle.className = 'tableHeaderTitle';
                         tableHeaderTitle.innerHTML = _cetTable.title;
 
                     if (_cetTable.search) {
 
-                        var searchDiv = document.createElement('div');
+                        let searchDiv = document.createElement('div');
                             searchDiv.className = 'input-field col s6 searchTable';
 
-                        var icon = document.createElement('i');
+                        let icon = document.createElement('i');
                             icon.className = 'mdi-action-search prefix';
-                        var searchInput = document.createElement('input');
+                        let searchInput = document.createElement('input');
                             searchInput.className = 'validate';
                             searchInput.type = 'text';
                             searchInput.id = 'icon_prefix';
-                        var inputLabel = document.createElement('label');
+                        let inputLabel = document.createElement('label');
                             inputLabel.setAttribute('for', 'icon_prefix');
 
                         searchDiv.appendChild(icon);
@@ -269,11 +269,11 @@ var CET = (function(cet){
                     }
 
                     if (_cetTable.options) {
-                        var tableHeaderOptions = document.createElement('button');
+                        let tableHeaderOptions = document.createElement('button');
                             tableHeaderOptions.className = 'normalButton mdi-navigation-menu';
                         tableHeader.appendChild(tableHeaderOptions);
 
-                        var optionsContainer = document.createElement('div');
+                        let optionsContainer = document.createElement('div');
                             optionsContainer.className = 'optionsContainer';
                             optionsContainer.id = 'optionsContainer';
                             optionsContainer.style.display = 'none';
@@ -284,7 +284,7 @@ var CET = (function(cet){
 
                         tableHeaderOptions.onclick = () => {
 
-                            var elementPosition = tableHeaderOptions.getBoundingClientRect();
+                            let elementPosition = tableHeaderOptions.getBoundingClientRect();
 
                             optionsContainer.style.top = (elementPosition.top + 38) + 'px';
                             optionsContainer.style.left = (elementPosition.left - 164) + 'px';
@@ -311,27 +311,27 @@ var CET = (function(cet){
 
                 if (_cetTable.container.childNodes.length === 1) {
                     // table
-                    var table = document.createElement('table');
+                    let table = document.createElement('table');
                     table.id = 'cetTable';
                     table.className = 'striped';
 
                     // HEAD
 
-                    var tableHead = document.createElement('tHead'),
+                    let tableHead = document.createElement('tHead'),
                         headContent = _cetTable.tableData.head || _cetTable.tableData[0].head;
 
                     for (let k in headContent) {
                         if (headContent.hasOwnProperty(k) && typeof headContent[k] !== 'function') {
-                            var th = document.createElement('th');
+                            let th = document.createElement('th');
                             th.className = k;
-                            var thLabel = document.createElement('span');
+                            let thLabel = document.createElement('span');
                             thLabel.innerHTML = headContent[k];
                             thLabel.value = headContent[k];
                             th.setAttribute('data-field', headContent[k]);
                             th.appendChild(thLabel);
 
                             if (_cetTable.sortable) {
-                                var sortIcon = document.createElement('i');
+                                let sortIcon = document.createElement('i');
                                 sortIcon.className = 'mdi-hardware-keyboard-arrow-down sortIcon';
                                 th.appendChild(sortIcon);
                             }
@@ -344,7 +344,7 @@ var CET = (function(cet){
 
                     // BODY
 
-                    var tableBody = document.createElement('tBody'),
+                    let tableBody = document.createElement('tBody'),
                         bodyContent = _cetTable.tableData.body || _cetTable.tableData[0].body,
                         pager = false,
                         trObj = {};
@@ -355,15 +355,15 @@ var CET = (function(cet){
 
                     for (let key in bodyContent) {
                         if (bodyContent.hasOwnProperty(key) && typeof bodyContent[key] !== 'function') {
-                            var tr = document.createElement('tr');
+                            let tr = document.createElement('tr');
                             tr.className = key;
 
                             for (let p in bodyContent[key]) {
-                                var td = document.createElement('td');
+                                let td = document.createElement('td');
                                 td.className = p;
                                 if (bodyContent[key][p].data !== undefined && bodyContent[key][p].type !== undefined) {
                                     if (bodyContent[key][p].edit) {
-                                        var input = document.createElement('input');
+                                        let input = document.createElement('input');
                                         if (_cetTable.tooltips) {
                                             input.className = 'input_edit tooltipped';
                                             input.setAttribute('data-position', 'bottom');
@@ -383,7 +383,7 @@ var CET = (function(cet){
                                         }
                                         td.appendChild(input);
                                     } else {
-                                        var noEditLabel = document.createElement('span');
+                                        let noEditLabel = document.createElement('span');
                                         noEditLabel.className = 'noEditableField';
                                         noEditLabel.innerHTML = bodyContent[key][p].data;
                                         noEditLabel.value = bodyContent[key][p].data;
@@ -392,7 +392,7 @@ var CET = (function(cet){
                                             noEditLabel.setAttribute('data-position', 'bottom');
                                             noEditLabel.setAttribute('data-delay', '30');
                                             td.appendChild(noEditLabel);
-                                            var labelParent = noEditLabel.parentNode.className,
+                                            let labelParent = noEditLabel.parentNode.className,
                                                 sliceNum = labelParent.slice(-1),
                                                 thClass = 'th' + sliceNum,
                                                 thText = tableHead.getElementsByClassName(thClass)[0].innerText;
@@ -432,7 +432,7 @@ var CET = (function(cet){
                      * @type {NodeList}
                      */
 
-                    var inputs = table.getElementsByTagName('input'),
+                    let inputs = table.getElementsByTagName('input'),
                         icons = table.getElementsByTagName('i'),
                         spans = table.getElementsByTagName('span');
                     // inputs events
@@ -465,7 +465,7 @@ var CET = (function(cet){
                     for (let i = 0; i < icons.length; i++) {
                         // click
                         icons[i].onclick = () => {
-                            var thClass = icons[i].parentNode.className,
+                            let thClass = icons[i].parentNode.className,
                                 tdNum = thClass.slice(-1),
                                 tdClass = 'td' + tdNum,
                                 eventName = 'sort',
