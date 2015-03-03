@@ -1,5 +1,6 @@
 /**
  * table downloads
+ * required plugins
  */
 
 var tableDownloads = () => {

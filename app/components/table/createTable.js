@@ -1,8 +1,15 @@
 /**
  * create table function
- * @param _cetTable {Object}
+ * @param CET {Object}
  */
-var CET = (function(cet){
+
+var CET = ((cet) => {
+
+    /**
+     * Create Table
+     * @param _cetTable {object}
+     */
+
     var createTable = (_cetTable) => {
 
         /**
@@ -526,7 +533,12 @@ var CET = (function(cet){
                 }
             }
         }
-    }
+    };
+
+    /**
+     * init table
+     * @param config
+     */
 
     cet.init = function(config){
         //TODO extend cet.defaultConfig

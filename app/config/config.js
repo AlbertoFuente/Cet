@@ -3,7 +3,7 @@
  * @type {Object} defaultConfig - config Object
  * @private
  */
-var CET = (function(cet){
+var CET = ((cet) => {
 
     cet.defaultConfig = {};
     // add header title
