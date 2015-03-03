@@ -8,8 +8,8 @@
  * @param status
  */
 
-function tableEffects(trClass, tdClass, eventName, table, status) {
-    var tr = document.getElementsByClassName(trClass),
+var tableEffects = (trClass, tdClass, eventName, table, status) => {
+    let tr = document.getElementsByClassName(trClass),
         td = document.getElementsByClassName(tdClass),
         tdChar = tdClass.slice(-1),
         thClass = 'th'+tdChar,
@@ -45,7 +45,7 @@ function tableEffects(trClass, tdClass, eventName, table, status) {
             }
             break;
         case "sort":
-            var tds = table.getElementsByClassName(tdClass),
+            let tds = table.getElementsByClassName(tdClass),
                 column = [],
                 val = [],
                 isNumeric = false;
@@ -78,7 +78,7 @@ function tableEffects(trClass, tdClass, eventName, table, status) {
             }
 
             // hover & mouse out
-            var inputs = table.getElementsByTagName('input'),
+            let inputs = table.getElementsByTagName('input'),
                 spans = table.getElementsByTagName('span');
             // inputs events
             for (let i = 0; i < inputs.length; i++) {
@@ -112,4 +112,4 @@ function tableEffects(trClass, tdClass, eventName, table, status) {
 
             break;
     }
-}
+};
