@@ -2,20 +2,20 @@
  * Show modal
  */
 
-function showModal () {
-    var gModal = document.createElement('div');
+var showModal = () => {
+    let gModal = document.createElement('div');
     gModal.className = 'gModal';
     gModal.id = 'gModal';
-    var gHeader = document.createElement('div');
+    let gHeader = document.createElement('div');
     gHeader.className = 'gHeader';
-    var closeButton = document.createElement('button');
+    let closeButton = document.createElement('button');
     closeButton.className = 'closeButton mdi-content-clear';
 
     closeButton.onclick = () => {
         closeModal(gModal);
     };
 
-    var gContent = document.createElement('canvas');
+    let gContent = document.createElement('canvas');
     gContent.className = 'gContent';
     gContent.id = 'chart';
     gContent.width = '700';
@@ -26,7 +26,7 @@ function showModal () {
     gModal.appendChild(gContent);
 
     document.body.appendChild(gModal);
-}
+};
 
 /**
  * Show modal graph
@@ -35,10 +35,10 @@ function showModal () {
  * @param yData
  */
 
-function showGraph(graphType, xData, yData) {
+var showGraph = (graphType, xData, yData) => {
 
     var colors = (index) => {
-        var colors = [
+        let colors = [
             'rgba(244, 67, 54, 0.5)',
             'rgba(233, 30, 99, 0.5)',
             'rgba(156, 39, 176, 0.5)',
@@ -67,7 +67,7 @@ function showGraph(graphType, xData, yData) {
     switch (graphType) {
         case 'Bar chart':
             // prepare data
-            var data = {
+            let data = {
                 'labels': [],
                 'datasets': [{
                     'data': [],
@@ -86,8 +86,8 @@ function showGraph(graphType, xData, yData) {
             }
 
             // print graph
-            var bar = document.getElementById("chart").getContext("2d");
-            var BarChart = new Chart(bar).Bar(data);
+            let bar = document.getElementById("chart").getContext("2d"),
+                BarChart = new Chart(bar).Bar(data);
 
             for (let i in xData) {
                 BarChart.datasets[0].bars[i].fillColor = colors(i);
@@ -98,7 +98,7 @@ function showGraph(graphType, xData, yData) {
             break;
         case 'Line chart':
             // prepare data
-            var dataLine = {
+            let dataLine = {
                 'labels': [],
                 'datasets': [{
                     'data': [],
@@ -117,12 +117,12 @@ function showGraph(graphType, xData, yData) {
             }
 
             // print graph
-            var line = document.getElementById("chart").getContext("2d");
-            var LineChart = new Chart(line).Line(dataLine);
+            let line = document.getElementById("chart").getContext("2d"),
+                LineChart = new Chart(line).Line(dataLine);
 
             break;
         case 'Pie chart':
-            var dataPie = [];
+            let dataPie = [];
             for (let i in xData) {
                 dataPie.push({
                     'label': xData[i],
@@ -131,11 +131,11 @@ function showGraph(graphType, xData, yData) {
                     'highlight': colors(i)});
             }
             // print graph
-            var pie = document.getElementById("chart").getContext("2d");
-            var myPieChart = new Chart(pie).Doughnut(dataPie);
+            let pie = document.getElementById("chart").getContext("2d"),
+                myPieChart = new Chart(pie).Doughnut(dataPie);
             break;
         case 'Polar Area chart':
-            var dataPolar = [];
+            let dataPolar = [];
             for (let i in xData) {
                 dataPolar.push({
                     'label': xData[i],
@@ -144,11 +144,11 @@ function showGraph(graphType, xData, yData) {
                     'highlight': colors(i)});
             }
             // print graph
-            var polar = document.getElementById("chart").getContext("2d");
-            var myPolarChart = new Chart(polar).PolarArea(dataPolar);
+            let polar = document.getElementById("chart").getContext("2d"),
+                myPolarChart = new Chart(polar).PolarArea(dataPolar);
             break;
     }
-}
+};
 
 /**
  * prepare the data for print the graph
@@ -157,8 +157,8 @@ function showGraph(graphType, xData, yData) {
  * @param modalContainer
  */
 
-function prepareGraphData (cet, selecteds, modalContainer) {
-    var graphType = selecteds.type,
+var prepareGraphData = (cet, selecteds, modalContainer) => {
+    let graphType = selecteds.type,
         xAxis = selecteds.xAxis,
         yAxis = selecteds.yAxis,
         tableHead = cet.tableData[0].head,
@@ -182,7 +182,7 @@ function prepareGraphData (cet, selecteds, modalContainer) {
     // tableBody
     for (let key in tableBody) {
         for (let k in tableBody[key]) {
-            var tdNumX = 'td'+xNum,
+            let tdNumX = 'td'+xNum,
                 tdNumY = 'td'+yNum;
             // save xAxis data
             if (tdNumX === k) {
@@ -227,7 +227,7 @@ function prepareGraphData (cet, selecteds, modalContainer) {
      */
 
     var showError = (cont) => {
-        var errLabel = document.createElement('label');
+        let errLabel = document.createElement('label');
             errLabel.className = 'errLabel';
             errLabel.innerHTML = 'Impossible to construct a graph of the selected data, try another selection.';
         cont.appendChild(errLabel);
@@ -251,4 +251,4 @@ function prepareGraphData (cet, selecteds, modalContainer) {
             showError(modalContainer);
         }
     }
-}
+};
