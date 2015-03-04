@@ -15,13 +15,12 @@
     "test",
     "tests"
   ],
-  "devDependencies": {
-    "materialize": "~0.95.1",
-    "firebase": "~2.1.2",
-    "jquery": "~2.1.3"
-  },
+  "devDependencies": {},
   "dependencies": {
     "table-export": "*",
-    "Chart.js": "~1.0.1"
+    "Chart.js": "~1.0.1",
+    "materialize": "~0.95.3",
+    "firebase": "~2.2.2",
+    "jquery": "~2.1.3"
   }
 }
