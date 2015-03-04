@@ -36,16 +36,15 @@ gulp.task('default', function () {
             console.error(String(error));
         })*/
         .pipe(uglify())
-        .pipe(gulp.dest('js/'))
-});
+        .pipe(gulp.dest('js/'));
 
-gulp.task('sass', function () {
     gulp.src('styles/styles.scss')
         .pipe(sass())
         .pipe(minifyCSS({keepBreaks:true}))
         .pipe(rename('styles.min.css'))
         .pipe(gulp.dest('css'))
 });
+
 
 gulp.task('watch', function () {
 
@@ -65,6 +64,6 @@ gulp.task('watch', function () {
     gulp.watch([
         'styles/styles.scss'
     ], function() {
-        gulp.start('sass');
+        gulp.start('default');
     });
 });
