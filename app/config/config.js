@@ -4,8 +4,11 @@
  * @private
  */
 var CET = ((cet) => {
-
+    // cet object
     cet.defaultConfig = {};
+    // table design
+    cet.defaultConfig.materialize = true;
+    cet.defaultConfig.bootstrap = false;
     // add header title
     cet.defaultConfig.header = true;
     cet.defaultConfig.title = "Table Title";
