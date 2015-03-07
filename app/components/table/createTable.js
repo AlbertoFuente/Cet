@@ -63,12 +63,32 @@ var CET = ((cet) => {
         _cetTable.assignClasses = (elementType) => {
             let design = null;
 
+            var classifyElement = (design) => {
+                switch (design) {
+                    case 'm':
+                        let navButton = 'mdi-navigation-menu',
+                            tableType = 'striped',
+                            sortIconDown = 'mdi-hardware-keyboard-arrow-down',
+                            sortIconUp = 'mdi-hardware-keyboard-arrow-up',
+                            tooltipElement = 'tooltipped',
+                            closeButton = 'mdi-content-clear',
+                            normalButton = 'waves-effect waves-light btn',
+                            searchIcon = 'mdi-action-search prefix';
+                        switch (elementType) {
+                            case '':
+
+                                break;
+                        }
+                        break;
+                    case 'b':
+                        break;
+                }
+            }
+
             if (_cetTable.materialize) {
                 design = 'm'; // materilize
-
             } else if (_cetTable.bootstrap) {
                 design = 'b'; // bootstrap
-
             } else {
                 design = 'd'; // default
             }
@@ -108,7 +128,7 @@ var CET = ((cet) => {
         _cetTable.mouseEffects = (element, eventName) => {
             let trClass = element.parentNode.parentNode.className,
                 tdClass = element.parentNode.className;
-            tableEffects(trClass,tdClass,eventName, null, null);
+            tableEffects(trClass, tdClass, eventName, null, null);
         };
 
         /**
@@ -120,7 +140,7 @@ var CET = ((cet) => {
             let parentClass = element.parentNode.className,
                 val = element.value,
                 trClass = element.parentNode.parentNode.className;
-            _cetTable.modifyData(trClass,parentClass, val, _cetTable.mode);
+            _cetTable.modifyData(trClass, parentClass, val, _cetTable.mode);
         };
 
         /**
@@ -135,10 +155,10 @@ var CET = ((cet) => {
             };
             // create pager container
             let container = document.createElement('div');
-                container.className = 'pagerContainer';
+            container.className = 'pagerContainer';
             // btn left
             let btnLeft = document.createElement('button');
-                btnLeft.className = 'mdi-hardware-keyboard-arrow-left directionBtn';
+            btnLeft.className = 'mdi-hardware-keyboard-arrow-left directionBtn';
             container.appendChild(btnLeft);
             // number buttons
             let number = calcPages(obj.tr);
@@ -158,7 +178,7 @@ var CET = ((cet) => {
             }
             // btn right
             let btnRight = document.createElement('button');
-                btnRight.className = 'mdi-hardware-keyboard-arrow-right directionBtn';
+            btnRight.className = 'mdi-hardware-keyboard-arrow-right directionBtn';
             container.appendChild(btnRight);
 
             _cetTable.container.appendChild(container);
@@ -171,7 +191,10 @@ var CET = ((cet) => {
                 if (m === 0) {
                     count++;
                 }
-                obj.pages.push({'page': count, 'tr': obj.tr[j]});
+                obj.pages.push({
+                    'page': count,
+                    'tr': obj.tr[j]
+                });
             }
             // buttons events
             // get actual trs
@@ -186,15 +209,15 @@ var CET = ((cet) => {
             };
             // remove body
             let removeBody = (old) => {
-               for (let i = 0; i < old.length;) {
-                   old[i].remove();
-               }
+                for (let i = 0; i < old.length;) {
+                    old[i].remove();
+                }
             };
             // get actual page
             let actualPage = (oldTrs, direction, ev) => {
                 let page = null;
 
-                for (let i = 0 ; i < oldTrs.length; i++) {
+                for (let i = 0; i < oldTrs.length; i++) {
                     obj.pages.map((a) => {
                         if (a.tr.className === oldTrs[i].className) {
                             page = a.page;
@@ -266,25 +289,25 @@ var CET = ((cet) => {
                 if (_cetTable.header) {
 
                     let tableHeader = document.createElement('div');
-                        tableHeader.className = 'tableHeader';
+                    tableHeader.className = 'tableHeader';
 
                     let tableHeaderTitle = document.createElement('label');
-                        tableHeaderTitle.className = 'tableHeaderTitle';
-                        tableHeaderTitle.innerHTML = _cetTable.title;
+                    tableHeaderTitle.className = 'tableHeaderTitle';
+                    tableHeaderTitle.innerHTML = _cetTable.title;
 
                     if (_cetTable.search) {
 
                         let searchDiv = document.createElement('div');
-                            searchDiv.className = 'input-field col s6 searchTable';
+                        searchDiv.className = 'input-field col s6 searchTable';
 
                         let icon = document.createElement('i');
-                            icon.className = 'mdi-action-search prefix';
+                        icon.className = 'mdi-action-search prefix';
                         let searchInput = document.createElement('input');
-                            searchInput.className = 'validate';
-                            searchInput.type = 'text';
-                            searchInput.id = 'icon_prefix';
+                        searchInput.className = 'validate';
+                        searchInput.type = 'text';
+                        searchInput.id = 'icon_prefix';
                         let inputLabel = document.createElement('label');
-                            inputLabel.setAttribute('for', 'icon_prefix');
+                        inputLabel.setAttribute('for', 'icon_prefix');
 
                         searchDiv.appendChild(icon);
                         searchDiv.appendChild(searchInput);
@@ -299,13 +322,13 @@ var CET = ((cet) => {
 
                     if (_cetTable.options) {
                         let tableHeaderOptions = document.createElement('button');
-                            tableHeaderOptions.className = 'normalButton mdi-navigation-menu';
+                        tableHeaderOptions.className = 'normalButton mdi-navigation-menu';
                         tableHeader.appendChild(tableHeaderOptions);
 
                         let optionsContainer = document.createElement('div');
-                            optionsContainer.className = 'optionsContainer';
-                            optionsContainer.id = 'optionsContainer';
-                            optionsContainer.style.display = 'none';
+                        optionsContainer.className = 'optionsContainer';
+                        optionsContainer.id = 'optionsContainer';
+                        optionsContainer.style.display = 'none';
 
                         if (_cetTable.listOptions !== undefined && typeof _cetTable.listOptions === 'object') {
                             listTableOptions(_cetTable, optionsContainer, tableHeader);
@@ -377,8 +400,8 @@ var CET = ((cet) => {
                         bodyContent = _cetTable.tableData.body || _cetTable.tableData[0].body,
                         pager = false,
                         trObj = {};
-                        trObj.tr = [];
-                        trObj.pages = [];
+                    trObj.tr = [];
+                    trObj.pages = [];
 
                     _cetTable.limitRows > 0 ? pager = true : pager = false;
 
@@ -430,7 +453,7 @@ var CET = ((cet) => {
                                         noEditLabel.className = 'noEditableField';
                                         noEditLabel.innerHTML = bodyContent[key][p].data;
                                         noEditLabel.value = bodyContent[key][p].data;
-                                        if (_cetTable.tooltips){
+                                        if (_cetTable.tooltips) {
                                             noEditLabel.className = noEditLabel.className + ' tooltipped';
                                             noEditLabel.setAttribute('data-position', 'bottom');
                                             noEditLabel.setAttribute('data-delay', '30');
@@ -584,28 +607,45 @@ var CET = ((cet) => {
      */
 
     cet.init = (config) => {
+        let docHead = document.head,
+            docBody = document.body;
         if (cet.defaultConfig.materialize) {
-            // import materialize css
-            let importMcss = document.createElement('link');
-            importMcss.rel  = 'stylesheet';
-            importMcss.type = 'text/css';
-            importMcss.href = '../../bower_components/materialize/bin/materialize.css';
-            document.head.appendChild(importMcss);
-            // import materialize js
-            let importMjs = document.createElement('script');
-            importMjs.src = '../../bower_components/materialize/bin/materialize.js';
-            document.head.appendChild(importMjs);
+            for (let i in docHead.childNodes) {
+                if (docHead.childNodes[i].tagName === 'LINK' && docHead.childNodes[i].id === 'bootstrapStyles') {
+                    docHead.childNodes[i].remove();
+                }
+            }
+            for (let i in docBody.childNodes) {
+                if (docBody.childNodes[i].tagName === 'SCRIPT' && docBody.childNodes[i].id === 'bootstrapScript') {
+                    docBody.childNodes[i].remove();
+                }
+            }
         } else if (cet.defaultConfig.bootstrap) {
-            // import bootstrap css
-            let importBcss = document.createElement('link');
-            importBcss.rel  = 'stylesheet';
-            importBcss.type = 'text/css';
-            importBcss.src = '../../bower_components/bootstrap/dist/css/bootstrap.min.css';
-            document.head.appendChild(importBcss);
-            // import bootstrap js
-            let importBjs = document.createElement('script');
-            importBjs.src = '../../bower_components/bootstrap/dist/js/bootstrap.min.js';
-            document.head.appendChild(importBjs);
+            for (let i in docHead.childNodes) {
+                if (docHead.childNodes[i].tagName === 'LINK' && docHead.childNodes[i].id === 'materializeStyles') {
+                    docHead.childNodes[i].remove();
+                }
+            }
+            for (let i in docBody.childNodes) {
+                if (docBody.childNodes[i].tagName === 'SCRIPT' && docBody.childNodes[i].id === 'materializeScript') {
+                    docBody.childNodes[i].remove();
+                }
+            }
+        } else {
+            for (let i in docHead.childNodes) {
+                if (docHead.childNodes[i].tagName === 'LINK') {
+                    if (docHead.childNodes[i].id === 'materializeStyles' || docHead.childNodes[i].id === 'bootstrapStyles') {
+                        docHead.childNodes[i].remove();
+                    }
+                }
+            }
+            for (let i in docBody.childNodes) {
+                if (docBody.childNodes[i].tagName === 'SCRIPT') {
+                    if (docBody.childNodes[i].id === 'materializeScript' || docBody.childNodes[i].id === 'bootstrapScript') {
+                        docBody.childNodes[i].remove();
+                    }
+                }
+            }
         }
         //TODO extend cet.defaultConfig
         config = config || cet.defaultConfig;

@@ -112,9 +112,11 @@ var tableEffects = (trClass, tdClass, eventName, table, status) => {
                     CET.defaultConfig.mouseEffects(spans[i], 'out');
                 }
             }
-
-            // datepicker
-            $('.datepicker').pickadate();
+            
+            if (CET.defaultConfig.materialize) {
+                // datepicker
+                $('.datepicker').pickadate();
+            }
 
             break;
     }
