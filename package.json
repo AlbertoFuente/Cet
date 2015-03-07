@@ -18,7 +18,6 @@
   "homepage": "https://github.com/AlbertoFuente/Cet",
   "devDependencies": {},
   "dependencies": {
-    "firebase": "^2.1.2",
     "gulp": "^3.8.11",
     "gulp-babel": "^4.0.0",
     "gulp-concat": "^2.5.2",
