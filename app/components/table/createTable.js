@@ -651,18 +651,8 @@ var CET = ((cet) => {
     cet.init = (config) => {
         let docHead = document.head,
             docBody = document.body;
-        if (cet.defaultConfig.materialize) {
-            for (let i in docHead.childNodes) {
-                if (docHead.childNodes[i].tagName === 'LINK' && docHead.childNodes[i].id === 'bootstrapStyles') {
-                    docHead.childNodes[i].remove();
-                }
-            }
-            for (let i in docBody.childNodes) {
-                if (docBody.childNodes[i].tagName === 'SCRIPT' && docBody.childNodes[i].id === 'bootstrapScript') {
-                    docBody.childNodes[i].remove();
-                }
-            }
-        } else if (cet.defaultConfig.bootstrap) {
+        // remove Materialize
+        let removeMaterialize = () => {
             for (let i in docHead.childNodes) {
                 if (docHead.childNodes[i].tagName === 'LINK' && docHead.childNodes[i].id === 'materializeStyles') {
                     docHead.childNodes[i].remove();
@@ -673,21 +663,28 @@ var CET = ((cet) => {
                     docBody.childNodes[i].remove();
                 }
             }
-        } else {
+        };
+        // let remove bootstrap
+        let removeBootstrap = () => {
             for (let i in docHead.childNodes) {
-                if (docHead.childNodes[i].tagName === 'LINK') {
-                    if (docHead.childNodes[i].id === 'materializeStyles' || docHead.childNodes[i].id === 'bootstrapStyles') {
-                        docHead.childNodes[i].remove();
-                    }
+                if (docHead.childNodes[i].tagName === 'LINK' && docHead.childNodes[i].id === 'bootstrapStyles') {
+                    docHead.childNodes[i].remove();
                 }
             }
             for (let i in docBody.childNodes) {
-                if (docBody.childNodes[i].tagName === 'SCRIPT') {
-                    if (docBody.childNodes[i].id === 'materializeScript' || docBody.childNodes[i].id === 'bootstrapScript') {
-                        docBody.childNodes[i].remove();
-                    }
+                if (docBody.childNodes[i].tagName === 'SCRIPT' && docBody.childNodes[i].id === 'bootstrapScript') {
+                    docBody.childNodes[i].remove();
                 }
             }
+        };
+        
+        if (cet.defaultConfig.materialize) {
+            removeBootstrap();
+        } else if (cet.defaultConfig.bootstrap) {
+            removeMaterialize();
+        } else {
+            removeBootstrap();
+            removeMaterialize();
         }
         //TODO extend cet.defaultConfig
         config = config || cet.defaultConfig;
