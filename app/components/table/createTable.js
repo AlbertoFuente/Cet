@@ -61,7 +61,8 @@ var CET = ((cet) => {
          */
 
         _cetTable.assignClasses = (elementType) => {
-            let design = null;
+            let design = null,
+                designClass = null;
 
             var classifyElement = (design) => {
                 switch (design) {
@@ -73,10 +74,35 @@ var CET = ((cet) => {
                             tooltipElement = 'tooltipped',
                             closeButton = 'mdi-content-clear',
                             normalButton = 'waves-effect waves-light btn',
-                            searchIcon = 'mdi-action-search prefix';
+                            searchIcon = 'mdi-action-search prefix',
+                            searchDiv = 'input-field col s6',
+                            buttonDirectionLeft = 'mdi-hardware-keyboard-arrow-left',
+                            buttonDirectionRight = 'mdi-hardware-keyboard-arrow-right',
+                            datePicker = ' datepicker picker__input';
                         switch (elementType) {
-                            case '':
-
+                            case 'searchDiv':
+                                designClass = searchDiv;
+                                break;
+                            case 'searchIcon':
+                                designClass = searchIcon;
+                                break;
+                            case 'headerButton':
+                                designClass = navButton;
+                                break;
+                            case 'tableStriped':
+                                designClass = tableType;
+                                break;
+                            case 'sortIconDown':
+                                designClass = sortIconDown;
+                                break;
+                            case 'sortIconUp':
+                                designClass = sortIconUp;
+                                break;
+                            case 'tooltip':
+                                designClass = tooltipElement;
+                                break;
+                            case 'datePicker':
+                                designClass = datePicker;
                                 break;
                         }
                         break;
@@ -87,11 +113,14 @@ var CET = ((cet) => {
 
             if (_cetTable.materialize) {
                 design = 'm'; // materilize
+                classifyElement(design);
             } else if (_cetTable.bootstrap) {
                 design = 'b'; // bootstrap
+                classifyElement(design);
             } else {
                 design = 'd'; // default
             }
+            return designClass; // return class
         };
 
         /**
@@ -298,10 +327,10 @@ var CET = ((cet) => {
                     if (_cetTable.search) {
 
                         let searchDiv = document.createElement('div');
-                        searchDiv.className = 'input-field col s6 searchTable';
+                        searchDiv.className = _cetTable.assignClasses('searchDiv') + ' searchTable';
 
                         let icon = document.createElement('i');
-                        icon.className = 'mdi-action-search prefix';
+                        icon.className = _cetTable.assignClasses('searchIcon');
                         let searchInput = document.createElement('input');
                         searchInput.className = 'validate';
                         searchInput.type = 'text';
@@ -322,7 +351,7 @@ var CET = ((cet) => {
 
                     if (_cetTable.options) {
                         let tableHeaderOptions = document.createElement('button');
-                        tableHeaderOptions.className = 'normalButton mdi-navigation-menu';
+                        tableHeaderOptions.className = 'normalButton ' + _cetTable.assignClasses('headerButton');
                         tableHeader.appendChild(tableHeaderOptions);
 
                         let optionsContainer = document.createElement('div');
@@ -341,8 +370,8 @@ var CET = ((cet) => {
                             optionsContainer.style.top = (elementPosition.top + 38) + 'px';
                             optionsContainer.style.left = (elementPosition.left - 164) + 'px';
 
-                            if (tableHeaderOptions.className === 'normalButton mdi-navigation-menu') {
-                                tableHeaderOptions.className = 'clickedButton mdi-navigation-menu';
+                            if (tableHeaderOptions.className === 'normalButton ' + _cetTable.assignClasses('headerButton')) {
+                                tableHeaderOptions.className = 'clickedButton ' + _cetTable.assignClasses('headerButton');
                                 if (document.getElementById('optionsContainer')) {
                                     optionsContainer.style.display = 'block';
                                 } else {
@@ -350,7 +379,7 @@ var CET = ((cet) => {
                                     optionsContainer.style.display = 'block';
                                 }
                             } else {
-                                tableHeaderOptions.className = 'normalButton mdi-navigation-menu';
+                                tableHeaderOptions.className = 'normalButton ' + _cetTable.assignClasses('headerButton');
                                 optionsContainer.style.display = 'none';
                             }
                         }
@@ -365,7 +394,7 @@ var CET = ((cet) => {
                     // table
                     let table = document.createElement('table');
                     table.id = 'cetTable';
-                    table.className = 'striped';
+                    table.className = _cetTable.assignClasses('tableStriped');
 
                     // HEAD
 
@@ -384,7 +413,7 @@ var CET = ((cet) => {
 
                             if (_cetTable.sortable) {
                                 let sortIcon = document.createElement('i');
-                                sortIcon.className = 'mdi-hardware-keyboard-arrow-down sortIcon';
+                                sortIcon.className = _cetTable.assignClasses('sortIconDown') + ' sortIcon';
                                 th.appendChild(sortIcon);
                             }
                             tableHead.appendChild(th);
@@ -419,7 +448,7 @@ var CET = ((cet) => {
                                             span = document.createElement('span');
                                         span.style.display = 'none';
                                         if (_cetTable.tooltips) {
-                                            input.className = 'input_edit tooltipped';
+                                            input.className = 'input_edit ' + _cetTable.assignClasses('tooltip');
                                             input.setAttribute('data-position', 'bottom');
                                             input.setAttribute('data-delay', '30');
                                             input.setAttribute('data-tooltip', 'Edit field: ' + bodyContent[key][p].data);
@@ -433,7 +462,7 @@ var CET = ((cet) => {
                                             span.setAttribute('value', bodyContent[key][p].data);
                                         }
                                         if (bodyContent[key][p].type === 'date') {
-                                            input.className = input.className + ' datepicker picker__input';
+                                            input.className = input.className + _cetTable.assignClasses('datePicker');
                                             input.type = 'text';
                                             input.setAttribute('value', bodyContent[key][p].data);
                                             input.setAttribute('placeholder', bodyContent[key][p].data);
@@ -454,7 +483,7 @@ var CET = ((cet) => {
                                         noEditLabel.innerHTML = bodyContent[key][p].data;
                                         noEditLabel.value = bodyContent[key][p].data;
                                         if (_cetTable.tooltips) {
-                                            noEditLabel.className = noEditLabel.className + ' tooltipped';
+                                            noEditLabel.className = noEditLabel.className + ' ' + _cetTable.assignClasses('tooltip');
                                             noEditLabel.setAttribute('data-position', 'bottom');
                                             noEditLabel.setAttribute('data-delay', '30');
                                             td.appendChild(noEditLabel);
@@ -541,8 +570,8 @@ var CET = ((cet) => {
                                 tdNum = thClass.slice(-1),
                                 tdClass = 'td' + tdNum,
                                 eventName = 'sort',
-                                downClass = 'mdi-hardware-keyboard-arrow-down sortIcon',
-                                upClass = 'mdi-hardware-keyboard-arrow-up sortIcon',
+                                downClass = _cetTable.assignClasses('sortIconDown') + ' sortIcon',
+                                upClass = _cetTable.assignClasses('sortIconUp') + ' sortIcon',
                                 ics = table.getElementsByTagName('i'),
                                 status = 'down';
                             // check class
