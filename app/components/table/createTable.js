@@ -77,6 +77,7 @@ var CET = ((cet) => {
                     buttonDirectionLeft = null,
                     buttonDirectionRight = null,
                     datePicker = null;
+                    
                 switch (design) {
                     case 'm':
                         navButton = 'mdi-navigation-menu';
@@ -195,6 +196,7 @@ var CET = ((cet) => {
                 classifyElement(design);
             } else {
                 design = 'd'; // default
+                return false;
             }
             return designClass; // return class
         };
@@ -466,7 +468,7 @@ var CET = ((cet) => {
                     _cetTable.container.className = 'cet-table-cnt';
                 }
 
-                if (_cetTable.container.childNodes.length === 1) {
+                if (_cetTable.container.childNodes.length === 0) {
                     // table
                     let table = document.createElement('table');
                     table.id = 'cetTable';
@@ -612,30 +614,34 @@ var CET = ((cet) => {
                         inputs[i].onchange = () => {
                             _cetTable.inputChange(inputs[i]);
                         };
-                        // hover
-                        inputs[i].onmouseover = () => {
-                            _cetTable.mouseEffects(inputs[i], 'hover');
-                        };
-                        inputs[i].parentNode.onmouseover = () => {
-                            _cetTable.mouseEffects(inputs[i], 'hover');
-                        };
-                        // out
-                        inputs[i].parentNode.onmouseout = () => {
-                            _cetTable.mouseEffects(inputs[i], 'out');
+                        if (_cetTable.effects) {
+                            // hover
+                            inputs[i].onmouseover = () => {
+                                _cetTable.mouseEffects(inputs[i], 'hover');
+                            };
+                            inputs[i].parentNode.onmouseover = () => {
+                                _cetTable.mouseEffects(inputs[i], 'hover');
+                            };
+                            // out
+                            inputs[i].parentNode.onmouseout = () => {
+                                _cetTable.mouseEffects(inputs[i], 'out');
+                            }
                         }
                     }
                     // spans events
                     for (let i = 0; i < spans.length; i++) {
-                        // hover
-                        spans[i].onmouseover = () => {
-                            _cetTable.mouseEffects(spans[i], 'hover');
-                        };
-                        spans[i].parentNode.onmouseover = () => {
-                            _cetTable.mouseEffects(spans[i], 'hover');
-                        };
-                        // out
-                        spans[i].parentNode.onmouseout = () => {
-                            _cetTable.mouseEffects(spans[i], 'out');
+                        if (_cetTable.effects) {
+                            // hover
+                            spans[i].onmouseover = () => {
+                                _cetTable.mouseEffects(spans[i], 'hover');
+                            };
+                            spans[i].parentNode.onmouseover = () => {
+                                _cetTable.mouseEffects(spans[i], 'hover');
+                            };
+                            // out
+                            spans[i].parentNode.onmouseout = () => {
+                                _cetTable.mouseEffects(spans[i], 'out');
+                            }
                         }
                     }
                     // icons events

@@ -59,12 +59,6 @@ var selectedOption = (selected) => {
         case 'doc':
             tableId.tableExport({type:selected,escape:'false'});
             break;
-        case 'ppt':
-            tableId.tableExport({type:'powerpoint',escape:'false'});
-            break;
-        case 'png':
-            tableId.tableExport({type:selected,escape:'false'});
-            break;
         case 'pdf':
             tableId.tableExport({type:selected,pdfFontSize:'7',escape:'false'});
             break;
