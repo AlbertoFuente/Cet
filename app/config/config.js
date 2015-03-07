@@ -10,16 +10,16 @@ var CET = ((cet) => {
     cet.defaultConfig.materialize = true;
     cet.defaultConfig.bootstrap = false;
     // add header title
-    cet.defaultConfig.header = true;
+    cet.defaultConfig.header = false;
     cet.defaultConfig.title = "Table Title";
     // add options to header
-    cet.defaultConfig.options = true;
+    cet.defaultConfig.options = false;
     cet.defaultConfig.listOptions = {
-        'graphs': true,
-        'downloads': true
+        'graphs': false,
+        'downloads': false
     };
     // tooltips
-    cet.defaultConfig.tooltips = true;
+    cet.defaultConfig.tooltips = false;
     // download options
     cet.defaultConfig.downloadOptions = {
         'json': true,
@@ -29,8 +29,6 @@ var CET = ((cet) => {
         'csv': true,
         'xsl': true,
         'doc': true,
-        'ppt': true,
-        'png': true,
         'pdf': true
     };
     // search
@@ -51,9 +49,9 @@ var CET = ((cet) => {
     cet.defaultConfig.apiRestGetUrl = '';
     cet.defaultConfig.apiRestPostUrl = '';
     // display table effects
-    cet.defaultConfig.effects = true;
+    cet.defaultConfig.effects = false;
     // sort table
-    cet.defaultConfig.sortable = true;
+    cet.defaultConfig.sortable = false;
     // div container
     cet.defaultConfig.container = document.getElementById('tableContainer');
 
