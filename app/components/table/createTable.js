@@ -77,7 +77,7 @@ var CET = ((cet) => {
                     buttonDirectionLeft = null,
                     buttonDirectionRight = null,
                     datePicker = null;
-                    
+
                 switch (design) {
                     case 'm':
                         navButton = 'mdi-navigation-menu';
@@ -468,7 +468,13 @@ var CET = ((cet) => {
                     _cetTable.container.className = 'cet-table-cnt';
                 }
 
-                if (_cetTable.container.childNodes.length === 0) {
+                let childLength = 0;
+
+                if (_cetTable.header) {
+                    childLength = 1
+                }
+                
+                if (_cetTable.container.childNodes.length === childLength) {
                     // table
                     let table = document.createElement('table');
                     table.id = 'cetTable';
