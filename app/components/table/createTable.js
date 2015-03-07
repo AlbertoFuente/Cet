@@ -79,17 +79,17 @@ var CET = ((cet) => {
                     datePicker = null;
                 switch (design) {
                     case 'm':
-                        navButton = 'mdi-navigation-menu',
-                        tableType = 'striped',
-                        sortIconDown = 'mdi-hardware-keyboard-arrow-down',
-                        sortIconUp = 'mdi-hardware-keyboard-arrow-up',
-                        tooltipElement = 'tooltipped',
-                        closeButton = 'mdi-content-clear',
-                        normalButton = 'waves-effect waves-light btn',
-                        searchIcon = 'mdi-action-search prefix',
-                        searchDiv = 'input-field col s6',
-                        buttonDirectionLeft = 'mdi-hardware-keyboard-arrow-left',
-                        buttonDirectionRight = 'mdi-hardware-keyboard-arrow-right',
+                        navButton = 'mdi-navigation-menu';
+                        tableType = 'striped';
+                        sortIconDown = 'mdi-hardware-keyboard-arrow-down';
+                        sortIconUp = 'mdi-hardware-keyboard-arrow-up';
+                        tooltipElement = 'tooltipped';
+                        closeButton = 'mdi-content-clear';
+                        normalButton = 'waves-effect waves-light btn';
+                        searchIcon = 'mdi-action-search prefix';
+                        searchDiv = 'input-field col s6';
+                        buttonDirectionLeft = 'mdi-hardware-keyboard-arrow-left';
+                        buttonDirectionRight = 'mdi-hardware-keyboard-arrow-right';
                         datePicker = ' datepicker picker__input';
 
                         switch (elementType) {
@@ -132,17 +132,17 @@ var CET = ((cet) => {
                         }
                         break;
                     case 'b':
-                        navButton = 'glyphicon glyphicon-align-justify',
-                        tableType = 'table table-striped',
-                        sortIconDown = 'glyphicon glyphicon-menu-down',
-                        sortIconUp = 'glyphicon glyphicon-menu-up',
-                        tooltipElement = '',
-                        closeButton = 'glyphicon glyphicon-remove',
-                        normalButton = 'btn btn-primary',
-                        searchIcon = 'glyphicon glyphicon-search',
-                        searchDiv = '',
-                        buttonDirectionLeft = 'glyphicon glyphicon-menu-left',
-                        buttonDirectionRight = 'glyphicon glyphicon-menu-right',
+                        navButton = 'glyphicon glyphicon-align-justify';
+                        tableType = 'table table-striped';
+                        sortIconDown = 'glyphicon glyphicon-menu-down';
+                        sortIconUp = 'glyphicon glyphicon-menu-up';
+                        tooltipElement = '';
+                        closeButton = 'glyphicon glyphicon-remove';
+                        normalButton = 'btn btn-primary';
+                        searchIcon = 'glyphicon glyphicon-search';
+                        searchDiv = '';
+                        buttonDirectionLeft = 'glyphicon glyphicon-menu-left';
+                        buttonDirectionRight = 'glyphicon glyphicon-menu-right';
                         datePicker = ' date';
 
                         switch (elementType) {
@@ -185,7 +185,7 @@ var CET = ((cet) => {
                         }
                         break;
                 }
-            }
+            };
 
             if (_cetTable.materialize) {
                 design = 'm'; // materilize
