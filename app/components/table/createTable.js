@@ -53,6 +53,28 @@ var CET = ((cet) => {
         };
 
         /**
+         * table design assigning classes
+         * - materializecss (m)
+         * - bootstrap (b)
+         * - default (d)
+         * @param {string} elementType - element type (button, input, span, ...).
+         */
+
+        _cetTable.assignClasses = (elementType) => {
+            let design = null;
+
+            if (_cetTable.materialize) {
+                design = 'm'; // materilize
+
+            } else if (_cetTable.bootstrap) {
+                design = 'b'; // bootstrap
+
+            } else {
+                design = 'd'; // default
+            }
+        };
+
+        /**
          * Print New table Body
          * @param val
          * @param column
@@ -515,9 +537,10 @@ var CET = ((cet) => {
                             tableEffects(thClass, tdClass, eventName, table, status);
                         }
                     }
-
-                    // datepicker
-                    $('.datepicker').pickadate();
+                    if (_cetTable.materialize) {
+                        // datepicker
+                        $('.datepicker').pickadate();
+                    }
 
                     // return table
                     return _cetTable.container;
@@ -560,7 +583,30 @@ var CET = ((cet) => {
      * @param config
      */
 
-    cet.init = function(config){
+    cet.init = (config) => {
+        if (cet.defaultConfig.materialize) {
+            // import materialize css
+            let importMcss = document.createElement('link');
+            importMcss.rel  = 'stylesheet';
+            importMcss.type = 'text/css';
+            importMcss.href = '../../bower_components/materialize/bin/materialize.css';
+            document.head.appendChild(importMcss);
+            // import materialize js
+            let importMjs = document.createElement('script');
+            importMjs.src = '../../bower_components/materialize/bin/materialize.js';
+            document.head.appendChild(importMjs);
+        } else if (cet.defaultConfig.bootstrap) {
+            // import bootstrap css
+            let importBcss = document.createElement('link');
+            importBcss.rel  = 'stylesheet';
+            importBcss.type = 'text/css';
+            importBcss.src = '../../bower_components/bootstrap/dist/css/bootstrap.min.css';
+            document.head.appendChild(importBcss);
+            // import bootstrap js
+            let importBjs = document.createElement('script');
+            importBjs.src = '../../bower_components/bootstrap/dist/js/bootstrap.min.js';
+            document.head.appendChild(importBjs);
+        }
         //TODO extend cet.defaultConfig
         config = config || cet.defaultConfig;
         createTable(config);
