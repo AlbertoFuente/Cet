@@ -9,7 +9,7 @@ var showModal = () => {
     let gHeader = document.createElement('div');
     gHeader.className = 'gHeader';
     let closeButton = document.createElement('button');
-    closeButton.className = 'closeButton mdi-content-clear';
+    closeButton.className = 'closeButton ' + CET.defaultConfig.assignClasses('closeButton');
 
     closeButton.onclick = () => {
         closeModal(gModal);

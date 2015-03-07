@@ -25,7 +25,7 @@ var openModal = (type, cet) => {
     let modalHeaderTitle = document.createElement('label');
     // close modal button
     let closeButton = document.createElement('button');
-        closeButton.className = 'closeButton mdi-content-clear';
+        closeButton.className = 'closeButton ' + cet.assignClasses('closeButton');
     closeButton.onclick = () => {
         closeModal(modal);
     };
@@ -86,7 +86,7 @@ var openModal = (type, cet) => {
 
             // done button
             let doneButton = document.createElement('a');
-                doneButton.className = 'doneButton waves-effect waves-light btn';
+                doneButton.className = 'doneButton ' + cet.assignClasses('normalButton');
                 doneButton.innerHTML = 'DONE';
             modalContainer.appendChild(doneButton);
 
@@ -118,7 +118,7 @@ var openModal = (type, cet) => {
                 }
             }
             let downButton = document.createElement('button');
-                downButton.className = 'doneButton waves-effect waves-light btn';
+                downButton.className = 'doneButton ' + cet.assignClasses('normalButton');
                 downButton.innerHTML = 'DOWNLOAD';
 
             downButton.onclick = () => {
@@ -150,7 +150,7 @@ var closeMenu = (container, tableHeader) => {
     let button = tableHeader.childNodes;
     for (let i in button) {
         if (button[i].tagName === 'BUTTON') {
-            button[i].className = 'normalButton mdi-navigation-menu';
+            button[i].className = 'normalButton ' + CET.defaultConfig.assignClasses('headerButton');
         }
     }
 };

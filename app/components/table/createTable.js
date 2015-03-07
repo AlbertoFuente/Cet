@@ -79,6 +79,7 @@ var CET = ((cet) => {
                             buttonDirectionLeft = 'mdi-hardware-keyboard-arrow-left',
                             buttonDirectionRight = 'mdi-hardware-keyboard-arrow-right',
                             datePicker = ' datepicker picker__input';
+
                         switch (elementType) {
                             case 'searchDiv':
                                 designClass = searchDiv;
@@ -103,6 +104,18 @@ var CET = ((cet) => {
                                 break;
                             case 'datePicker':
                                 designClass = datePicker;
+                                break;
+                            case 'buttonLeft':
+                                designClass = buttonDirectionLeft;
+                                break;
+                            case 'buttonRight':
+                                designClass = buttonDirectionRight;
+                                break;
+                            case 'closeButton':
+                                designClass = closeButton;
+                                break;
+                            case 'normalButton':
+                                designClass = normalButton;
                                 break;
                         }
                         break;
@@ -187,7 +200,7 @@ var CET = ((cet) => {
             container.className = 'pagerContainer';
             // btn left
             let btnLeft = document.createElement('button');
-            btnLeft.className = 'mdi-hardware-keyboard-arrow-left directionBtn';
+            btnLeft.className = _cetTable.assignClasses('buttonLeft') + ' directionBtn';
             container.appendChild(btnLeft);
             // number buttons
             let number = calcPages(obj.tr);
@@ -207,7 +220,7 @@ var CET = ((cet) => {
             }
             // btn right
             let btnRight = document.createElement('button');
-            btnRight.className = 'mdi-hardware-keyboard-arrow-right directionBtn';
+            btnRight.className = _cetTable.assignClasses('buttonRight') + ' directionBtn';
             container.appendChild(btnRight);
 
             _cetTable.container.appendChild(container);
