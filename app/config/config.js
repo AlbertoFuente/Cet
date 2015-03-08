@@ -16,7 +16,8 @@ var CET = ((cet) => {
     cet.defaultConfig.options = false;
     cet.defaultConfig.listOptions = {
         'graphs': false,
-        'downloads': false
+        'downloads': false,
+        'column_data_sum': false
     };
     // tooltips
     cet.defaultConfig.tooltips = false;
