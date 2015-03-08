@@ -55,7 +55,8 @@ var showGraph = (graphType, xData, yData) => {
             'rgba(255, 193, 7, 0.5)',
             'rgba(255, 152, 0, 0.5)',
             'rgba(255, 87, 34, 0.5)',
-            'rgba(121, 85, 72, 0.5)'];
+            'rgba(121, 85, 72, 0.5)'
+        ];
 
         if (index > colors.length) {
             return colors[Math.floor(Math.random() * colors.length)];
@@ -128,7 +129,8 @@ var showGraph = (graphType, xData, yData) => {
                     'label': xData[i],
                     'value': parseInt(yData[i]),
                     'color': colors(i),
-                    'highlight': colors(i)});
+                    'highlight': colors(i)
+                });
             }
             // print graph
             let pie = document.getElementById("chart").getContext("2d"),
@@ -141,7 +143,8 @@ var showGraph = (graphType, xData, yData) => {
                     'label': xData[i],
                     'value': parseInt(yData[i]),
                     'color': colors(i),
-                    'highlight': colors(i)});
+                    'highlight': colors(i)
+                });
             }
             // print graph
             let polar = document.getElementById("chart").getContext("2d"),
@@ -182,8 +185,8 @@ var prepareGraphData = (cet, selecteds, modalContainer) => {
     // tableBody
     for (let key in tableBody) {
         for (let k in tableBody[key]) {
-            let tdNumX = 'td'+xNum,
-                tdNumY = 'td'+yNum;
+            let tdNumX = 'td' + xNum,
+                tdNumY = 'td' + yNum;
             // save xAxis data
             if (tdNumX === k) {
                 xData.push(tableBody[key][k].data);
@@ -228,10 +231,10 @@ var prepareGraphData = (cet, selecteds, modalContainer) => {
 
     var showError = (cont) => {
         let errLabel = document.createElement('label');
-            errLabel.className = 'errLabel';
-            errLabel.innerHTML = 'Impossible to construct a graph of the selected data, try another selection.';
+        errLabel.className = 'errLabel';
+        errLabel.innerHTML = 'Impossible to construct a graph of the selected data, try another selection.';
         cont.appendChild(errLabel);
-        setTimeout(function () {
+        setTimeout(function() {
             cont.removeChild(errLabel);
         }, 5000);
     };
