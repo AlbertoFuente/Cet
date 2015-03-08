@@ -130,8 +130,8 @@ var openModal = (type, cet) => {
             modalContainer.appendChild(selectDownload);
             modalContainer.appendChild(downButton);
             break;
-        case 'column_data_amount':
-            modalHeaderTitle.innerHTML = 'Config column data amount options';
+        case 'column_data_sum':
+            modalHeaderTitle.innerHTML = 'Config sum options';
 
             // text or number
             const num = /^\d+$/;
@@ -147,7 +147,8 @@ var openModal = (type, cet) => {
                             for (let p = 0; p < contChilds[j].childNodes.length; p++) {
                                 obj[p] = {
                                     'name': contChilds[j].childNodes[p].innerText,
-                                    'data': []
+                                    'data': [],
+                                    'sum': ''
                                 }
                             }
                         }
@@ -156,13 +157,62 @@ var openModal = (type, cet) => {
                                 let trChilds = contChilds[j].childNodes[p].childNodes;
                                 for (let c = 0; c < trChilds.length; c++) {
                                     obj[c].data.push(trChilds[c].lastChild.innerText);
+                                    if (num.test(trChilds[c].lastChild.innerText)) {
+                                        obj[c].sum = true;
+                                    } else {
+                                        obj[c].sum = false;
+                                    }
                                 }
                             }
                         }
                     }
                 }
             }
-            console.log(obj);
+
+            let colLabel = document.createElement('label');
+            colLabel.innerHTML = 'Select column to get the sum:';
+            let colSelect = document.createElement('select');
+
+            for (let op in obj) {
+                if (obj[op].sum) {
+                    let colOption = document.createElement('option');
+                    colOption.value = obj[op].name;
+                    colOption.innerHTML = obj[op].name;
+                    colSelect.appendChild(colOption);
+                }
+            }
+
+            let result = document.createElement('label');
+            result.className = 'resultLabel';
+
+            colSelect.onchange = () => {
+                let res = colSelect.value,
+                    total = 0;
+
+                for (let i in obj) {
+                    if (res === obj[i].name) {
+                        for (let j = 0; j < obj[i].data.length; j++) {
+                            total += obj[i].data[j] << 0;
+                        }
+                    }
+                }
+                result.innerHTML = 'Total: ' + total;
+            };
+
+            let colDone = document.createElement('button');
+            colDone.className = 'doneButton ' + cet.assignClasses('normalButton');
+            colDone.style.cssFloat = 'right';
+            colDone.innerHTML = 'DONE';
+
+            colDone.onclick = () => {
+                closeModal(modal);
+            };
+
+            modalContainer.appendChild(colLabel);
+            modalContainer.appendChild(colSelect);
+            modalContainer.appendChild(result);
+            modalContainer.appendChild(colDone);
+
             break;
     }
 
@@ -237,9 +287,9 @@ var listTableOptions = (cet, container, tableHeader) => {
     }
 
     // column data aount
-    if (cet.listOptions.column_data_amount) {
-        selectedType = 'column_data_amount';
-        optionText = 'Show column data amount panel';
+    if (cet.listOptions.column_data_sum) {
+        selectedType = 'column_data_sum';
+        optionText = 'Show column data sum panel';
         createOption(selectedType, optionText, ul);
     }
 
