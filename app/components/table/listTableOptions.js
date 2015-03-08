@@ -17,21 +17,21 @@ var closeModal = (modal) => {
 var openModal = (type, cet) => {
     // create modal container
     let modal = document.createElement('div');
-        modal.id = '_cetTableModal';
+    modal.id = '_cetTableModal';
     // modal header
     let modalHeader = document.createElement('div');
-        modalHeader.className = '_cetTableModalHeader';
+    modalHeader.className = '_cetTableModalHeader';
     // modal header title
     let modalHeaderTitle = document.createElement('label');
     // close modal button
     let closeButton = document.createElement('button');
-        closeButton.className = 'closeButton ' + cet.assignClasses('closeButton');
+    closeButton.className = 'closeButton ' + cet.assignClasses('closeButton');
     closeButton.onclick = () => {
         closeModal(modal);
     };
     // content container
     let modalContainer = document.createElement('div');
-        modalContainer.className = '_cetTableContent';
+    modalContainer.className = '_cetTableContent';
 
     switch (type) {
         case 'graph':
@@ -52,9 +52,9 @@ var openModal = (type, cet) => {
                 }
                 parent.appendChild(select);
             };
-            
+
             let table = cet.tableData[0].head;
-            
+
             // select graph
             let selectTitle = 'Select graph type: ',
                 selectType = document.createElement('select'),
@@ -86,25 +86,25 @@ var openModal = (type, cet) => {
 
             // done button
             let doneButton = document.createElement('a');
-                doneButton.className = 'doneButton ' + cet.assignClasses('normalButton');
-                doneButton.innerHTML = 'DONE';
+            doneButton.className = 'doneButton ' + cet.assignClasses('normalButton');
+            doneButton.innerHTML = 'DONE';
             modalContainer.appendChild(doneButton);
 
             doneButton.onclick = () => {
                 let selecteds = {};
-                    selecteds.xAxis = selectXType.value;
-                    selecteds.yAxis = selectYType.value;
-                    selecteds.type = selectType.value;
-              prepareGraphData(cet, selecteds, modalContainer);
+                selecteds.xAxis = selectXType.value;
+                selecteds.yAxis = selectYType.value;
+                selecteds.type = selectType.value;
+                prepareGraphData(cet, selecteds, modalContainer);
             };
             break;
         case 'downloads':
             // table downloads function
             tableDownloads();
 
-            modalHeaderTitle.innerHTML = 'Config Downloads Options';
+            modalHeaderTitle.innerHTML = 'Config downloads options';
             let sDownloadLabel = document.createElement('label');
-                sDownloadLabel.innerHTML = 'Download Options: ';
+            sDownloadLabel.innerHTML = 'Download Options: ';
             let selectDownload = document.createElement('select');
 
             if (typeof cet.downloadOptions === 'object') {
@@ -118,8 +118,8 @@ var openModal = (type, cet) => {
                 }
             }
             let downButton = document.createElement('button');
-                downButton.className = 'doneButton ' + cet.assignClasses('normalButton');
-                downButton.innerHTML = 'DOWNLOAD';
+            downButton.className = 'doneButton ' + cet.assignClasses('normalButton');
+            downButton.innerHTML = 'DOWNLOAD';
 
             downButton.onclick = () => {
                 let selected = selectDownload.value;
@@ -129,6 +129,40 @@ var openModal = (type, cet) => {
             modalContainer.appendChild(sDownloadLabel);
             modalContainer.appendChild(selectDownload);
             modalContainer.appendChild(downButton);
+            break;
+        case 'column_data_amount':
+            modalHeaderTitle.innerHTML = 'Config column data amount options';
+
+            // text or number
+            const num = /^\d+$/;
+            let obj = {};
+
+            let container = cet.container.childNodes;
+
+            for (let i = 0; i < container.length; i++) {
+                if (container[i].tagName === 'TABLE') {
+                    let contChilds = container[i].childNodes;
+                    for (let j = 0; j < contChilds.length; j++) {
+                        if (contChilds[j].tagName === 'THEAD') {
+                            for (let p = 0; p < contChilds[j].childNodes.length; p++) {
+                                obj[p] = {
+                                    'name': contChilds[j].childNodes[p].innerText,
+                                    'data': []
+                                }
+                            }
+                        }
+                        if (contChilds[j].tagName === 'TBODY') {
+                            for (let p = 0; p < contChilds[j].childNodes.length; p++) {
+                                let trChilds = contChilds[j].childNodes[p].childNodes;
+                                for (let c = 0; c < trChilds.length; c++) {
+                                    obj[c].data.push(trChilds[c].lastChild.innerText);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            console.log(obj);
             break;
     }
 
@@ -146,7 +180,7 @@ var openModal = (type, cet) => {
  */
 
 var closeMenu = (container, tableHeader) => {
-    container.style.display= 'none';
+    container.style.display = 'none';
     let button = tableHeader.childNodes;
     for (let i in button) {
         if (button[i].tagName === 'BUTTON') {
@@ -165,7 +199,7 @@ var closeMenu = (container, tableHeader) => {
 var listTableOptions = (cet, container, tableHeader) => {
     // options menu list
     let ul = document.createElement('ul');
-        ul.className = 'optionsList';
+    ul.className = 'optionsList';
     let selectedType = null,
         optionText = null;
 
@@ -178,8 +212,8 @@ var listTableOptions = (cet, container, tableHeader) => {
 
     var createOption = (type, text, parent) => {
         let li = document.createElement('li');
-            li.className = 'optionsLi';
-            li.innerHTML = text;
+        li.className = 'optionsLi';
+        li.innerHTML = text;
         parent.appendChild(li);
 
         li.onclick = () => {
@@ -198,8 +232,16 @@ var listTableOptions = (cet, container, tableHeader) => {
     // downloads
     if (cet.listOptions.downloads) {
         selectedType = 'downloads';
-        optionText = 'Show Downloads Panel';
+        optionText = 'Show downloads panel';
         createOption(selectedType, optionText, ul);
     }
+
+    // column data aount
+    if (cet.listOptions.column_data_amount) {
+        selectedType = 'column_data_amount';
+        optionText = 'Show column data amount panel';
+        createOption(selectedType, optionText, ul);
+    }
+
     container.appendChild(ul);
 };
