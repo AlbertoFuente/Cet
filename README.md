@@ -1,6 +1,12 @@
 # Cet
 Cet (Custom editable table) is a library that creates editable and customizable table, the table is dynamically created from a JSON file locally, from Firebase (https://www.firebase.com/) or from an API, also allows you to save the changes you make to it. To configure it you have to do it in the app/config/config.js file, by default comes with almost every option to 'false'.
 
+![alt tag](https://cloud.githubusercontent.com/assets/6747489/6547670/199ab132-c5df-11e4-8169-efc78cb2003e.png)
+
+![alt tag](https://cloud.githubusercontent.com/assets/6747489/6547672/1de6df9a-c5df-11e4-9fa5-44f99686e3b6.png)
+
+![alt tag](https://cloud.githubusercontent.com/assets/6747489/6547674/2018ac76-c5df-11e4-80ac-bdefb5ba4f25.png)
+
 ##Install
 To install, clone the repository and:
 - Install bower dependencies:
