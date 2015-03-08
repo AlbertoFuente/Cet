@@ -94,4 +94,66 @@ cet.defaultConfig.sortable = false;
 ```js
 cet.defaultConfig.effects = false;
 ```
+## JSON data structure
+The structure of the JSON file must be like this example:
+```json
+[
+  {
+    "head": {
+      "th1": "column1", 
+      "th2": "column2"
+    },
+    "body": {
+      "tr1": {
+        "td1": {
+          "data": "data1",
+          "type": "text",
+          "edit": false
+        },
+        "td2": {
+          "data": "data2",
+          "type": "text",
+          "edit": false
+        },
+        "td3": {
+          "data": "data3",
+          "type": "text",
+          "edit": false
+        },
+        "td4": {
+          "data": "data4",
+          "type": "text",
+          "edit": true
+        }
+      },
+      "tr2": {
+        "td1": {
+          "data": "data1",
+          "type": "text",
+          "edit": false
+        },
+        "td2": {
+          "data": "data2",
+          "type": "text",
+          "edit": false
+        },
+        "td3": {
+          "data": "data3",
+          "type": "text",
+          "edit": false
+        },
+        "td4": {
+          "data": "data4",
+          "type": "text",
+          "edit": true
+        }
+      }
+    }
+  }
+]
+```
+Inside all tds you can find three parameters:
+- data: the text of the filed you want to show.
+- type: the type of field if it is editable (text, date, ...)
+- edit: If it is an editable field set it to 'true'.
   
