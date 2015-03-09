@@ -88,6 +88,5 @@ CET.downloads = {
                 });
                 break;
         }
-
     }
-}
+};

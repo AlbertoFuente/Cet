@@ -69,4 +69,4 @@ CET.services = {
         xmlhttp.open("GET", url, false);
         xmlhttp.send();
     }
-}
+};

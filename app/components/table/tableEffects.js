@@ -126,4 +126,4 @@ CET.effects = {
                 break;
         }
     }
-}
+};

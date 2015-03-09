@@ -195,7 +195,6 @@ CET.table = {
                 design = 'b'; // bootstrap
                 classifyElement(design);
             } else {
-                design = 'd'; // default
                 return false;
             }
             return designClass; // return class
