@@ -235,7 +235,7 @@ CET.table = {
         _cetTable.mouseEffects = (element, eventName) => {
             let trClass = element.parentNode.parentNode.className,
                 tdClass = element.parentNode.className;
-            tableEffects(trClass, tdClass, eventName, null, null);
+            CET.effects.tableEffects(trClass, tdClass, eventName, null, null);
         };
 
         /**
@@ -285,7 +285,7 @@ CET.table = {
             }
             // btn right
             let btnRight = document.createElement('button');
-            btnRight.className = _cetTable.assignClasses('buttonRight') + ' directionBtn';
+            btnRight.className = CET.assignClasses('buttonRight') + ' directionBtn';
             container.appendChild(btnRight);
 
             _cetTable.container.appendChild(container);
@@ -390,7 +390,7 @@ CET.table = {
          * @returns {_cetTable.container|*}
          */
 
-        _cetTable.tableConstructor = (_cetTable) => {
+        CET.table.tableConstructor = (_cetTable) => {
 
             if (_cetTable !== undefined) {
                 if (_cetTable.header) {
@@ -674,7 +674,7 @@ CET.table = {
                                     status = 'down';
                                 }
                             }
-                            tableEffects(thClass, tdClass, eventName, table, status);
+                            CET.effects.tableEffects(thClass, tdClass, eventName, table, status);
                         }
                     }
                     if (_cetTable.materialize) {
@@ -695,14 +695,14 @@ CET.table = {
             if (_cetTable.dataOptions.localData) {
                 if (_cetTable.localDataUrl !== '') {
                     _cetTable.mode = 1;
-                    getLocalData(_cetTable);
+                    CET.services.getLocalData(_cetTable);
                 } else {
                     alert('You must add _cetTable.localDataUrl in config.js');
                 }
             } else if (_cetTable.dataOptions.fireBase) {
                 if (_cetTable.fireBaseUrl !== '') {
                     _cetTable.mode = 2;
-                    fireBaseData(_cetTable);
+                    CET.services.fireBaseData(_cetTable);
 
                 } else {
                     alert('You must add _cetTable.fireBaseUrl in config.js');
@@ -710,7 +710,7 @@ CET.table = {
             } else if (_cetTable.dataOptions.apiRest) {
                 if (_cetTable.apiRestUrl !== '') {
                     _cetTable.mode = 3;
-                    apiRestData(_cetTable.apiRestGetUrl);
+                    CET.services.apiRestData(_cetTable.apiRestGetUrl);
                 } else {
                     alert('You must add _cetTable.apiRestUrl in config.js');
                 }

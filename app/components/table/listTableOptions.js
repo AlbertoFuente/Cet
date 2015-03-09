@@ -28,7 +28,7 @@ CET.options = {
         let closeButton = document.createElement('button');
         closeButton.className = 'closeButton ' + cet.assignClasses('closeButton');
         closeButton.onclick = () => {
-            cet.closeModal(modal);
+            cet.options.closeModal(modal);
         };
         // content container
         let modalContainer = document.createElement('div');
@@ -103,16 +103,18 @@ CET.options = {
                 break;
             case 'downloads':
                 // table downloads function
-                tableDownloads();
+                if (CET.downloads) {
+                    CET.downloads.tableDownloads();
+                }
 
                 modalHeaderTitle.innerHTML = 'Config downloads options';
                 let sDownloadLabel = document.createElement('label');
                 sDownloadLabel.innerHTML = 'Download Options: ';
                 let selectDownload = document.createElement('select');
 
-                if (typeof cet.downloadOptions === 'object') {
-                    for (let k in cet.downloadOptions) {
-                        if (cet.downloadOptions[k]) {
+                if (typeof cet.defaultConfig.downloadOptions === 'object') {
+                    for (let k in cet.defaultConfig.downloadOptions) {
+                        if (cet.defaultConfig.downloadOptions[k]) {
                             let option = document.createElement('option');
                             option.value = k;
                             option.innerHTML = k;
@@ -126,7 +128,7 @@ CET.options = {
 
                 downButton.onclick = () => {
                     let selected = selectDownload.value;
-                    selectedOption(selected);
+                    CET.downloads.selectedOption(selected);
                 };
 
                 modalContainer.appendChild(sDownloadLabel);
@@ -140,7 +142,7 @@ CET.options = {
                 const num = /^\d+$/;
                 let obj = {};
 
-                let container = cet.container.childNodes;
+                let container = cet.defaultConfig.container.childNodes;
 
                 for (let i = 0; i < container.length; i++) {
                     if (container[i].tagName === 'TABLE') {
@@ -208,7 +210,7 @@ CET.options = {
                 colDone.innerHTML = 'DONE';
 
                 colDone.onclick = () => {
-                    cet.closeModal(modal);
+                    cet.options.closeModal(modal);
                 };
 
                 modalContainer.appendChild(colLabel);
