@@ -423,7 +423,7 @@ CET.table = {
                         tableHeader.appendChild(searchDiv);
 
                         searchInput.onchange = () => {
-                            tableSearcher(searchInput.value, _cetTable.tableData);
+                            CET.search.tableSearcher(searchInput.value, _cetTable.tableData);
                         }
                     }
 
