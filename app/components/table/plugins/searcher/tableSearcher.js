@@ -6,14 +6,14 @@
 
 var tableSearcher = (val, tableData) => {
     let obj = {};
-        obj.defaultData = tableData[0].body;
-        obj.newData = [];
+    obj.defaultData = tableData[0].body;
+    obj.newData = [];
 
     var refreshTable = (obj) => {
         let table = document.getElementById('cetTable'),
             tableBody = table.childNodes[1];
 
-        for (let i  = 0; i < obj.length; i++) {
+        for (let i = 0; i < obj.length; i++) {
             for (let j in tableBody.childNodes) {
                 if (obj[i].tr !== tableBody.childNodes[j].className) {
                     if (typeof tableBody.childNodes[j] === 'object') {
@@ -48,7 +48,10 @@ var tableSearcher = (val, tableData) => {
             for (let f in obj.defaultData[i]) {
                 var data = obj.defaultData[i][f].data.toLowerCase();
                 if (data.search(lowerVal) != -1) {
-                    obj.newData.push({'tr': i,'tds': obj.defaultData[i]});
+                    obj.newData.push({
+                        'tr': i,
+                        'tds': obj.defaultData[i]
+                    });
                 }
             }
         }

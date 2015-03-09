@@ -40,7 +40,7 @@ var CET = ((cet) => {
     cet.defaultConfig.dataOptions = {
         'localData': true, // mode 1
         'fireBase': false, // mode 2
-        'apiRest': false   // mode 3
+        'apiRest': false // mode 3
     };
     // localData url
     cet.defaultConfig.localDataUrl = 'localData/tableData.json';

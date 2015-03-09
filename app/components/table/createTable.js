@@ -473,7 +473,7 @@ CET.table = {
                 if (_cetTable.header) {
                     childLength = 1
                 }
-                
+
                 if (_cetTable.container.childNodes.length === childLength) {
                     // table
                     let table = document.createElement('table');
