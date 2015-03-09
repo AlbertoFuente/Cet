@@ -3,14 +3,14 @@
  * @param CET {Object}
  */
 
-var CET = ((cet) => {
+CET.table = {
 
     /**
      * Create Table
      * @param _cetTable {object}
      */
 
-    var createTable = (_cetTable) => {
+    createTable: (_cetTable) => {
 
         /**
          * modify data
@@ -60,7 +60,7 @@ var CET = ((cet) => {
          * @param {string} elementType - element type (button, input, span, ...).
          */
 
-        _cetTable.assignClasses = (elementType) => {
+        CET.assignClasses = (elementType) => {
             let design = null,
                 designClass = null;
 
@@ -265,7 +265,7 @@ var CET = ((cet) => {
             container.className = 'pagerContainer';
             // btn left
             let btnLeft = document.createElement('button');
-            btnLeft.className = _cetTable.assignClasses('buttonLeft') + ' directionBtn';
+            btnLeft.className = CET.assignClasses('buttonLeft') + ' directionBtn';
             container.appendChild(btnLeft);
             // number buttons
             let number = calcPages(obj.tr);
@@ -405,10 +405,10 @@ var CET = ((cet) => {
                     if (_cetTable.search) {
 
                         let searchDiv = document.createElement('div');
-                        searchDiv.className = _cetTable.assignClasses('searchDiv') + ' searchTable';
+                        searchDiv.className = CET.assignClasses('searchDiv') + ' searchTable';
 
                         let icon = document.createElement('i');
-                        icon.className = _cetTable.assignClasses('searchIcon');
+                        icon.className = CET.assignClasses('searchIcon');
                         let searchInput = document.createElement('input');
                         searchInput.className = 'validate';
                         searchInput.type = 'text';
@@ -429,7 +429,7 @@ var CET = ((cet) => {
 
                     if (_cetTable.options) {
                         let tableHeaderOptions = document.createElement('button');
-                        tableHeaderOptions.className = 'normalButton ' + _cetTable.assignClasses('headerButton');
+                        tableHeaderOptions.className = 'normalButton ' + CET.assignClasses('headerButton');
                         tableHeader.appendChild(tableHeaderOptions);
 
                         let optionsContainer = document.createElement('div');
@@ -438,7 +438,7 @@ var CET = ((cet) => {
                         optionsContainer.style.display = 'none';
 
                         if (_cetTable.listOptions !== undefined && typeof _cetTable.listOptions === 'object') {
-                            listTableOptions(_cetTable, optionsContainer, tableHeader);
+                            CET.options.listTableOptions(CET, optionsContainer, tableHeader);
                         }
 
                         tableHeaderOptions.onclick = () => {
@@ -448,8 +448,8 @@ var CET = ((cet) => {
                             optionsContainer.style.top = (elementPosition.top + 38) + 'px';
                             optionsContainer.style.left = (elementPosition.left - 164) + 'px';
 
-                            if (tableHeaderOptions.className === 'normalButton ' + _cetTable.assignClasses('headerButton')) {
-                                tableHeaderOptions.className = 'clickedButton ' + _cetTable.assignClasses('headerButton');
+                            if (tableHeaderOptions.className === 'normalButton ' + CET.assignClasses('headerButton')) {
+                                tableHeaderOptions.className = 'clickedButton ' + CET.assignClasses('headerButton');
                                 if (document.getElementById('optionsContainer')) {
                                     optionsContainer.style.display = 'block';
                                 } else {
@@ -457,7 +457,7 @@ var CET = ((cet) => {
                                     optionsContainer.style.display = 'block';
                                 }
                             } else {
-                                tableHeaderOptions.className = 'normalButton ' + _cetTable.assignClasses('headerButton');
+                                tableHeaderOptions.className = 'normalButton ' + CET.assignClasses('headerButton');
                                 optionsContainer.style.display = 'none';
                             }
                         }
@@ -478,7 +478,7 @@ var CET = ((cet) => {
                     // table
                     let table = document.createElement('table');
                     table.id = 'cetTable';
-                    table.className = _cetTable.assignClasses('tableStriped');
+                    table.className = CET.assignClasses('tableStriped');
 
                     // HEAD
 
@@ -497,7 +497,7 @@ var CET = ((cet) => {
 
                             if (_cetTable.sortable) {
                                 let sortIcon = document.createElement('i');
-                                sortIcon.className = _cetTable.assignClasses('sortIconDown') + ' sortIcon';
+                                sortIcon.className = CET.assignClasses('sortIconDown') + ' sortIcon';
                                 th.appendChild(sortIcon);
                             }
                             tableHead.appendChild(th);
@@ -532,7 +532,7 @@ var CET = ((cet) => {
                                             span = document.createElement('span');
                                         span.style.display = 'none';
                                         if (_cetTable.tooltips) {
-                                            input.className = 'input_edit ' + _cetTable.assignClasses('tooltip');
+                                            input.className = 'input_edit ' + CET.assignClasses('tooltip');
                                             input.setAttribute('data-position', 'bottom');
                                             input.setAttribute('data-delay', '30');
                                             input.setAttribute('data-tooltip', 'Edit field: ' + bodyContent[key][p].data);
@@ -546,7 +546,7 @@ var CET = ((cet) => {
                                             span.setAttribute('value', bodyContent[key][p].data);
                                         }
                                         if (bodyContent[key][p].type === 'date') {
-                                            input.className = input.className + _cetTable.assignClasses('datePicker');
+                                            input.className = input.className + CET.assignClasses('datePicker');
                                             input.type = 'text';
                                             input.setAttribute('value', bodyContent[key][p].data);
                                             input.setAttribute('placeholder', bodyContent[key][p].data);
@@ -567,7 +567,7 @@ var CET = ((cet) => {
                                         noEditLabel.innerHTML = bodyContent[key][p].data;
                                         noEditLabel.value = bodyContent[key][p].data;
                                         if (_cetTable.tooltips) {
-                                            noEditLabel.className = noEditLabel.className + ' ' + _cetTable.assignClasses('tooltip');
+                                            noEditLabel.className = noEditLabel.className + ' ' + CET.assignClasses('tooltip');
                                             noEditLabel.setAttribute('data-position', 'bottom');
                                             noEditLabel.setAttribute('data-delay', '30');
                                             td.appendChild(noEditLabel);
@@ -658,8 +658,8 @@ var CET = ((cet) => {
                                 tdNum = thClass.slice(-1),
                                 tdClass = 'td' + tdNum,
                                 eventName = 'sort',
-                                downClass = _cetTable.assignClasses('sortIconDown') + ' sortIcon',
-                                upClass = _cetTable.assignClasses('sortIconUp') + ' sortIcon',
+                                downClass = CET.assignClasses('sortIconDown') + ' sortIcon',
+                                upClass = CET.assignClasses('sortIconUp') + ' sortIcon',
                                 ics = table.getElementsByTagName('i'),
                                 status = 'down';
                             // check class
@@ -716,14 +716,14 @@ var CET = ((cet) => {
                 }
             }
         }
-    };
+    },
 
     /**
      * init table
      * @param config
      */
 
-    cet.init = (config) => {
+    init: (config) => {
         let docHead = document.head,
             docBody = document.body;
         // remove Materialize
@@ -752,19 +752,16 @@ var CET = ((cet) => {
                 }
             }
         };
-
-        if (cet.defaultConfig.materialize) {
+        if (CET.defaultConfig.materialize) {
             removeBootstrap();
-        } else if (cet.defaultConfig.bootstrap) {
+        } else if (CET.defaultConfig.bootstrap) {
             removeMaterialize();
         } else {
             removeBootstrap();
             removeMaterialize();
         }
         //TODO extend cet.defaultConfig
-        config = config || cet.defaultConfig;
-        createTable(config);
-    };
-
-    return cet;
-})(CET || {});
+        config = config || CET.defaultConfig;
+        CET.table.createTable(config);
+    }
+};
