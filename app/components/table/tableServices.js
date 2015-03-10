@@ -1,10 +1,12 @@
-CET.services = {
+((cet) => {
+    // CET.services object
+    cet.services = {};
     /**
      * get local data
      * @param cet
      */
 
-    getLocalData: (cet) => {
+    cet.services.getLocalData = (cet) => {
         if (cet !== undefined) {
             if (localStorage.getItem("_tableData")) {
 
@@ -27,14 +29,14 @@ CET.services = {
                 xmlhttp.send();
             }
         }
-    },
+    };
 
     /**
      * get firebase data
      * @param cet
      */
 
-    fireBaseData: (cet) => {
+    cet.services.fireBaseData = (cet) => {
         if (cet !== undefined) {
             let myFirebaseRef = new Firebase(cet.fireBaseUrl);
 
@@ -46,14 +48,14 @@ CET.services = {
             });
         }
 
-    },
+    };
 
     /**
      * API REST DATA
      * @param url
      */
 
-    apiRestData: (url) => {
+    cet.services.apiRestData = (url) => {
         let xmlhttp = new XMLHttpRequest();
 
         xmlhttp.onreadystatechange = () => {
@@ -68,5 +70,5 @@ CET.services = {
         };
         xmlhttp.open("GET", url, false);
         xmlhttp.send();
-    }
-};
+    };
+})(CET || {});
