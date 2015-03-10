@@ -1,4 +1,8 @@
-CET.effects = {
+((cet) => {
+
+    // CET.effect object
+    cet.effects = {};
+
     /**
      * Table effects
      *
@@ -9,7 +13,7 @@ CET.effects = {
      * @param status
      */
 
-    tableEffects: (trClass, tdClass, eventName, table, status) => {
+    cet.effects.tableEffects = (trClass, tdClass, eventName, table, status) => {
         let tr = document.getElementsByClassName(trClass),
             td = document.getElementsByClassName(tdClass),
             tdChar = tdClass.slice(-1),
@@ -125,5 +129,5 @@ CET.effects = {
 
                 break;
         }
-    }
-};
+    };
+})(CET || {});
