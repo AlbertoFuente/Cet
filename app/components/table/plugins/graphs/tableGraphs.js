@@ -1,16 +1,18 @@
-CET.graphs = {
+((cet) => {
+    // CET.graphs object
+    cet.graphs = {};
     /**
      * Show modal
      */
 
-    showModal: () => {
+    cet.graphs.showModal = () => {
         let gModal = document.createElement('div');
         gModal.className = 'gModal';
         gModal.id = 'gModal';
         let gHeader = document.createElement('div');
         gHeader.className = 'gHeader';
         let closeButton = document.createElement('button');
-        closeButton.className = 'closeButton ' + CET.assignClasses('closeButton');
+        closeButton.className = 'closeButton ' + cet.table.assignClasses('closeButton');
 
         closeButton.onclick = () => {
             CET.options.closeModal(gModal);
@@ -27,7 +29,7 @@ CET.graphs = {
         gModal.appendChild(gContent);
 
         document.body.appendChild(gModal);
-    },
+    };
 
     /**
      * Show modal graph
@@ -36,7 +38,7 @@ CET.graphs = {
      * @param yData
      */
 
-    showGraph: (graphType, xData, yData) => {
+    cet.graphs.showGraph = (graphType, xData, yData) => {
 
         var colors = (index) => {
             let colors = [
@@ -152,7 +154,7 @@ CET.graphs = {
                     myPolarChart = new Chart(polar).PolarArea(dataPolar);
                 break;
         }
-    },
+    };
 
     /**
      * prepare the data for print the graph
@@ -161,7 +163,7 @@ CET.graphs = {
      * @param modalContainer
      */
 
-    prepareGraphData: (cet, selecteds, modalContainer) => {
+    cet.graphs.prepareGraphData = (cet, selecteds, modalContainer) => {
         let graphType = selecteds.type,
             xAxis = selecteds.xAxis,
             yAxis = selecteds.yAxis,
@@ -255,5 +257,5 @@ CET.graphs = {
                 showError(modalContainer);
             }
         }
-    }
-};
+    };
+})(CET || {});
