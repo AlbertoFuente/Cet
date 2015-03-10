@@ -738,7 +738,7 @@ CET.table = {
                 }
             }
         };
-        // let remove bootstrap
+        // remove Bootstrap
         let removeBootstrap = () => {
             for (let i in docHead.childNodes) {
                 if (docHead.childNodes[i].tagName === 'LINK' && docHead.childNodes[i].id === 'bootstrapStyles') {
