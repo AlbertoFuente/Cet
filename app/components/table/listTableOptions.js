@@ -1,13 +1,15 @@
-CET.options = {
+((cet) => {
+    // CET.options object
+    cet.options = {};
     /**
      * close modal
      * @param modal
      */
 
-    closeModal: (modal) => {
+    cet.options.closeModal = (modal) => {
         let modalId = document.getElementById(modal.id);
         modalId.remove();
-    },
+    };
 
     /**
      * open modal
@@ -15,7 +17,7 @@ CET.options = {
      * @param cet
      */
 
-    openModal: (type, cet) => {
+    cet.options.openModal = (type, cet) => {
         // create modal container
         let modal = document.createElement('div');
         modal.id = '_cetTableModal';
@@ -26,7 +28,7 @@ CET.options = {
         let modalHeaderTitle = document.createElement('label');
         // close modal button
         let closeButton = document.createElement('button');
-        closeButton.className = 'closeButton ' + cet.assignClasses('closeButton');
+        closeButton.className = 'closeButton ' + cet.table.assignClasses('closeButton');
         closeButton.onclick = () => {
             cet.options.closeModal(modal);
         };
@@ -87,7 +89,7 @@ CET.options = {
 
                 // done button
                 let doneButton = document.createElement('a');
-                doneButton.className = 'doneButton ' + cet.assignClasses('normalButton');
+                doneButton.className = 'doneButton ' + cet.table.assignClasses('normalButton');
                 doneButton.innerHTML = 'DONE';
                 modalContainer.appendChild(doneButton);
 
@@ -123,7 +125,7 @@ CET.options = {
                     }
                 }
                 let downButton = document.createElement('button');
-                downButton.className = 'doneButton ' + cet.assignClasses('normalButton');
+                downButton.className = 'doneButton ' + cet.table.assignClasses('normalButton');
                 downButton.innerHTML = 'DOWNLOAD';
 
                 downButton.onclick = () => {
@@ -205,7 +207,7 @@ CET.options = {
                 };
 
                 let colDone = document.createElement('button');
-                colDone.className = 'doneButton ' + cet.assignClasses('normalButton');
+                colDone.className = 'doneButton ' + cet.table.assignClasses('normalButton');
                 colDone.style.cssFloat = 'right';
                 colDone.innerHTML = 'DONE';
 
@@ -226,7 +228,7 @@ CET.options = {
         modal.appendChild(modalHeader);
         modal.appendChild(modalContainer);
         document.body.appendChild(modal);
-    },
+    };
 
     /**
      * close menu
@@ -234,15 +236,15 @@ CET.options = {
      * @param tableHeader
      */
 
-    closeMenu: (container, tableHeader) => {
+    cet.options.closeMenu = (container, tableHeader) => {
         container.style.display = 'none';
         let button = tableHeader.childNodes;
         for (let i in button) {
             if (button[i].tagName === 'BUTTON') {
-                button[i].className = 'normalButton ' + CET.assignClasses('headerButton');
+                button[i].className = 'normalButton ' + cet.table.assignClasses('headerButton');
             }
         }
-    },
+    };
 
     /**
      * list table options
@@ -251,7 +253,7 @@ CET.options = {
      * @param tableHeader - table header
      */
 
-    listTableOptions: (cet, container, tableHeader) => {
+    cet.options.listTableOptions = (cet, container, tableHeader) => {
         // options menu list
         let ul = document.createElement('ul');
         ul.className = 'optionsList';
@@ -299,6 +301,5 @@ CET.options = {
         }
 
         container.appendChild(ul);
-    }
-
-};
+    };
+})(CET || {});
