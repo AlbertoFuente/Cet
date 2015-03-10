@@ -1,8 +1,3 @@
-/**
- * create table function
- * @param CET {Object}
- */
-
 CET.table = {
 
     /**
