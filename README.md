@@ -25,7 +25,7 @@ gulp watch
 And start config all the options inside app/config/config.js.
 Once set the options you want in the table, to launch it you must add the following to the end of the body:
 ```js
-CET.table.init();
+CET.init();
 ```
 ##Options
 In app/config/config.js you can find all the table default options:
