@@ -11,46 +11,6 @@
     cet.table.createTable = (_cetTable) => {
 
         /**
-         * modify data
-         * @param trParent - tr parent class
-         * @param tdParent - td parent class
-         * @param val - value
-         * @param mode - mode {1, 2, 3}
-         */
-
-        _cetTable.modifyData = (trParent, tdParent, val, mode) => {
-
-            _cetTable.tableData[0].body[trParent][tdParent].data = val;
-
-            switch (mode) {
-                case 1:
-                    // mode 1 - localData
-                    // save it in localStorage
-                    if (window.localStorage) {
-                        localStorage.setItem('_tableData', JSON.stringify(_cetTable.tableData));
-                    } else {
-                        throw new Error("Your browser don't support LocalStorage!");
-                    }
-                    break;
-                case 2:
-                    // mode 2 - fireBase
-                    if (_cetTable.fireBaseUrl !== '') {
-                        var fireUrl = new Firebase(_cetTable.fireBaseUrl);
-
-                        fireUrl.set(_cetTable.tableData);
-                    }
-                    break;
-                case 3:
-                    // mode 3 - apiRest
-                    var xmlhttp = new XMLHttpRequest();
-                    xmlhttp.open("POST", _cetTable.apiRestPostUrl);
-                    xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-                    xmlhttp.send(JSON.stringify(_cetTable.tableData));
-                    break;
-            }
-        };
-
-        /**
          * table design assigning classes
          * - materializecss (m)
          * - bootstrap (b)
@@ -244,7 +204,7 @@
             let parentClass = element.parentNode.className,
                 val = element.value,
                 trClass = element.parentNode.parentNode.className;
-            _cetTable.modifyData(trClass, parentClass, val, _cetTable.mode);
+            CET.services.modifyData(trClass, parentClass, val, _cetTable.mode);
         };
 
         /**
