@@ -1,5 +1,5 @@
 # Cet
-Cet (Custom editable table) is a library that creates editable and customizable table, the table is dynamically created from a JSON file locally, from Firebase (https://www.firebase.com/) or from an API, also allows you to save the changes you make to it. To configure it you have to do it in the app/config/config.js file, by default comes with almost every option to 'false'.
+Cet (Custom editable table) is a library that creates editable and customizable table, the table is dynamically created from a JSON file locally, from Firebase (https://www.firebase.com/) or from an API, also allows you to save the changes you make to it. To configure it you have to do it in the app/config/config.js file.
 
 ![alt tag](https://cloud.githubusercontent.com/assets/6747489/6547670/199ab132-c5df-11e4-8169-efc78cb2003e.png)
 
@@ -54,12 +54,12 @@ cet.defaultConfig.apiRestPostUrl = '';
 cet.defaultConfig.materialize = true;
 cet.defaultConfig.bootstrap = false;
 ```
-- Header: Adds a header to the table and add a title. By default is 'false'.
+- Header: Adds a header to the table and add a title. 
 ```js
 cet.defaultConfig.header = false;
 cet.defaultConfig.title = "Table Title";
 ```
-- Header options: If we set the header option to true, we can add a menu of options header. By default is 'false'.
+- Header options: If we set the header option to true, we can add a menu of options header. 
   Options: Graphs, downloads and Column data sum.
   These options appear in the drop-down menu of the header, when you click on any of them will display a modal with their     choices. 
 ```js
@@ -84,11 +84,11 @@ cet.defaultConfig.downloadOptions = {
     'pdf': true
 };
 ```
-- Tooltip: Allows to add tooltips to the table, they will appear in each field of the table showing the value, now operated with Materialize. By default is 'false'.
+- Tooltip: Allows to add tooltips to the table, they will appear in each field of the table showing the value, now operated with Materialize. 
 ```js
 cet.defaultConfig.tooltips = false;
 ```
-- Search: Allows a search box on the table. By default comes 'false'.
+- Search: Allows a search box on the table. 
 ```js
 cet.defaultConfig.search = false;
 ```
@@ -96,11 +96,11 @@ cet.defaultConfig.search = false;
 ```js
 cet.defaultConfig.limitRows = 0;
 ```
-- Sortable: Allows sort the data in each column. By default is 'false'.
+- Sortable: Allows sort the data in each column. 
 ```js
 cet.defaultConfig.sortable = false;
 ```
-- Table effects: Allows show hover table effects. By default is 'false'. 
+- Table effects: Allows show hover table effects. 
 ```js
 cet.defaultConfig.effects = false;
 ```
