@@ -1,10 +1,12 @@
-CET.downloads = {
+((cet) => {
+    // CET.downloads object
+    cet.downloads = {};
     /**
      * table downloads
      * required plugins
      */
 
-    tableDownloads: () => {
+     cet.downloads.tableDownloads = () => {
         // import table Export
         let importTbExport = document.createElement('script');
         importTbExport.src = '../../bower_components/table-export/tableExport.js';
@@ -29,14 +31,14 @@ CET.downloads = {
         let sprintF = document.createElement('script');
         sprintF.src = '../../bower_components/table-export/jspdf/libs/sprintf.js';
         document.head.appendChild(sprintF);
-    },
+    };
 
     /**
      * selected option to download
      * @param selected
      */
 
-    selectedOption: (selected) => {
+    cet.downloads.selectedOption = (selected) => {
         let tableId = $('#cetTable');
         switch (selected) {
             case 'json':
@@ -88,5 +90,5 @@ CET.downloads = {
                 });
                 break;
         }
-    }
-};
+    };
+})(CET || {});
