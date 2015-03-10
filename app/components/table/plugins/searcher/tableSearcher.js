@@ -1,11 +1,13 @@
-CET.search = {
+((cet) => {
+    // CET.search object
+    cet.search = {};
     /**
      * table searcher
      * @param val
      * @param tableData
      */
 
-    tableSearcher: (val, tableData) => {
+    cet.search.tableSearcher = (val, tableData) => {
         let obj = {};
         obj.defaultData = tableData[0].body;
         obj.newData = [];
@@ -68,5 +70,5 @@ CET.search = {
                 refreshTable(obj.defaultData);
             }
         }
-    }
-};
+    };
+})(CET || {});
