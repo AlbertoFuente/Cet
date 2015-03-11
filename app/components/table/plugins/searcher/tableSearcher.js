@@ -19,8 +19,6 @@
             for (let i = 0; i < obj.length; i++) {
                 for (let j in tableBody.childNodes) {
                     if (obj[i].tr !== tableBody.childNodes[j].className) {
-                        console.log(typeof tableBody.childNodes[j]);
-                        console.log(tableBody.childNodes[j]);
                         if (tableBody.childNodes[j].tagName === 'TR') {
                             if (!tableBody.childNodes[j].hasAttribute('style')) {
                                 tableBody.childNodes[j].style.opacity = '0.3'; //For real browsers;
