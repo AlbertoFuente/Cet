@@ -1,0 +1,247 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Cet by AlbertoFuente</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Cet</h1>
+        <p>Custom Editable Table</p>
+
+        <p class="view"><a href="https://github.com/AlbertoFuente/Cet">View the Project on GitHub <small>AlbertoFuente/Cet</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/AlbertoFuente/Cet/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/AlbertoFuente/Cet/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/AlbertoFuente/Cet">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <p>Cet (Custom editable table) is a library that creates editable and customizable table, the table is dynamically created from a JSON file locally, from Firebase (<a href="https://www.firebase.com/">https://www.firebase.com/</a>) or from an API, also allows you to save the changes you make to it. To configure it you have to do it in the app/config/config.js file.</p>
+
+<p><img src="https://cloud.githubusercontent.com/assets/6747489/6547670/199ab132-c5df-11e4-8169-efc78cb2003e.png" alt="alt tag"></p>
+
+<p><img src="https://cloud.githubusercontent.com/assets/6747489/6547672/1de6df9a-c5df-11e4-9fa5-44f99686e3b6.png" alt="alt tag"></p>
+
+<p><img src="https://cloud.githubusercontent.com/assets/6747489/6547674/2018ac76-c5df-11e4-80ac-bdefb5ba4f25.png" alt="alt tag"></p>
+
+<h2>
+<a id="install" class="anchor" href="#install" aria-hidden="true"><span class="octicon octicon-link"></span></a>Install</h2>
+
+<p>To install, clone the repository and:</p>
+
+<ul>
+<li>Install bower dependencies:</li>
+</ul>
+
+<pre><code>bower install
+</code></pre>
+
+<ul>
+<li>Install node dependencies:</li>
+</ul>
+
+<pre><code>node install
+</code></pre>
+
+<ul>
+<li>Run gulp:</li>
+</ul>
+
+<pre><code>gulp
+gulp watch
+</code></pre>
+
+<p>And start config all the options inside app/config/config.js.
+Once set the options you want in the table, to launch it you must add the following to the end of the body:</p>
+
+<div class="highlight highlight-js"><pre>CET.init();</pre></div>
+
+<h2>
+<a id="options" class="anchor" href="#options" aria-hidden="true"><span class="octicon octicon-link"></span></a>Options</h2>
+
+<p>In app/config/config.js you can find all the table default options:</p>
+
+<ul>
+<li>Container: Here you must insert the identifier of the box where you want to insert the table.</li>
+</ul>
+
+<div class="highlight highlight-js"><pre>cet.defaultConfig.container <span class="pl-k">=</span> <span class="pl-s3">document</span>.<span class="pl-s3">getElementById</span>(<span class="pl-s1"><span class="pl-pds">'</span>tableContainer<span class="pl-pds">'</span></span>);</pre></div>
+
+<ul>
+<li>Data: Here configure where you get the JSON with table data, configurable to obtain and store locally on Firebase (<a href="https://www.firebase.com/">https://www.firebase.com/</a>) or an API set for you. Set by default to localData. You can find the sample inside app/sample.</li>
+</ul>
+
+<div class="highlight highlight-js"><pre><span class="pl-c">// config type of data service</span>
+cet.defaultConfig.dataOptions <span class="pl-k">=</span> {
+    <span class="pl-s1"><span class="pl-pds">'</span>localData<span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-c1">true</span>, 
+    <span class="pl-s1"><span class="pl-pds">'</span>fireBase<span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-c1">false</span>, 
+    <span class="pl-s1"><span class="pl-pds">'</span>apiRest<span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-c1">false</span>   
+};
+<span class="pl-c">// localData url</span>
+cet.defaultConfig.localDataUrl <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">'</span>localData/tableData.json<span class="pl-pds">'</span></span>;
+<span class="pl-c">// fireBase url</span>
+cet.defaultConfig.fireBaseUrl <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">'</span><span class="pl-pds">'</span></span>;
+<span class="pl-c">// apiRest url</span>
+cet.defaultConfig.apiRestGetUrl <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">'</span><span class="pl-pds">'</span></span>;
+cet.defaultConfig.apiRestPostUrl <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">'</span><span class="pl-pds">'</span></span>;</pre></div>
+
+<ul>
+<li>Table Design: By default the table came with materialize (<a href="http://materializecss.com/">http://materializecss.com/</a>) to 'true', but you can change it to boostrap (<a href="http://getbootstrap.com/">http://getbootstrap.com/</a>) if you like or leave both 'false' and give your own design.</li>
+</ul>
+
+<div class="highlight highlight-js"><pre>cet.defaultConfig.materialize <span class="pl-k">=</span> <span class="pl-c1">true</span>;
+cet.defaultConfig.bootstrap <span class="pl-k">=</span> <span class="pl-c1">false</span>;</pre></div>
+
+<ul>
+<li>Header: Adds a header to the table and add a title. </li>
+</ul>
+
+<div class="highlight highlight-js"><pre>cet.defaultConfig.header <span class="pl-k">=</span> <span class="pl-c1">false</span>;
+cet.defaultConfig.<span class="pl-sc">title</span> <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">"</span>Table Title<span class="pl-pds">"</span></span>;</pre></div>
+
+<ul>
+<li>Header options: If we set the header option to true, we can add a menu of options header. 
+Options: Graphs, downloads and Column data sum.
+These options appear in the drop-down menu of the header, when you click on any of them will display a modal with their     choices. </li>
+</ul>
+
+<div class="highlight highlight-js"><pre>cet.defaultConfig.<span class="pl-sc">options</span> <span class="pl-k">=</span> <span class="pl-c1">false</span>;
+cet.defaultConfig.listOptions <span class="pl-k">=</span> {
+    <span class="pl-c">// Allow show table data in diferents graphs: Bar chart, line chart, pie chart and polar area chart.</span>
+    <span class="pl-s1"><span class="pl-pds">'</span>graphs<span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-c1">false</span>,
+    <span class="pl-c">// Allow download the table data in diferents formats.</span>
+    <span class="pl-s1"><span class="pl-pds">'</span>downloads<span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-c1">false</span>,
+    <span class="pl-c">// Allow make the sum selectign one numeric column</span>
+    <span class="pl-s1"><span class="pl-pds">'</span>column_data_sum<span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-c1">false</span>
+};
+<span class="pl-c">// Download options:</span>
+cet.defaultConfig.downloadOptions <span class="pl-k">=</span> {
+    <span class="pl-s1"><span class="pl-pds">'</span>json<span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-c1">true</span>,
+    <span class="pl-s1"><span class="pl-pds">'</span>xml<span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-c1">true</span>,
+    <span class="pl-s1"><span class="pl-pds">'</span>sql<span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-c1">true</span>,
+    <span class="pl-s1"><span class="pl-pds">'</span>txt<span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-c1">true</span>,
+    <span class="pl-s1"><span class="pl-pds">'</span>csv<span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-c1">true</span>,
+    <span class="pl-s1"><span class="pl-pds">'</span>xsl<span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-c1">true</span>,
+    <span class="pl-s1"><span class="pl-pds">'</span>doc<span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-c1">true</span>,
+    <span class="pl-s1"><span class="pl-pds">'</span>pdf<span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-c1">true</span>
+};</pre></div>
+
+<ul>
+<li>Tooltip: Allows to add tooltips to the table, they will appear in each field of the table showing the value, now operated with Materialize. </li>
+</ul>
+
+<div class="highlight highlight-js"><pre>cet.defaultConfig.tooltips <span class="pl-k">=</span> <span class="pl-c1">false</span>;</pre></div>
+
+<ul>
+<li>Search: Allows a search box on the table. </li>
+</ul>
+
+<div class="highlight highlight-js"><pre>cet.defaultConfig.search <span class="pl-k">=</span> <span class="pl-c1">false</span>;</pre></div>
+
+<ul>
+<li>Limit rows: Default is 0, leaving the table 0 show all rows that we add to the table, if we change the value, automatically calculate the number of pages to add by the number of rows that have the table.</li>
+</ul>
+
+<div class="highlight highlight-js"><pre>cet.defaultConfig.limitRows <span class="pl-k">=</span> <span class="pl-c1">0</span>;</pre></div>
+
+<ul>
+<li>Sortable: Allows sort the data in each column. </li>
+</ul>
+
+<div class="highlight highlight-js"><pre>cet.defaultConfig.sortable <span class="pl-k">=</span> <span class="pl-c1">false</span>;</pre></div>
+
+<ul>
+<li>Table effects: Allows show hover table effects. </li>
+</ul>
+
+<div class="highlight highlight-js"><pre>cet.defaultConfig.effects <span class="pl-k">=</span> <span class="pl-c1">false</span>;</pre></div>
+
+<h2>
+<a id="json-data-structure" class="anchor" href="#json-data-structure" aria-hidden="true"><span class="octicon octicon-link"></span></a>JSON data structure</h2>
+
+<p>The structure of the JSON file must be like this example:</p>
+
+<div class="highlight highlight-json"><pre>[
+  {
+    <span class="pl-s1"><span class="pl-pds">"</span>head<span class="pl-pds">"</span></span>: {
+      <span class="pl-s1"><span class="pl-pds">"</span>th1<span class="pl-pds">"</span></span>: <span class="pl-s1"><span class="pl-pds">"</span>column1<span class="pl-pds">"</span></span>, 
+      <span class="pl-s1"><span class="pl-pds">"</span>th2<span class="pl-pds">"</span></span>: <span class="pl-s1"><span class="pl-pds">"</span>column2<span class="pl-pds">"</span></span>
+    },
+    <span class="pl-s1"><span class="pl-pds">"</span>body<span class="pl-pds">"</span></span>: {
+      <span class="pl-s1"><span class="pl-pds">"</span>tr1<span class="pl-pds">"</span></span>: {
+        <span class="pl-s1"><span class="pl-pds">"</span>td1<span class="pl-pds">"</span></span>: {
+          <span class="pl-s1"><span class="pl-pds">"</span>data<span class="pl-pds">"</span></span>: <span class="pl-s1"><span class="pl-pds">"</span>data1<span class="pl-pds">"</span></span>,
+          <span class="pl-s1"><span class="pl-pds">"</span>type<span class="pl-pds">"</span></span>: <span class="pl-s1"><span class="pl-pds">"</span>text<span class="pl-pds">"</span></span>,
+          <span class="pl-s1"><span class="pl-pds">"</span>edit<span class="pl-pds">"</span></span>: <span class="pl-c1">false</span>
+        },
+        <span class="pl-s1"><span class="pl-pds">"</span>td2<span class="pl-pds">"</span></span>: {
+          <span class="pl-s1"><span class="pl-pds">"</span>data<span class="pl-pds">"</span></span>: <span class="pl-s1"><span class="pl-pds">"</span>data2<span class="pl-pds">"</span></span>,
+          <span class="pl-s1"><span class="pl-pds">"</span>type<span class="pl-pds">"</span></span>: <span class="pl-s1"><span class="pl-pds">"</span>text<span class="pl-pds">"</span></span>,
+          <span class="pl-s1"><span class="pl-pds">"</span>edit<span class="pl-pds">"</span></span>: <span class="pl-c1">false</span>
+        },
+        <span class="pl-s1"><span class="pl-pds">"</span>td3<span class="pl-pds">"</span></span>: {
+          <span class="pl-s1"><span class="pl-pds">"</span>data<span class="pl-pds">"</span></span>: <span class="pl-s1"><span class="pl-pds">"</span>data3<span class="pl-pds">"</span></span>,
+          <span class="pl-s1"><span class="pl-pds">"</span>type<span class="pl-pds">"</span></span>: <span class="pl-s1"><span class="pl-pds">"</span>text<span class="pl-pds">"</span></span>,
+          <span class="pl-s1"><span class="pl-pds">"</span>edit<span class="pl-pds">"</span></span>: <span class="pl-c1">false</span>
+        },
+        <span class="pl-s1"><span class="pl-pds">"</span>td4<span class="pl-pds">"</span></span>: {
+          <span class="pl-s1"><span class="pl-pds">"</span>data<span class="pl-pds">"</span></span>: <span class="pl-s1"><span class="pl-pds">"</span>data4<span class="pl-pds">"</span></span>,
+          <span class="pl-s1"><span class="pl-pds">"</span>type<span class="pl-pds">"</span></span>: <span class="pl-s1"><span class="pl-pds">"</span>text<span class="pl-pds">"</span></span>,
+          <span class="pl-s1"><span class="pl-pds">"</span>edit<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>
+        }
+      },
+      <span class="pl-s1"><span class="pl-pds">"</span>tr2<span class="pl-pds">"</span></span>: {
+        <span class="pl-s1"><span class="pl-pds">"</span>td1<span class="pl-pds">"</span></span>: {
+          <span class="pl-s1"><span class="pl-pds">"</span>data<span class="pl-pds">"</span></span>: <span class="pl-s1"><span class="pl-pds">"</span>data1<span class="pl-pds">"</span></span>,
+          <span class="pl-s1"><span class="pl-pds">"</span>type<span class="pl-pds">"</span></span>: <span class="pl-s1"><span class="pl-pds">"</span>text<span class="pl-pds">"</span></span>,
+          <span class="pl-s1"><span class="pl-pds">"</span>edit<span class="pl-pds">"</span></span>: <span class="pl-c1">false</span>
+        },
+        <span class="pl-s1"><span class="pl-pds">"</span>td2<span class="pl-pds">"</span></span>: {
+          <span class="pl-s1"><span class="pl-pds">"</span>data<span class="pl-pds">"</span></span>: <span class="pl-s1"><span class="pl-pds">"</span>data2<span class="pl-pds">"</span></span>,
+          <span class="pl-s1"><span class="pl-pds">"</span>type<span class="pl-pds">"</span></span>: <span class="pl-s1"><span class="pl-pds">"</span>text<span class="pl-pds">"</span></span>,
+          <span class="pl-s1"><span class="pl-pds">"</span>edit<span class="pl-pds">"</span></span>: <span class="pl-c1">false</span>
+        },
+        <span class="pl-s1"><span class="pl-pds">"</span>td3<span class="pl-pds">"</span></span>: {
+          <span class="pl-s1"><span class="pl-pds">"</span>data<span class="pl-pds">"</span></span>: <span class="pl-s1"><span class="pl-pds">"</span>data3<span class="pl-pds">"</span></span>,
+          <span class="pl-s1"><span class="pl-pds">"</span>type<span class="pl-pds">"</span></span>: <span class="pl-s1"><span class="pl-pds">"</span>text<span class="pl-pds">"</span></span>,
+          <span class="pl-s1"><span class="pl-pds">"</span>edit<span class="pl-pds">"</span></span>: <span class="pl-c1">false</span>
+        },
+        <span class="pl-s1"><span class="pl-pds">"</span>td4<span class="pl-pds">"</span></span>: {
+          <span class="pl-s1"><span class="pl-pds">"</span>data<span class="pl-pds">"</span></span>: <span class="pl-s1"><span class="pl-pds">"</span>data4<span class="pl-pds">"</span></span>,
+          <span class="pl-s1"><span class="pl-pds">"</span>type<span class="pl-pds">"</span></span>: <span class="pl-s1"><span class="pl-pds">"</span>text<span class="pl-pds">"</span></span>,
+          <span class="pl-s1"><span class="pl-pds">"</span>edit<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>
+        }
+      }
+    }
+  }
+]</pre></div>
+
+<p>Inside all tds you can find three parameters:</p>
+
+<ul>
+<li>data: the text of the filed you want to show.</li>
+<li>type: the type of field if it is editable (text, date, ...)</li>
+<li>edit: If it is an editable field set it to 'true'.</li>
+</ul>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/AlbertoFuente">AlbertoFuente</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
