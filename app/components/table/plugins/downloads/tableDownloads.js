@@ -6,7 +6,7 @@
      * required plugins
      */
 
-     cet.downloads.tableDownloads = () => {
+    cet.downloads.tableDownloads = () => {
         // import table Export
         let importTbExport = document.createElement('script');
         importTbExport.src = '../../bower_components/table-export/tableExport.js';

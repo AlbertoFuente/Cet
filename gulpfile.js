@@ -8,7 +8,7 @@ var gulp = require('gulp'),
     jslint = require('gulp-jslint'),
     rename = require('gulp-rename');
 
-gulp.task('default', function () {
+gulp.task('default', function() {
 
     gulp.src([
         'app/config/config.js',
@@ -31,8 +31,8 @@ gulp.task('default', function () {
             predef: [],
             reporter: 'default',
             errorsOnly: false
-        }))*/
-        /*.on('error', function (error) {
+        }))
+        .on('error', function(error) {
             console.error(String(error));
         })*/
         .pipe(uglify())
@@ -40,13 +40,15 @@ gulp.task('default', function () {
 
     gulp.src('styles/styles.scss')
         .pipe(sass())
-        .pipe(minifyCSS({keepBreaks:true}))
+        .pipe(minifyCSS({
+            keepBreaks: true
+        }))
         .pipe(rename('styles.min.css'))
         .pipe(gulp.dest('css'))
 });
 
 
-gulp.task('watch', function () {
+gulp.task('watch', function() {
 
     gulp.watch([
         'app/config/config.js',
