@@ -672,7 +672,7 @@
                 }
             } else if (_cetTable.dataOptions.pouchdb) {
                 _cetTable.mode = 4;
-                CET.services.pouchDB(_cetTable.pouchDbUrl);
+                CET.services.pouchDB(_cetTable, _cetTable.pouchDbUrl);
             }
         }
     };
