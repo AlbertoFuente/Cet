@@ -1,6 +1,7 @@
 ((cet) => {
     // CET.search object
     cet.search = {};
+    
     /**
      * table searcher
      * @param val
@@ -37,8 +38,10 @@
             let table = document.getElementById('cetTable'),
                 tableBody = table.childNodes[1];
             for (let i in tableBody.childNodes) {
-                if (typeof tableBody.childNodes[i] === 'object') {
-                    tableBody.childNodes[i].removeAttribute('style');
+                if (tableBody.childNodes[i].tagName === 'TR') {
+                    if (tableBody.childNodes[i].hasAttribute('style')) {
+                        tableBody.childNodes[i].removeAttribute('style');
+                    }
                 }
             }
         };
