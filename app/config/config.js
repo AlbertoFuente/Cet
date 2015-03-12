@@ -40,12 +40,15 @@ var CET = ((cet) => {
     cet.defaultConfig.dataOptions = {
         'localData': true, // mode 1
         'fireBase': false, // mode 2
-        'apiRest': false // mode 3
+        'apiRest': false, // mode 3
+        'pouchdb': false // mode 4
     };
     // localData url
     cet.defaultConfig.localDataUrl = 'localData/tableData.json';
     // fireBase url
     cet.defaultConfig.fireBaseUrl = '';
+    // pouchDB url
+    cet.defaultConfig.pouchDbUrl = 'localData/tableData.json';
     // apiRest url
     cet.defaultConfig.apiRestGetUrl = '';
     cet.defaultConfig.apiRestPostUrl = '';
