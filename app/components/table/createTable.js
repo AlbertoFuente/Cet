@@ -660,7 +660,6 @@
                 if (_cetTable.fireBaseUrl !== '') {
                     _cetTable.mode = 2;
                     CET.services.fireBaseData(_cetTable);
-
                 } else {
                     alert('You must add _cetTable.fireBaseUrl in config.js');
                 }
@@ -671,6 +670,9 @@
                 } else {
                     alert('You must add _cetTable.apiRestUrl in config.js');
                 }
+            } else if (_cetTable.dataOptions.pouchdb) {
+                _cetTable.mode = 4;
+                CET.services.pouchDB(_cetTable.pouchDbUrl);
             }
         }
     };
@@ -681,33 +683,15 @@
      */
 
     cet.init = (config) => {
-        let docHead = document.head,
-            docBody = document.body;
         // remove Materialize
         let removeMaterialize = () => {
-            for (let i in docHead.childNodes) {
-                if (docHead.childNodes[i].tagName === 'LINK' && docHead.childNodes[i].id === 'materializeStyles') {
-                    docHead.childNodes[i].remove();
-                }
-            }
-            for (let i in docBody.childNodes) {
-                if (docBody.childNodes[i].tagName === 'SCRIPT' && docBody.childNodes[i].id === 'materializeScript') {
-                    docBody.childNodes[i].remove();
-                }
-            }
+            CET.services.removeLibrary('materializeScript');
+            CET.services.removeStyles('materializeStyles');
         };
         // remove Bootstrap
         let removeBootstrap = () => {
-            for (let i in docHead.childNodes) {
-                if (docHead.childNodes[i].tagName === 'LINK' && docHead.childNodes[i].id === 'bootstrapStyles') {
-                    docHead.childNodes[i].remove();
-                }
-            }
-            for (let i in docBody.childNodes) {
-                if (docBody.childNodes[i].tagName === 'SCRIPT' && docBody.childNodes[i].id === 'bootstrapScript') {
-                    docBody.childNodes[i].remove();
-                }
-            }
+            CET.services.removeLibrary('bootstrapScript');
+            CET.services.removeStyles('bootstrapStyles');
         };
         if (cet.defaultConfig.materialize) {
             removeBootstrap();
