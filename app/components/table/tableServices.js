@@ -1,12 +1,41 @@
 ((cet) => {
     // CET.services object
     cet.services = {};
+
+    /**
+     * remove unused JS library
+     */
+
+    cet.services.removeLibrary = (libId) => {
+        let docBody = document.body;
+        for (let i in docBody.childNodes) {
+            if (docBody.childNodes[i].tagName === 'SCRIPT' && docBody.childNodes[i].id === libId) {
+                docBody.childNodes[i].remove();
+            }
+        }
+    }
+
+    /**
+     * remove unused CSS library
+     */
+
+    cet.services.removeStyles = (cssId) => {
+        let docHead = document.head;
+        for (let i in docHead.childNodes) {
+            if (docHead.childNodes[i].tagName === 'LINK' && docHead.childNodes[i].id === cssId) {
+                docHead.childNodes[i].remove();
+            }
+        }
+    }
+
     /**
      * get local data
      * @param cet
      */
 
     cet.services.getLocalData = (cet) => {
+        CET.services.removeLibrary('pouchDb');
+        CET.services.removeLibrary('firebaseDb');
         if (cet !== undefined) {
             if (localStorage.getItem("_tableData")) {
 
@@ -37,6 +66,7 @@
      */
 
     cet.services.fireBaseData = (cet) => {
+        CET.services.removeLibrary('pouchDb');
         if (cet !== undefined) {
             let myFirebaseRef = new Firebase(cet.fireBaseUrl);
 
@@ -56,6 +86,8 @@
      */
 
     cet.services.apiRestData = (url) => {
+        CET.services.removeLibrary('pouchDb');
+        CET.services.removeLibrary('firebaseDb');
         let xmlhttp = new XMLHttpRequest();
 
         xmlhttp.onreadystatechange = () => {
@@ -70,6 +102,16 @@
         };
         xmlhttp.open("GET", url, false);
         xmlhttp.send();
+    };
+
+    /**
+     * POUCHDB DATA
+     */
+
+    cet.services.pouchDB = (obj) => {
+        CET.services.removeLibrary('firebaseDb');
+        let db = new PouchDB('cet_database'),
+            remoteCouch = false;
     };
 
     /**
@@ -108,6 +150,8 @@
                 xmlhttp.open("POST", cet.defaultConfig.apiRestPostUrl);
                 xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
                 xmlhttp.send(JSON.stringify(cet.defaultConfig.tableData));
+                break;
+            case 4:
                 break;
         }
     };
