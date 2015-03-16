@@ -7,7 +7,6 @@
      * table design assigning classes
      * - materializecss (m)
      * - bootstrap (b)
-     * - default (d)
      * @param {string} elementType - element type (button, input, span, ...).
      */
 
