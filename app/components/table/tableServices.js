@@ -111,57 +111,12 @@
     cet.services.pouchDB = (cet, url) => {
         CET.services.removeLibrary('firebaseDb');
 
-        var db = new PouchDB('cet_database', {
-            adapter: 'websql'
+        var db = new PouchDB('cet_database');
+
+        db.info().then(function(info) {
+            console.log(info);
         });
-
-        CET.db = db;
-
-        if (url != undefined) {
-            if (localStorage.getItem("_tableData")) {
-
-                cet.tableData = JSON.parse(localStorage.getItem("_tableData"));
-                CET.table.tableConstructor(cet);
-            } else {
-                let xmlhttp = new XMLHttpRequest();
-
-                xmlhttp.onreadystatechange = () => {
-                    if (xmlhttp.readyState === 4) {
-                        if (xmlhttp.status === 200) {
-                            cet.tableData = JSON.parse(xmlhttp.responseText);
-                            CET.table.tableConstructor(cet);
-                        } else {
-                            throw new Error("Could not load the data inside the " + cet.pouchDbUrl + " file");
-                        }
-                    }
-                };
-                xmlhttp.open("GET", cet.pouchDbUrl, false);
-                xmlhttp.send();
-            }
-        }
-
-        let cetHead = cet.tableData[0].head,
-            cetBody = cet.tableData[0].body;
-
-        CET.db.destroy().then(() => {
-            // success
-        }).catch((error) => {
-            console.log(error);
-        });
-
-        for (let i in cetHead) {
-            CET.db.put({
-                _id: i,
-                title: cetHead[i]
-            }).then((response) => {
-                console.log(response);
-            }).catch((err) => {
-                console.log(err);
-            });
-        }
-
-        console.log(db);
-
+        // TODO: finish pouchDB service
     };
 
     /**
