@@ -113,10 +113,73 @@
 
         var db = new PouchDB('cet_database');
 
-        db.info().then(function(info) {
-            console.log(info);
+        var createDB = (url) => {
+            if (url != undefined) {
+                if (localStorage.getItem("_tableData")) {
+
+                    cet.tableData = JSON.parse(localStorage.getItem("_tableData"));
+                    CET.table.tableConstructor(cet);
+                } else {
+                    let xmlhttp = new XMLHttpRequest();
+
+                    xmlhttp.onreadystatechange = () => {
+                        if (xmlhttp.readyState === 4) {
+                            if (xmlhttp.status === 200) {
+                                cet.tableData = JSON.parse(xmlhttp.responseText);
+                                CET.table.tableConstructor(cet);
+                            } else {
+                                throw new Error("Could not load the data inside the " + cet.pouchDbUrl + " file");
+                            }
+                        }
+                    };
+                    xmlhttp.open("GET", cet.pouchDbUrl, false);
+                    xmlhttp.send();
+                }
+            }
+            let cetHead = cet.tableData[0].head,
+                cetBody = cet.tableData[0].body,
+                count = 0;
+
+            for (let i in cetHead) {
+                db.put({
+                    '_id': i,
+                    'title': cetHead[i]
+                }).then((response) => {
+                    throw response;
+                }).catch((err) => {
+                    throw new Error(err);
+                });
+            }
+
+            for (let i in cetBody) {
+                let trInfo = cetBody[i];
+                for (let j in trInfo) {
+                    count++;
+                    db.put({
+                        '_id': 'td_' + count,
+                        'tdId': j,
+                        'parentId': i,
+                        'title': trInfo[j].data,
+                        'edit': trInfo[j].edit,
+                        'type': trInfo[j].type
+                    }).then((response) => {
+                        throw response;
+                    }).catch((err) => {
+                        throw new Error(err);
+                    });
+                }
+            }
+        };
+
+        db.info().then((result) => {
+            if (result.update_seq === 0) {
+                createDB(url);
+            } else {
+                // TODO: Continue if the table exists
+            }
+        }).catch((err) => {
+            throw new Error(err);
         });
-        // TODO: finish pouchDB service
     };
 
     /**
