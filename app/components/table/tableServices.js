@@ -113,6 +113,8 @@
 
         var db = new PouchDB('cet_database');
 
+        // table constructor
+
         var constructTable = (result) => {
             if (typeof result.rows === 'object') {
                 cet.tableData = [{}];
@@ -150,6 +152,8 @@
             CET.table.tableConstructor(cet);
         };
 
+        // fetch all table data
+
         var dbFetch = (db) => {
             db.allDocs({
                 include_docs: true,
@@ -160,6 +164,10 @@
                 throw new Error(err);
             });
         };
+
+        /**
+         * Create new dataBase
+         */
 
         var createDB = (url) => {
             if (url != undefined) {
@@ -219,6 +227,8 @@
             }
             dbFetch(db);
         };
+
+        // db info
 
         db.info().then((result) => {
             if (result.update_seq === 0) {
