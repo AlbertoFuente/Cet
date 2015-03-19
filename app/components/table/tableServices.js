@@ -113,6 +113,43 @@
 
         var db = new PouchDB('cet_database');
 
+        var constructTable = (result) => {
+            if (typeof result.rows === 'object') {
+                cet.tableData = [{}];
+                cet.tableData[0].head = {};
+                cet.tableData[0].body = {};
+
+                let tr = [];
+
+                var tdFilter = (element) => {
+                    result.rows.map((a) => {
+                        if (a.doc.part === 'body') {
+                            if (a.doc.parentId === element) {
+                                cet.tableData[0].body[element][a.doc.tdId] = {};
+                                cet.tableData[0].body[element][a.doc.tdId].data = a.doc.title;
+                                cet.tableData[0].body[element][a.doc.tdId].edit = a.doc.edit;
+                                cet.tableData[0].body[element][a.doc.tdId].type = a.doc.type;
+                            }
+                        }
+                    });
+                };
+
+                for (let i in result.rows) {
+                    // head
+                    if (result.rows[i].doc.part === 'head') {
+                        cet.tableData[0].head[result.rows[i].doc._id] = result.rows[i].doc.title;
+                    }
+                    // body
+                    if (result.rows[i].doc.part === 'body') {
+                        tr.push(result.rows[i].doc.parentId);
+                        cet.tableData[0].body[result.rows[i].doc.parentId] = {};
+                    }
+                }
+                tr.filter(tdFilter);
+            }
+            CET.table.tableConstructor(cet);
+        };
+
         var createDB = (url) => {
             if (url != undefined) {
                 if (localStorage.getItem("_tableData")) {
@@ -126,7 +163,6 @@
                         if (xmlhttp.readyState === 4) {
                             if (xmlhttp.status === 200) {
                                 cet.tableData = JSON.parse(xmlhttp.responseText);
-                                CET.table.tableConstructor(cet);
                             } else {
                                 throw new Error("Could not load the data inside the " + cet.pouchDbUrl + " file");
                             }
@@ -143,6 +179,7 @@
             for (let i in cetHead) {
                 db.put({
                     '_id': i,
+                    'part': 'head',
                     'title': cetHead[i]
                 }).then((response) => {
                     throw response;
@@ -158,6 +195,7 @@
                     db.put({
                         '_id': 'td_' + count,
                         'tdId': j,
+                        'part': 'body',
                         'parentId': i,
                         'title': trInfo[j].data,
                         'edit': trInfo[j].edit,
@@ -169,13 +207,29 @@
                     });
                 }
             }
+
+            db.allDocs({
+                include_docs: true,
+                attachments: true
+            }).then((result) => {
+                constructTable(result);
+            }).catch((err) => {
+                throw new Error(err);
+            });
         };
 
         db.info().then((result) => {
             if (result.update_seq === 0) {
                 createDB(url);
             } else {
-                // TODO: Continue if the table exists
+                db.allDocs({
+                    include_docs: true,
+                    attachments: true
+                }).then((result) => {
+                    constructTable(result);
+                }).catch((err) => {
+                    throw new Error(err);
+                });
             }
         }).catch((err) => {
             throw new Error(err);
