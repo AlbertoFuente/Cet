@@ -150,10 +150,20 @@
             CET.table.tableConstructor(cet);
         };
 
+        var dbFetch = (db) => {
+            db.allDocs({
+                include_docs: true,
+                attachments: true
+            }).then((result) => {
+                constructTable(result);
+            }).catch((err) => {
+                throw new Error(err);
+            });
+        };
+
         var createDB = (url) => {
             if (url != undefined) {
                 if (localStorage.getItem("_tableData")) {
-
                     cet.tableData = JSON.parse(localStorage.getItem("_tableData"));
                     CET.table.tableConstructor(cet);
                 } else {
@@ -207,29 +217,14 @@
                     });
                 }
             }
-
-            db.allDocs({
-                include_docs: true,
-                attachments: true
-            }).then((result) => {
-                constructTable(result);
-            }).catch((err) => {
-                throw new Error(err);
-            });
+            dbFetch(db);
         };
 
         db.info().then((result) => {
             if (result.update_seq === 0) {
                 createDB(url);
             } else {
-                db.allDocs({
-                    include_docs: true,
-                    attachments: true
-                }).then((result) => {
-                    constructTable(result);
-                }).catch((err) => {
-                    throw new Error(err);
-                });
+                dbFetch(db);
             }
         }).catch((err) => {
             throw new Error(err);
