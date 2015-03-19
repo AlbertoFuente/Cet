@@ -237,7 +237,7 @@
             errLabel.className = 'errLabel';
             errLabel.innerHTML = 'Impossible to construct a graph of the selected data, try another selection.';
             cont.appendChild(errLabel);
-            setTimeout(function() {
+            setTimeout(() => {
                 cont.removeChild(errLabel);
             }, 5000);
         };
