@@ -70,10 +70,10 @@
         if (cet !== undefined) {
             let myFirebaseRef = new Firebase(cet.fireBaseUrl);
 
-            myFirebaseRef.on("value", function(response) {
+            myFirebaseRef.on("value", (response) => {
                 cet.tableData = response.val();
                 CET.table.tableConstructor(cet);
-            }, function(errorObject) {
+            }, (errorObject) => {
                 throw new Error("The read failed: " + errorObject.code);
             });
         }
