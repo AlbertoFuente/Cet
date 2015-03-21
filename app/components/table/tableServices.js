@@ -140,9 +140,8 @@
                     // head
                     if (result.rows[i].doc.part === 'head') {
                         cet.tableData[0].head[result.rows[i].doc._id] = result.rows[i].doc.title;
-                    }
-                    // body
-                    if (result.rows[i].doc.part === 'body') {
+                        // body
+                    } else {
                         tr.push(result.rows[i].doc.parentId);
                         cet.tableData[0].body[result.rows[i].doc.parentId] = {};
                     }
