@@ -469,7 +469,7 @@
                         bodyContent = _cetTable.tableData.body || _cetTable.tableData[0].body,
                         pager = false,
                         trObj = {},
-                        tdObjSorted= {};
+                        tdObjSorted = {};
 
                     trObj.tr = [];
                     trObj.pages = [];
