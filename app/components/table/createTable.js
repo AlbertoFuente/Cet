@@ -468,22 +468,37 @@
                     let tableBody = document.createElement('tBody'),
                         bodyContent = _cetTable.tableData.body || _cetTable.tableData[0].body,
                         pager = false,
-                        trObj = {};
+                        trObj = {},
+                        tdObjSorted= {};
+
                     trObj.tr = [];
                     trObj.pages = [];
 
                     _cetTable.limitRows > 0 ? pager = true : pager = false;
 
-                    for (let key in bodyContent) {
-                        if (bodyContent.hasOwnProperty(key) && typeof bodyContent[key] !== 'function') {
+                    let bodyKeys = Object.keys(bodyContent).sort(),
+                        newBody = {};
+
+                    bodyKeys.map((a) => {
+                        newBody[a] = bodyContent[a];
+                    });
+
+                    for (let key in newBody) {
+                        if (newBody.hasOwnProperty(key) && typeof newBody[key] !== 'function') {
                             let tr = document.createElement('tr');
                             tr.className = key;
 
-                            for (let p in bodyContent[key]) {
+                            let tdKeys = Object.keys(newBody[key]).sort();
+
+                            tdKeys.map((a) => {
+                                tdObjSorted[a] = newBody[key][a];
+                            });
+
+                            for (let p in tdObjSorted) {
                                 let td = document.createElement('td');
                                 td.className = p;
-                                if (bodyContent[key][p].data !== undefined && bodyContent[key][p].type !== undefined) {
-                                    if (bodyContent[key][p].edit) {
+                                if (tdObjSorted[p].data !== undefined && tdObjSorted[p].type !== undefined) {
+                                    if (tdObjSorted[p].edit) {
                                         let input = document.createElement('input'),
                                             span = document.createElement('span');
                                         span.style.display = 'none';
@@ -491,28 +506,28 @@
                                             input.className = 'input_edit ' + cet.table.assignClasses('tooltip');
                                             input.setAttribute('data-position', 'bottom');
                                             input.setAttribute('data-delay', '30');
-                                            input.setAttribute('data-tooltip', 'Edit field: ' + bodyContent[key][p].data);
-                                            input.setAttribute('value', bodyContent[key][p].data);
-                                            span.innerHTML = bodyContent[key][p].data;
-                                            span.setAttribute('value', bodyContent[key][p].data);
+                                            input.setAttribute('data-tooltip', 'Edit field: ' + tdObjSorted[p].data);
+                                            input.setAttribute('value', tdObjSorted[p].data);
+                                            span.innerHTML = tdObjSorted[p].data;
+                                            span.setAttribute('value', tdObjSorted[p].data);
                                         } else {
                                             input.className = 'input_edit';
-                                            input.setAttribute('value', bodyContent[key][p].data);
-                                            span.innerHTML = bodyContent[key][p].data;
-                                            span.setAttribute('value', bodyContent[key][p].data);
+                                            input.setAttribute('value', tdObjSorted[p].data);
+                                            span.innerHTML = tdObjSorted[p].data;
+                                            span.setAttribute('value', tdObjSorted[p].data);
                                         }
-                                        if (bodyContent[key][p].type === 'date') {
+                                        if (tdObjSorted[p].type === 'date') {
                                             input.className = input.className + cet.table.assignClasses('datePicker');
                                             input.type = 'text';
-                                            input.setAttribute('value', bodyContent[key][p].data);
-                                            input.setAttribute('placeholder', bodyContent[key][p].data);
-                                            span.innerHTML = bodyContent[key][p].data;
-                                            span.setAttribute('value', bodyContent[key][p].data);
+                                            input.setAttribute('value', tdObjSorted[p].data);
+                                            input.setAttribute('placeholder', tdObjSorted[p].data);
+                                            span.innerHTML = tdObjSorted[p].data;
+                                            span.setAttribute('value', tdObjSorted[p].data);
                                         } else {
-                                            input.type = bodyContent[key][p].type;
-                                            input.setAttribute('value', bodyContent[key][p].data);
-                                            span.innerHTML = bodyContent[key][p].data;
-                                            span.setAttribute('value', bodyContent[key][p].data);
+                                            input.type = tdObjSorted[p].type;
+                                            input.setAttribute('value', tdObjSorted[p].data);
+                                            span.innerHTML = tdObjSorted[p].data;
+                                            span.setAttribute('value', tdObjSorted[p].data);
                                         }
 
                                         td.appendChild(input);
@@ -520,8 +535,8 @@
                                     } else {
                                         let noEditLabel = document.createElement('span');
                                         noEditLabel.className = 'noEditableField';
-                                        noEditLabel.innerHTML = bodyContent[key][p].data;
-                                        noEditLabel.value = bodyContent[key][p].data;
+                                        noEditLabel.innerHTML = tdObjSorted[p].data;
+                                        noEditLabel.value = tdObjSorted[p].data;
                                         if (_cetTable.tooltips) {
                                             noEditLabel.className = noEditLabel.className + ' ' + cet.table.assignClasses('tooltip');
                                             noEditLabel.setAttribute('data-position', 'bottom');
@@ -531,7 +546,7 @@
                                                 sliceNum = labelParent.slice(-1),
                                                 thClass = 'th' + sliceNum,
                                                 thText = tableHead.getElementsByClassName(thClass)[0].innerText;
-                                            noEditLabel.setAttribute('data-tooltip', thText + ': ' + bodyContent[key][p].data);
+                                            noEditLabel.setAttribute('data-tooltip', thText + ': ' + tdObjSorted[p].data);
                                         } else {
                                             td.appendChild(noEditLabel);
                                         }
