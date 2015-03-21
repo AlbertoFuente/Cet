@@ -33,13 +33,14 @@ In app/config/config.js you can find all the table default options:
 ```js
 cet.defaultConfig.container = document.getElementById('tableContainer');
 ```
-- Data: Here configure where you get the JSON with table data, configurable to obtain and store locally on Firebase (https://www.firebase.com/) or an API set for you. Set by default to localData. You can find the sample inside app/sample.
+- Data: Here configure where you get the JSON with table data, configurable to obtain and store locally, on Firebase (https://www.firebase.com/), on pouchDB (http://pouchdb.com/), or an API set for you. Set by default to localData. You can find the sample inside app/sample.
 ```js
 // config type of data service
 cet.defaultConfig.dataOptions = {
     'localData': true, 
     'fireBase': false, 
-    'apiRest': false   
+    'apiRest': false, 
+    'pouchdb': false   
 };
 // localData url
 cet.defaultConfig.localDataUrl = 'localData/tableData.json';
@@ -48,6 +49,8 @@ cet.defaultConfig.fireBaseUrl = '';
 // apiRest url
 cet.defaultConfig.apiRestGetUrl = '';
 cet.defaultConfig.apiRestPostUrl = '';
+// pouchDB url
+cet.defaultConfig.pouchDbUrl = 'localData/tableData.json';
 ```
 - Table Design: By default the table came with materialize (http://materializecss.com/) to 'true', but you can change it to boostrap (http://getbootstrap.com/) if you like or leave both 'false' and give your own design.
 ```js
