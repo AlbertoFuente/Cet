@@ -190,8 +190,7 @@
                 }
             }
             let cetHead = cet.tableData[0].head,
-                cetBody = cet.tableData[0].body,
-                count = 0;
+                cetBody = cet.tableData[0].body;
 
             for (let i in cetHead) {
                 db.put({
@@ -208,9 +207,7 @@
             for (let i in cetBody) {
                 let trInfo = cetBody[i];
                 for (let j in trInfo) {
-                    count++;
-                    db.put({
-                        '_id': 'td_' + count,
+                    db.post({
                         'tdId': j,
                         'part': 'body',
                         'parentId': i,
@@ -278,6 +275,36 @@
                 xmlhttp.send(JSON.stringify(cet.defaultConfig.tableData));
                 break;
             case 4:
+                let num = tdParent.slice(-1),
+                    db = new PouchDB('cet_database');
+
+                db.allDocs({
+                    include_docs: true,
+                    attachments: true
+                }).then((result) => {
+                    if (result.total_rows > 0) {
+                        result.rows.map((a) => {
+                            if (a.doc.tdId === tdParent && a.doc.parentId === trParent) {
+                                db.get(a.doc._id).then((doc) => {
+                                    return db.put({
+                                        '_id': a.doc._id,
+                                        '_rev': doc._rev,
+                                        'title': val,
+                                        'tdId': tdParent,
+                                        'part': 'body',
+                                        'parentId': trParent,
+                                        'edit': a.doc.edit,
+                                        'type': a.doc.type
+                                    });
+                                }).catch((err) => {
+                                    throw new Error(err);
+                                });
+                            }
+                        });
+                    }
+                }).catch((err) => {
+                    throw new Error(err);
+                });
                 break;
         }
     };
