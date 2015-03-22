@@ -77,7 +77,6 @@
                 throw new Error("The read failed: " + errorObject.code);
             });
         }
-
     };
 
     /**
@@ -275,8 +274,8 @@
                 xmlhttp.send(JSON.stringify(cet.defaultConfig.tableData));
                 break;
             case 4:
-                let num = tdParent.slice(-1),
-                    db = new PouchDB('cet_database');
+                // mode 4 - pouchDB
+                let db = new PouchDB('cet_database');
 
                 db.allDocs({
                     include_docs: true,
