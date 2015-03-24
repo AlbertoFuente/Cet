@@ -93,32 +93,22 @@
                     };
                     if (CET.defaultConfig.effects) {
                         // hover
-                        inputs[i].onmouseover = () => {
-                            CET.defaultConfig.mouseEffects(inputs[i], 'hover');
-                        };
-                        inputs[i].parentNode.onmouseover = () => {
-                            CET.defaultConfig.mouseEffects(inputs[i], 'hover');
-                        };
+                        inputs[i].onmouseover = () => CET.defaultConfig.mouseEffects(inputs[i], 'hover');
+                        inputs[i].parentNode.onmouseover = () => CET.defaultConfig.mouseEffects(inputs[i], 'hover');
+
                         // out
-                        inputs[i].parentNode.onmouseout = () => {
-                            CET.defaultConfig.mouseEffects(inputs[i], 'out');
-                        }
+                        inputs[i].parentNode.onmouseout = () => CET.defaultConfig.mouseEffects(inputs[i], 'out');
                     }
                 }
                 // spans events
                 for (let i = 0; i < spans.length; i++) {
                     if (CET.defaultConfig.effects) {
                         // hover
-                        spans[i].onmouseover = () => {
-                            CET.defaultConfig.mouseEffects(spans[i], 'hover');
-                        };
-                        spans[i].parentNode.onmouseover = () => {
-                            CET.defaultConfig.mouseEffects(spans[i], 'hover');
-                        };
+                        spans[i].onmouseover = () => CET.defaultConfig.mouseEffects(spans[i], 'hover');
+                        spans[i].parentNode.onmouseover = () => CET.defaultConfig.mouseEffects(spans[i], 'hover');
+
                         // out
-                        spans[i].parentNode.onmouseout = () => {
-                            CET.defaultConfig.mouseEffects(spans[i], 'out');
-                        }
+                        spans[i].parentNode.onmouseout = () => CET.defaultConfig.mouseEffects(spans[i], 'out');
                     }
                 }
 
