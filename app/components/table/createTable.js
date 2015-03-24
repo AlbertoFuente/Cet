@@ -213,9 +213,8 @@
 
         _cetTable.showPager = (obj) => {
             // calc num of panels
-            let calcPages = (num) => {
-                return Math.round(num.length / _cetTable.limitRows);
-            };
+            let calcPages = (num) => Math.round(num.length / _cetTable.limitRows);
+
             // create pager container
             let container = document.createElement('div');
             container.className = 'pagerContainer';
@@ -295,7 +294,11 @@
                             let newPage = page - 1;
                             obj.pages.map((a) => {
                                 if (newPage === a.page) {
-                                    _cetTable.container.childNodes[1].childNodes[1].appendChild(a.tr);
+                                    for (let i in _cetTable.container.childNodes) {
+                                        if (typeof _cetTable.container.childNodes[i] === 'object' && _cetTable.container.childNodes[i].tagName === 'TABLE') {
+                                            _cetTable.container.childNodes[i].childNodes[1].appendChild(a.tr);
+                                        }
+                                    }
                                 }
                             });
                         }
@@ -306,7 +309,11 @@
                             let newPage = page + 1;
                             obj.pages.map((a) => {
                                 if (newPage === a.page) {
-                                    _cetTable.container.childNodes[1].childNodes[1].appendChild(a.tr);
+                                    for (let i in _cetTable.container.childNodes) {
+                                        if (typeof _cetTable.container.childNodes[i] === 'object' && _cetTable.container.childNodes[i].tagName === 'TABLE') {
+                                            _cetTable.container.childNodes[i].childNodes[1].appendChild(a.tr);
+                                        }
+                                    }
                                 }
                             });
                         }
@@ -316,7 +323,11 @@
                         removeBody(oldTrs);
                         obj.pages.map((a) => {
                             if (num === a.page) {
-                                _cetTable.container.childNodes[1].childNodes[1].appendChild(a.tr);
+                                for (let i in _cetTable.container.childNodes) {
+                                    if (typeof _cetTable.container.childNodes[i] === 'object' && _cetTable.container.childNodes[i].tagName === 'TABLE') {
+                                        _cetTable.container.childNodes[i].childNodes[1].appendChild(a.tr);
+                                    }
+                                }
                             }
                         });
                         break;
