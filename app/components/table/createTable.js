@@ -599,37 +599,26 @@
                     // inputs events
                     for (let i = 0; i < inputs.length; i++) {
                         // change
-                        inputs[i].onchange = () => {
-                            _cetTable.inputChange(inputs[i]);
-                        };
+                        inputs[i].onchange = () => _cetTable.inputChange(inputs[i]);
+
                         if (_cetTable.effects) {
                             // hover
-                            inputs[i].onmouseover = () => {
-                                _cetTable.mouseEffects(inputs[i], 'hover');
-                            };
-                            inputs[i].parentNode.onmouseover = () => {
-                                _cetTable.mouseEffects(inputs[i], 'hover');
-                            };
+                            inputs[i].onmouseover = () => _cetTable.mouseEffects(inputs[i], 'hover');
+                            inputs[i].parentNode.onmouseover = () => _cetTable.mouseEffects(inputs[i], 'hover');
+
                             // out
-                            inputs[i].parentNode.onmouseout = () => {
-                                _cetTable.mouseEffects(inputs[i], 'out');
-                            }
+                            inputs[i].parentNode.onmouseout = () => _cetTable.mouseEffects(inputs[i], 'out');
                         }
                     }
                     // spans events
                     for (let i = 0; i < spans.length; i++) {
                         if (_cetTable.effects) {
                             // hover
-                            spans[i].onmouseover = () => {
-                                _cetTable.mouseEffects(spans[i], 'hover');
-                            };
-                            spans[i].parentNode.onmouseover = () => {
-                                _cetTable.mouseEffects(spans[i], 'hover');
-                            };
+                            spans[i].onmouseover = () => _cetTable.mouseEffects(spans[i], 'hover');
+                            spans[i].parentNode.onmouseover = () => _cetTable.mouseEffects(spans[i], 'hover');
+
                             // out
-                            spans[i].parentNode.onmouseout = () => {
-                                _cetTable.mouseEffects(spans[i], 'out');
-                            }
+                            spans[i].parentNode.onmouseout = () => _cetTable.mouseEffects(spans[i], 'out');
                         }
                     }
                     // icons events
