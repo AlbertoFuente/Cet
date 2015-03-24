@@ -287,6 +287,12 @@
                     });
                 }
 
+                let insertTrs = (a, cont) => {
+                    if (typeof cont === 'object' && cont.tagName === 'TABLE') {
+                        cont.childNodes[1].appendChild(a.tr);
+                    }
+                }
+
                 switch (direction) {
                     case 'prev':
                         if (page !== 1) {
@@ -295,9 +301,7 @@
                             obj.pages.map((a) => {
                                 if (newPage === a.page) {
                                     for (let i in _cetTable.container.childNodes) {
-                                        if (typeof _cetTable.container.childNodes[i] === 'object' && _cetTable.container.childNodes[i].tagName === 'TABLE') {
-                                            _cetTable.container.childNodes[i].childNodes[1].appendChild(a.tr);
-                                        }
+                                        insertTrs(a, _cetTable.container.childNodes[i]);
                                     }
                                 }
                             });
@@ -310,9 +314,7 @@
                             obj.pages.map((a) => {
                                 if (newPage === a.page) {
                                     for (let i in _cetTable.container.childNodes) {
-                                        if (typeof _cetTable.container.childNodes[i] === 'object' && _cetTable.container.childNodes[i].tagName === 'TABLE') {
-                                            _cetTable.container.childNodes[i].childNodes[1].appendChild(a.tr);
-                                        }
+                                        insertTrs(a, _cetTable.container.childNodes[i]);
                                     }
                                 }
                             });
@@ -324,9 +326,7 @@
                         obj.pages.map((a) => {
                             if (num === a.page) {
                                 for (let i in _cetTable.container.childNodes) {
-                                    if (typeof _cetTable.container.childNodes[i] === 'object' && _cetTable.container.childNodes[i].tagName === 'TABLE') {
-                                        _cetTable.container.childNodes[i].childNodes[1].appendChild(a.tr);
-                                    }
+                                    insertTrs(a, _cetTable.container.childNodes[i]);
                                 }
                             }
                         });
