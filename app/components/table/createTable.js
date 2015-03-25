@@ -291,7 +291,7 @@
                     if (typeof cont === 'object' && cont.tagName === 'TABLE') {
                         cont.childNodes[1].appendChild(a.tr);
                     }
-                }
+                };
 
                 switch (direction) {
                     case 'prev':
@@ -354,7 +354,6 @@
         /**
          * table constructor
          * @param _cetTable {Object}
-         * @returns {_cetTable.container|*}
          */
 
         cet.table.tableConstructor = (_cetTable) => {
@@ -715,7 +714,7 @@
             removeBootstrap();
             removeMaterialize();
         }
-        //TODO extend cet.defaultConfig
+
         config = config || CET.defaultConfig;
         cet.table.createTable(config);
     };

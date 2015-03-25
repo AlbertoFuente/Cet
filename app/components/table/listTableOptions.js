@@ -164,11 +164,7 @@
                                     let trChilds = contChilds[j].childNodes[p].childNodes;
                                     for (let c = 0; c < trChilds.length; c++) {
                                         obj[c].data.push(trChilds[c].lastChild.innerText);
-                                        if (num.test(trChilds[c].lastChild.innerText)) {
-                                            obj[c].sum = true;
-                                        } else {
-                                            obj[c].sum = false;
-                                        }
+                                        obj[c].sum = !!num.test(trChilds[c].lastChild.innerText);
                                     }
                                 }
                             }

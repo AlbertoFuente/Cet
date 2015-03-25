@@ -13,7 +13,7 @@
                 docBody.childNodes[i].remove();
             }
         }
-    }
+    };
 
     /**
      * remove unused CSS library
@@ -26,7 +26,7 @@
                 docHead.childNodes[i].remove();
             }
         }
-    }
+    };
 
     /**
      * get local data

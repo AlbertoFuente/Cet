@@ -1,6 +1,7 @@
 ((cet) => {
     // CET.graphs object
     cet.graphs = {};
+
     /**
      * Show modal
      */
@@ -59,11 +60,8 @@
                 'rgba(121, 85, 72, 0.5)'
             ];
 
-            if (index > colors.length) {
-                return colors[Math.floor(Math.random() * colors.length)];
-            } else {
-                return colors[index];
-            }
+            if (index > colors.length) return colors[Math.floor(Math.random() * colors.length)];
+            else return colors[index];
         };
 
         switch (graphType) {
@@ -175,12 +173,9 @@
 
         // tableHead
         for (let key in tableHead) {
-            if (tableHead[key] === xAxis) {
-                xNum = key.slice(-1);
-            }
-            if (tableHead[key] === yAxis) {
-                yNum = key.slice(-1);
-            }
+            if (tableHead[key] === xAxis) xNum = key.slice(-1);
+
+            if (tableHead[key] === yAxis) yNum = key.slice(-1);
         }
 
         // tableBody
@@ -189,13 +184,9 @@
                 let tdNumX = 'td' + xNum,
                     tdNumY = 'td' + yNum;
                 // save xAxis data
-                if (tdNumX === k) {
-                    xData.push(tableBody[key][k].data);
-                }
+                if (tdNumX === k) xData.push(tableBody[key][k].data);
                 // save yAxis data
-                if (tdNumY === k) {
-                    yData.push(tableBody[key][k].data);
-                }
+                if (tdNumY === k) yData.push(tableBody[key][k].data);
             }
         }
 
