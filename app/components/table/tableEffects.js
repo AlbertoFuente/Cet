@@ -67,18 +67,14 @@
                 }
 
                 if (status === "down") {
-                    if (isNumeric) {
-                        val.sort((a, b) => a - b);
-                    } else {
-                        val.reverse();
-                    }
+                    if (isNumeric) val.sort((a, b) => a - b);
+                    else val.reverse();
+
                     CET.defaultConfig.printNewBody(val, column, table);
                 } else {
-                    if (isNumeric) {
-                        val.sort((a, b) => b - a);
-                    } else {
-                        val.sort();
-                    }
+                    if (isNumeric) val.sort((a, b) => b - a);
+                    else val.sort();
+
                     CET.defaultConfig.printNewBody(val, column, table);
                 }
 
@@ -111,11 +107,8 @@
                         spans[i].parentNode.onmouseout = () => CET.defaultConfig.mouseEffects(spans[i], 'out');
                     }
                 }
-
-                if (CET.defaultConfig.materialize) {
-                    // datepicker
-                    $('.datepicker').pickadate();
-                }
+                // datepicker
+                if (CET.defaultConfig.materialize) $('.datepicker').pickadate();
 
                 break;
         }
