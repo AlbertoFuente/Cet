@@ -172,9 +172,7 @@
 
             for (let i = 0; i < val.length; i++) {
                 for (let j = 0; j < column.length; j++) {
-                    if (val[i] === column[j].value) {
-                        newColumn.push(column[j].tr);
-                    }
+                    if (val[i] === column[j].value) newColumn.push(column[j].tr);
                 }
             }
             for (let i = 0; i < newColumn.length; i++) {
@@ -250,9 +248,7 @@
 
             for (let j = 0; j < obj.tr.length; j++) {
                 let m = j % _cetTable.limitRows;
-                if (m === 0) {
-                    count++;
-                }
+                if (m === 0) count++;
                 obj.pages.push({
                     'page': count,
                     'tr': obj.tr[j]
@@ -263,9 +259,7 @@
             let oldView = () => {
                 for (let i in _cetTable.container.childNodes) {
                     if (typeof _cetTable.container.childNodes[i] === 'object') {
-                        if (_cetTable.container.childNodes[i].id === 'cetTable') {
-                            return _cetTable.container.childNodes[i].childNodes[1].childNodes;
-                        }
+                        if (_cetTable.container.childNodes[i].id === 'cetTable') return _cetTable.container.childNodes[i].childNodes[1].childNodes;
                     }
                 }
             };
@@ -281,16 +275,12 @@
 
                 for (let i = 0; i < oldTrs.length; i++) {
                     obj.pages.map((a) => {
-                        if (a.tr.className === oldTrs[i].className) {
-                            page = a.page;
-                        }
+                        if (a.tr.className === oldTrs[i].className) page = a.page;
                     });
                 }
 
                 let insertTrs = (a, cont) => {
-                    if (typeof cont === 'object' && cont.tagName === 'TABLE') {
-                        cont.childNodes[1].appendChild(a.tr);
-                    }
+                    if (typeof cont === 'object' && cont.tagName === 'TABLE') cont.childNodes[1].appendChild(a.tr);
                 };
 
                 switch (direction) {
@@ -436,9 +426,7 @@
 
                 let childLength = 0;
 
-                if (_cetTable.header) {
-                    childLength = 1
-                }
+                if (_cetTable.header) childLength = 1;
 
                 if (_cetTable.container.childNodes.length === childLength) {
                     // table
@@ -568,9 +556,7 @@
                                 trObj.tr.push(tr);
                                 trObj.tbBody = tableBody;
                                 let num = tr.className.slice(-1);
-                                if (num <= _cetTable.limitRows) {
-                                    tableBody.appendChild(tr);
-                                }
+                                if (num <= _cetTable.limitRows) tableBody.appendChild(tr);
                             } else {
                                 tableBody.appendChild(tr);
                             }
@@ -583,9 +569,7 @@
 
                     _cetTable.container.appendChild(table);
 
-                    if (pager) {
-                        _cetTable.showPager(trObj);
-                    }
+                    if (pager) _cetTable.showPager(trObj);
 
                     /**
                      * Events
@@ -647,10 +631,8 @@
                             CET.effects.tableEffects(thClass, tdClass, eventName, table, status);
                         }
                     }
-                    if (_cetTable.materialize) {
-                        // datepicker
-                        $('.datepicker').pickadate();
-                    }
+                    // datepicker
+                    if (_cetTable.materialize) $('.datepicker').pickadate();
 
                     // return table
                     return _cetTable.container;
