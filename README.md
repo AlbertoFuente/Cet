@@ -184,4 +184,42 @@ dataOptions: {
 // fireBase url
 fireBaseUrl: 'Standard Fireabse url where your data is stored'
 ```
-Once configure this your data appear in the table if the json file has the appropriate structure, if you have editable fields, once you make changes to them, they sync with your server data firebase.
+Once configured, your data appear in the table if the json file has the appropriate structure, if you have editable fields, once you make changes to them, they sync with your server data firebase.
+
+- PouchDB:
+You have two options if the database is not created, simply by creating a file JSON following the appropriate structure and enter the url pointing to that file, into the file config.js and putting pouchDB option to 'true':
+```js
+// config type of data service
+dataOptions: {
+    'localData': false, 
+    'fireBase': false, 
+    'apiRest': false, 
+    'pouchdb': true 
+},
+// pouchDB url
+pouchDbUrl: 'localData/tableData.json'
+```
+If the database is yet created, then it must have this structure:
+table header data:
+```json
+{
+  "_id": "th1",
+  "part": "head",
+  "title": "Name",
+  "_rev": "1-ba8bfeed1a56f587914a9d9f678f55fa"
+}
+```
+table body data:
+```json
+{
+  "_id": "39A73F6A-84FB-0931-82E7-5D9E67C4CF77",
+  "tdId": "td2",
+  "part": "body",
+  "parentId": "tr3",
+  "title": "Javascript Framework",
+  "edit": false,
+  "type": "text",
+  "_rev": "1-f159e19262919ff434cd3c6b41f97b7f"
+}
+```
+If the database is created and with the correct structure, then the table should appear correctly and if you make changes in editable fields, it must be sync with your pouchDB database.
