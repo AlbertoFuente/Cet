@@ -167,6 +167,21 @@ The structure of the JSON file must be like this example:
 ```
 Inside all tds you can find three parameters:
 - data: the text of the filed you want to show.
-- type: the type of field if it is editable (text, date, ...)
+- type: the type of field if it is editable (text, date, ...).
 - edit: If it is an editable field set it to 'true'.
-  
+
+## GET/POST Data Options
+- Firebase:
+To store and sync your table data with your fireabse server you only have to create new app, store the JSON data with a similar structure like the one you can find inside Cet/app/sample/localData, then inside config.js file you have to configure it like this:
+```js
+// config type of data service
+dataOptions: {
+    'localData': false, 
+    'fireBase': true, 
+    'apiRest': false, 
+    'pouchdb': false 
+},
+// fireBase url
+fireBaseUrl: 'Standard Fireabse url where your data is stored'
+```
+Once configure this your data appear in the table if the json file has the appropriate structure, if you have editable fields, once you make changes to them, they sync with your server data firebase.
