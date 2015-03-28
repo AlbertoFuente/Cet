@@ -200,7 +200,8 @@ dataOptions: {
 pouchDbUrl: 'localData/tableData.json'
 ```
 If the database is yet created, then it must have this structure:
-table header data:
+
+Table header data:
 ```json
 {
   "_id": "th1",
@@ -209,7 +210,7 @@ table header data:
   "_rev": "1-ba8bfeed1a56f587914a9d9f678f55fa"
 }
 ```
-table body data:
+Table body data:
 ```json
 {
   "_id": "39A73F6A-84FB-0931-82E7-5D9E67C4CF77",
