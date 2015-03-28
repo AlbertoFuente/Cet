@@ -172,7 +172,7 @@ Inside all tds you can find three parameters:
 
 ## GET/POST Data Options
 - Firebase:
-To store and sync your table data with your fireabse server you only have to create new app, store the JSON data with a similar structure like the one you can find inside Cet/app/sample/localData, then inside config.js file you have to configure it like this:
+To store and sync your table data with your firebase server you only have to create new app in your firebase server, then store the JSON data with a similar structure like the one you can find inside Cet/app/sample/localData, then inside config.js file you have to configure it like this:
 ```js
 // config type of data service
 dataOptions: {
