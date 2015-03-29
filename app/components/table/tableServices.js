@@ -28,22 +28,26 @@
         }
     };
 
+    /**
+     * Get local JSON data
+     * @param  {string} url - url from local file
+     * @return promise
+     */
+
     cet.services.getJsonData = (url) => {
-        return new Promise(function(resolve, reject) {
+        return new Promise((resolve, reject) => {
             let req = new XMLHttpRequest();
             req.open('GET', url);
 
-            req.onload = function() {
+            req.onload = () => {
                 if (req.status == 200) {
-                    CET.defaultConfig.tableData = JSON.parse(req.response);
+                    resolve(req.response);
                 } else {
                     reject(Error(req.statusText));
-                    throw new Error("Problems to find the JSON file in this url: " + url);
                 }
             };
-            req.onerror = function() {
+            req.onerror = () => {
                 reject(Error(req.statusText));
-                throw new Error("Problems to find the JSON file in this url: " + url);
             };
             req.send();
         });
@@ -63,8 +67,12 @@
                 cet.tableData = JSON.parse(localStorage.getItem("_tableData"));
                 CET.table.tableConstructor(cet);
             } else {
-                CET.services.getJsonData(cet.localDataUrl);
-                CET.table.tableConstructor(CET.defaultConfig);
+                CET.services.getJsonData(cet.localDataUrl).then((response) => {
+                    CET.defaultConfig.tableData = JSON.parse(response);
+                    CET.table.tableConstructor(CET.defaultConfig);
+                }, (error) => {
+                    throw new Error("Problems to find the JSON file in this url: " + url);
+                });
             }
         }
     };
@@ -96,8 +104,12 @@
     cet.services.apiRestData = (url) => {
         CET.services.removeLibrary('pouchDb');
         CET.services.removeLibrary('firebaseDb');
-        CET.services.getJsonData(url);
-        CET.table.tableConstructor(CET.defaultConfig);
+        CET.services.getJsonData(url).then((response) => {
+            CET.defaultConfig.tableData = JSON.parse(response);
+            CET.table.tableConstructor(CET.defaultConfig);
+        }, (error) => {
+            throw new Error("Problems to find the JSON file in this url: " + url);
+        });
     };
 
     /**
@@ -170,19 +182,12 @@
                     cet.tableData = JSON.parse(localStorage.getItem("_tableData"));
                     CET.table.tableConstructor(cet);
                 } else {
-                    let xmlhttp = new XMLHttpRequest();
-
-                    xmlhttp.onreadystatechange = () => {
-                        if (xmlhttp.readyState === 4) {
-                            if (xmlhttp.status === 200) {
-                                cet.tableData = JSON.parse(xmlhttp.responseText);
-                            } else {
-                                throw new Error("Could not load the data inside the " + cet.pouchDbUrl + " file");
-                            }
-                        }
-                    };
-                    xmlhttp.open("GET", cet.pouchDbUrl, false);
-                    xmlhttp.send();
+                    CET.services.getJsonData(cet.pouchDbUrl).then((response) => {
+                        CET.defaultConfig.tableData = JSON.parse(response);
+                        CET.table.tableConstructor(CET.defaultConfig);
+                    }, (error) => {
+                        throw new Error("Problems to find the JSON file in this url: " + url);
+                    });
                 }
             }
             let cetHead = cet.tableData[0].head,
