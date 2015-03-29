@@ -15,124 +15,47 @@
             designClass = null;
 
         var classifyElement = (design) => {
-            let navButton = null,
-                tableType = null,
-                sortIconDown = null,
-                sortIconUp = null,
-                tooltipElement = null,
-                closeButton = null,
-                normalButton = null,
-                searchIcon = null,
-                searchDiv = null,
-                buttonDirectionLeft = null,
-                buttonDirectionRight = null,
-                datePicker = null;
-
+            const materialzeClasses = {
+                    searchDiv: 'input-field col s6',
+                    searchIcon: 'mdi-action-search prefix',
+                    headerButton: 'mdi-navigation-menu',
+                    tableStriped: 'striped',
+                    sortIconDown: 'mdi-hardware-keyboard-arrow-down',
+                    sortIconUp: 'mdi-hardware-keyboard-arrow-up',
+                    tooltip: 'tooltipped',
+                    datePicker: ' datepicker picker__input',
+                    buttonLeft: 'mdi-hardware-keyboard-arrow-left',
+                    buttonRight: 'mdi-hardware-keyboard-arrow-right',
+                    closeButton: 'mdi-content-clear',
+                    normalButton: 'waves-effect waves-light btn'
+                },
+                bootstrapClasses = {
+                    searchDiv: '',
+                    searchIcon: 'glyphicon glyphicon-search',
+                    headerButton: 'glyphicon glyphicon-align-justify',
+                    tableStriped: 'table table-striped',
+                    sortIconDown: 'glyphicon glyphicon-menu-down',
+                    sortIconUp: 'glyphicon glyphicon-menu-up',
+                    tooltip: '',
+                    datePicker: ' date',
+                    buttonLeft: 'glyphicon glyphicon-menu-left',
+                    buttonRight: 'glyphicon glyphicon-menu-right',
+                    closeButton: 'glyphicon glyphicon-remove',
+                    normalButton: 'btn btn-primary'
+                };
             switch (design) {
-                case 'm':
-                    navButton = 'mdi-navigation-menu';
-                    tableType = 'striped';
-                    sortIconDown = 'mdi-hardware-keyboard-arrow-down';
-                    sortIconUp = 'mdi-hardware-keyboard-arrow-up';
-                    tooltipElement = 'tooltipped';
-                    closeButton = 'mdi-content-clear';
-                    normalButton = 'waves-effect waves-light btn';
-                    searchIcon = 'mdi-action-search prefix';
-                    searchDiv = 'input-field col s6';
-                    buttonDirectionLeft = 'mdi-hardware-keyboard-arrow-left';
-                    buttonDirectionRight = 'mdi-hardware-keyboard-arrow-right';
-                    datePicker = ' datepicker picker__input';
-
-                    switch (elementType) {
-                        case 'searchDiv':
-                            designClass = searchDiv;
-                            break;
-                        case 'searchIcon':
-                            designClass = searchIcon;
-                            break;
-                        case 'headerButton':
-                            designClass = navButton;
-                            break;
-                        case 'tableStriped':
-                            designClass = tableType;
-                            break;
-                        case 'sortIconDown':
-                            designClass = sortIconDown;
-                            break;
-                        case 'sortIconUp':
-                            designClass = sortIconUp;
-                            break;
-                        case 'tooltip':
-                            designClass = tooltipElement;
-                            break;
-                        case 'datePicker':
-                            designClass = datePicker;
-                            break;
-                        case 'buttonLeft':
-                            designClass = buttonDirectionLeft;
-                            break;
-                        case 'buttonRight':
-                            designClass = buttonDirectionRight;
-                            break;
-                        case 'closeButton':
-                            designClass = closeButton;
-                            break;
-                        case 'normalButton':
-                            designClass = normalButton;
-                            break;
+                case ('m'):
+                    for (let key in materialzeClasses) {
+                        if (key === elementType) {
+                            designClass = materialzeClasses[key];
+                        }
                     }
                     break;
                 case 'b':
-                    navButton = 'glyphicon glyphicon-align-justify';
-                    tableType = 'table table-striped';
-                    sortIconDown = 'glyphicon glyphicon-menu-down';
-                    sortIconUp = 'glyphicon glyphicon-menu-up';
-                    tooltipElement = '';
-                    closeButton = 'glyphicon glyphicon-remove';
-                    normalButton = 'btn btn-primary';
-                    searchIcon = 'glyphicon glyphicon-search';
-                    searchDiv = '';
-                    buttonDirectionLeft = 'glyphicon glyphicon-menu-left';
-                    buttonDirectionRight = 'glyphicon glyphicon-menu-right';
-                    datePicker = ' date';
-
-                    switch (elementType) {
-                        case 'searchDiv':
-                            designClass = searchDiv;
-                            break;
-                        case 'searchIcon':
-                            designClass = searchIcon;
-                            break;
-                        case 'headerButton':
-                            designClass = navButton;
-                            break;
-                        case 'tableStriped':
-                            designClass = tableType;
-                            break;
-                        case 'sortIconDown':
-                            designClass = sortIconDown;
-                            break;
-                        case 'sortIconUp':
-                            designClass = sortIconUp;
-                            break;
-                        case 'tooltip':
-                            designClass = tooltipElement;
-                            break;
-                        case 'datePicker':
-                            designClass = datePicker;
-                            break;
-                        case 'buttonLeft':
-                            designClass = buttonDirectionLeft;
-                            break;
-                        case 'buttonRight':
-                            designClass = buttonDirectionRight;
-                            break;
-                        case 'closeButton':
-                            designClass = closeButton;
-                            break;
-                        case 'normalButton':
-                            designClass = normalButton;
-                            break;
+                    for (let key in bootstrapClasses) {
+                        if (key === elementType) {
+                            designClass = bootstrapClasses[key];
+                        }
                     }
                     break;
             }
