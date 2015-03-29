@@ -28,6 +28,29 @@
         }
     };
 
+    cet.services.getJsonData = (url) => {
+        return new Promise(function(resolve, reject) {
+            let req = new XMLHttpRequest();
+            req.open('GET', url);
+
+            req.onload = function() {
+                if (req.status == 200) {
+                    CET.defaultConfig.tableData = JSON.parse(req.response);
+                    CET.table.tableConstructor(CET.defaultConfig);
+                } else {
+                    reject(Error(req.statusText));
+                    throw new Error("Problems to find the JSON file in this url: " + url);
+                }
+            };
+            req.onerror = function() {
+                reject(Error(req.statusText));
+                throw new Error("Problems to find the JSON file in this url: " + url);
+            };
+            req.send();
+        });
+    };
+
+
     /**
      * get local data
      * @param cet
@@ -38,24 +61,10 @@
         CET.services.removeLibrary('firebaseDb');
         if (cet !== undefined) {
             if (localStorage.getItem("_tableData")) {
-
                 cet.tableData = JSON.parse(localStorage.getItem("_tableData"));
                 CET.table.tableConstructor(cet);
             } else {
-                let xmlhttp = new XMLHttpRequest();
-
-                xmlhttp.onreadystatechange = () => {
-                    if (xmlhttp.readyState === 4) {
-                        if (xmlhttp.status === 200) {
-                            cet.tableData = JSON.parse(xmlhttp.responseText);
-                            CET.table.tableConstructor(cet);
-                        } else {
-                            throw new Error("Could not load the data inside the " + cet.localDataUrl + " file");
-                        }
-                    }
-                };
-                xmlhttp.open("GET", cet.localDataUrl, false);
-                xmlhttp.send();
+                CET.services.getJsonData(cet.localDataUrl);
             }
         }
     };
@@ -87,20 +96,7 @@
     cet.services.apiRestData = (url) => {
         CET.services.removeLibrary('pouchDb');
         CET.services.removeLibrary('firebaseDb');
-        let xmlhttp = new XMLHttpRequest();
-
-        xmlhttp.onreadystatechange = () => {
-            if (xmlhttp.readyState === 4) {
-                if (xmlhttp.status === 200) {
-                    cet.tableData = JSON.parse(xmlhttp.responseText);
-                    CET.table.tableConstructor(cet);
-                } else {
-                    throw new Error("Could not load the data inside the " + url + " file");
-                }
-            }
-        };
-        xmlhttp.open("GET", url, false);
-        xmlhttp.send();
+        CET.services.getJsonData(url);
     };
 
     /**
