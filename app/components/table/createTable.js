@@ -13,6 +13,11 @@
     cet.table.assignClasses = (elementType) => {
         let design = null,
             designClass = null;
+        /**
+         * Assign class to elements
+         * materializeccs classes and bootstrap classes
+         * @param {string} design - 'm': materializecss, 'b': bootstrap.
+         */
 
         var classifyElement = (design) => {
             const materialzeClasses = {
@@ -43,6 +48,7 @@
                     closeButton: 'glyphicon glyphicon-remove',
                     normalButton: 'btn btn-primary'
                 };
+
             switch (design) {
                 case ('m'):
                     for (let key in materialzeClasses) {
