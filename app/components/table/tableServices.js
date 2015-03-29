@@ -36,7 +36,6 @@
             req.onload = function() {
                 if (req.status == 200) {
                     CET.defaultConfig.tableData = JSON.parse(req.response);
-                    CET.table.tableConstructor(CET.defaultConfig);
                 } else {
                     reject(Error(req.statusText));
                     throw new Error("Problems to find the JSON file in this url: " + url);
@@ -65,6 +64,7 @@
                 CET.table.tableConstructor(cet);
             } else {
                 CET.services.getJsonData(cet.localDataUrl);
+                CET.table.tableConstructor(CET.defaultConfig);
             }
         }
     };
@@ -97,6 +97,7 @@
         CET.services.removeLibrary('pouchDb');
         CET.services.removeLibrary('firebaseDb');
         CET.services.getJsonData(url);
+        CET.table.tableConstructor(CET.defaultConfig);
     };
 
     /**
