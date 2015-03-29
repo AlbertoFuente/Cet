@@ -48,12 +48,12 @@
 
         let lowerVal = val.toLowerCase();
 
-        if (val != '') {
+        if (val !== '') {
             for (let i in obj.defaultData) {
 
                 for (let f in obj.defaultData[i]) {
                     var data = obj.defaultData[i][f].data.toLowerCase();
-                    if (data.search(lowerVal) != -1) {
+                    if (data.search(lowerVal) !== -1) {
                         obj.newData.push({
                             'tr': i,
                             'tds': obj.defaultData[i]
