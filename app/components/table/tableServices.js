@@ -57,7 +57,6 @@
         });
     };
 
-
     /**
      * get local data
      * @param cet
@@ -188,45 +187,45 @@
                 } else {
                     CET.services.getJsonData(cet.pouchDbUrl).then((response) => {
                         CET.defaultConfig.tableData = JSON.parse(response);
-                        CET.table.tableConstructor(CET.defaultConfig);
+                        //CET.table.tableConstructor(CET.defaultConfig);
+                        let cetHead = cet.tableData[0].head,
+                            cetBody = cet.tableData[0].body;
+
+                        for (let i in cetHead) {
+                            db.put({
+                                '_id': i,
+                                'part': 'head',
+                                'title': cetHead[i]
+                            }).then((response) => {
+                                throw response;
+                            }).catch((err) => {
+                                throw new Error(err);
+                            });
+                        }
+
+                        for (let i in cetBody) {
+                            let trInfo = cetBody[i];
+                            for (let j in trInfo) {
+                                db.post({
+                                    'tdId': j,
+                                    'part': 'body',
+                                    'parentId': i,
+                                    'title': trInfo[j].data,
+                                    'edit': trInfo[j].edit,
+                                    'type': trInfo[j].type
+                                }).then((response) => {
+                                    throw response;
+                                }).catch((err) => {
+                                    throw new Error(err);
+                                });
+                            }
+                        }
+                        dbFetch(db);
                     }, (error) => {
                         throw new Error(tokenError + url);
                     });
                 }
             }
-            let cetHead = cet.tableData[0].head,
-                cetBody = cet.tableData[0].body;
-
-            for (let i in cetHead) {
-                db.put({
-                    '_id': i,
-                    'part': 'head',
-                    'title': cetHead[i]
-                }).then((response) => {
-                    throw response;
-                }).catch((err) => {
-                    throw new Error(err);
-                });
-            }
-
-            for (let i in cetBody) {
-                let trInfo = cetBody[i];
-                for (let j in trInfo) {
-                    db.post({
-                        'tdId': j,
-                        'part': 'body',
-                        'parentId': i,
-                        'title': trInfo[j].data,
-                        'edit': trInfo[j].edit,
-                        'type': trInfo[j].type
-                    }).then((response) => {
-                        throw response;
-                    }).catch((err) => {
-                        throw new Error(err);
-                    });
-                }
-            }
-            dbFetch(db);
         };
 
         // db info
