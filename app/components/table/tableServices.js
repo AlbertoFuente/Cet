@@ -2,6 +2,10 @@
     // CET.services object
     cet.services = {};
 
+    var tokenError = "Problems to find the JSON file in this url: ",
+        tokenErrorBrowser = "Your browser don't support LocalStorage!",
+        tokenErrorRead = "The read failed: ";
+
     /**
      * remove unused JS library
      */
@@ -71,7 +75,7 @@
                     CET.defaultConfig.tableData = JSON.parse(response);
                     CET.table.tableConstructor(CET.defaultConfig);
                 }, (error) => {
-                    throw new Error("Problems to find the JSON file in this url: " + url);
+                    throw new Error(tokenError + url);
                 });
             }
         }
@@ -91,7 +95,7 @@
                 cet.tableData = response.val();
                 CET.table.tableConstructor(cet);
             }, (errorObject) => {
-                throw new Error("The read failed: " + errorObject.code);
+                throw new Error(tokenErrorRead + errorObject.code);
             });
         }
     };
@@ -108,7 +112,7 @@
             CET.defaultConfig.tableData = JSON.parse(response);
             CET.table.tableConstructor(CET.defaultConfig);
         }, (error) => {
-            throw new Error("Problems to find the JSON file in this url: " + url);
+            throw new Error(tokenError + url);
         });
     };
 
@@ -186,7 +190,7 @@
                         CET.defaultConfig.tableData = JSON.parse(response);
                         CET.table.tableConstructor(CET.defaultConfig);
                     }, (error) => {
-                        throw new Error("Problems to find the JSON file in this url: " + url);
+                        throw new Error(tokenError + url);
                     });
                 }
             }
@@ -257,7 +261,7 @@
                 if (window.localStorage) {
                     localStorage.setItem('_tableData', JSON.stringify(cet.defaultConfig.tableData));
                 } else {
-                    throw new Error("Your browser don't support LocalStorage!");
+                    throw new Error(tokenErrorBrowser);
                 }
                 break;
             case 2:
