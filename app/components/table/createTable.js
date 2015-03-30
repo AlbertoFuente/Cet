@@ -3,6 +3,12 @@
     // CET.table object
     cet.table = {};
 
+    // Error Tokens
+    const tokenErrorLocalUrl = 'You must add _cetTable.localDataUrl in config.js',
+        tokenErrorFirebaseUrl = 'You must add _cetTable.fireBaseUrl in config.js',
+        tokenErrorApiRestUrl = 'You must add _cetTable.apiRestUrl in config.js',
+        tokenErrorPouchDBUrl = 'You must add _cetTable.pouchDbUrl in config.js';
+
     /**
      * table design assigning classes
      * - materializecss (m)
@@ -578,25 +584,29 @@
                     _cetTable.mode = 1;
                     CET.services.getLocalData(_cetTable);
                 } else {
-                    alert('You must add _cetTable.localDataUrl in config.js');
+                    alert(tokenErrorLocalUrl);
                 }
             } else if (_cetTable.dataOptions.fireBase) {
                 if (_cetTable.fireBaseUrl !== '') {
                     _cetTable.mode = 2;
                     CET.services.fireBaseData(_cetTable);
                 } else {
-                    alert('You must add _cetTable.fireBaseUrl in config.js');
+                    alert(tokenErrorFirebaseUrl);
                 }
             } else if (_cetTable.dataOptions.apiRest) {
                 if (_cetTable.apiRestUrl !== '') {
                     _cetTable.mode = 3;
                     CET.services.apiRestData(_cetTable.apiRestGetUrl);
                 } else {
-                    alert('You must add _cetTable.apiRestUrl in config.js');
+                    alert(tokenErrorApiRestUrl);
                 }
             } else if (_cetTable.dataOptions.pouchdb) {
-                _cetTable.mode = 4;
-                CET.services.pouchDB(_cetTable, _cetTable.pouchDbUrl);
+                if (_cetTable.pouchDbUrl !== '') {
+                    _cetTable.mode = 4;
+                    CET.services.pouchDB(_cetTable, _cetTable.pouchDbUrl);
+                } else {
+                    alert(tokenErrorPouchDBUrl);
+                }
             }
         }
     };

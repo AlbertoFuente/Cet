@@ -2,6 +2,7 @@
     // CET.services object
     cet.services = {};
 
+    // Error Tokens
     const tokenError = "Problems to find the JSON file in this url: ",
         tokenErrorBrowser = "Your browser don't support LocalStorage!",
         tokenErrorRead = "The read failed: ";
