@@ -38,13 +38,13 @@
      * @return promise
      */
 
-    cet.services.getJsonData = (url) => {
+    const getJsonData = (url) => {
         return new Promise((resolve, reject) => {
             let req = new XMLHttpRequest();
             req.open('GET', url);
 
             req.onload = () => {
-                if (req.status == 200) {
+                if (req.status === 200) {
                     resolve(req.response);
                 } else {
                     reject(Error(req.statusText));
@@ -70,7 +70,7 @@
                 cet.tableData = JSON.parse(localStorage.getItem("_tableData"));
                 CET.table.tableConstructor(cet);
             } else {
-                CET.services.getJsonData(cet.localDataUrl).then((response) => {
+                getJsonData(cet.localDataUrl).then((response) => {
                     CET.defaultConfig.tableData = JSON.parse(response);
                     CET.table.tableConstructor(CET.defaultConfig);
                 }, (error) => {
@@ -107,7 +107,7 @@
     cet.services.apiRestData = (url) => {
         CET.services.removeLibrary('pouchDb');
         CET.services.removeLibrary('firebaseDb');
-        CET.services.getJsonData(url).then((response) => {
+        getJsonData(url).then((response) => {
             CET.defaultConfig.tableData = JSON.parse(response);
             CET.table.tableConstructor(CET.defaultConfig);
         }, (error) => {
@@ -185,7 +185,7 @@
                     cet.tableData = JSON.parse(localStorage.getItem("_tableData"));
                     CET.table.tableConstructor(cet);
                 } else {
-                    CET.services.getJsonData(cet.pouchDbUrl).then((response) => {
+                    getJsonData(cet.pouchDbUrl).then((response) => {
                         CET.defaultConfig.tableData = JSON.parse(response);
                         //CET.table.tableConstructor(CET.defaultConfig);
                         let cetHead = cet.tableData[0].head,
