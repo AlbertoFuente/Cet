@@ -58,7 +58,7 @@ var CET = ((cet) => {
         sortable: false,
         // div container
         container: document.getElementById('tableContainer')
-    }
+    };
 
     return cet;
 })(CET || {});

@@ -10,7 +10,7 @@
     /**
      * Get local JSON data
      * @param  {string} url - url from local file
-     * @return promise
+     * @return Promise
      */
 
     const getJsonData = (url) => {
