@@ -2,6 +2,9 @@
     // CET.graphs object
     cet.graphs = {};
 
+    // Error Tokens 
+    const tokenErrorCreateGraph = 'Impossible to construct a graph of the selected data, try another selection.';
+
     /**
      * Show modal
      */
@@ -224,7 +227,7 @@
         var showError = (cont) => {
             let errLabel = document.createElement('label');
             errLabel.className = 'errLabel';
-            errLabel.innerHTML = 'Impossible to construct a graph of the selected data, try another selection.';
+            errLabel.innerHTML = tokenErrorCreateGraph;
             cont.appendChild(errLabel);
             setTimeout(() => {
                 cont.removeChild(errLabel);
