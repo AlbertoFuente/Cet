@@ -607,25 +607,6 @@
      */
 
     cet.init = (config) => {
-        // remove Materialize
-        let removeMaterialize = () => {
-            CET.services.removeLibrary('materializeScript');
-            CET.services.removeStyles('materializeStyles');
-        };
-        // remove Bootstrap
-        let removeBootstrap = () => {
-            CET.services.removeLibrary('bootstrapScript');
-            CET.services.removeStyles('bootstrapStyles');
-        };
-        if (cet.defaultConfig.materialize) {
-            removeBootstrap();
-        } else if (cet.defaultConfig.bootstrap) {
-            removeMaterialize();
-        } else {
-            removeBootstrap();
-            removeMaterialize();
-        }
-
         config = config || CET.defaultConfig;
         cet.table.createTable(config);
     };
