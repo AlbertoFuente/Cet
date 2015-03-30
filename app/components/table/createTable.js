@@ -50,7 +50,7 @@
                 };
 
             switch (design) {
-                case ('m'):
+                case 'm':
                     for (let key in materialzeClasses) {
                         if (key === elementType) {
                             designClass = materialzeClasses[key];
