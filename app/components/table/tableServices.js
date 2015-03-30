@@ -2,35 +2,9 @@
     // CET.services object
     cet.services = {};
 
-    var tokenError = "Problems to find the JSON file in this url: ",
+    const tokenError = "Problems to find the JSON file in this url: ",
         tokenErrorBrowser = "Your browser don't support LocalStorage!",
         tokenErrorRead = "The read failed: ";
-
-    /**
-     * remove unused JS library
-     */
-
-    cet.services.removeLibrary = (libId) => {
-        let docBody = document.body;
-        for (let i in docBody.childNodes) {
-            if (docBody.childNodes[i].tagName === 'SCRIPT' && docBody.childNodes[i].id === libId) {
-                docBody.childNodes[i].remove();
-            }
-        }
-    };
-
-    /**
-     * remove unused CSS library
-     */
-
-    cet.services.removeStyles = (cssId) => {
-        let docHead = document.head;
-        for (let i in docHead.childNodes) {
-            if (docHead.childNodes[i].tagName === 'LINK' && docHead.childNodes[i].id === cssId) {
-                docHead.childNodes[i].remove();
-            }
-        }
-    };
 
     /**
      * Get local JSON data
@@ -63,8 +37,6 @@
      */
 
     cet.services.getLocalData = (cet) => {
-        CET.services.removeLibrary('pouchDb');
-        CET.services.removeLibrary('firebaseDb');
         if (cet !== undefined) {
             if (localStorage.getItem("_tableData")) {
                 cet.tableData = JSON.parse(localStorage.getItem("_tableData"));
@@ -86,7 +58,6 @@
      */
 
     cet.services.fireBaseData = (cet) => {
-        CET.services.removeLibrary('pouchDb');
         if (cet !== undefined) {
             let myFirebaseRef = new Firebase(cet.fireBaseUrl);
 
@@ -105,8 +76,6 @@
      */
 
     cet.services.apiRestData = (url) => {
-        CET.services.removeLibrary('pouchDb');
-        CET.services.removeLibrary('firebaseDb');
         getJsonData(url).then((response) => {
             CET.defaultConfig.tableData = JSON.parse(response);
             CET.table.tableConstructor(CET.defaultConfig);
@@ -120,8 +89,6 @@
      */
 
     cet.services.pouchDB = (cet, url) => {
-        CET.services.removeLibrary('firebaseDb');
-
         var db = new PouchDB('cet_database');
 
         // table constructor
