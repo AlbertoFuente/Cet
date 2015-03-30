@@ -49,20 +49,20 @@
                     normalButton: 'btn btn-primary'
                 };
 
+            var setClasses = (mode) => {
+                for (let key in mode) {
+                    if (key === elementType) {
+                        designClass = materialzeClasses[key];
+                    }
+                }
+            };
+
             switch (design) {
                 case 'm':
-                    for (let key in materialzeClasses) {
-                        if (key === elementType) {
-                            designClass = materialzeClasses[key];
-                        }
-                    }
+                    setClasses(materialzeClasses);
                     break;
                 case 'b':
-                    for (let key in bootstrapClasses) {
-                        if (key === elementType) {
-                            designClass = bootstrapClasses[key];
-                        }
-                    }
+                    setClasses(bootstrapClasses);
                     break;
             }
         };
