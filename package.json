@@ -21,6 +21,7 @@
     "gulp": "^3.8.11",
     "gulp-babel": "^4.0.0",
     "gulp-concat": "^2.5.2",
+    "gulp-jasmine": "^2.0.1",
     "gulp-jslint": "^0.2.2",
     "gulp-minify-css": "^0.4.6",
     "gulp-rename": "^1.2.0",
