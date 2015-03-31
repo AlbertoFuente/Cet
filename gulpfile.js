@@ -7,7 +7,9 @@ var gulp = require('gulp'),
     minifyCSS = require('gulp-minify-css'),
     jslint = require('gulp-jslint'),
     rename = require('gulp-rename'),
-    jasmine = require('gulp-jasmine');
+    jasmine = require('gulp-jasmine'),
+    karma = require('gulp-karma'),
+    testFiles = ['js/cet.min.js'];
 
 gulp.task('default', function() {
 
@@ -26,8 +28,14 @@ gulp.task('default', function() {
         .pipe(uglify())
         .pipe(gulp.dest('js/'));
 
-    gulp.src('spec/test.js')
-        .pipe(jasmine());
+    /*gulp.src(testFiles)
+        .pipe(karma({
+            configFile: 'karma.conf.js',
+            action: 'run'
+        }))
+        .on('error', function(err) {
+            throw err;
+        });*/
 
     gulp.src('styles/styles.scss')
         .pipe(sass())
