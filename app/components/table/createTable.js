@@ -218,43 +218,35 @@
                     if (typeof cont === 'object' && cont.tagName === 'TABLE') cont.childNodes[1].appendChild(a.tr);
                 };
 
+                let mapPages = (newPage) => {
+                    obj.pages.map((a) => {
+                        if (newPage === a.page) {
+                            for (let i in _cetTable.container.childNodes) {
+                                insertTrs(a, _cetTable.container.childNodes[i]);
+                            }
+                        }
+                    });
+                };
+
                 switch (direction) {
                     case 'prev':
                         if (page !== 1) {
                             removeBody(oldTrs);
                             let newPage = page - 1;
-                            obj.pages.map((a) => {
-                                if (newPage === a.page) {
-                                    for (let i in _cetTable.container.childNodes) {
-                                        insertTrs(a, _cetTable.container.childNodes[i]);
-                                    }
-                                }
-                            });
+                            mapPages(newPage);
                         }
                         break;
                     case 'next':
                         if (page !== obj.numPages) {
                             removeBody(oldTrs);
                             let newPage = page + 1;
-                            obj.pages.map((a) => {
-                                if (newPage === a.page) {
-                                    for (let i in _cetTable.container.childNodes) {
-                                        insertTrs(a, _cetTable.container.childNodes[i]);
-                                    }
-                                }
-                            });
+                            mapPages(newPage);
                         }
                         break;
                     case 'num':
                         let num = parseInt(ev.srcElement.innerHTML);
                         removeBody(oldTrs);
-                        obj.pages.map((a) => {
-                            if (num === a.page) {
-                                for (let i in _cetTable.container.childNodes) {
-                                    insertTrs(a, _cetTable.container.childNodes[i]);
-                                }
-                            }
-                        });
+                        mapPages(num);
                         break;
                 }
 
