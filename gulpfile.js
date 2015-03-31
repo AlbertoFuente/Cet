@@ -6,7 +6,8 @@ var gulp = require('gulp'),
     sass = require('gulp-sass'),
     minifyCSS = require('gulp-minify-css'),
     jslint = require('gulp-jslint'),
-    rename = require('gulp-rename');
+    rename = require('gulp-rename'),
+    jasmine = require('gulp-jasmine');
 
 gulp.task('default', function() {
 
@@ -22,21 +23,11 @@ gulp.task('default', function() {
     ])
         .pipe(concat('cet.min.js'))
         .pipe(babel())
-        /*.pipe(jslint({
-            node: true,
-            evil: true,
-            nomen: true,
-            vars: true,
-            global: [],
-            predef: [],
-            reporter: 'default',
-            errorsOnly: false
-        }))
-        .on('error', function(error) {
-            console.error(String(error));
-        })*/
         .pipe(uglify())
         .pipe(gulp.dest('js/'));
+
+    gulp.src('spec/test.js')
+        .pipe(jasmine());
 
     gulp.src('styles/styles.scss')
         .pipe(sass())
