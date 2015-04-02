@@ -56,7 +56,8 @@ gulp.task('watch', function() {
         'app/components/table/listTableOptions.js',
         'app/components/table/plugins/graphs/tableGraphs.js',
         'app/components/table/plugins/downloads/tableDownloads.js',
-        'app/components/table/plugins/searcher/tableSearcher.js'
+        'app/components/table/plugins/searcher/tableSearcher.js',
+        'spec/test.js'
     ], function() {
         gulp.start('default');
     });
