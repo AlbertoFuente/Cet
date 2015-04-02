@@ -6,7 +6,9 @@ var gulp = require('gulp'),
     sass = require('gulp-sass'),
     minifyCSS = require('gulp-minify-css'),
     jslint = require('gulp-jslint'),
-    rename = require('gulp-rename');
+    rename = require('gulp-rename'),
+    karma = require('gulp-karma'),
+    testFiles = ['js/cet.min.js', 'spec/test.js'];
 
 gulp.task('default', function() {
 
@@ -32,6 +34,15 @@ gulp.task('default', function() {
         }))
         .pipe(rename('styles.min.css'))
         .pipe(gulp.dest('css'))
+
+    gulp.src(testFiles)
+        .pipe(karma({
+            configFile: 'karma.conf.js',
+            action: 'run'
+        }))
+        .on('error', function(err) {
+            throw err;
+        });
 });
 
 
