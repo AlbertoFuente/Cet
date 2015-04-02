@@ -33,7 +33,19 @@ describe('Test CET.defaultConfig vars', function() {
 		// CET.defaultConfig.listOptions.downloads
 		downloads = global.defaultConfig.listOptions.downloads,
 		// CET.defaultConfig.listOptions.column_data_sum
-		sum = global.defaultConfig.listOptions.column_data_sum;
+		sum = global.defaultConfig.listOptions.column_data_sum,
+
+		// CET.defaultConfig.dataOptions
+		dataOptions = global.defaultConfig.dataOptions,
+		// CET.defaultConfig.localDataUrl
+		dataOptionsLocalUrl = global.defaultConfig.localDataUrl,
+		// CET.defaultConfig.fireBaseUrl
+		dataOptionsFireUrl = global.defaultConfig.fireBaseUrl,
+		// CET.defaultConfig.pouchDbUrl
+		dataOptionsPouchUrl = global.defaultConfig.pouchDbUrl,
+
+		// CET.defaultConfig.container
+		container = global.defaultConfig.container;
 
 	it('CET.defaultCongig.materailize and CET.defaultCongig.bootstrap must be Booleans', function() {
 		expect(mat).toMatch(/true|false/);
@@ -116,5 +128,21 @@ describe('Test CET.defaultConfig vars', function() {
 			expect(head).toBe(true);
 			expect(headOptions).toBe(true);
 		}
+	});
+
+	it('Test if CET.defaultConfig.dataOptions is an object and more...', function() {
+		expect(dataOptions).toEqual(jasmine.any(Object));
+
+		if (dataOptions.localData) {
+			expect(dataOptionsLocalUrl).toBeTruthy();
+		}
+
+		if (dataOptions.fireBase) {
+			expect(dataOptionsFireUrl).toBeTruthy();
+		}
+	});
+
+	it('Test if CET.defaultConfig.container is not empty', function() {
+		expect(container).not.toBeTruthy();
 	});
 });
