@@ -62,7 +62,8 @@ describe('Test CET.defaultConfig vars', function() {
 
 		cetTable = global.table, // CET.table
 		cetTableAssignClasses = global.table.assignClasses, // CET.table.assignClasses
-		cetTableCreateTable = global.table.createTable; // CET.table.createTable
+		cetTableCreateTable = global.table.createTable, // CET.table.createTable
+		cetTableTableConstructor = global.table.tableConstructor; // CET.table.tableConstructor
 
 	it('Test if CET.defaultCongig.materailize and CET.defaultCongig.bootstrap are be Booleans', function() {
 		expect(mat).toMatch(/true|false/);
@@ -274,5 +275,9 @@ describe('Test CET.defaultConfig vars', function() {
 
 	it('Test if CET.table.createTable is a function', function() {
 		expect(cetTableCreateTable).toEqual(jasmine.any(Function));
+	});
+
+	it('Test if CET.table.tableConstructor is a function', function() {
+		expect(cetTableTableConstructor).toEqual(jasmine.any(Function));
 	});
 });
