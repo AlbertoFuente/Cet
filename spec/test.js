@@ -5,47 +5,30 @@
 describe('Test CET.defaultConfig vars', function() {
 	// CET
 	var global = CET,
-		// CET.defaultCongig
-		globalDC = global.defaultConfig,
-		// CET.defaultCongig.materailize
-		mat = globalDC.materialize,
-		// CET.defaultCongig.bootstrap
-		bot = globalDC.bootstrap,
-		// CET.defaultConfig.header
-		head = global.defaultConfig.header,
-		// CET.defaultConfig.options
-		headOptions = global.defaultConfig.options,
-		// CET.defatultConfig.tooltips
-		tooltips = global.defaultConfig.tooltips,
-		// CET.defaultConfig.search
-		search = global.defaultConfig.search,
-		// CET.defaultConfig.limitRows
-		limitRows = global.defaultConfig.limitRows,
-		// CET.defaultConfig.effects
-		effects = global.defaultConfig.effects,
-		// CET.defaultConfig.sortable
-		sort = global.defaultConfig.sortable,
+		globalDC = global.defaultConfig, // CET.defaultCongig
+		mat = globalDC.materialize, // CET.defaultCongig.materailize
+		bot = globalDC.bootstrap, // CET.defaultCongig.bootstrap
+		head = global.defaultConfig.header, // CET.defaultConfig.header
+		headOptions = global.defaultConfig.options, // CET.defaultConfig.options
+		tooltips = global.defaultConfig.tooltips, // CET.defatultConfig.tooltips
+		search = global.defaultConfig.search, // CET.defaultConfig.search
+		limitRows = global.defaultConfig.limitRows, // CET.defaultConfig.limitRows
+		effects = global.defaultConfig.effects, // CET.defaultConfig.effects
+		sort = global.defaultConfig.sortable, // CET.defaultConfig.sortable
 
-		// CET.defaultConfig.listOptions
-		listOptions = global.defaultConfig.listOptions,
-		// CET.defaultConfig.listOptions.graphs
-		graphs = global.defaultConfig.listOptions.graphs,
-		// CET.defaultConfig.listOptions.downloads
-		downloads = global.defaultConfig.listOptions.downloads,
-		// CET.defaultConfig.listOptions.column_data_sum
-		sum = global.defaultConfig.listOptions.column_data_sum,
+		listOptions = global.defaultConfig.listOptions, // CET.defaultConfig.listOptions
+		graphs = global.defaultConfig.listOptions.graphs, // CET.defaultConfig.listOptions.graphs
+		downloads = global.defaultConfig.listOptions.downloads, // CET.defaultConfig.listOptions.downloads
+		sum = global.defaultConfig.listOptions.column_data_sum, // CET.defaultConfig.listOptions.column_data_sum
 
-		// CET.defaultConfig.dataOptions
-		dataOptions = global.defaultConfig.dataOptions,
-		// CET.defaultConfig.localDataUrl
-		dataOptionsLocalUrl = global.defaultConfig.localDataUrl,
-		// CET.defaultConfig.fireBaseUrl
-		dataOptionsFireUrl = global.defaultConfig.fireBaseUrl,
-		// CET.defaultConfig.pouchDbUrl
-		dataOptionsPouchUrl = global.defaultConfig.pouchDbUrl,
+		dataOptions = global.defaultConfig.dataOptions, // CET.defaultConfig.dataOptions
+		dataOptionsLocalUrl = global.defaultConfig.localDataUrl, // CET.defaultConfig.localDataUrl
+		dataOptionsFireUrl = global.defaultConfig.fireBaseUrl, // CET.defaultConfig.fireBaseUrl
+		dataOptionsPouchUrl = global.defaultConfig.pouchDbUrl, // CET.defaultConfig.pouchDbUrl
+		dataOptionsApiGetUrl = global.defaultConfig.apiRestGetUrl, // CET.defaultConfig.apiRestGetUrl
+		dataOptionsApiPostUrl = global.defaultConfig.apiRestPostUrl, // CET.defaultConfig.apiRestPostUrl
 
-		// CET.defaultConfig.container
-		container = global.defaultConfig.container;
+		container = global.defaultConfig.container; // CET.defaultConfig.container
 
 	it('Test if CET.defaultCongig.materailize and CET.defaultCongig.bootstrap are be Booleans', function() {
 		expect(mat).toMatch(/true|false/);
@@ -115,7 +98,7 @@ describe('Test CET.defaultConfig vars', function() {
 	it('Test if CET.defaultConfig.listOptions.downloads is boolean and if is true, check if CET.defaultConfig.listOptions & CET.defaultConfig.header are true too', function() {
 		expect(downloads).toMatch(/true|false/);
 
-		if (graphs) {
+		if (downloads) {
 			expect(head).toBe(true);
 			expect(headOptions).toBe(true);
 		}
@@ -124,7 +107,7 @@ describe('Test CET.defaultConfig vars', function() {
 	it('Test if CET.defaultConfig.listOptions.column_data_sum is boolean and if is true, check if CET.defaultConfig.listOptions & CET.defaultConfig.header are true too', function() {
 		expect(sum).toMatch(/true|false/);
 
-		if (graphs) {
+		if (sum) {
 			expect(head).toBe(true);
 			expect(headOptions).toBe(true);
 		}
@@ -139,6 +122,15 @@ describe('Test CET.defaultConfig vars', function() {
 
 		if (dataOptions.fireBase) {
 			expect(dataOptionsFireUrl).toBeTruthy();
+		}
+
+		if (dataOptions.apiRest) {
+			expect(dataOptionsApiGetUrl).toBeTruthy();
+			expect(dataOptionsApiPostUrl).toBeTruthy();
+		}
+
+		if (dataOptions.pouchDbUrl) {
+			expect(dataOptionsPouchUrl).toBeTruthy();
 		}
 	});
 
