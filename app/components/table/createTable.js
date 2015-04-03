@@ -86,6 +86,307 @@
     };
 
     /**
+     * table constructor
+     * @param _cetTable {Object}
+     */
+
+    cet.table.tableConstructor = (_cetTable) => {
+
+        if (_cetTable !== undefined) {
+            if (_cetTable.header) {
+
+                let tableHeader = document.createElement('div');
+                tableHeader.className = 'tableHeader';
+
+                let tableHeaderTitle = document.createElement('label');
+                tableHeaderTitle.className = 'tableHeaderTitle';
+                tableHeaderTitle.innerHTML = _cetTable.title;
+
+                if (_cetTable.search) {
+
+                    let searchDiv = document.createElement('div');
+                    searchDiv.className = cet.table.assignClasses('searchDiv') + ' searchTable';
+
+                    let icon = document.createElement('i');
+                    icon.className = cet.table.assignClasses('searchIcon');
+                    let searchInput = document.createElement('input');
+                    searchInput.className = 'validate';
+                    searchInput.type = 'text';
+                    searchInput.id = 'icon_prefix';
+                    let inputLabel = document.createElement('label');
+                    inputLabel.setAttribute('for', 'icon_prefix');
+
+                    searchDiv.appendChild(icon);
+                    searchDiv.appendChild(searchInput);
+                    searchDiv.appendChild(inputLabel);
+
+                    tableHeader.appendChild(searchDiv);
+
+                    searchInput.onchange = () => {
+                        CET.search.tableSearcher(searchInput.value, _cetTable.tableData);
+                    }
+                }
+
+                if (_cetTable.options) {
+                    let tableHeaderOptions = document.createElement('button');
+                    tableHeaderOptions.className = 'normalButton ' + cet.table.assignClasses('headerButton');
+                    tableHeader.appendChild(tableHeaderOptions);
+
+                    let optionsContainer = document.createElement('div');
+                    optionsContainer.className = 'optionsContainer';
+                    optionsContainer.id = 'optionsContainer';
+                    optionsContainer.style.display = 'none';
+
+                    if (_cetTable.listOptions !== undefined && typeof _cetTable.listOptions === 'object') {
+                        CET.options.listTableOptions(CET, optionsContainer, tableHeader);
+                    }
+
+                    tableHeaderOptions.onclick = () => {
+
+                        let elementPosition = tableHeaderOptions.getBoundingClientRect();
+
+                        optionsContainer.style.top = (elementPosition.top + 38) + 'px';
+                        optionsContainer.style.left = (elementPosition.left - 164) + 'px';
+
+                        if (tableHeaderOptions.className === 'normalButton ' + cet.table.assignClasses('headerButton')) {
+                            tableHeaderOptions.className = 'clickedButton ' + cet.table.assignClasses('headerButton');
+                            if (document.getElementById('optionsContainer')) {
+                                optionsContainer.style.display = 'block';
+                            } else {
+                                document.body.appendChild(optionsContainer);
+                                optionsContainer.style.display = 'block';
+                            }
+                        } else {
+                            tableHeaderOptions.className = 'normalButton ' + cet.table.assignClasses('headerButton');
+                            optionsContainer.style.display = 'none';
+                        }
+                    }
+                }
+
+                tableHeader.appendChild(tableHeaderTitle);
+                _cetTable.container.appendChild(tableHeader);
+                _cetTable.container.className = 'cet-table-cnt';
+            }
+
+            let childLength = 0;
+
+            if (_cetTable.header) childLength = 1;
+
+            if (_cetTable.container.childNodes.length === childLength) {
+                // table
+                let table = document.createElement('table');
+                table.id = 'cetTable';
+                table.className = cet.table.assignClasses('tableStriped');
+
+                // HEAD
+
+                let tableHead = document.createElement('tHead'),
+                    headContent = _cetTable.tableData.head || _cetTable.tableData[0].head;
+
+                for (let k in headContent) {
+                    if (headContent.hasOwnProperty(k) && typeof headContent[k] !== 'function') {
+                        let th = document.createElement('th');
+                        th.className = k;
+                        let thLabel = document.createElement('span');
+                        thLabel.innerHTML = headContent[k];
+                        thLabel.value = headContent[k];
+                        th.setAttribute('data-field', headContent[k]);
+                        th.appendChild(thLabel);
+
+                        if (_cetTable.sortable) {
+                            let sortIcon = document.createElement('i');
+                            sortIcon.className = cet.table.assignClasses('sortIconDown') + ' sortIcon';
+                            th.appendChild(sortIcon);
+                        }
+                        tableHead.appendChild(th);
+                    }
+                }
+                table.appendChild(tableHead);
+
+                // END HEAD
+
+                // BODY
+
+                let tableBody = document.createElement('tBody'),
+                    bodyContent = _cetTable.tableData.body || _cetTable.tableData[0].body,
+                    pager = false,
+                    trObj = {},
+                    tdObjSorted = {};
+
+                trObj.tr = [];
+                trObj.pages = [];
+
+                _cetTable.limitRows > 0 ? pager = true : pager = false;
+
+                let bodyKeys = Object.keys(bodyContent).sort(),
+                    newBody = {};
+
+                bodyKeys.map((a) => {
+                    newBody[a] = bodyContent[a];
+                });
+
+                for (let key in newBody) {
+                    if (newBody.hasOwnProperty(key) && typeof newBody[key] !== 'function') {
+                        let tr = document.createElement('tr');
+                        tr.className = key;
+
+                        let tdKeys = Object.keys(newBody[key]).sort();
+
+                        tdKeys.map((a) => {
+                            tdObjSorted[a] = newBody[key][a];
+                        });
+
+                        for (let p in tdObjSorted) {
+                            let td = document.createElement('td');
+                            td.className = p;
+                            if (tdObjSorted[p].data !== undefined && tdObjSorted[p].type !== undefined) {
+                                if (tdObjSorted[p].edit) {
+                                    let input = document.createElement('input'),
+                                        span = document.createElement('span');
+                                    span.style.display = 'none';
+                                    if (_cetTable.tooltips) {
+                                        input.className = 'input_edit ' + cet.table.assignClasses('tooltip');
+                                        input.setAttribute('data-position', 'bottom');
+                                        input.setAttribute('data-delay', '30');
+                                        input.setAttribute('data-tooltip', 'Edit field: ' + tdObjSorted[p].data);
+                                        input.setAttribute('value', tdObjSorted[p].data);
+                                        span.innerHTML = tdObjSorted[p].data;
+                                        span.setAttribute('value', tdObjSorted[p].data);
+                                    } else {
+                                        input.className = 'input_edit';
+                                        input.setAttribute('value', tdObjSorted[p].data);
+                                        span.innerHTML = tdObjSorted[p].data;
+                                        span.setAttribute('value', tdObjSorted[p].data);
+                                    }
+                                    if (tdObjSorted[p].type === 'date') {
+                                        input.className = input.className + cet.table.assignClasses('datePicker');
+                                        input.type = 'text';
+                                        input.setAttribute('value', tdObjSorted[p].data);
+                                        input.setAttribute('placeholder', tdObjSorted[p].data);
+                                        span.innerHTML = tdObjSorted[p].data;
+                                        span.setAttribute('value', tdObjSorted[p].data);
+                                    } else {
+                                        input.type = tdObjSorted[p].type;
+                                        input.setAttribute('value', tdObjSorted[p].data);
+                                        span.innerHTML = tdObjSorted[p].data;
+                                        span.setAttribute('value', tdObjSorted[p].data);
+                                    }
+
+                                    td.appendChild(input);
+                                    td.appendChild(span);
+                                } else {
+                                    let noEditLabel = document.createElement('span');
+                                    noEditLabel.className = 'noEditableField';
+                                    noEditLabel.innerHTML = tdObjSorted[p].data;
+                                    noEditLabel.value = tdObjSorted[p].data;
+                                    if (_cetTable.tooltips) {
+                                        noEditLabel.className = noEditLabel.className + ' ' + cet.table.assignClasses('tooltip');
+                                        noEditLabel.setAttribute('data-position', 'bottom');
+                                        noEditLabel.setAttribute('data-delay', '30');
+                                        td.appendChild(noEditLabel);
+                                        let labelParent = noEditLabel.parentNode.className,
+                                            sliceNum = labelParent.slice(-1),
+                                            thClass = 'th' + sliceNum,
+                                            thText = tableHead.getElementsByClassName(thClass)[0].innerText;
+                                        noEditLabel.setAttribute('data-tooltip', thText + ': ' + tdObjSorted[p].data);
+                                    } else {
+                                        td.appendChild(noEditLabel);
+                                    }
+                                }
+                            }
+                            tr.appendChild(td);
+                        }
+                        if (pager) {
+                            trObj.tr.push(tr);
+                            trObj.tbBody = tableBody;
+                            let num = tr.className.slice(-1);
+                            if (num <= _cetTable.limitRows) tableBody.appendChild(tr);
+                        } else {
+                            tableBody.appendChild(tr);
+                        }
+                    }
+                }
+
+                table.appendChild(tableBody);
+
+                // END BODY
+
+                _cetTable.container.appendChild(table);
+
+                if (pager) _cetTable.showPager(trObj);
+
+                /**
+                 * Events
+                 * @type {NodeList}
+                 */
+
+                let inputs = table.getElementsByTagName('input'),
+                    icons = table.getElementsByTagName('i'),
+                    spans = table.getElementsByTagName('span');
+                // inputs events
+                for (let i = 0; i < inputs.length; i++) {
+                    // change
+                    inputs[i].onchange = () => _cetTable.inputChange(inputs[i]);
+
+                    if (_cetTable.effects) {
+                        // hover
+                        inputs[i].onmouseover = () => _cetTable.mouseEffects(inputs[i], 'hover');
+                        inputs[i].parentNode.onmouseover = () => _cetTable.mouseEffects(inputs[i], 'hover');
+
+                        // out
+                        inputs[i].parentNode.onmouseout = () => _cetTable.mouseEffects(inputs[i], 'out');
+                    }
+                }
+                // spans events
+                for (let i = 0; i < spans.length; i++) {
+                    if (_cetTable.effects) {
+                        // hover
+                        spans[i].onmouseover = () => _cetTable.mouseEffects(spans[i], 'hover');
+                        spans[i].parentNode.onmouseover = () => _cetTable.mouseEffects(spans[i], 'hover');
+
+                        // out
+                        spans[i].parentNode.onmouseout = () => _cetTable.mouseEffects(spans[i], 'out');
+                    }
+                }
+                // icons events
+                for (let i = 0; i < icons.length; i++) {
+                    // click
+                    icons[i].onclick = () => {
+                        let thClass = icons[i].parentNode.className,
+                            tdNum = thClass.slice(-1),
+                            tdClass = 'td' + tdNum,
+                            eventName = 'sort',
+                            downClass = cet.table.assignClasses('sortIconDown') + ' sortIcon',
+                            upClass = cet.table.assignClasses('sortIconUp') + ' sortIcon',
+                            ics = table.getElementsByTagName('i'),
+                            status = 'down';
+                        // check class
+                        if (icons[i].className === downClass) {
+                            for (let i = 0; i < ics.length; i++) {
+                                ics[i].className = upClass;
+                                status = 'up';
+                            }
+                        } else {
+                            for (let i = 0; i < ics.length; i++) {
+                                ics[i].className = downClass;
+                                status = 'down';
+                            }
+                        }
+                        CET.effects.tableEffects(thClass, tdClass, eventName, table, status);
+                    }
+                }
+                // datepicker
+                if (_cetTable.materialize) $('.datepicker').pickadate();
+
+                // return table
+                return _cetTable.container;
+            } else {
+                return false;
+            }
+        }
+    };
+
+    /**
      * Create Table
      * @param _cetTable {object}
      */
@@ -266,307 +567,6 @@
                 'numberPages': obj.numPages,
                 'pages': obj.pages
             };
-        };
-
-        /**
-         * table constructor
-         * @param _cetTable {Object}
-         */
-
-        cet.table.tableConstructor = (_cetTable) => {
-
-            if (_cetTable !== undefined) {
-                if (_cetTable.header) {
-
-                    let tableHeader = document.createElement('div');
-                    tableHeader.className = 'tableHeader';
-
-                    let tableHeaderTitle = document.createElement('label');
-                    tableHeaderTitle.className = 'tableHeaderTitle';
-                    tableHeaderTitle.innerHTML = _cetTable.title;
-
-                    if (_cetTable.search) {
-
-                        let searchDiv = document.createElement('div');
-                        searchDiv.className = cet.table.assignClasses('searchDiv') + ' searchTable';
-
-                        let icon = document.createElement('i');
-                        icon.className = cet.table.assignClasses('searchIcon');
-                        let searchInput = document.createElement('input');
-                        searchInput.className = 'validate';
-                        searchInput.type = 'text';
-                        searchInput.id = 'icon_prefix';
-                        let inputLabel = document.createElement('label');
-                        inputLabel.setAttribute('for', 'icon_prefix');
-
-                        searchDiv.appendChild(icon);
-                        searchDiv.appendChild(searchInput);
-                        searchDiv.appendChild(inputLabel);
-
-                        tableHeader.appendChild(searchDiv);
-
-                        searchInput.onchange = () => {
-                            CET.search.tableSearcher(searchInput.value, _cetTable.tableData);
-                        }
-                    }
-
-                    if (_cetTable.options) {
-                        let tableHeaderOptions = document.createElement('button');
-                        tableHeaderOptions.className = 'normalButton ' + cet.table.assignClasses('headerButton');
-                        tableHeader.appendChild(tableHeaderOptions);
-
-                        let optionsContainer = document.createElement('div');
-                        optionsContainer.className = 'optionsContainer';
-                        optionsContainer.id = 'optionsContainer';
-                        optionsContainer.style.display = 'none';
-
-                        if (_cetTable.listOptions !== undefined && typeof _cetTable.listOptions === 'object') {
-                            CET.options.listTableOptions(CET, optionsContainer, tableHeader);
-                        }
-
-                        tableHeaderOptions.onclick = () => {
-
-                            let elementPosition = tableHeaderOptions.getBoundingClientRect();
-
-                            optionsContainer.style.top = (elementPosition.top + 38) + 'px';
-                            optionsContainer.style.left = (elementPosition.left - 164) + 'px';
-
-                            if (tableHeaderOptions.className === 'normalButton ' + cet.table.assignClasses('headerButton')) {
-                                tableHeaderOptions.className = 'clickedButton ' + cet.table.assignClasses('headerButton');
-                                if (document.getElementById('optionsContainer')) {
-                                    optionsContainer.style.display = 'block';
-                                } else {
-                                    document.body.appendChild(optionsContainer);
-                                    optionsContainer.style.display = 'block';
-                                }
-                            } else {
-                                tableHeaderOptions.className = 'normalButton ' + cet.table.assignClasses('headerButton');
-                                optionsContainer.style.display = 'none';
-                            }
-                        }
-                    }
-
-                    tableHeader.appendChild(tableHeaderTitle);
-                    _cetTable.container.appendChild(tableHeader);
-                    _cetTable.container.className = 'cet-table-cnt';
-                }
-
-                let childLength = 0;
-
-                if (_cetTable.header) childLength = 1;
-
-                if (_cetTable.container.childNodes.length === childLength) {
-                    // table
-                    let table = document.createElement('table');
-                    table.id = 'cetTable';
-                    table.className = cet.table.assignClasses('tableStriped');
-
-                    // HEAD
-
-                    let tableHead = document.createElement('tHead'),
-                        headContent = _cetTable.tableData.head || _cetTable.tableData[0].head;
-
-                    for (let k in headContent) {
-                        if (headContent.hasOwnProperty(k) && typeof headContent[k] !== 'function') {
-                            let th = document.createElement('th');
-                            th.className = k;
-                            let thLabel = document.createElement('span');
-                            thLabel.innerHTML = headContent[k];
-                            thLabel.value = headContent[k];
-                            th.setAttribute('data-field', headContent[k]);
-                            th.appendChild(thLabel);
-
-                            if (_cetTable.sortable) {
-                                let sortIcon = document.createElement('i');
-                                sortIcon.className = cet.table.assignClasses('sortIconDown') + ' sortIcon';
-                                th.appendChild(sortIcon);
-                            }
-                            tableHead.appendChild(th);
-                        }
-                    }
-                    table.appendChild(tableHead);
-
-                    // END HEAD
-
-                    // BODY
-
-                    let tableBody = document.createElement('tBody'),
-                        bodyContent = _cetTable.tableData.body || _cetTable.tableData[0].body,
-                        pager = false,
-                        trObj = {},
-                        tdObjSorted = {};
-
-                    trObj.tr = [];
-                    trObj.pages = [];
-
-                    _cetTable.limitRows > 0 ? pager = true : pager = false;
-
-                    let bodyKeys = Object.keys(bodyContent).sort(),
-                        newBody = {};
-
-                    bodyKeys.map((a) => {
-                        newBody[a] = bodyContent[a];
-                    });
-
-                    for (let key in newBody) {
-                        if (newBody.hasOwnProperty(key) && typeof newBody[key] !== 'function') {
-                            let tr = document.createElement('tr');
-                            tr.className = key;
-
-                            let tdKeys = Object.keys(newBody[key]).sort();
-
-                            tdKeys.map((a) => {
-                                tdObjSorted[a] = newBody[key][a];
-                            });
-
-                            for (let p in tdObjSorted) {
-                                let td = document.createElement('td');
-                                td.className = p;
-                                if (tdObjSorted[p].data !== undefined && tdObjSorted[p].type !== undefined) {
-                                    if (tdObjSorted[p].edit) {
-                                        let input = document.createElement('input'),
-                                            span = document.createElement('span');
-                                        span.style.display = 'none';
-                                        if (_cetTable.tooltips) {
-                                            input.className = 'input_edit ' + cet.table.assignClasses('tooltip');
-                                            input.setAttribute('data-position', 'bottom');
-                                            input.setAttribute('data-delay', '30');
-                                            input.setAttribute('data-tooltip', 'Edit field: ' + tdObjSorted[p].data);
-                                            input.setAttribute('value', tdObjSorted[p].data);
-                                            span.innerHTML = tdObjSorted[p].data;
-                                            span.setAttribute('value', tdObjSorted[p].data);
-                                        } else {
-                                            input.className = 'input_edit';
-                                            input.setAttribute('value', tdObjSorted[p].data);
-                                            span.innerHTML = tdObjSorted[p].data;
-                                            span.setAttribute('value', tdObjSorted[p].data);
-                                        }
-                                        if (tdObjSorted[p].type === 'date') {
-                                            input.className = input.className + cet.table.assignClasses('datePicker');
-                                            input.type = 'text';
-                                            input.setAttribute('value', tdObjSorted[p].data);
-                                            input.setAttribute('placeholder', tdObjSorted[p].data);
-                                            span.innerHTML = tdObjSorted[p].data;
-                                            span.setAttribute('value', tdObjSorted[p].data);
-                                        } else {
-                                            input.type = tdObjSorted[p].type;
-                                            input.setAttribute('value', tdObjSorted[p].data);
-                                            span.innerHTML = tdObjSorted[p].data;
-                                            span.setAttribute('value', tdObjSorted[p].data);
-                                        }
-
-                                        td.appendChild(input);
-                                        td.appendChild(span);
-                                    } else {
-                                        let noEditLabel = document.createElement('span');
-                                        noEditLabel.className = 'noEditableField';
-                                        noEditLabel.innerHTML = tdObjSorted[p].data;
-                                        noEditLabel.value = tdObjSorted[p].data;
-                                        if (_cetTable.tooltips) {
-                                            noEditLabel.className = noEditLabel.className + ' ' + cet.table.assignClasses('tooltip');
-                                            noEditLabel.setAttribute('data-position', 'bottom');
-                                            noEditLabel.setAttribute('data-delay', '30');
-                                            td.appendChild(noEditLabel);
-                                            let labelParent = noEditLabel.parentNode.className,
-                                                sliceNum = labelParent.slice(-1),
-                                                thClass = 'th' + sliceNum,
-                                                thText = tableHead.getElementsByClassName(thClass)[0].innerText;
-                                            noEditLabel.setAttribute('data-tooltip', thText + ': ' + tdObjSorted[p].data);
-                                        } else {
-                                            td.appendChild(noEditLabel);
-                                        }
-                                    }
-                                }
-                                tr.appendChild(td);
-                            }
-                            if (pager) {
-                                trObj.tr.push(tr);
-                                trObj.tbBody = tableBody;
-                                let num = tr.className.slice(-1);
-                                if (num <= _cetTable.limitRows) tableBody.appendChild(tr);
-                            } else {
-                                tableBody.appendChild(tr);
-                            }
-                        }
-                    }
-
-                    table.appendChild(tableBody);
-
-                    // END BODY
-
-                    _cetTable.container.appendChild(table);
-
-                    if (pager) _cetTable.showPager(trObj);
-
-                    /**
-                     * Events
-                     * @type {NodeList}
-                     */
-
-                    let inputs = table.getElementsByTagName('input'),
-                        icons = table.getElementsByTagName('i'),
-                        spans = table.getElementsByTagName('span');
-                    // inputs events
-                    for (let i = 0; i < inputs.length; i++) {
-                        // change
-                        inputs[i].onchange = () => _cetTable.inputChange(inputs[i]);
-
-                        if (_cetTable.effects) {
-                            // hover
-                            inputs[i].onmouseover = () => _cetTable.mouseEffects(inputs[i], 'hover');
-                            inputs[i].parentNode.onmouseover = () => _cetTable.mouseEffects(inputs[i], 'hover');
-
-                            // out
-                            inputs[i].parentNode.onmouseout = () => _cetTable.mouseEffects(inputs[i], 'out');
-                        }
-                    }
-                    // spans events
-                    for (let i = 0; i < spans.length; i++) {
-                        if (_cetTable.effects) {
-                            // hover
-                            spans[i].onmouseover = () => _cetTable.mouseEffects(spans[i], 'hover');
-                            spans[i].parentNode.onmouseover = () => _cetTable.mouseEffects(spans[i], 'hover');
-
-                            // out
-                            spans[i].parentNode.onmouseout = () => _cetTable.mouseEffects(spans[i], 'out');
-                        }
-                    }
-                    // icons events
-                    for (let i = 0; i < icons.length; i++) {
-                        // click
-                        icons[i].onclick = () => {
-                            let thClass = icons[i].parentNode.className,
-                                tdNum = thClass.slice(-1),
-                                tdClass = 'td' + tdNum,
-                                eventName = 'sort',
-                                downClass = cet.table.assignClasses('sortIconDown') + ' sortIcon',
-                                upClass = cet.table.assignClasses('sortIconUp') + ' sortIcon',
-                                ics = table.getElementsByTagName('i'),
-                                status = 'down';
-                            // check class
-                            if (icons[i].className === downClass) {
-                                for (let i = 0; i < ics.length; i++) {
-                                    ics[i].className = upClass;
-                                    status = 'up';
-                                }
-                            } else {
-                                for (let i = 0; i < ics.length; i++) {
-                                    ics[i].className = downClass;
-                                    status = 'down';
-                                }
-                            }
-                            CET.effects.tableEffects(thClass, tdClass, eventName, table, status);
-                        }
-                    }
-                    // datepicker
-                    if (_cetTable.materialize) $('.datepicker').pickadate();
-
-                    // return table
-                    return _cetTable.container;
-                } else {
-                    return false;
-                }
-            }
         };
 
         if (_cetTable !== undefined) {
