@@ -42,7 +42,27 @@ describe('Test CET.defaultConfig vars', function() {
 		cetGraphs = global.graphs, // CET.graphs
 		cetGraphsPrepareGraphData = global.graphs.prepareGraphData, // CET.graphs.prepareGraphData
 		cetGraphsShowGraph = global.graphs.showGraph, // CET.graphs.showGraph
-		cetGraphsShowModal = global.graphs.showModal; // CET.graphs.showModal
+		cetGraphsShowModal = global.graphs.showModal, // CET.graphs.showModal
+
+		cetOptions = global.options, // CET.options
+		cetOptionsCloseMenu = global.options.closeMenu, // CET.options.closeMenu
+		cetOptionsCloseModal = global.options.closeModal, // CET.options.closeModal
+		cetOptionsListTableOptions = global.options.listTableOptions, // CET.options.listTableOptions
+		cetOptionsOpenModal = global.options.openModal, // CET.options.openModal
+
+		cetSearch = global.search, // CET.search
+		cetSearchTableSearcher = global.search.tableSearcher, // CET.search.tableSearcher
+
+		cetServices = global.services, // CET.services
+		cetServicesApiRestData = global.services.apiRestData, // CET.services.apiRestData
+		cetServicesFireBaseData = global.services.fireBaseData, // CET.services.fireBaseData
+		cetServicesGetLocalData = global.services.getLocalData, // CET.services.getLocalData
+		cetServicesModifyData = global.services.modifyData, // CET.services.modifyData
+		cetServicesPouchDB = global.services.pouchDB, // CET.services.pouchDB
+
+		cetTable = global.table, // CET.table
+		cetTableAssignClasses = global.table.assignClasses, // CET.table.assignClasses
+		cetTableCreateTable = global.table.createTable; // CET.table.createTable
 
 	it('Test if CET.defaultCongig.materailize and CET.defaultCongig.bootstrap are be Booleans', function() {
 		expect(mat).toMatch(/true|false/);
@@ -192,4 +212,67 @@ describe('Test CET.defaultConfig vars', function() {
 		expect(cetGraphsShowModal).toEqual(jasmine.any(Function));
 	});
 
+	it('Test if CET.options is a object', function() {
+		expect(cetOptions).toEqual(jasmine.any(Object));
+	});
+
+	it('Test if CET.options.closeMenu is a function', function() {
+		expect(cetOptionsCloseMenu).toEqual(jasmine.any(Function));
+	});
+
+	it('Test if CET.options.closeModal is a function', function() {
+		expect(cetOptionsCloseModal).toEqual(jasmine.any(Function));
+	});
+
+	it('Test if CET.options.listTableOptions is a function', function() {
+		expect(cetOptionsListTableOptions).toEqual(jasmine.any(Function));
+	});
+
+	it('Test if CET.options.openModal is a function', function() {
+		expect(cetOptionsOpenModal).toEqual(jasmine.any(Function));
+	});
+
+	it('Test if CET.search is a object', function() {
+		expect(cetSearch).toEqual(jasmine.any(Object));
+	});
+
+	it('Test if CET.search.tableSearcher is a function', function() {
+		expect(cetSearchTableSearcher).toEqual(jasmine.any(Function));
+	});
+
+	it('Test if CET.services is a object', function() {
+		expect(cetServices).toEqual(jasmine.any(Object));
+	});
+
+	it('Test if CET.services.apiRestData is a function', function() {
+		expect(cetServicesApiRestData).toEqual(jasmine.any(Function));
+	});
+
+	it('Test if CET.services.fireBaseData is a function', function() {
+		expect(cetServicesFireBaseData).toEqual(jasmine.any(Function));
+	});
+
+	it('Test if CET.services.getLocalData is a function', function() {
+		expect(cetServicesGetLocalData).toEqual(jasmine.any(Function));
+	});
+
+	it('Test if CET.services.modifyData is a function', function() {
+		expect(cetServicesModifyData).toEqual(jasmine.any(Function));
+	});
+
+	it('Test if CET.services.pouchDB is a function', function() {
+		expect(cetServicesPouchDB).toEqual(jasmine.any(Function));
+	});
+
+	it('Test if CET.table is a object', function() {
+		expect(cetTable).toEqual(jasmine.any(Object));
+	});
+
+	it('Test if CET.table.assignClasses is a function', function() {
+		expect(cetTableAssignClasses).toEqual(jasmine.any(Function));
+	});
+
+	it('Test if CET.table.createTable is a function', function() {
+		expect(cetTableCreateTable).toEqual(jasmine.any(Function));
+	});
 });
