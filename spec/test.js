@@ -4,9 +4,9 @@
 
 describe('Test CET.defaultConfig vars', function() {
 	// CET
-	var global = CET;
-	// CET.defaultCongig
-	var globalDC = global.defaultConfig,
+	var global = CET,
+		// CET.defaultCongig
+		globalDC = global.defaultConfig,
 		// CET.defaultCongig.materailize
 		mat = globalDC.materialize,
 		// CET.defaultCongig.bootstrap
@@ -47,12 +47,12 @@ describe('Test CET.defaultConfig vars', function() {
 		// CET.defaultConfig.container
 		container = global.defaultConfig.container;
 
-	it('CET.defaultCongig.materailize and CET.defaultCongig.bootstrap must be Booleans', function() {
+	it('Test if CET.defaultCongig.materailize and CET.defaultCongig.bootstrap are be Booleans', function() {
 		expect(mat).toMatch(/true|false/);
 		expect(bot).toMatch(/true|false/);
 	});
 
-	it('If CET.defaultConfig.materialize is true, CET.defaultConfig.bootstrap must be false and upside down', function() {
+	it('Test if CET.defaultConfig.materialize is true, CET.defaultConfig.bootstrap must be false and upside down', function() {
 		if (mat) {
 			expect(bot).toBe(false);
 		} else if (bot) {
@@ -67,7 +67,7 @@ describe('Test CET.defaultConfig vars', function() {
 		expect(head).toMatch(/true|false/);
 	});
 
-	it('Test CET.defaultConfig.options is boolean and if it is true, CET.defaultConfig.header must be true too', function() {
+	it('Test if CET.defaultConfig.options is boolean and if it is true, CET.defaultConfig.header must be true too', function() {
 		expect(headOptions).toMatch(/true|false/);
 
 		if (headOptions) {
@@ -79,7 +79,7 @@ describe('Test CET.defaultConfig vars', function() {
 		expect(tooltips).toMatch(/true|false/);
 	});
 
-	it('Test CET.defaultConfig.search is boolean and if it is true, CET.defaultConfig.header must be true too', function() {
+	it('Test if CET.defaultConfig.search is boolean and if it is true, CET.defaultConfig.header must be true too', function() {
 		expect(search).toMatch(/true|false/);
 
 		if (headOptions) {
@@ -143,6 +143,6 @@ describe('Test CET.defaultConfig vars', function() {
 	});
 
 	it('Test if CET.defaultConfig.container is not empty', function() {
-		expect(container).not.toBeTruthy();
+		expect(container).toBeNull;
 	});
 });
