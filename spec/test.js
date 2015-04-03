@@ -28,7 +28,21 @@ describe('Test CET.defaultConfig vars', function() {
 		dataOptionsApiGetUrl = global.defaultConfig.apiRestGetUrl, // CET.defaultConfig.apiRestGetUrl
 		dataOptionsApiPostUrl = global.defaultConfig.apiRestPostUrl, // CET.defaultConfig.apiRestPostUrl
 
-		container = global.defaultConfig.container; // CET.defaultConfig.container
+		container = global.defaultConfig.container, // CET.defaultConfig.container
+
+		cetInit = global.init, // CET.init
+
+		cetDownloads = global.downloads, // CET.downloads
+		cetDownloadsSelectedOption = global.downloads.selectedOption, // CET.downloads.selectedOption
+		cetDownloadsTableDownloads = global.downloads.tableDownloads, // CET.downloads.tableDownloads
+
+		cetEffects = global.effects, // CET.effects
+		cetEffectsTableEffects = global.effects.tableEffects, // CET.effects.tableEffects
+
+		cetGraphs = global.graphs, // CET.graphs
+		cetGraphsPrepareGraphData = global.graphs.prepareGraphData, // CET.graphs.prepareGraphData
+		cetGraphsShowGraph = global.graphs.showGraph, // CET.graphs.showGraph
+		cetGraphsShowModal = global.graphs.showModal; // CET.graphs.showModal
 
 	it('Test if CET.defaultCongig.materailize and CET.defaultCongig.bootstrap are be Booleans', function() {
 		expect(mat).toMatch(/true|false/);
@@ -137,4 +151,45 @@ describe('Test CET.defaultConfig vars', function() {
 	it('Test if CET.defaultConfig.container is not empty', function() {
 		expect(container).toBeNull;
 	});
+
+	it('Test if CET.init is a function', function() {
+		expect(cetInit).toEqual(jasmine.any(Function));
+	});
+
+	it('Test if CET.downloads is a object', function() {
+		expect(cetDownloads).toEqual(jasmine.any(Object));
+	});
+
+	it('Test if CET.downloads.selectedOption is a function', function() {
+		expect(cetDownloadsSelectedOption).toEqual(jasmine.any(Function));
+	});
+
+	it('Test if CET.downloads.tableDownloads is a function', function() {
+		expect(cetDownloadsTableDownloads).toEqual(jasmine.any(Function));
+	});
+
+	it('Test if CET.effects is a object', function() {
+		expect(cetEffects).toEqual(jasmine.any(Object));
+	});
+
+	it('Test if CET.effects.tableEffects is a function', function() {
+		expect(cetEffectsTableEffects).toEqual(jasmine.any(Function));
+	});
+
+	it('Test if CET.graphs is a object', function() {
+		expect(cetGraphs).toEqual(jasmine.any(Object));
+	});
+
+	it('Test if CET.graphs.prepareGraphData is a function', function() {
+		expect(cetGraphsPrepareGraphData).toEqual(jasmine.any(Function));
+	});
+
+	it('Test if CET.graphs.showGraph is a function', function() {
+		expect(cetGraphsShowGraph).toEqual(jasmine.any(Function));
+	});
+
+	it('Test if CET.graphs.showModal is a function', function() {
+		expect(cetGraphsShowModal).toEqual(jasmine.any(Function));
+	});
+
 });
