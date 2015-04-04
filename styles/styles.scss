@@ -17,8 +17,8 @@
     font-weight: bold;
   }
   .normalButton {
-    width: auto;
-    height: auto;
+    width: 36px;
+    height: 39px;
     float: right;
     font-size: 1.5em;
     border: 1px solid transparent;
@@ -32,8 +32,8 @@
     z-index: 1000;
   }
   .clickedButton {
-    width: auto;
-    height: auto;
+    width: 36px;
+    height: 39px;
     float: right;
     font-size: 1.5em;
     background: #f2f2f2;
@@ -59,6 +59,7 @@
 
 .optionsContainer {
   width: 200px;
+  height: 155px;;
   background: #f2f2f2;
   border: 1px solid rgb(203, 203, 203);
   -webkit-border-radius: 3px;
@@ -87,6 +88,16 @@
       cursor: pointer;
       text-decoration: none;
     }
+    &:hover {
+      color: rgba(105, 105, 105, 0.81);
+      transition:all 0.2s ease;
+    }
+  }
+  li:last-of-type{ 
+    border-bottom: none;
+  }
+  li:first-of-type{ 
+    margin-top: -12px;
   }
 }
 
