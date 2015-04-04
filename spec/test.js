@@ -8,27 +8,27 @@ describe('Test CET.defaultConfig vars', function() {
 		globalDC = global.defaultConfig, // CET.defaultCongig
 		mat = globalDC.materialize, // CET.defaultCongig.materailize
 		bot = globalDC.bootstrap, // CET.defaultCongig.bootstrap
-		head = global.defaultConfig.header, // CET.defaultConfig.header
-		headOptions = global.defaultConfig.options, // CET.defaultConfig.options
-		tooltips = global.defaultConfig.tooltips, // CET.defatultConfig.tooltips
-		search = global.defaultConfig.search, // CET.defaultConfig.search
-		limitRows = global.defaultConfig.limitRows, // CET.defaultConfig.limitRows
-		effects = global.defaultConfig.effects, // CET.defaultConfig.effects
-		sort = global.defaultConfig.sortable, // CET.defaultConfig.sortable
+		head = globalDC.header, // CET.defaultConfig.header
+		headOptions = globalDC.options, // CET.defaultConfig.options
+		tooltips = globalDC.tooltips, // CET.defatultConfig.tooltips
+		search = globalDC.search, // CET.defaultConfig.search
+		limitRows = globalDC.limitRows, // CET.defaultConfig.limitRows
+		effects = globalDC.effects, // CET.defaultConfig.effects
+		sort = globalDC.sortable, // CET.defaultConfig.sortable
 
-		listOptions = global.defaultConfig.listOptions, // CET.defaultConfig.listOptions
-		graphs = global.defaultConfig.listOptions.graphs, // CET.defaultConfig.listOptions.graphs
-		downloads = global.defaultConfig.listOptions.downloads, // CET.defaultConfig.listOptions.downloads
-		sum = global.defaultConfig.listOptions.column_data_sum, // CET.defaultConfig.listOptions.column_data_sum
+		listOptions = globalDC.listOptions, // CET.defaultConfig.listOptions
+		graphs = globalDC.listOptions.graphs, // CET.defaultConfig.listOptions.graphs
+		downloads = globalDC.listOptions.downloads, // CET.defaultConfig.listOptions.downloads
+		sum = globalDC.listOptions.column_data_sum, // CET.defaultConfig.listOptions.column_data_sum
 
-		dataOptions = global.defaultConfig.dataOptions, // CET.defaultConfig.dataOptions
-		dataOptionsLocalUrl = global.defaultConfig.localDataUrl, // CET.defaultConfig.localDataUrl
-		dataOptionsFireUrl = global.defaultConfig.fireBaseUrl, // CET.defaultConfig.fireBaseUrl
-		dataOptionsPouchUrl = global.defaultConfig.pouchDbUrl, // CET.defaultConfig.pouchDbUrl
-		dataOptionsApiGetUrl = global.defaultConfig.apiRestGetUrl, // CET.defaultConfig.apiRestGetUrl
-		dataOptionsApiPostUrl = global.defaultConfig.apiRestPostUrl, // CET.defaultConfig.apiRestPostUrl
+		dataOptions = globalDC.dataOptions, // CET.defaultConfig.dataOptions
+		dataOptionsLocalUrl = globalDC.localDataUrl, // CET.defaultConfig.localDataUrl
+		dataOptionsFireUrl = globalDC.fireBaseUrl, // CET.defaultConfig.fireBaseUrl
+		dataOptionsPouchUrl = globalDC.pouchDbUrl, // CET.defaultConfig.pouchDbUrl
+		dataOptionsApiGetUrl = globalDC.apiRestGetUrl, // CET.defaultConfig.apiRestGetUrl
+		dataOptionsApiPostUrl = globalDC.apiRestPostUrl, // CET.defaultConfig.apiRestPostUrl
 
-		container = global.defaultConfig.container, // CET.defaultConfig.container
+		container = globalDC.container, // CET.defaultConfig.container
 
 		cetInit = global.init, // CET.init
 
