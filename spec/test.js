@@ -33,37 +33,37 @@ describe('Test CET.defaultConfig vars', function() {
 		cetInit = global.init, // CET.init
 
 		cetDownloads = global.downloads, // CET.downloads
-		cetDownloadsSelectedOption = global.downloads.selectedOption, // CET.downloads.selectedOption
-		cetDownloadsTableDownloads = global.downloads.tableDownloads, // CET.downloads.tableDownloads
+		cetDownloadsSelectedOption = cetDownloads.selectedOption, // CET.downloads.selectedOption
+		cetDownloadsTableDownloads = cetDownloads.tableDownloads, // CET.downloads.tableDownloads
 
 		cetEffects = global.effects, // CET.effects
-		cetEffectsTableEffects = global.effects.tableEffects, // CET.effects.tableEffects
+		cetEffectsTableEffects = cetEffects.tableEffects, // CET.effects.tableEffects
 
 		cetGraphs = global.graphs, // CET.graphs
-		cetGraphsPrepareGraphData = global.graphs.prepareGraphData, // CET.graphs.prepareGraphData
-		cetGraphsShowGraph = global.graphs.showGraph, // CET.graphs.showGraph
-		cetGraphsShowModal = global.graphs.showModal, // CET.graphs.showModal
+		cetGraphsPrepareGraphData = cetGraphs.prepareGraphData, // CET.graphs.prepareGraphData
+		cetGraphsShowGraph = cetGraphs.showGraph, // CET.graphs.showGraph
+		cetGraphsShowModal = cetGraphs.showModal, // CET.graphs.showModal
 
 		cetOptions = global.options, // CET.options
-		cetOptionsCloseMenu = global.options.closeMenu, // CET.options.closeMenu
-		cetOptionsCloseModal = global.options.closeModal, // CET.options.closeModal
-		cetOptionsListTableOptions = global.options.listTableOptions, // CET.options.listTableOptions
-		cetOptionsOpenModal = global.options.openModal, // CET.options.openModal
+		cetOptionsCloseMenu = cetOptions.closeMenu, // CET.options.closeMenu
+		cetOptionsCloseModal = cetOptions.closeModal, // CET.options.closeModal
+		cetOptionsListTableOptions = cetOptions.listTableOptions, // CET.options.listTableOptions
+		cetOptionsOpenModal = cetOptions.openModal, // CET.options.openModal
 
 		cetSearch = global.search, // CET.search
-		cetSearchTableSearcher = global.search.tableSearcher, // CET.search.tableSearcher
+		cetSearchTableSearcher = cetSearch.tableSearcher, // CET.search.tableSearcher
 
 		cetServices = global.services, // CET.services
-		cetServicesApiRestData = global.services.apiRestData, // CET.services.apiRestData
-		cetServicesFireBaseData = global.services.fireBaseData, // CET.services.fireBaseData
-		cetServicesGetLocalData = global.services.getLocalData, // CET.services.getLocalData
-		cetServicesModifyData = global.services.modifyData, // CET.services.modifyData
-		cetServicesPouchDB = global.services.pouchDB, // CET.services.pouchDB
+		cetServicesApiRestData = cetServices.apiRestData, // CET.services.apiRestData
+		cetServicesFireBaseData = cetServices.fireBaseData, // CET.services.fireBaseData
+		cetServicesGetLocalData = cetServices.getLocalData, // CET.services.getLocalData
+		cetServicesModifyData = cetServices.modifyData, // CET.services.modifyData
+		cetServicesPouchDB = cetServices.pouchDB, // CET.services.pouchDB
 
 		cetTable = global.table, // CET.table
-		cetTableAssignClasses = global.table.assignClasses, // CET.table.assignClasses
-		cetTableCreateTable = global.table.createTable, // CET.table.createTable
-		cetTableTableConstructor = global.table.tableConstructor; // CET.table.tableConstructor
+		cetTableAssignClasses = cetTable.assignClasses, // CET.table.assignClasses
+		cetTableCreateTable = cetTable.createTable, // CET.table.createTable
+		cetTableTableConstructor = cetTable.tableConstructor; // CET.table.tableConstructor
 
 	it('Test if CET.defaultCongig.materailize and CET.defaultCongig.bootstrap are be Booleans', function() {
 		expect(mat).toMatch(/true|false/);
