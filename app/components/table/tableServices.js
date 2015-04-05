@@ -77,12 +77,14 @@
      */
 
     cet.services.apiRestData = (url) => {
-        getJsonData(url).then((response) => {
-            CET.defaultConfig.tableData = JSON.parse(response);
-            CET.table.tableConstructor(CET.defaultConfig);
-        }, (error) => {
-            throw new Error(tokenError + url);
-        });
+        if (cet !== undefined) {
+            getJsonData(url).then((response) => {
+                CET.defaultConfig.tableData = JSON.parse(response);
+                CET.table.tableConstructor(CET.defaultConfig);
+            }, (error) => {
+                throw new Error(tokenError + url);
+            });
+        }
     };
 
     /**
