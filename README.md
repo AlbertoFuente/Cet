@@ -224,3 +224,18 @@ Table body data:
 }
 ```
 If the database is created and with the correct structure, then the table should appear correctly and if you make changes in editable fields, it must be sync with your pouchDB database.
+
+- Local Storage:
+If you like to store your table changes in local Storage you only have to change in config.js the dataOptions, and add the url where you have you JSON data:
+```js
+// config type of data service
+dataOptions: {
+    'localData': true, 
+    'fireBase': false, 
+    'apiRest': false, 
+    'pouchdb': false 
+},
+// localData url
+localDataUrl: 'localData/tableData.json'
+```
+Once the data is stored in local Storage, then when you refresh the page automatically take the data for the table from local Storage.
