@@ -239,3 +239,18 @@ dataOptions: {
 localDataUrl: 'localData/tableData.json'
 ```
 Once the data is stored in local Storage, then when you refresh the page automatically take the data for the table from local Storage.
+
+- API Rest: 
+If you want to store your data in a external API, you have to configure it in config.js, for get the data you have to insert the url in apiRestGetUrl, and to post it you have to insert the url inside apiRestPostUrl.
+```js
+// config type of data service
+dataOptions: {
+    'localData': false, 
+    'fireBase': false, 
+    'apiRest': true, 
+    'pouchdb': false 
+},
+// apiRest url
+apiRestGetUrl: 'apiGetUrl',
+apiRestPostUrl: 'apiPostUrl'
+```
