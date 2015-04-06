@@ -198,11 +198,17 @@
         if (xData.length > 0 && xData.length === yData.length) {
             compareArrays.sameLength = true;
         }
-        // text or number
-        const num = /^\d+$/;
+
+        // extend String Class with isNumeric fucntion
+        if (!String.prototype.isNumeric) {
+            String.prototype.isNumeric = function() {
+                return !isNaN(parseFloat(this));
+            };
+        }
+
         // xData
         for (let i = 0; i < xData.length; i++) {
-            if (num.test(xData[i])) {
+            if (xData[i].isNumeric()) {
                 compareArrays.xAxisIsNum = true;
             } else {
                 compareArrays.xAxisIsNum = false;
@@ -211,7 +217,7 @@
         }
         // yData
         for (let j = 0; j < yData.length; j++) {
-            if (num.test(yData[j])) {
+            if (yData[j].isNumeric()) {
                 compareArrays.yAxisIsNum = true;
             } else {
                 compareArrays.yAxisIsNum = false;
