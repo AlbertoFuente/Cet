@@ -140,8 +140,13 @@
             case 'column_data_sum':
                 modalHeaderTitle.innerHTML = 'Config sum options';
 
-                // text or number
-                const num = /^\d+$/;
+                // extend String Class with isNumeric fucntion
+                if (!String.prototype.isNumeric) {
+                    String.prototype.isNumeric = function() {
+                        return !isNaN(parseFloat(this));
+                    };
+                }
+
                 let obj = {};
 
                 let container = cet.defaultConfig.container.childNodes;
@@ -164,7 +169,7 @@
                                     let trChilds = contChilds[j].childNodes[p].childNodes;
                                     for (let c = 0; c < trChilds.length; c++) {
                                         obj[c].data.push(trChilds[c].lastChild.innerText);
-                                        obj[c].sum = !!num.test(trChilds[c].lastChild.innerText);
+                                        obj[c].sum = trChilds[c].lastChild.innerText.isNumeric();
                                     }
                                 }
                             }
