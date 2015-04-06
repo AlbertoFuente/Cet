@@ -165,7 +165,7 @@
                     window.onresize = () => {
                         let elementPosition = tableHeaderOptions.getBoundingClientRect();
 
-                        if (optionsContainer.style.display = 'block') {
+                        if (optionsContainer.style.display === 'block') {
                             optionsContainer.style.top = (elementPosition.top + 38) + 'px';
                             optionsContainer.style.left = (elementPosition.left - 164) + 'px';
                         }
