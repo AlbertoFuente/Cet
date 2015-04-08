@@ -13,10 +13,10 @@
      * @return Promise
      */
 
-    const getJsonData = (url) => {
+    const getJsonData = (url, method) => {
         return new Promise((resolve, reject) => {
             let req = new XMLHttpRequest();
-            req.open('GET', url);
+            req.open(method, url);
 
             req.onload = () => {
                 if (req.status === 200) {
@@ -43,7 +43,7 @@
                 cet.tableData = JSON.parse(localStorage.getItem("_tableData"));
                 CET.table.tableConstructor(cet);
             } else {
-                getJsonData(cet.localDataUrl).then((response) => {
+                getJsonData(cet.localDataUrl, 'GET').then((response) => {
                     CET.defaultConfig.tableData = JSON.parse(response);
                     CET.table.tableConstructor(CET.defaultConfig);
                 }, (error) => {
@@ -78,7 +78,7 @@
 
     cet.services.apiRestData = (url) => {
         if (cet !== undefined) {
-            getJsonData(url).then((response) => {
+            getJsonData(url, 'GET').then((response) => {
                 CET.defaultConfig.tableData = JSON.parse(response);
                 CET.table.tableConstructor(CET.defaultConfig);
             }, (error) => {
@@ -155,9 +155,8 @@
                     cet.tableData = JSON.parse(localStorage.getItem("_tableData"));
                     CET.table.tableConstructor(cet);
                 } else {
-                    getJsonData(cet.pouchDbUrl).then((response) => {
+                    getJsonData(cet.pouchDbUrl, 'GET').then((response) => {
                         CET.defaultConfig.tableData = JSON.parse(response);
-                        //CET.table.tableConstructor(CET.defaultConfig);
                         let cetHead = cet.tableData[0].head,
                             cetBody = cet.tableData[0].body;
 
