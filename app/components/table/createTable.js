@@ -34,7 +34,7 @@
                     sortIconDown: 'mdi-hardware-keyboard-arrow-down',
                     sortIconUp: 'mdi-hardware-keyboard-arrow-up',
                     tooltip: 'tooltipped',
-                    datePicker: ' datepicker picker__input',
+                    datePicker: 'datepicker picker__input',
                     buttonLeft: 'mdi-hardware-keyboard-arrow-left',
                     buttonRight: 'mdi-hardware-keyboard-arrow-right',
                     closeButton: 'mdi-content-clear',
@@ -48,7 +48,7 @@
                     sortIconDown: 'glyphicon glyphicon-menu-down',
                     sortIconUp: 'glyphicon glyphicon-menu-up',
                     tooltip: '',
-                    datePicker: ' date',
+                    datePicker: 'date',
                     buttonLeft: 'glyphicon glyphicon-menu-left',
                     buttonRight: 'glyphicon glyphicon-menu-right',
                     closeButton: 'glyphicon glyphicon-remove',
@@ -254,7 +254,7 @@
                                         span = document.createElement('span');
                                     span.style.display = 'none';
                                     if (_cetTable.tooltips) {
-                                        input.className = 'input_edit ' + cet.table.assignClasses('tooltip');
+                                        input.className = ' input_edit ' + cet.table.assignClasses('tooltip');
                                         input.setAttribute('data-position', 'bottom');
                                         input.setAttribute('data-delay', '30');
                                         input.setAttribute('data-tooltip', 'Edit field: ' + tdObjSorted[p].data);
@@ -262,13 +262,13 @@
                                         span.innerHTML = tdObjSorted[p].data;
                                         span.setAttribute('value', tdObjSorted[p].data);
                                     } else {
-                                        input.className = 'input_edit';
+                                        input.className = ' input_edit';
                                         input.setAttribute('value', tdObjSorted[p].data);
                                         span.innerHTML = tdObjSorted[p].data;
                                         span.setAttribute('value', tdObjSorted[p].data);
                                     }
                                     if (tdObjSorted[p].type === 'date') {
-                                        input.className = input.className + cet.table.assignClasses('datePicker');
+                                        input.className = cet.table.assignClasses('datePicker') + input.className;
                                         input.type = 'text';
                                         input.setAttribute('value', tdObjSorted[p].data);
                                         input.setAttribute('placeholder', tdObjSorted[p].data);
