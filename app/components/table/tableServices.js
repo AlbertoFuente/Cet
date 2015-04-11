@@ -151,49 +151,44 @@
 
         var createDB = (url) => {
             if (url != undefined) {
-                if (localStorage.getItem("_tableData")) {
-                    cet.tableData = JSON.parse(localStorage.getItem("_tableData"));
-                    CET.table.tableConstructor(cet);
-                } else {
-                    getJsonData(cet.pouchDbUrl, 'GET').then((response) => {
-                        CET.defaultConfig.tableData = JSON.parse(response);
-                        let cetHead = cet.tableData[0].head,
-                            cetBody = cet.tableData[0].body;
+                getJsonData(cet.pouchDbUrl, 'GET').then((response) => {
+                    CET.defaultConfig.tableData = JSON.parse(response);
+                    let cetHead = cet.tableData[0].head,
+                        cetBody = cet.tableData[0].body;
 
-                        for (let i in cetHead) {
-                            db.put({
-                                '_id': i,
-                                'part': 'head',
-                                'title': cetHead[i]
+                    for (let i in cetHead) {
+                        db.put({
+                            '_id': i,
+                            'part': 'head',
+                            'title': cetHead[i]
+                        }).then((response) => {
+                            throw response;
+                        }).catch((err) => {
+                            throw new Error(err);
+                        });
+                    }
+
+                    for (let i in cetBody) {
+                        let trInfo = cetBody[i];
+                        for (let j in trInfo) {
+                            db.post({
+                                'tdId': j,
+                                'part': 'body',
+                                'parentId': i,
+                                'title': trInfo[j].data,
+                                'edit': trInfo[j].edit,
+                                'type': trInfo[j].type
                             }).then((response) => {
                                 throw response;
                             }).catch((err) => {
                                 throw new Error(err);
                             });
                         }
-
-                        for (let i in cetBody) {
-                            let trInfo = cetBody[i];
-                            for (let j in trInfo) {
-                                db.post({
-                                    'tdId': j,
-                                    'part': 'body',
-                                    'parentId': i,
-                                    'title': trInfo[j].data,
-                                    'edit': trInfo[j].edit,
-                                    'type': trInfo[j].type
-                                }).then((response) => {
-                                    throw response;
-                                }).catch((err) => {
-                                    throw new Error(err);
-                                });
-                            }
-                        }
-                        dbFetch(db);
-                    }, (error) => {
-                        throw new Error(tokenError + url);
-                    });
-                }
+                    }
+                    dbFetch(db);
+                }, (error) => {
+                    throw new Error(tokenError + url);
+                });
             }
         };
 
