@@ -33,6 +33,32 @@
     };
 
     /**
+     * Post JSON Data
+     * @param {string} url - url to post the data
+     * @param {json} data
+     * @return Promise
+     */
+
+    const postJsonData = (url, data) => {
+        return new Promise((resolve, reject) => {
+            let req = new XMLHttpRequest();
+            req.open('POST', url);
+            req.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            req.onload = () => {
+                if (req.status === 200) {
+                    resolve(req.response);
+                } else {
+                    reject(Error(req.statusText));
+                }
+            };
+            req.onerror = () => {
+                reject(Error(req.statusText));
+            };
+            req.send(JSON.stringify(data));
+        });
+    };
+
+    /**
      * get local data
      * @param cet
      */
@@ -237,10 +263,11 @@
                 break;
             case 3:
                 // mode 3 - apiRest
-                var xmlhttp = new XMLHttpRequest();
-                xmlhttp.open("POST", cet.defaultConfig.apiRestPostUrl);
-                xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-                xmlhttp.send(JSON.stringify(cet.defaultConfig.tableData));
+                postJsonData(cet.defaultConfig.apiRestPostUrl, cet.defaultConfig.tableData).then((response) => {
+                    throw response;
+                }, (error) => {
+                    throw new Error(tokenError + url);
+                });
                 break;
             case 4:
                 // mode 4 - pouchDB
