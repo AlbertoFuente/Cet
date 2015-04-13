@@ -498,8 +498,7 @@
             let count = 0;
 
             for (let j = 0; j < obj.tr.length; j++) {
-                let m = j.isPair(_cetTable.limitRows);
-                if (m === 0) count++;
+                if (j.isPair(_cetTable.limitRows) === 0) count++;
                 obj.pages.push({
                     'page': count,
                     'tr': obj.tr[j]
