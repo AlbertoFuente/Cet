@@ -488,11 +488,17 @@
 
             _cetTable.container.appendChild(container);
 
+            if (!Number.prototype.isPair) {
+                Number.prototype.isPair = function(limit) {
+                    return this % limit;
+                };
+            }
+
             // new table structure
             let count = 0;
 
             for (let j = 0; j < obj.tr.length; j++) {
-                let m = j % _cetTable.limitRows;
+                let m = j.isPair(_cetTable.limitRows);
                 if (m === 0) count++;
                 obj.pages.push({
                     'page': count,
