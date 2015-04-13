@@ -195,9 +195,7 @@
 
         // compare arrays
         // array length
-        if (xData.length > 0 && xData.length === yData.length) {
-            compareArrays.sameLength = true;
-        }
+        if (xData.length > 0 && xData.length === yData.length) compareArrays.sameLength = true;
 
         // extend String Class with isNumeric fucntion
         if (!String.prototype.isNumeric) {
