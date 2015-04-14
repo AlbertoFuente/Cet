@@ -56,7 +56,8 @@
                     parent.appendChild(select);
                 };
 
-                let table = cet.defaultConfig.tableData[0].head;
+                let tData = cet.tableData ||  cet.defaultConfig.tableData,
+                    table = tData[0].head;
 
                 // select graph
                 let selectTitle = 'Select graph type: ',
@@ -114,9 +115,10 @@
                 sDownloadLabel.innerHTML = 'Download Options: ';
                 let selectDownload = document.createElement('select');
 
-                if (typeof cet.defaultConfig.downloadOptions === 'object') {
-                    for (let k in cet.defaultConfig.downloadOptions) {
-                        if (cet.defaultConfig.downloadOptions[k]) {
+                if (typeof cet.downloadOptions === 'object' ||  typeof cet.defaultConfig.downloadOptions === 'object') {
+                    let down = cet.downloadOptions || cet.defaultConfig.downloadOptions;
+                    for (let k in down) {
+                        if (down[k]) {
                             let option = document.createElement('option');
                             option.value = k;
                             option.innerHTML = k;
@@ -147,9 +149,9 @@
                     };
                 }
 
-                let obj = {};
-
-                let container = cet.defaultConfig.container.childNodes;
+                let obj = {},
+                    cont = cet.container || cet.defaultConfig.container,
+                    container = cont.childNodes;
 
                 for (let i = 0; i < container.length; i++) {
                     if (container[i].tagName === 'TABLE') {
@@ -279,23 +281,30 @@
                 CET.options.closeMenu(container, tableHeader);
             }
         };
+        let type = null;
+
+        if (cet.listOptions) {
+            type = cet.listOptions;
+        } else {
+            type = cet.defaultConfig.listOptions;
+        }
 
         // graphs
-        if (cet.defaultConfig.listOptions.graphs) {
+        if (type.graphs) {
             selectedType = 'graph';
             optionText = 'Show graph panel';
             createOption(selectedType, optionText, ul);
         }
 
         // downloads
-        if (cet.defaultConfig.listOptions.downloads) {
+        if (type.downloads) {
             selectedType = 'downloads';
             optionText = 'Show downloads panel';
             createOption(selectedType, optionText, ul);
         }
 
         // column data aount
-        if (cet.defaultConfig.listOptions.column_data_sum) {
+        if (type.column_data_sum) {
             selectedType = 'column_data_sum';
             optionText = 'Show column data sum panel';
             createOption(selectedType, optionText, ul);
