@@ -73,10 +73,10 @@
             }
         };
 
-        if (cet.defaultConfig.materialize) {
+        if (cet.materialize || cet.defaultConfig.materialize) {
             design = 'm'; // materilize
             classifyElement(design);
-        } else if (cet.defaultConfig.bootstrap) {
+        } else if (cet.bootstrap || cet.defaultConfig.bootstrap) {
             design = 'b'; // bootstrap
             classifyElement(design);
         } else {
