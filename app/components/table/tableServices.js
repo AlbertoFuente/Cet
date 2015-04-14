@@ -64,14 +64,16 @@
      */
 
     cet.services.getLocalData = (cet) => {
+        let data = CET.tableData || CET.defaultConfig.tableData,
+            dataConf = CET || CET.defaultConfig;
         if (cet !== undefined) {
             if (localStorage.getItem("_tableData")) {
                 cet.tableData = JSON.parse(localStorage.getItem("_tableData"));
                 CET.table.tableConstructor(cet);
             } else {
                 getJsonData(cet.localDataUrl).then((response) => {
-                    CET.defaultConfig.tableData = JSON.parse(response);
-                    CET.table.tableConstructor(CET.defaultConfig);
+                    data = JSON.parse(response);
+                    CET.table.tableConstructor(dataConf);
                 }, (error) => {
                     throw new Error(tokenError + url);
                 });
@@ -103,10 +105,12 @@
      */
 
     cet.services.apiRestData = (url) => {
+        let data = CET.tableData || CET.defaultConfig.tableData,
+            dataConf = CET || CET.defaultConfig;
         if (cet !== undefined) {
             getJsonData(url).then((response) => {
-                CET.defaultConfig.tableData = JSON.parse(response);
-                CET.table.tableConstructor(CET.defaultConfig);
+                data = JSON.parse(response);
+                CET.table.tableConstructor(dataConf);
             }, (error) => {
                 throw new Error(tokenError + url);
             });
@@ -176,9 +180,10 @@
          */
 
         var createDB = (url) => {
+            let data = CET.tableData || CET.defaultConfig.tableData;
             if (url != undefined) {
                 getJsonData(cet.pouchDbUrl).then((response) => {
-                    CET.defaultConfig.tableData = JSON.parse(response);
+                    data = JSON.parse(response);
                     let cetHead = cet.tableData[0].head,
                         cetBody = cet.tableData[0].body;
 
@@ -241,29 +246,33 @@
 
     cet.services.modifyData = (trParent, tdParent, val, mode) => {
 
-        cet.defaultConfig.tableData[0].body[trParent][tdParent].data = val;
+        let data = cet.tableData || cet.defaultConfig.tableData,
+            firebaseUrl = cet.fireBaseUrl || cet.defaultConfig.fireBaseUrl,
+            apiUrl = cet.apiRestPostUrl || cet.defaultConfig.apiRestPostUrl;
+
+        data[0].body[trParent][tdParent].data = val;
 
         switch (mode) {
             case 1:
                 // mode 1 - localData
                 // save it in localStorage
                 if (window.localStorage) {
-                    localStorage.setItem('_tableData', JSON.stringify(cet.defaultConfig.tableData));
+                    localStorage.setItem('_tableData', JSON.stringify(data));
                 } else {
                     throw new Error(tokenErrorBrowser);
                 }
                 break;
             case 2:
                 // mode 2 - fireBase
-                if (cet.defaultConfig.fireBaseUrl !== '') {
-                    var fireUrl = new Firebase(cet.defaultConfig.fireBaseUrl);
+                if (firebaseUrl !== '') {
+                    var fireUrl = new Firebase(firebaseUrl);
 
-                    fireUrl.set(cet.defaultConfig.tableData);
+                    fireUrl.set(data);
                 }
                 break;
             case 3:
                 // mode 3 - apiRest
-                postJsonData(cet.defaultConfig.apiRestPostUrl, cet.defaultConfig.tableData).then((response) => {
+                postJsonData(apiUrl, data).then((response) => {
                     throw response;
                 }, (error) => {
                     throw new Error(tokenError + url);
