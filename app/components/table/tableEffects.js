@@ -53,7 +53,8 @@
                 let tds = table.getElementsByClassName(tdClass),
                     column = [],
                     val = [],
-                    isNumeric = false;
+                    isNumeric = false,
+                    obj = CET || CET.defaultConfig;
                 const num = /^\d+$/;
 
                 for (let i = 0; i < tds.length; i++) {
@@ -70,12 +71,12 @@
                     if (isNumeric) val.sort((a, b) => a - b);
                     else val.reverse();
 
-                    CET.defaultConfig.printNewBody(val, column, table);
+                    obj.printNewBody(val, column, table);
                 } else {
                     if (isNumeric) val.sort((a, b) => b - a);
                     else val.sort();
 
-                    CET.defaultConfig.printNewBody(val, column, table);
+                    obj.printNewBody(val, column, table);
                 }
 
                 // hover & mouse out
@@ -85,30 +86,30 @@
                 for (let i = 0; i < inputs.length; i++) {
                     // change
                     inputs[i].parentNode.onchange = () => {
-                        CET.defaultConfig.inputChange(inputs[i]);
+                        obj.inputChange(inputs[i]);
                     };
-                    if (CET.defaultConfig.effects) {
+                    if (obj.effects) {
                         // hover
-                        inputs[i].onmouseover = () => CET.defaultConfig.mouseEffects(inputs[i], 'hover');
-                        inputs[i].parentNode.onmouseover = () => CET.defaultConfig.mouseEffects(inputs[i], 'hover');
+                        inputs[i].onmouseover = () => obj.mouseEffects(inputs[i], 'hover');
+                        inputs[i].parentNode.onmouseover = () => obj.mouseEffects(inputs[i], 'hover');
 
                         // out
-                        inputs[i].parentNode.onmouseout = () => CET.defaultConfig.mouseEffects(inputs[i], 'out');
+                        inputs[i].parentNode.onmouseout = () => obj.mouseEffects(inputs[i], 'out');
                     }
                 }
                 // spans events
                 for (let i = 0; i < spans.length; i++) {
-                    if (CET.defaultConfig.effects) {
+                    if (obj.effects) {
                         // hover
-                        spans[i].onmouseover = () => CET.defaultConfig.mouseEffects(spans[i], 'hover');
-                        spans[i].parentNode.onmouseover = () => CET.defaultConfig.mouseEffects(spans[i], 'hover');
+                        spans[i].onmouseover = () => obj.mouseEffects(spans[i], 'hover');
+                        spans[i].parentNode.onmouseover = () => obj.mouseEffects(spans[i], 'hover');
 
                         // out
-                        spans[i].parentNode.onmouseout = () => CET.defaultConfig.mouseEffects(spans[i], 'out');
+                        spans[i].parentNode.onmouseout = () => obj.mouseEffects(spans[i], 'out');
                     }
                 }
                 // datepicker
-                if (CET.defaultConfig.materialize) $('.datepicker').pickadate();
+                if (obj.materialize) $('.datepicker').pickadate();
 
                 break;
         }
