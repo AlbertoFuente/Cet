@@ -54,7 +54,7 @@
                     column = [],
                     val = [],
                     isNumeric = false,
-                    obj = CET || CET.defaultConfig;
+                    obj = CET.defaultConfig;
                 const num = /^\d+$/;
 
                 for (let i = 0; i < tds.length; i++) {
