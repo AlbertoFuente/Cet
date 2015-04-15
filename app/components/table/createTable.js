@@ -73,10 +73,10 @@
             }
         };
 
-        if (cet.materialize || cet.defaultConfig.materialize) {
+        if (cet.materialize ||  cet.defaultConfig.materialize) {
             design = 'm'; // materilize
             classifyElement(design);
-        } else if (cet.bootstrap || cet.defaultConfig.bootstrap) {
+        } else if (cet.bootstrap ||  cet.defaultConfig.bootstrap) {
             design = 'b'; // bootstrap
             classifyElement(design);
         } else {
@@ -583,33 +583,50 @@
             };
         };
 
-        if (_cetTable !== undefined) {
+        var setServices = (service) => {
+            switch (service) {
+                case 'localData':
+                    _cetTable.mode = 1;
+                    CET.services.getLocalData(_cetTable);
+                    break;
+                case 'fireBase':
+                    _cetTable.mode = 2;
+                    CET.services.fireBaseData(_cetTable);
+                    break;
+                case 'apiRest':
+                    _cetTable.mode = 3;
+                    CET.services.apiRestData(_cetTable.apiRestGetUrl);
+                    break;
+                case 'pouchdb':
+                    _cetTable.mode = 4;
+                    CET.services.pouchDB(_cetTable, _cetTable.pouchDbUrl);
+                    break;
+            }
+        };
+
+        if (_cetTable) {
             // Detect type of data service
             if (_cetTable.dataOptions.localData) {
                 if (_cetTable.localDataUrl !== '') {
-                    _cetTable.mode = 1;
-                    CET.services.getLocalData(_cetTable);
+                    setServices('localData');
                 } else {
                     alert(tokenErrorLocalUrl);
                 }
             } else if (_cetTable.dataOptions.fireBase) {
                 if (_cetTable.fireBaseUrl !== '') {
-                    _cetTable.mode = 2;
-                    CET.services.fireBaseData(_cetTable);
+                    setServices('fireBase');
                 } else {
                     alert(tokenErrorFirebaseUrl);
                 }
             } else if (_cetTable.dataOptions.apiRest) {
                 if (_cetTable.apiRestUrl !== '') {
-                    _cetTable.mode = 3;
-                    CET.services.apiRestData(_cetTable.apiRestGetUrl);
+                    setServices('apiRest');
                 } else {
                     alert(tokenErrorApiRestUrl);
                 }
             } else if (_cetTable.dataOptions.pouchdb) {
                 if (_cetTable.pouchDbUrl !== '') {
-                    _cetTable.mode = 4;
-                    CET.services.pouchDB(_cetTable, _cetTable.pouchDbUrl);
+                    setServices('pouchdb');
                 } else {
                     alert(tokenErrorPouchDBUrl);
                 }
@@ -620,7 +637,7 @@
     /**
      * init table
      * here you can pass your own CET object
-     * with all the properties like in config.js 
+     * with all the properties like in config.js
      * @param config
      */
 
