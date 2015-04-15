@@ -20,7 +20,70 @@
 	<script type="text/javascript" src="../../js/cet.min.js"></script>
 
 	<script>
-		CET.init();
+	// config object with our configuration
+		config = {
+	        // table design
+	        materialize: true,
+	        bootstrap: false,
+	        // add header title
+	        header: true,
+	        title: "Table Title",
+	        // add options to header
+	        options: true,
+	        listOptions: {
+	            'graphs': true,
+	            'downloads': true,
+	            'column_data_sum': true
+	        },
+	        // tooltips
+	        tooltips: true,
+	        // download options
+	        downloadOptions: {
+	            'json': true,
+	            'xml': true,
+	            'sql': true,
+	            'txt': true,
+	            'csv': true,
+	            'xsl': true,
+	            'doc': true,
+	            'pdf': true
+	        },
+	        // search
+	        search: true,
+	        // limit rows and add pager
+	        limitRows: 3,
+	        // config type of data service
+	        dataOptions: {
+	            'localData': true, // mode 1
+	            'fireBase': false, // mode 2
+	            'apiRest': false, // mode 3
+	            'pouchdb': false // mode 4
+	        },
+	        // localData url
+	        localDataUrl: 'localData/tableData.json',
+	        // fireBase url
+	        fireBaseUrl: '',
+	        // pouchDB url
+	        pouchDbUrl: 'localData/tableData.json',
+	        // apiRest url
+	        apiRestGetUrl: '',
+	        apiRestPostUrl: '',
+	        // display table effects
+	        effects: true,
+	        // sort table
+	        sortable: true,
+	        // div container
+	        container: document.getElementById('tableContainer')
+	    };
+
+	    /**
+	     * If we pass an object to the init function with the configuration as we show in config variable, the table 
+	     * be shown with this configuration, if we don't pass any parameter to this function, then automatically takes 
+	     * the default configuration inside config.js file.
+	     * @param {object} - config
+	     */
+	    
+		CET.init(config);
 	</script>
 </body>
 </html>
