@@ -1,5 +1,5 @@
 # Cet
-Cet (Custom editable table) is a library that creates editable and customizable table, the table is dynamically created from a JSON file locally, from Firebase (https://www.firebase.com/) or from an API, also allows you to save the changes you make to it. To configure it you have to do it in the app/config/config.js file.
+Cet (Custom editable table) is a library that creates editable and customizable table, the table can be dynamically created from a JSON file locally, from Firebase (https://www.firebase.com/), from pouchDB (http://pouchdb.com/), or from an API, also allows you to save the changes you make to it. To configure it you have to do it in the app/config/config.js file or pass your own object configuration to the init() function, you can find an example inside app/sample.
 
 ![alt tag](https://cloud.githubusercontent.com/assets/6747489/6547670/199ab132-c5df-11e4-8169-efc78cb2003e.png)
 
@@ -22,12 +22,15 @@ node install
 gulp
 gulp watch
 ```
-And start config all the options inside app/config/config.js.
+And start config all the options inside app/config/config.js or pass your own object configuration to the init() function, you can find an example inside app/sample.
 Once set the options you want in the table, to launch it you must add the following to the end of the body:
 ```js
+// default config
 CET.init();
+// your own config
+CET.init(yourConfigObject);
 ```
-##Options
+##Default Options
 In app/config/config.js you can find all the table default options:
 - Container: Here you must insert the identifier of the box where you want to insert the table.
 ```js
@@ -187,6 +190,7 @@ fireBaseUrl: 'Standard Fireabse url where your data is stored'
 Once configured, your data appear in the table if the json file has the appropriate structure, if you have editable fields, once you make changes to them, they sync with your server data firebase.
 
 - PouchDB:
+The first step should be to install pouchDB, you will find how to do it http://pouchdb.com/guides/setup-pouchdb.html.
 You have two options if the database is not created, simply by creating a file JSON following the appropriate structure and enter the url pointing to that file, into the file config.js and putting pouchDB option to 'true':
 ```js
 // config type of data service
