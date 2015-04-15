@@ -137,7 +137,7 @@
                     optionsContainer.id = 'optionsContainer';
                     optionsContainer.style.display = 'none';
 
-                    if (_cetTable.listOptions !== undefined && typeof _cetTable.listOptions === 'object') {
+                    if (typeof _cetTable.listOptions === 'object') {
                         CET.options.listTableOptions(CET, optionsContainer, tableHeader);
                     }
 
@@ -619,11 +619,13 @@
 
     /**
      * init table
+     * here you can pass your own CET object
+     * with all the properties like in config.js 
      * @param config
      */
 
     cet.init = (config) => {
-        config = config || CET.defaultConfig;
-        cet.table.createTable(config);
+        CET.defaultConfig = config || CET.defaultConfig;
+        cet.table.createTable(CET.defaultConfig);
     };
 })(CET || {});
