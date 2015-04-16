@@ -53,12 +53,17 @@
                 let tds = table.getElementsByClassName(tdClass),
                     column = [],
                     val = [],
-                    isNumeric = false,
+                    isNum = false,
                     obj = CET.defaultConfig;
-                const num = /^\d+$/;
+
+                if (!String.prototype.isNumeric) {
+                    String.prototype.isNumeric = function() {
+                        return !isNaN(parseFloat(this));
+                    }
+                }
 
                 for (let i = 0; i < tds.length; i++) {
-                    isNumeric = !!num.test(tds[i].childNodes[0].value);
+                    isNum = tds[i].childNodes[0].value.isNumeric();
 
                     column.push({
                         "tr": tds[i].parentNode,
@@ -68,12 +73,12 @@
                 }
 
                 if (status === "down") {
-                    if (isNumeric) val.sort((a, b) => a - b);
+                    if (isNum) val.sort((a, b) => a - b);
                     else val.reverse();
 
                     obj.printNewBody(val, column, table);
                 } else {
-                    if (isNumeric) val.sort((a, b) => b - a);
+                    if (isNum) val.sort((a, b) => b - a);
                     else val.sort();
 
                     obj.printNewBody(val, column, table);
