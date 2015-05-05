@@ -153,19 +153,24 @@ describe('Test CET.defaultConfig vars', function() {
 
         if (dataOptions.localData) {
             expect(dataOptionsLocalUrl).toBeTruthy();
+            expect(dataOptionsLocalUrl).toEqual(jasmine.any(String));
         }
 
         if (dataOptions.fireBase) {
             expect(dataOptionsFireUrl).toBeTruthy();
+            expect(dataOptionsFireUrl).toEqual(jasmine.any(String));
         }
 
         if (dataOptions.apiRest) {
             expect(dataOptionsApiGetUrl).toBeTruthy();
+            expect(dataOptionsApiGetUrl).toEqual(jasmine.any(String));
             expect(dataOptionsApiPostUrl).toBeTruthy();
+            expect(dataOptionsApiPostUrl).toEqual(jasmine.any(String));
         }
 
         if (dataOptions.pouchDbUrl) {
             expect(dataOptionsPouchUrl).toBeTruthy();
+            expect(dataOptionsPouchUrl).toEqual(jasmine.any(String));
         }
     });
 
