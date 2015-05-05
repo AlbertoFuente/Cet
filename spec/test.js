@@ -287,16 +287,41 @@ describe('Test CET.defaultConfig vars', function() {
     });
 
     // spy in CET.table
-    var res = null;
+    var res = null,
+        cet = null,
+        fetchObj = null,
+        cons = null,
+        fetchCons = null;
+
     beforeEach(function() {
         global.table = {
             assignClasses: function(str) {
                 res = str;
+            },
+            createTable: function(obj) {
+                cet = obj;
+            },
+            tableConstructor: function(obj) {
+                cons = obj;
+            },
+            getObj: function() {
+                return cet;
+            },
+            getCons: function() {
+                return cons;
             }
         };
 
         spyOn(global.table, 'assignClasses');
+        spyOn(global.table, 'createTable').and.callThrough();
+        spyOn(global.table, 'tableConstructor').and.callThrough();
+
         global.table.assignClasses('newClass');
+        global.table.createTable(globalDC);
+        global.table.tableConstructor(globalDC);
+
+        fetchObj = global.table.getObj();
+        fetchCons = global.table.getCons();
     });
 
     it('Test if CET.table is a object', function() {
@@ -308,11 +333,15 @@ describe('Test CET.defaultConfig vars', function() {
         expect(global.table.assignClasses).toHaveBeenCalledWith(jasmine.any(String));
     });
 
-    it('Test if CET.table.createTable is a function', function() {
+    it('Test if CET.table.createTable is a function and have been called with an Object like CET.defaultConfig', function() {
         expect(cetTableCreateTable).toEqual(jasmine.any(Function));
+        expect(global.table.createTable).toHaveBeenCalledWith(jasmine.any(Object));
+        expect(fetchObj).toEqual(globalDC);
     });
 
-    it('Test if CET.table.tableConstructor is a function', function() {
+    it('Test if CET.table.tableConstructor is a function and have been called with an Object like CET.defaultConfig', function() {
         expect(cetTableTableConstructor).toEqual(jasmine.any(Function));
+        expect(global.table.tableConstructor).toHaveBeenCalledWith(jasmine.any(Object));
+        expect(fetchCons).toEqual(globalDC);
     });
 });
