@@ -1,5 +1,5 @@
 ((cet) => {
-
+    'use strict';
     // CET.table object
     cet.table = {};
 
