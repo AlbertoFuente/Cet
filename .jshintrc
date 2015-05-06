@@ -1,0 +1,17 @@
+{
+    "esnext": true,
+    "eqeqeq": true,
+    "bitwise": true,
+    "forin": true,
+    "strict": true,
+    "noarg": true,
+    "noempty": true,
+    "nonbsp": true,
+    "undef": true,
+    "browser": true,
+    "unused": true,
+    "devel": true,
+    "jasmine": true,
+    "jquery": true,    
+    "indent": 4
+}
