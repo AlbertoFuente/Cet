@@ -65,8 +65,9 @@
 	 */
 
 	cet.services.getLocalData = (cet) => {
-		let data = CET.tableData ||  CET.defaultConfig.tableData,
-			dataConf = CET ||  CET.defaultConfig;
+		let CET = CET,
+			data = CET.tableData || CET.defaultConfig.tableData,
+			dataConf = CET || CET.defaultConfig;
 		if (cet !== undefined) {
 			if (localStorage.getItem("_tableData")) {
 				cet.tableData = JSON.parse(localStorage.getItem("_tableData"));
@@ -76,7 +77,7 @@
 					data = JSON.parse(response);
 					CET.table.tableConstructor(dataConf);
 				}, (error) => {
-					throw new Error(tokenError + url);
+					throw new Error(tokenError + cet.localDataUrl);
 				});
 			}
 		}
@@ -89,7 +90,8 @@
 
 	cet.services.fireBaseData = (cet) => {
 		if (cet !== undefined) {
-			let myFirebaseRef = new Firebase(cet.fireBaseUrl);
+			let myFirebaseRef = new Firebase(cet.fireBaseUrl),
+				CET = CET;
 
 			myFirebaseRef.on("value", (response) => {
 				cet.tableData = response.val();
@@ -106,8 +108,9 @@
 	 */
 
 	cet.services.apiRestData = (url) => {
-		let data = CET.tableData ||  CET.defaultConfig.tableData,
-			dataConf = CET ||  CET.defaultConfig;
+		let CET = CET,
+			data = CET.tableData || CET.defaultConfig.tableData,
+			dataConf = CET || CET.defaultConfig;
 		if (cet !== undefined) {
 			getJsonData(url).then((response) => {
 				data = JSON.parse(response);
@@ -123,7 +126,8 @@
 	 */
 
 	cet.services.pouchDB = (cet, url) => {
-		var db = new PouchDB('cet_database');
+		var db = new PouchDB('cet_database'),
+			CET = CET;
 
 		// table constructor
 
@@ -182,39 +186,45 @@
 
 		var createDB = (url) => {
 			let data = CET.tableData || CET.defaultConfig.tableData;
-			if (url != undefined) {
+			if (url !== undefined) {
 				getJsonData(cet.pouchDbUrl).then((response) => {
 					data = JSON.parse(response);
 					let cetHead = cet.tableData[0].head,
 						cetBody = cet.tableData[0].body;
 
 					for (let i in cetHead) {
-						db.put({
-							'_id': i,
-							'part': 'head',
-							'title': cetHead[i]
-						}).then((response) => {
-							throw response;
-						}).catch((err) => {
-							throw new Error(err);
-						});
-					}
-
-					for (let i in cetBody) {
-						let trInfo = cetBody[i];
-						for (let j in trInfo) {
-							db.post({
-								'tdId': j,
-								'part': 'body',
-								'parentId': i,
-								'title': trInfo[j].data,
-								'edit': trInfo[j].edit,
-								'type': trInfo[j].type
+						if (cetHead.hasOwnProperty(i)) {
+							db.put({
+								'_id': i,
+								'part': 'head',
+								'title': cetHead[i]
 							}).then((response) => {
 								throw response;
 							}).catch((err) => {
 								throw new Error(err);
 							});
+						}
+					}
+
+					for (let i in cetBody) {
+						if (cetBody.hasOwnProperty(i)) {
+							let trInfo = cetBody[i];
+							for (let j in trInfo) {
+								if (trInfo.hasOwnProperty(j)) {
+									db.post({
+										'tdId': j,
+										'part': 'body',
+										'parentId': i,
+										'title': trInfo[j].data,
+										'edit': trInfo[j].edit,
+										'type': trInfo[j].type
+									}).then((response) => {
+										throw response;
+									}).catch((err) => {
+										throw new Error(err);
+									});
+								}
+							}
 						}
 					}
 					dbFetch(db);
@@ -247,9 +257,9 @@
 
 	cet.services.modifyData = (trParent, tdParent, val, mode) => {
 
-		let data = cet.tableData ||  cet.defaultConfig.tableData,
-			firebaseUrl = cet.fireBaseUrl ||  cet.defaultConfig.fireBaseUrl,
-			apiUrl = cet.apiRestPostUrl ||  cet.defaultConfig.apiRestPostUrl;
+		let data = cet.tableData || cet.defaultConfig.tableData,
+			firebaseUrl = cet.fireBaseUrl || cet.defaultConfig.fireBaseUrl,
+			apiUrl = cet.apiRestPostUrl || cet.defaultConfig.apiRestPostUrl;
 
 		data[0].body[trParent][tdParent].data = val;
 
@@ -276,7 +286,7 @@
 				postJsonData(apiUrl, data).then((response) => {
 					throw response;
 				}, (error) => {
-					throw new Error(tokenError + url);
+					throw new Error(tokenError + apiUrl);
 				});
 				break;
 			case 4:

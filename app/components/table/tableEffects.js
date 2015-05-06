@@ -1,4 +1,4 @@
-((cet) => {
+((cet, $) => {
 	'use strict';
 	// CET.effect object
 	cet.effects = {};
@@ -54,12 +54,13 @@
 					column = [],
 					val = [],
 					isNum = false,
+					CET = CET,
 					obj = CET.defaultConfig;
 
 				if (!String.prototype.isNumeric) {
 					String.prototype.isNumeric = function() {
 						return !isNaN(parseFloat(this));
-					}
+					};
 				}
 
 				for (let i = 0; i < tds.length; i++) {
@@ -119,4 +120,4 @@
 				break;
 		}
 	};
-})(CET || {});
+})(CET || {}, jQuery);

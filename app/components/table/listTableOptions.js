@@ -57,7 +57,7 @@
 					parent.appendChild(select);
 				};
 
-				let tData = cet.tableData ||  cet.defaultConfig.tableData,
+				let tData = cet.tableData || cet.defaultConfig.tableData,
 					table = tData[0].head;
 
 				// select graph
@@ -73,7 +73,9 @@
 					xOptions = [];
 
 				for (let k in table) {
-					xOptions.push(table[k]);
+					if (table.hasOwnProperty(k)) {
+						xOptions.push(table[k]);
+					}
 				}
 
 				createConfigOption(selectXaxisTitle, xOptions, modalContainer, selectXId, selectXType);
@@ -84,7 +86,9 @@
 					yOptions = [];
 
 				for (let k in table) {
-					yOptions.push(table[k]);
+					if (table.hasOwnProperty(k)) {
+						yOptions.push(table[k]);
+					}
 				}
 
 				createConfigOption(selectYaxisTitle, yOptions, modalContainer, selectYId, selectYType);
@@ -106,6 +110,7 @@
 				};
 				break;
 			case 'downloads':
+				let CET = CET;
 				// table downloads function
 				if (CET.downloads) {
 					CET.downloads.tableDownloads();
@@ -116,7 +121,7 @@
 				sDownloadLabel.innerHTML = 'Download Options: ';
 				let selectDownload = document.createElement('select');
 
-				if (typeof cet.downloadOptions === 'object' ||  typeof cet.defaultConfig.downloadOptions === 'object') {
+				if (typeof cet.downloadOptions === 'object' || typeof cet.defaultConfig.downloadOptions === 'object') {
 					let down = cet.downloadOptions || cet.defaultConfig.downloadOptions;
 					for (let k in down) {
 						if (down[k]) {
@@ -151,7 +156,7 @@
 				}
 
 				let obj = {},
-					cont = cet.container ||  cet.defaultConfig.container,
+					cont = cet.container || cet.defaultConfig.container,
 					container = cont.childNodes;
 
 				for (let i = 0; i < container.length; i++) {
@@ -164,7 +169,7 @@
 										'name': contChilds[j].childNodes[p].innerText,
 										'data': [],
 										'sum': ''
-									}
+									};
 								}
 							}
 							if (contChilds[j].tagName === 'TBODY') {
@@ -278,9 +283,10 @@
 			parent.appendChild(li);
 
 			li.onclick = () => {
+				let CET = CET;
 				CET.options.openModal(type, cet);
 				CET.options.closeMenu(container, tableHeader);
-			}
+			};
 		};
 		let type = null;
 
