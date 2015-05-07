@@ -110,10 +110,9 @@
 				};
 				break;
 			case 'downloads':
-				let CET = CET;
 				// table downloads function
-				if (CET.downloads) {
-					CET.downloads.tableDownloads();
+				if (cet.downloads) {
+					cet.downloads.tableDownloads();
 				}
 
 				modalHeaderTitle.innerHTML = 'Config downloads options';
@@ -138,7 +137,7 @@
 
 				downButton.onclick = () => {
 					let selected = selectDownload.value;
-					CET.downloads.selectedOption(selected);
+					cet.downloads.selectedOption(selected);
 				};
 
 				modalContainer.appendChild(sDownloadLabel);
@@ -283,9 +282,8 @@
 			parent.appendChild(li);
 
 			li.onclick = () => {
-				let CET = CET;
-				CET.options.openModal(type, cet);
-				CET.options.closeMenu(container, tableHeader);
+				cet.options.openModal(type, cet);
+				cet.options.closeMenu(container, tableHeader);
 			};
 		};
 		let type = null;

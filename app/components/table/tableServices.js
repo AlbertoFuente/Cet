@@ -64,20 +64,17 @@
 	 * @param cet
 	 */
 
-	cet.services.getLocalData = (cet) => {
-		let CET = CET,
-			data = CET.tableData || CET.defaultConfig.tableData,
-			dataConf = CET || CET.defaultConfig;
+	cet.services.getLocalData = () => {
 		if (cet !== undefined) {
 			if (localStorage.getItem("_tableData")) {
-				cet.tableData = JSON.parse(localStorage.getItem("_tableData"));
-				CET.table.tableConstructor(cet);
+				cet.defaultConfig.tableData = JSON.parse(localStorage.getItem("_tableData"));
+				cet.table.tableConstructor(cet.defaultConfig);
 			} else {
 				getJsonData(cet.localDataUrl).then((response) => {
-					data = JSON.parse(response);
-					CET.table.tableConstructor(dataConf);
+					cet.defaultConfig.tableData = JSON.parse(response);
+					cet.table.tableConstructor(cet.defaultConfig);
 				}, (error) => {
-					throw new Error(tokenError + cet.localDataUrl);
+					throw new Error(tokenError + cet.defaultConfig.localDataUrl);
 				});
 			}
 		}
@@ -90,12 +87,11 @@
 
 	cet.services.fireBaseData = (cet) => {
 		if (cet !== undefined) {
-			let myFirebaseRef = new Firebase(cet.fireBaseUrl),
-				CET = CET;
+			let myFirebaseRef = new Firebase(cet.fireBaseUrl);
 
 			myFirebaseRef.on("value", (response) => {
-				cet.tableData = response.val();
-				CET.table.tableConstructor(cet);
+				cet.defaultConfig.tableData = response.val();
+				cet.table.tableConstructor(cet);
 			}, (errorObject) => {
 				throw new Error(tokenErrorRead + errorObject.code);
 			});
@@ -108,13 +104,10 @@
 	 */
 
 	cet.services.apiRestData = (url) => {
-		let CET = CET,
-			data = CET.tableData || CET.defaultConfig.tableData,
-			dataConf = CET || CET.defaultConfig;
 		if (cet !== undefined) {
 			getJsonData(url).then((response) => {
-				data = JSON.parse(response);
-				CET.table.tableConstructor(dataConf);
+				cet.defaultConfig.tableData = JSON.parse(response);
+				cet.table.tableConstructor(cet.defaultConfig);
 			}, (error) => {
 				throw new Error(tokenError + url);
 			});
@@ -126,8 +119,7 @@
 	 */
 
 	cet.services.pouchDB = (cet, url) => {
-		var db = new PouchDB('cet_database'),
-			CET = CET;
+		var db = new PouchDB('cet_database');
 
 		// table constructor
 
@@ -164,7 +156,7 @@
 				}
 				tr.filter(tdFilter);
 			}
-			CET.table.tableConstructor(cet);
+			cet.table.tableConstructor(cet);
 		};
 
 		// fetch all table data
@@ -185,12 +177,11 @@
 		 */
 
 		var createDB = (url) => {
-			let data = CET.tableData || CET.defaultConfig.tableData;
 			if (url !== undefined) {
 				getJsonData(cet.pouchDbUrl).then((response) => {
-					data = JSON.parse(response);
-					let cetHead = cet.tableData[0].head,
-						cetBody = cet.tableData[0].body;
+					cet.defaultConfig.tableData = JSON.parse(response);
+					let cetHead = cet.defaultConfig.tableData[0].head,
+						cetBody = cet.defaultConfig.tableData[0].body;
 
 					for (let i in cetHead) {
 						if (cetHead.hasOwnProperty(i)) {
@@ -231,7 +222,7 @@
 				}, (error) => {
 					throw new Error(tokenError + url);
 				});
-			}
+			};
 		};
 
 		// db info

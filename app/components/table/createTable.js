@@ -1,4 +1,4 @@
-((cet, $) => {
+((cet) => {
     'use strict';
     // CET.table object
     cet.table = {};
@@ -91,7 +91,7 @@
      */
 
     cet.table.tableConstructor = (_cetTable) => {
-        let CET = CET;
+
         if (_cetTable !== undefined) {
             if (_cetTable.header) {
 
@@ -123,7 +123,7 @@
                     tableHeader.appendChild(searchDiv);
 
                     searchInput.onchange = () => {
-                        CET.search.tableSearcher(searchInput.value, _cetTable.tableData);
+                        cet.search.tableSearcher(searchInput.value, _cetTable.tableData);
                     };
                 }
 
@@ -138,7 +138,7 @@
                     optionsContainer.style.display = 'none';
 
                     if (typeof _cetTable.listOptions === 'object') {
-                        CET.options.listTableOptions(CET, optionsContainer, tableHeader);
+                        cet.options.listTableOptions(cet, optionsContainer, tableHeader);
                     }
 
                     tableHeaderOptions.onclick = () => {
@@ -387,7 +387,7 @@
                                 status = 'down';
                             }
                         }
-                        CET.effects.tableEffects(thClass, tdClass, eventName, table, status);
+                        cet.effects.tableEffects(thClass, tdClass, eventName, table, status);
                     };
                 }
                 // datepicker
@@ -439,9 +439,8 @@
 
         _cetTable.mouseEffects = (element, eventName) => {
             let trClass = element.parentNode.parentNode.className,
-                tdClass = element.parentNode.className,
-                CET = CET;
-            CET.effects.tableEffects(trClass, tdClass, eventName, null, null);
+                tdClass = element.parentNode.className;
+            cet.effects.tableEffects(trClass, tdClass, eventName, null, null);
         };
 
         /**
@@ -452,9 +451,8 @@
         _cetTable.inputChange = (element) => {
             let parentClass = element.parentNode.className,
                 val = element.value,
-                trClass = element.parentNode.parentNode.className,
-                CET = CET;
-            CET.services.modifyData(trClass, parentClass, val, _cetTable.mode);
+                trClass = element.parentNode.parentNode.className;
+            cet.services.modifyData(trClass, parentClass, val, _cetTable.mode);
         };
 
         /**
@@ -597,23 +595,22 @@
         };
 
         var setServices = (service) => {
-            let CET = CET;
             switch (service) {
                 case 'localData':
                     _cetTable.mode = 1;
-                    CET.services.getLocalData(_cetTable);
+                    cet.services.getLocalData(_cetTable);
                     break;
                 case 'fireBase':
                     _cetTable.mode = 2;
-                    CET.services.fireBaseData(_cetTable);
+                    cet.services.fireBaseData(_cetTable);
                     break;
                 case 'apiRest':
                     _cetTable.mode = 3;
-                    CET.services.apiRestData(_cetTable.apiRestGetUrl);
+                    cet.services.apiRestData(_cetTable.apiRestGetUrl);
                     break;
                 case 'pouchdb':
                     _cetTable.mode = 4;
-                    CET.services.pouchDB(_cetTable, _cetTable.pouchDbUrl);
+                    cet.services.pouchDB(_cetTable, _cetTable.pouchDbUrl);
                     break;
             }
         };
@@ -656,8 +653,7 @@
      */
 
     cet.init = (config) => {
-        let CET = CET;
-        CET.defaultConfig = config || CET.defaultConfig;
-        cet.table.createTable(CET.defaultConfig);
+        cet.defaultConfig = config || cet.defaultConfig;
+        cet.table.createTable(cet.defaultConfig);
     };
-}(CET || {}, jQuery));
+}(CET || {}));

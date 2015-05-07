@@ -11,7 +11,6 @@
      */
 
     cet.graphs.showModal = () => {
-        let CET = CET;
         let gModal = document.createElement('div');
         gModal.className = 'gModal';
         gModal.id = 'gModal';
@@ -20,7 +19,7 @@
         let closeButton = document.createElement('button');
         closeButton.className = 'closeButton ' + cet.table.assignClasses('closeButton');
 
-        closeButton.onclick = () => CET.options.closeModal(gModal);
+        closeButton.onclick = () => cet.options.closeModal(gModal);
 
         let gContent = document.createElement('canvas');
         gContent.className = 'gContent';
