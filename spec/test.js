@@ -5,8 +5,7 @@
 describe('Test CET.defaultConfig vars', function() {
     'use strict';
     // CET
-    var CET = CET,
-        global = CET,
+    var global = CET,
         globalDC = global.defaultConfig, // CET.defaultCongig
         mat = globalDC.materialize, // CET.defaultCongig.materailize
         bot = globalDC.bootstrap, // CET.defaultCongig.bootstrap
