@@ -337,9 +337,12 @@
 
                 let inputs = table.getElementsByTagName('input'),
                     icons = table.getElementsByTagName('i'),
-                    spans = table.getElementsByTagName('span');
+                    spans = table.getElementsByTagName('span'),
+                    inputLength = inputs.length,
+                    spansLength = spans.length,
+                    inputsLength = icons.length;
                 // inputs events
-                for (let i = 0; i < inputs.length; i++) {
+                for (let i = 0; i < inputLength; i++) {
                     // change
                     inputs[i].onchange = () => _cetTable.inputChange(inputs[i]);
 
@@ -353,7 +356,7 @@
                     }
                 }
                 // spans events
-                for (let i = 0; i < spans.length; i++) {
+                for (let i = 0; i < spansLength; i++) {
                     if (_cetTable.effects) {
                         // hover
                         spans[i].onmouseover = () => _cetTable.mouseEffects(spans[i], 'hover');
@@ -364,7 +367,7 @@
                     }
                 }
                 // icons events
-                for (let i = 0; i < icons.length; i++) {
+                for (let i = 0; i < inputsLength; i++) {
                     // click
                     icons[i].onclick = () => {
                         let thClass = icons[i].parentNode.className,
@@ -374,15 +377,16 @@
                             downClass = cet.table.assignClasses('sortIconDown') + ' sortIcon',
                             upClass = cet.table.assignClasses('sortIconUp') + ' sortIcon',
                             ics = table.getElementsByTagName('i'),
+                            icsLength = ics.length,
                             status = 'down';
                         // check class
                         if (icons[i].className === downClass) {
-                            for (let i = 0; i < ics.length; i++) {
+                            for (let i = 0; i < icsLength; i++) {
                                 ics[i].className = upClass;
                                 status = 'up';
                             }
                         } else {
-                            for (let i = 0; i < ics.length; i++) {
+                            for (let i = 0; i < icsLength; i++) {
                                 ics[i].className = downClass;
                                 status = 'down';
                             }
@@ -417,16 +421,19 @@
 
         _cetTable.printNewBody = (val, column, table) => {
             let tableBody = table.childNodes[1],
-                newColumn = [];
+                newColumn = [],
+                valLength = val.length,
+                columnLength = column.length,
+                newColumnLength = newColumn.length;
 
             tableBody.innerHTML = null;
 
-            for (let i = 0; i < val.length; i++) {
-                for (let j = 0; j < column.length; j++) {
+            for (let i = 0; i < valLength; i++) {
+                for (let j = 0; j < columnLength; j++) {
                     if (val[i] === column[j].value) newColumn.push(column[j].tr);
                 }
             }
-            for (let i = 0; i < newColumn.length; i++) {
+            for (let i = 0; i < newColumnLength; i++) {
                 tableBody.appendChild(newColumn[i]);
             }
         };
@@ -504,9 +511,10 @@
             }
 
             // new table structure
-            let count = 0;
+            let count = 0,
+                objTrLength = obj.tr.length;
 
-            for (let j = 0; j < obj.tr.length; j++) {
+            for (let j = 0; j < objTrLength; j++) {
                 if (j.isPair(_cetTable.limitRows) === 0) count++;
                 obj.pages.push({
                     'page': count,
@@ -524,15 +532,17 @@
             };
             // remove body
             let removeBody = (old) => {
-                for (let i = 0; i < old.length;) {
+                let oldLength = old.length;
+                for (let i = 0; i < oldLength;) {
                     old[i].remove();
                 }
             };
             // get actual page
             actualPage = (oldTrs, direction, ev) => {
-                let page = null;
+                let page = null,
+                    oldTrLength = oldTrs.length;
 
-                for (let i = 0; i < oldTrs.length; i++) {
+                for (let i = 0; i < oldTrLength; i++) {
                     obj.pages.map((a) => {
                         if (a.tr.className === oldTrs[i].className) page = a.page;
                     });
