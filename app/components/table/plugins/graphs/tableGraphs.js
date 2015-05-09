@@ -62,9 +62,10 @@
                 'rgba(255, 152, 0, 0.5)',
                 'rgba(255, 87, 34, 0.5)',
                 'rgba(121, 85, 72, 0.5)'
-            ];
+            ],
+            colorsLenght = colors.length;
 
-            if (index > colors.length) return colors[Math.floor(Math.random() * colors.length)];
+            if (index > colorsLenght) return colors[Math.floor(Math.random() * colorsLenght)];
             else return colors[index];
         };
 
@@ -217,7 +218,9 @@
 
         // compare arrays
         // array length
-        if (xData.length > 0 && xData.length === yData.length) compareArrays.sameLength = true;
+        let xDataLength = xData.length,
+            yDataLength = yData.length;
+        if (xDataLength > 0 && xDataLength === yDataLength) compareArrays.sameLength = true;
 
         // extend String Class with isNumeric fucntion
         if (!String.prototype.isNumeric) {
@@ -227,7 +230,7 @@
         }
 
         // xData
-        for (let i = 0; i < xData.length; i++) {
+        for (let i = 0; i < xDataLength; i++) {
             if (xData[i].isNumeric()) {
                 compareArrays.xAxisIsNum = true;
             } else {
@@ -236,7 +239,7 @@
             }
         }
         // yData
-        for (let j = 0; j < yData.length; j++) {
+        for (let j = 0; j < yDataLength; j++) {
             if (yData[j].isNumeric()) {
                 compareArrays.yAxisIsNum = true;
             } else {
