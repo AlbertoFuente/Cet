@@ -47,8 +47,9 @@
 					selectTypeLabel.innerHTML = selectTitle;
 					parent.appendChild(selectTypeLabel);
 					select.id = selectId;
+					let optionsLength = options.length;
 
-					for (let i = 0; i < options.length; i++) {
+					for (let i = 0; i < optionsLength; i++) {
 						let op = document.createElement('option');
 						op.value = options[i];
 						op.innerHTML = options[i];
@@ -156,14 +157,19 @@
 
 				let obj = {},
 					cont = cet.container || cet.defaultConfig.container,
-					container = cont.childNodes;
+					container = cont.childNodes,
+					containerLength = container.length,
+					contChilds = null,
+					contChildLength = contChilds.length,
+					contChildChildsLength = null;
 
-				for (let i = 0; i < container.length; i++) {
+				for (let i = 0; i < containerLength; i++) {
 					if (container[i].tagName === 'TABLE') {
-						let contChilds = container[i].childNodes;
-						for (let j = 0; j < contChilds.length; j++) {
+						contChilds = container[i].childNodes;
+						for (let j = 0; j < contChildLength; j++) {
 							if (contChilds[j].tagName === 'THEAD') {
-								for (let p = 0; p < contChilds[j].childNodes.length; p++) {
+								contChildChildsLength = contChilds[j].childNodes.length;
+								for (let p = 0; p < contChildChildsLength; p++) {
 									obj[p] = {
 										'name': contChilds[j].childNodes[p].innerText,
 										'data': [],
@@ -172,9 +178,10 @@
 								}
 							}
 							if (contChilds[j].tagName === 'TBODY') {
-								for (let p = 0; p < contChilds[j].childNodes.length; p++) {
-									let trChilds = contChilds[j].childNodes[p].childNodes;
-									for (let c = 0; c < trChilds.length; c++) {
+								for (let p = 0; p < contChildChildsLength; p++) {
+									let trChilds = contChilds[j].childNodes[p].childNodes,
+										trChildsLength = trChilds.length;
+									for (let c = 0; c < trChildsLength; c++) {
 										obj[c].data.push(trChilds[c].lastChild.innerText);
 										obj[c].sum = trChilds[c].lastChild.innerText.isNumeric();
 									}
@@ -206,7 +213,8 @@
 
 					for (let i in obj) {
 						if (res === obj[i].name) {
-							for (let j = 0; j < obj[i].data.length; j++) {
+							let objDataLength = obj[i].data.length;
+							for (let j = 0; j < objDataLength; j++) {
 								total += obj[i].data[j] << 0;
 							}
 						}
