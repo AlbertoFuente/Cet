@@ -18,32 +18,35 @@
 			td = document.getElementsByClassName(tdClass),
 			tdChar = tdClass.slice(-1),
 			thClass = 'th' + tdChar,
-			th = document.getElementsByClassName(thClass);
+			th = document.getElementsByClassName(thClass),
+			thLength = th.length,
+			trLength = tr.length,
+			tdLength = td.length;
 
 		switch (eventName) {
 			case "hover":
-				for (let i = 0; i < th.length; i++) {
+				for (let i = 0; i < thLength; i++) {
 					th[i].setAttribute('style', 'background: rgb(15, 151, 249); color: white');
 				}
-				for (let i = 0; i < tr.length; i++) {
+				for (let i = 0; i < trLength; i++) {
 					tr[i].setAttribute('style', 'background: rgba(15, 151, 249, 0.21)');
 				}
-				for (let i = 0; i < td.length; i++) {
+				for (let i = 0; i < tdLength; i++) {
 					td[i].setAttribute('style', 'background: rgba(15, 151, 249, 0.21)');
 				}
 				break;
 			case "out":
-				for (let i = 0; i < th.length; i++) {
+				for (let i = 0; i < thLength; i++) {
 					if (th[i].hasAttribute('style')) {
 						th[i].removeAttribute('style');
 					}
 				}
-				for (let i = 0; i < tr.length; i++) {
+				for (let i = 0; i < trLength; i++) {
 					if (tr[i].hasAttribute('style')) {
 						tr[i].removeAttribute('style');
 					}
 				}
-				for (let i = 0; i < td.length; i++) {
+				for (let i = 0; i < tdLength; i++) {
 					if (td[i].hasAttribute('style')) {
 						td[i].removeAttribute('style');
 					}
@@ -54,7 +57,8 @@
 					column = [],
 					val = [],
 					isNum = false,
-					obj = cet.defaultConfig;
+					obj = cet.defaultConfig,
+					tdsLength = tds.length;
 
 				if (!String.prototype.isNumeric) {
 					String.prototype.isNumeric = function() {
@@ -62,7 +66,7 @@
 					};
 				}
 
-				for (let i = 0; i < tds.length; i++) {
+				for (let i = 0; i < tdsLength; i++) {
 					isNum = tds[i].childNodes[0].value.isNumeric();
 
 					column.push({
@@ -86,9 +90,11 @@
 
 				// hover & mouse out
 				let inputs = table.getElementsByTagName('input'),
-					spans = table.getElementsByTagName('span');
+					spans = table.getElementsByTagName('span'),
+					inputsLength = inputs.length,
+					spansLength = spans.length;
 				// inputs events
-				for (let i = 0; i < inputs.length; i++) {
+				for (let i = 0; i < inputsLength; i++) {
 					// change
 					inputs[i].parentNode.onchange = () => {
 						obj.inputChange(inputs[i]);
@@ -103,7 +109,7 @@
 					}
 				}
 				// spans events
-				for (let i = 0; i < spans.length; i++) {
+				for (let i = 0; i < spansLength; i++) {
 					if (obj.effects) {
 						// hover
 						spans[i].onmouseover = () => obj.mouseEffects(spans[i], 'hover');
