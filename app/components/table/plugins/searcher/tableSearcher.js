@@ -12,13 +12,14 @@
     cet.search.tableSearcher = (val, tableData) => {
         let obj = {};
         obj.defaultData = tableData[0].body;
-        obj.newData = [];
+        obj.newData = [],
+        objLength = obj.length;
 
         var refreshTable = (obj) => {
             let table = document.getElementById('cetTable'),
                 tableBody = table.childNodes[1];
 
-            for (let i = 0; i < obj.length; i++) {
+            for (let i = 0; i < objLength; i++) {
                 for (let j in tableBody.childNodes) {
                     if (obj[i].tr !== tableBody.childNodes[j].className) {
                         if (tableBody.childNodes[j].tagName === 'TR') {
