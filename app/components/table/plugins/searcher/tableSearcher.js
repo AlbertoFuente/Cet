@@ -12,14 +12,13 @@
     cet.search.tableSearcher = (val, tableData) => {
         let obj = {};
         obj.defaultData = tableData[0].body;
-        obj.newData = [],
-        objLength = obj.length;
+        obj.newData = [];
 
         var refreshTable = (obj) => {
             let table = document.getElementById('cetTable'),
                 tableBody = table.childNodes[1];
 
-            for (let i = 0; i < objLength; i++) {
+            for (let i = 0; i < obj.length; i++) {
                 for (let j in tableBody.childNodes) {
                     if (obj[i].tr !== tableBody.childNodes[j].className) {
                         if (tableBody.childNodes[j].tagName === 'TR') {
@@ -40,9 +39,11 @@
             let table = document.getElementById('cetTable'),
                 tableBody = table.childNodes[1];
             for (let i in tableBody.childNodes) {
-                if (tableBody.childNodes[i].tagName === 'TR') {
-                    if (tableBody.childNodes[i].hasAttribute('style')) {
-                        tableBody.childNodes[i].removeAttribute('style');
+                if (tableBody.childNodes.hasOwnProperty(i)) {
+                    if (tableBody.childNodes[i].tagName === 'TR') {
+                        if (tableBody.childNodes[i].hasAttribute('style')) {
+                            tableBody.childNodes[i].removeAttribute('style');
+                        }
                     }
                 }
             }
