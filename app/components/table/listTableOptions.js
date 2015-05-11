@@ -47,9 +47,8 @@
 					selectTypeLabel.innerHTML = selectTitle;
 					parent.appendChild(selectTypeLabel);
 					select.id = selectId;
-					let optionsLength = options.length;
 
-					for (let i = 0; i < optionsLength; i++) {
+					for (let i = 0; i < options.length; i++) {
 						let op = document.createElement('option');
 						op.value = options[i];
 						op.innerHTML = options[i];
@@ -124,7 +123,7 @@
 				if (typeof cet.downloadOptions === 'object' || typeof cet.defaultConfig.downloadOptions === 'object') {
 					let down = cet.downloadOptions || cet.defaultConfig.downloadOptions;
 					for (let k in down) {
-						if (down[k]) {
+						if (down.hasOwnProperty(k) && down[k]) {
 							let option = document.createElement('option');
 							option.value = k;
 							option.innerHTML = k;
@@ -158,18 +157,14 @@
 				let obj = {},
 					cont = cet.container || cet.defaultConfig.container,
 					container = cont.childNodes,
-					containerLength = container.length,
-					contChilds = null,
-					contChildLength = contChilds.length,
-					contChildChildsLength = null;
+					contChilds = null;
 
-				for (let i = 0; i < containerLength; i++) {
+				for (let i = 0; i < container.length; i++) {
 					if (container[i].tagName === 'TABLE') {
 						contChilds = container[i].childNodes;
-						for (let j = 0; j < contChildLength; j++) {
+						for (let j = 0; j < contChilds.length; j++) {
 							if (contChilds[j].tagName === 'THEAD') {
-								contChildChildsLength = contChilds[j].childNodes.length;
-								for (let p = 0; p < contChildChildsLength; p++) {
+								for (let p = 0; p < contChilds[j].childNodes.length; p++) {
 									obj[p] = {
 										'name': contChilds[j].childNodes[p].innerText,
 										'data': [],
@@ -178,10 +173,9 @@
 								}
 							}
 							if (contChilds[j].tagName === 'TBODY') {
-								for (let p = 0; p < contChildChildsLength; p++) {
-									let trChilds = contChilds[j].childNodes[p].childNodes,
-										trChildsLength = trChilds.length;
-									for (let c = 0; c < trChildsLength; c++) {
+								for (let p = 0; p < contChilds[j].childNodes.length; p++) {
+									let trChilds = contChilds[j].childNodes[p].childNodes;
+									for (let c = 0; c < trChilds.length; c++) {
 										obj[c].data.push(trChilds[c].lastChild.innerText);
 										obj[c].sum = trChilds[c].lastChild.innerText.isNumeric();
 									}
@@ -196,7 +190,7 @@
 				let colSelect = document.createElement('select');
 
 				for (let op in obj) {
-					if (obj[op].sum) {
+					if (obj.hasOwnProperty(op) && obj[op].sum) {
 						let colOption = document.createElement('option');
 						colOption.value = obj[op].name;
 						colOption.innerHTML = obj[op].name;
@@ -212,9 +206,8 @@
 						total = 0;
 
 					for (let i in obj) {
-						if (res === obj[i].name) {
-							let objDataLength = obj[i].data.length;
-							for (let j = 0; j < objDataLength; j++) {
+						if(obj.hasOwnProperty(i) && res === obj[i].name) {
+							for (let j = 0; j < obj[i].data.length; j++) {
 								total += obj[i].data[j] << 0;
 							}
 						}
@@ -256,7 +249,7 @@
 		container.style.display = 'none';
 		let button = tableHeader.childNodes;
 		for (let i in button) {
-			if (button[i].tagName === 'BUTTON') {
+			if (button.hasOwnProperty(i) && button[i].tagName === 'BUTTON') {
 				button[i].className = 'normalButton ' + cet.table.assignClasses('headerButton');
 			}
 		}
