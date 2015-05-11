@@ -57,8 +57,10 @@
 
             var setClasses = (mode) => {
                 for (let key in mode) {
-                    if (key === elementType) {
-                        designClass = materialzeClasses[key];
+                    if (mode.hasOwnProperty(key)) {
+                        if (key === elementType) {
+                            designClass = materialzeClasses[key];
+                        }
                     }
                 }
             };
@@ -337,12 +339,9 @@
 
                 let inputs = table.getElementsByTagName('input'),
                     icons = table.getElementsByTagName('i'),
-                    spans = table.getElementsByTagName('span'),
-                    inputLength = inputs.length,
-                    spansLength = spans.length,
-                    inputsLength = icons.length;
+                    spans = table.getElementsByTagName('span');
                 // inputs events
-                for (let i = 0; i < inputLength; i++) {
+                for (let i = 0; i < inputs.length; i++) {
                     // change
                     inputs[i].onchange = () => _cetTable.inputChange(inputs[i]);
 
@@ -356,7 +355,7 @@
                     }
                 }
                 // spans events
-                for (let i = 0; i < spansLength; i++) {
+                for (let i = 0; i < spans.length; i++) {
                     if (_cetTable.effects) {
                         // hover
                         spans[i].onmouseover = () => _cetTable.mouseEffects(spans[i], 'hover');
@@ -367,7 +366,7 @@
                     }
                 }
                 // icons events
-                for (let i = 0; i < inputsLength; i++) {
+                for (let i = 0; i < icons.length; i++) {
                     // click
                     icons[i].onclick = () => {
                         let thClass = icons[i].parentNode.className,
@@ -377,16 +376,15 @@
                             downClass = cet.table.assignClasses('sortIconDown') + ' sortIcon',
                             upClass = cet.table.assignClasses('sortIconUp') + ' sortIcon',
                             ics = table.getElementsByTagName('i'),
-                            icsLength = ics.length,
                             status = 'down';
                         // check class
                         if (icons[i].className === downClass) {
-                            for (let i = 0; i < icsLength; i++) {
+                            for (let i = 0; i < ics.length; i++) {
                                 ics[i].className = upClass;
                                 status = 'up';
                             }
                         } else {
-                            for (let i = 0; i < icsLength; i++) {
+                            for (let i = 0; i < ics.length; i++) {
                                 ics[i].className = downClass;
                                 status = 'down';
                             }
@@ -421,19 +419,16 @@
 
         _cetTable.printNewBody = (val, column, table) => {
             let tableBody = table.childNodes[1],
-                newColumn = [],
-                valLength = val.length,
-                columnLength = column.length,
-                newColumnLength = newColumn.length;
+                newColumn = [];
 
             tableBody.innerHTML = null;
 
-            for (let i = 0; i < valLength; i++) {
-                for (let j = 0; j < columnLength; j++) {
+            for (let i = 0; i < val.length; i++) {
+                for (let j = 0; j < column.length; j++) {
                     if (val[i] === column[j].value) newColumn.push(column[j].tr);
                 }
             }
-            for (let i = 0; i < newColumnLength; i++) {
+            for (let i = 0; i < newColumn.length; i++) {
                 tableBody.appendChild(newColumn[i]);
             }
         };
@@ -511,11 +506,11 @@
             }
 
             // new table structure
-            let count = 0,
-                objTrLength = obj.tr.length;
+            let count = 0;
 
-            for (let j = 0; j < objTrLength; j++) {
-                if (j.isPair(_cetTable.limitRows) === 0) count++;
+            for (let j = 0; j < obj.tr.length; j++) {
+                if (j.isPair(_cetTable.limitRows) === 0)
+                    count++;
                 obj.pages.push({
                     'page': count,
                     'tr': obj.tr[j]
@@ -526,30 +521,30 @@
             oldView = () => {
                 for (let i in _cetTable.container.childNodes) {
                     if (typeof _cetTable.container.childNodes[i] === 'object') {
-                        if (_cetTable.container.childNodes[i].id === 'cetTable') return _cetTable.container.childNodes[i].childNodes[1].childNodes;
+                        if (_cetTable.container.childNodes[i].id === 'cetTable')
+                            return _cetTable.container.childNodes[i].childNodes[1].childNodes;
                     }
                 }
             };
             // remove body
             let removeBody = (old) => {
-                let oldLength = old.length;
-                for (let i = 0; i < oldLength;) {
+                for (let i = 0; i < old.length;) {
                     old[i].remove();
                 }
             };
             // get actual page
             actualPage = (oldTrs, direction, ev) => {
-                let page = null,
-                    oldTrLength = oldTrs.length;
+                let page = null;
 
-                for (let i = 0; i < oldTrLength; i++) {
+                for (let i = 0; i < oldTrs.length; i++) {
                     obj.pages.map((a) => {
                         if (a.tr.className === oldTrs[i].className) page = a.page;
                     });
                 }
 
                 let insertTrs = (a, cont) => {
-                    if (typeof cont === 'object' && cont.tagName === 'TABLE') cont.childNodes[1].appendChild(a.tr);
+                    if (typeof cont === 'object' && cont.tagName === 'TABLE')
+                        cont.childNodes[1].appendChild(a.tr);
                 };
 
                 let mapPages = (newPage) => {
