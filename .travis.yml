@@ -12,4 +12,5 @@ install:
   - bower install
   - npm install
 script:
+  - gulp
   - "./node_modules/karma/bin/karma start --browsers --single-run"
