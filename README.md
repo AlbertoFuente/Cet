@@ -15,7 +15,7 @@ bower install
 ```
 - Install node dependencies:
 ```
-node install
+npm install
 ```
 - Run gulp:
 ```
