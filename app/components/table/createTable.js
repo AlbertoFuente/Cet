@@ -615,7 +615,7 @@
                     break;
                 case 'pouchdb':
                     _cetTable.mode = 4;
-                    cet.services.pouchDB(_cetTable, _cetTable.pouchDbUrl);
+                    cet.services.pouchDB(cet, _cetTable.pouchDbUrl);
                     break;
             }
         };
