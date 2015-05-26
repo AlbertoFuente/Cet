@@ -87,11 +87,10 @@
 
 	cet.services.fireBaseData = (cet) => {
 		if (cet !== undefined) {
-			let myFirebaseRef = new Firebase(cet.fireBaseUrl);
-
+			let myFirebaseRef = new Firebase(cet.defaultConfig.fireBaseUrl);
 			myFirebaseRef.on("value", (response) => {
 				cet.defaultConfig.tableData = response.val();
-				cet.table.tableConstructor(cet);
+				cet.table.tableConstructor(cet.defaultConfig);
 			}, (errorObject) => {
 				throw new Error(tokenErrorRead + errorObject.code);
 			});
