@@ -25,7 +25,7 @@
          * @param {string} design - 'm': materializecss, 'b': bootstrap.
          */
 
-        var classifyElement = (design) => {
+        let classifyElement = (design) => {
             const materialzeClasses = {
                     searchDiv: 'input-field col s6',
                     searchIcon: 'mdi-action-search prefix',
@@ -56,13 +56,11 @@
                 };
 
             var setClasses = (mode) => {
-                for (let key in mode) {
-                    if (mode.hasOwnProperty(key)) {
-                        if (key === elementType) {
-                            designClass = materialzeClasses[key];
-                        }
+                Object.keys(mode).forEach(function(key) {
+                    if (key === elementType) {
+                        designClass = materialzeClasses[key];
                     }
-                }
+                });
             };
 
             switch (design) {
@@ -194,14 +192,14 @@
                 let tableHead = document.createElement('tHead'),
                     headContent = _cetTable.tableData.head || _cetTable.tableData[0].head;
 
-                for (let k in headContent) {
-                    if (headContent.hasOwnProperty(k) && typeof headContent[k] !== 'function') {
+                Object.keys(headContent).forEach(function(key) {
+                    if (typeof headContent[key] !== 'function') {
                         let th = document.createElement('th');
-                        th.className = k;
+                        th.className = key;
                         let thLabel = document.createElement('span');
-                        thLabel.innerHTML = headContent[k];
-                        thLabel.value = headContent[k];
-                        th.setAttribute('data-field', headContent[k]);
+                        thLabel.innerHTML = headContent[key];
+                        thLabel.value = headContent[key];
+                        th.setAttribute('data-field', headContent[key]);
                         th.appendChild(thLabel);
 
                         if (_cetTable.sortable) {
@@ -211,7 +209,8 @@
                         }
                         tableHead.appendChild(th);
                     }
-                }
+                });
+
                 table.appendChild(tableHead);
 
                 // END HEAD
@@ -240,8 +239,8 @@
                     newBody[a] = bodyContent[a];
                 });
 
-                for (let key in newBody) {
-                    if (newBody.hasOwnProperty(key) && typeof newBody[key] !== 'function') {
+                Object.keys(newBody).forEach(function(key) {
+                    if (typeof newBody[key] !== 'function') {
                         let tr = document.createElement('tr');
                         tr.className = key;
 
@@ -322,7 +321,7 @@
                             tableBody.appendChild(tr);
                         }
                     }
-                }
+                });
 
                 table.appendChild(tableBody);
 
@@ -550,11 +549,9 @@
                 let mapPages = (newPage) => {
                     obj.pages.map((a) => {
                         if (newPage === a.page) {
-                            for (let i in _cetTable.container.childNodes) {
-                                if (_cetTable.container.childNodes.hasOwnProperty(i)) {
-                                    insertTrs(a, _cetTable.container.childNodes[i]);
-                                }
-                            }
+                            Object.keys(_cetTable.container.childNodes).forEach(function(key) {
+                                insertTrs(a, _cetTable.container.childNodes[key]);
+                            });
                         }
                     });
                 };
