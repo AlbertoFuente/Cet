@@ -83,27 +83,22 @@
                         'highlightStroke': 'rgba(220,220,220,1)'
                     }]
                 };
-                for (let i in xData) {
-                    if (xData.hasOwnProperty(i)) {
-                        data.labels.push(xData[i]);
-                    }
-                }
-                for (let i in yData) {
-                    if (yData.hasOwnProperty(i)) {
-                        data.datasets[0].data.push(parseInt(yData[i]));
-                    }
-                }
+                Object.keys(xData).forEach(function(key) {
+                    data.labels.push(xData[key]);
+                });
+                Object.keys(yData).forEach(function(key) {
+                    data.datasets[0].data.push(parseInt(yData[key]));
+                });
 
                 // print graph
                 let bar = document.getElementById("chart").getContext("2d"),
                     barChart = new Chart(bar).Bar(data);
 
-                for (let i in xData) {
-                    if (xData.hasOwnProperty(i)) {
-                        barChart.datasets[0].bars[i].fillColor = colors(i);
-                        barChart.datasets[0].bars[i].strokeColor = colors(i);
-                    }
-                }
+                Object.keys(xData).forEach(function(key) {
+                    barChart.datasets[0].bars[key].fillColor = colors(key);
+                    barChart.datasets[0].bars[key].strokeColor = colors(key);
+                });
+
                 barChart.update();
 
                 break;
@@ -120,16 +115,12 @@
                         'highlightStroke': 'rgba(220,220,220,1)'
                     }]
                 };
-                for (let i in xData) {
-                    if (xData.hasOwnProperty(i)) {
-                        dataLine.labels.push(xData[i]);
-                    }
-                }
-                for (let i in yData) {
-                    if (yData.hasOwnProperty(i)) {
-                        dataLine.datasets[0].data.push(parseInt(yData[i]));
-                    }
-                }
+                Object.keys(xData).forEach(function(key) {
+                    dataLine.labels.push(xData[key]);
+                });
+                Object.keys(yData).forEach(function(key) {
+                    dataLine.datasets[0].data.push(parseInt(yData[key]));
+                });
 
                 // print graph
                 let line = document.getElementById("chart").getContext("2d"),
@@ -138,32 +129,29 @@
                 break;
             case 'Pie chart':
                 let dataPie = [];
-                for (let i in xData) {
-                    if (xData.hasOwnProperty(i)) {
-                        dataPie.push({
-                            'label': xData[i],
-                            'value': parseInt(yData[i]),
-                            'color': colors(i),
-                            'highlight': colors(i)
-                        });
-                    }
-                }
+                Object.keys(xData).forEach(function(key) {
+                    dataPie.push({
+                        'label': xData[key],
+                        'value': parseInt(yData[key]),
+                        'color': colors(key),
+                        'highlight': colors(key)
+                    });
+                });
+
                 // print graph
                 let pie = document.getElementById("chart").getContext("2d"),
                     myPieChart = new Chart(pie).Doughnut(dataPie);
                 break;
             case 'Polar Area chart':
                 let dataPolar = [];
-                for (let i in xData) {
-                    if (xData.hasOwnProperty(i)) {
-                        dataPolar.push({
-                            'label': xData[i],
-                            'value': parseInt(yData[i]),
-                            'color': colors(i),
-                            'highlight': colors(i)
-                        });
-                    }
-                }
+                Object.keys(xData).forEach(function(key) {
+                    dataPolar.push({
+                        'label': xData[key],
+                        'value': parseInt(yData[key]),
+                        'color': colors(key),
+                        'highlight': colors(key)
+                    });
+                });
                 // print graph
                 let polar = document.getElementById("chart").getContext("2d"),
                     myPolarChart = new Chart(polar).PolarArea(dataPolar);
@@ -192,29 +180,22 @@
             compareArrays = {};
 
         // tableHead
-        for (let key in tableHead) {
-            if (tableHead.hasOwnProperty(key)) {
-                if (tableHead[key] === xAxis) xNum = key.slice(-1);
-
-                if (tableHead[key] === yAxis) yNum = key.slice(-1);
-            }
-        }
+        Object.keys(tableHead).forEach(function(key) {
+            if (tableHead[key] === xAxis) xNum = key.slice(-1);
+            if (tableHead[key] === yAxis) yNum = key.slice(-1);
+        });
 
         // tableBody
-        for (let key in tableBody) {
-            if (tableBody.hasOwnProperty(key)) {
-                for (let k in tableBody[key]) {
-                    if (tableBody[key].hasOwnProperty(k)) {
-                        let tdNumX = 'td' + xNum,
-                            tdNumY = 'td' + yNum;
-                        // save xAxis data
-                        if (tdNumX === k) xData.push(tableBody[key][k].data);
-                        // save yAxis data
-                        if (tdNumY === k) yData.push(tableBody[key][k].data);
-                    }
-                }
-            }
-        }
+        Object.keys(tableBody).forEach(function(key) {
+            Object.keys(tableBody[key]).forEach(function(k) {
+                let tdNumX = 'td' + xNum,
+                    tdNumY = 'td' + yNum;
+                // save xAxis data
+                if (tdNumX === k) xData.push(tableBody[key][k].data);
+                // save yAxis data
+                if (tdNumY === k) yData.push(tableBody[key][k].data);
+            });
+        });
 
         // compare arrays
         // array length
