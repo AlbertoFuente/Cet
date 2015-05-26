@@ -607,7 +607,7 @@
                     break;
                 case 'fireBase':
                     _cetTable.mode = 2;
-                    cet.services.fireBaseData(_cetTable);
+                    cet.services.fireBaseData(cet);
                     break;
                 case 'apiRest':
                     _cetTable.mode = 3;
