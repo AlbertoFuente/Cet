@@ -124,9 +124,9 @@
 
 		var constructTable = (result) => {
 			if (typeof result.rows === 'object') {
-				cet.tableData = [{}];
-				cet.tableData[0].head = {};
-				cet.tableData[0].body = {};
+				cet.defaultConfig.tableData = [{}];
+				cet.defaultConfig.tableData[0].head = {};
+				cet.defaultConfig.tableData[0].body = {};
 
 				let tr = [];
 
@@ -134,10 +134,10 @@
 					result.rows.map((a) => {
 						if (a.doc.part === 'body') {
 							if (a.doc.parentId === element) {
-								cet.tableData[0].body[element][a.doc.tdId] = {};
-								cet.tableData[0].body[element][a.doc.tdId].data = a.doc.title;
-								cet.tableData[0].body[element][a.doc.tdId].edit = a.doc.edit;
-								cet.tableData[0].body[element][a.doc.tdId].type = a.doc.type;
+								cet.defaultConfig.tableData[0].body[element][a.doc.tdId] = {};
+								cet.defaultConfig.tableData[0].body[element][a.doc.tdId].data = a.doc.title;
+								cet.defaultConfig.tableData[0].body[element][a.doc.tdId].edit = a.doc.edit;
+								cet.defaultConfig.tableData[0].body[element][a.doc.tdId].type = a.doc.type;
 							}
 						}
 					});
@@ -146,16 +146,16 @@
 				for (let i in result.rows) {
 					// head
 					if (result.rows[i].doc.part === 'head') {
-						cet.tableData[0].head[result.rows[i].doc._id] = result.rows[i].doc.title;
+						cet.defaultConfig.tableData[0].head[result.rows[i].doc._id] = result.rows[i].doc.title;
 						// body
 					} else {
 						tr.push(result.rows[i].doc.parentId);
-						cet.tableData[0].body[result.rows[i].doc.parentId] = {};
+						cet.defaultConfig.tableData[0].body[result.rows[i].doc.parentId] = {};
 					}
 				}
 				tr.filter(tdFilter);
 			}
-			cet.table.tableConstructor(cet);
+			cet.table.tableConstructor(cet.defaultConfig);
 		};
 
 		// fetch all table data
