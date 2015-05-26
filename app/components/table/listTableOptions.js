@@ -72,11 +72,9 @@
 					selectXId = 'selectXaxis',
 					xOptions = [];
 
-				for (let k in table) {
-					if (table.hasOwnProperty(k)) {
-						xOptions.push(table[k]);
-					}
-				}
+				Object.keys(table).forEach(function(key) {
+					xOptions.push(table[key]);
+				});
 
 				createConfigOption(selectXaxisTitle, xOptions, modalContainer, selectXId, selectXType);
 				// select y Axis option
@@ -85,11 +83,9 @@
 					selectYId = 'selectYaxis',
 					yOptions = [];
 
-				for (let k in table) {
-					if (table.hasOwnProperty(k)) {
-						yOptions.push(table[k]);
-					}
-				}
+				Object.keys(table).forEach(function(key) {
+					yOptions.push(table[key]);
+				});
 
 				createConfigOption(selectYaxisTitle, yOptions, modalContainer, selectYId, selectYType);
 
@@ -122,14 +118,15 @@
 
 				if (typeof cet.downloadOptions === 'object' || typeof cet.defaultConfig.downloadOptions === 'object') {
 					let down = cet.downloadOptions || cet.defaultConfig.downloadOptions;
-					for (let k in down) {
-						if (down.hasOwnProperty(k) && down[k]) {
+
+					Object.keys(down).forEach(function(key) {
+						if (down[key]) {
 							let option = document.createElement('option');
-							option.value = k;
-							option.innerHTML = k;
+							option.value = key;
+							option.innerHTML = key;
 							selectDownload.appendChild(option);
 						}
-					}
+					});
 				}
 				let downButton = document.createElement('button');
 				downButton.className = 'doneButton ' + cet.table.assignClasses('normalButton');
@@ -189,14 +186,14 @@
 				colLabel.innerHTML = 'Select column to get the sum:';
 				let colSelect = document.createElement('select');
 
-				for (let op in obj) {
-					if (obj.hasOwnProperty(op) && obj[op].sum) {
+				Object.keys(obj).forEach(function(key) {
+					if (obj[key].sum) {
 						let colOption = document.createElement('option');
-						colOption.value = obj[op].name;
-						colOption.innerHTML = obj[op].name;
+						colOption.value = obj[key].name;
+						colOption.innerHTML = obj[key].name;
 						colSelect.appendChild(colOption);
 					}
-				}
+				});
 
 				let result = document.createElement('label');
 				result.className = 'resultLabel';
@@ -205,13 +202,13 @@
 					let res = colSelect.value,
 						total = 0;
 
-					for (let i in obj) {
-						if(obj.hasOwnProperty(i) && res === obj[i].name) {
-							for (let j = 0; j < obj[i].data.length; j++) {
-								total += obj[i].data[j] << 0;
+					Object.keys(obj).forEach(function(key) {
+						if (res === obj[key].name) {
+							for (let j = 0; j < obj[key].data.length; j++) {
+								total += obj[key].data[j] << 0;
 							}
 						}
-					}
+					});
 					result.innerHTML = 'Total: ' + total;
 				};
 
@@ -248,11 +245,11 @@
 	cet.options.closeMenu = (container, tableHeader) => {
 		container.style.display = 'none';
 		let button = tableHeader.childNodes;
-		for (let i in button) {
-			if (button.hasOwnProperty(i) && button[i].tagName === 'BUTTON') {
-				button[i].className = 'normalButton ' + cet.table.assignClasses('headerButton');
+		Object.keys(button).forEach(function(key) {
+			if (button[key].tagName === 'BUTTON') {
+				button[key].className = 'normalButton ' + cet.table.assignClasses('headerButton');
 			}
-		}
+		});
 	};
 
 	/**
