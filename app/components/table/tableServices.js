@@ -182,41 +182,36 @@
 					let cetHead = cet.defaultConfig.tableData[0].head,
 						cetBody = cet.defaultConfig.tableData[0].body;
 
-					for (let i in cetHead) {
-						if (cetHead.hasOwnProperty(i)) {
-							db.put({
-								'_id': i,
-								'part': 'head',
-								'title': cetHead[i]
+					Object.keys(cetHead).forEach(function(key) {
+						db.put({
+							'_id': key,
+							'part': 'head',
+							'title': cetHead[key]
+						}).then((response) => {
+							throw response;
+						}).catch((err) => {
+							throw new Error(err);
+						});
+					});
+
+					Object.keys(cetBody).forEach(function(key) {
+						let trInfo = cetBody[key];
+						Object.keys(trInfo).forEach(function(k) {
+							db.post({
+								'tdId': k,
+								'part': 'body',
+								'parentId': key,
+								'title': trInfo[k].data,
+								'edit': trInfo[k].edit,
+								'type': trInfo[k].type
 							}).then((response) => {
 								throw response;
 							}).catch((err) => {
 								throw new Error(err);
 							});
-						}
-					}
+						});
+					});
 
-					for (let i in cetBody) {
-						if (cetBody.hasOwnProperty(i)) {
-							let trInfo = cetBody[i];
-							for (let j in trInfo) {
-								if (trInfo.hasOwnProperty(j)) {
-									db.post({
-										'tdId': j,
-										'part': 'body',
-										'parentId': i,
-										'title': trInfo[j].data,
-										'edit': trInfo[j].edit,
-										'type': trInfo[j].type
-									}).then((response) => {
-										throw response;
-									}).catch((err) => {
-										throw new Error(err);
-									});
-								}
-							}
-						}
-					}
 					dbFetch(db);
 				}, (error) => {
 					throw new Error(tokenError + url);
