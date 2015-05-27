@@ -15,5 +15,4 @@ install:
   - bower install
   - npm install
 script:
-  - http-server
   - gulp
