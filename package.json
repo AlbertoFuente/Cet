@@ -4,8 +4,7 @@
   "description": "Custom Editable Table",
   "main": "index.js",
   "scripts": {
-     "start": "http-server",
-     "test": "./node_modules/.bin/karma start --single-run --browsers 'http://localhost:8080/app/sample/'"
+     "test": "./node_modules/.bin/karma start --single-run --browsers"
   },
   "repository": {
     "type": "git",
