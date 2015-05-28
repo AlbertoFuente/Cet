@@ -19,54 +19,54 @@
                 tableBody = table.childNodes[1];
 
             for (let i = 0; i < obj.length; i++) {
-                for (let j in tableBody.childNodes) {
-                    if (obj[i].tr !== tableBody.childNodes[j].className) {
-                        if (tableBody.childNodes[j].tagName === 'TR') {
-                            if (!tableBody.childNodes[j].hasAttribute('style')) {
-                                tableBody.childNodes[j].style.opacity = '0.3'; //For real browsers;
-                                tableBody.childNodes[j].style.filter = "alpha(opacity=30)"; //For IE;
+                Object.keys(tableBody.childNodes).forEach(function(key) {
+                    if (obj[i].tr !== tableBody.childNodes[key].className) {
+                        if (tableBody.childNodes[key].tagName === 'TR') {
+                            if (!tableBody.childNodes[key].hasAttribute('style')) {
+                                tableBody.childNodes[key].style.opacity = '0.3'; //For real browsers;
+                                tableBody.childNodes[key].style.filter = "alpha(opacity=30)"; //For IE;
                             }
                         }
                     } else {
-                        tableBody.childNodes[j].style.opacity = '1'; //For real browsers;
-                        tableBody.childNodes[j].style.filter = "alpha(opacity=100)"; //For IE;
+                        tableBody.childNodes[key].style.opacity = '1'; //For real browsers;
+                        tableBody.childNodes[key].style.filter = "alpha(opacity=100)"; //For IE;
                     }
-                }
+                });
             }
         };
 
         var cleanTable = () => {
             let table = document.getElementById('cetTable'),
                 tableBody = table.childNodes[1];
-            for (let i in tableBody.childNodes) {
-                if (tableBody.childNodes.hasOwnProperty(i)) {
-                    if (tableBody.childNodes[i].tagName === 'TR') {
-                        if (tableBody.childNodes[i].hasAttribute('style')) {
-                            tableBody.childNodes[i].removeAttribute('style');
+            Object.keys(tableBody.childNodes).forEach(function(key) {
+                if (tableBody.childNodes.hasOwnProperty(key)) {
+                    if (tableBody.childNodes[key].tagName === 'TR') {
+                        if (tableBody.childNodes[key].hasAttribute('style')) {
+                            tableBody.childNodes[key].removeAttribute('style');
                         }
                     }
                 }
-            }
+            });
         };
 
         let lowerVal = val.toLowerCase();
 
         if (val !== '') {
-            for (let i in obj.defaultData) {
-                if (obj.defaultData.hasOwnProperty(i)) {
-                    for (let f in obj.defaultData[i]) {
-                        if (obj.defaultData[i].hasOwnProperty(f)) {
-                            var data = obj.defaultData[i][f].data.toLowerCase();
+            Object.keys(obj.defaultData).forEach(function(key) {
+                if (obj.defaultData.hasOwnProperty(key)) {
+                    Object.keys(obj.defaultData[key]).forEach(function(k) {
+                        if (obj.defaultData[key].hasOwnProperty(k)) {
+                            var data = obj.defaultData[key][k].data.toLowerCase();
                             if (data.search(lowerVal) !== -1) {
                                 obj.newData.push({
-                                    'tr': i,
-                                    'tds': obj.defaultData[i]
+                                    'tr': key,
+                                    'tds': obj.defaultData[key]
                                 });
                             }
                         }
-                    }
+                    });
                 }
-            }
+            });
             try {
                 cleanTable();
             } finally {
