@@ -250,68 +250,67 @@
                             tdObjSorted[a] = newBody[key][a];
                         });
 
-                        for (let p in tdObjSorted) {
-                            if (tdObjSorted.hasOwnProperty(p)) {
-                                let td = document.createElement('td');
-                                td.className = p;
-                                if (tdObjSorted[p].data !== undefined && tdObjSorted[p].type !== undefined) {
-                                    if (tdObjSorted[p].edit) {
-                                        let input = document.createElement('input'),
-                                            span = document.createElement('span');
-                                        span.style.display = 'none';
-                                        if (_cetTable.tooltips) {
-                                            input.className = ' input_edit ' + cet.table.assignClasses('tooltip');
-                                            input.setAttribute('data-position', 'bottom');
-                                            input.setAttribute('data-delay', '30');
-                                            input.setAttribute('data-tooltip', 'Edit field: ' + tdObjSorted[p].data);
-                                            input.setAttribute('value', tdObjSorted[p].data);
-                                            span.innerHTML = tdObjSorted[p].data;
-                                            span.setAttribute('value', tdObjSorted[p].data);
-                                        } else {
-                                            input.className = ' input_edit';
-                                            input.setAttribute('value', tdObjSorted[p].data);
-                                            span.innerHTML = tdObjSorted[p].data;
-                                            span.setAttribute('value', tdObjSorted[p].data);
-                                        }
-                                        if (tdObjSorted[p].type === 'date') {
-                                            input.className = cet.table.assignClasses('datePicker') + input.className;
-                                            input.type = 'text';
-                                            input.setAttribute('value', tdObjSorted[p].data);
-                                            input.setAttribute('placeholder', tdObjSorted[p].data);
-                                            span.innerHTML = tdObjSorted[p].data;
-                                            span.setAttribute('value', tdObjSorted[p].data);
-                                        } else {
-                                            input.type = tdObjSorted[p].type;
-                                            input.setAttribute('value', tdObjSorted[p].data);
-                                            span.innerHTML = tdObjSorted[p].data;
-                                            span.setAttribute('value', tdObjSorted[p].data);
-                                        }
-
-                                        td.appendChild(input);
-                                        td.appendChild(span);
+                        Object.keys(tdObjSorted).forEach(function(p) {
+                            let td = document.createElement('td');
+                            td.className = p;
+                            if (tdObjSorted[p].data !== undefined && tdObjSorted[p].type !== undefined) {
+                                if (tdObjSorted[p].edit) {
+                                    let input = document.createElement('input'),
+                                        span = document.createElement('span');
+                                    span.style.display = 'none';
+                                    if (_cetTable.tooltips) {
+                                        input.className = ' input_edit ' + cet.table.assignClasses('tooltip');
+                                        input.setAttribute('data-position', 'bottom');
+                                        input.setAttribute('data-delay', '30');
+                                        input.setAttribute('data-tooltip', 'Edit field: ' + tdObjSorted[p].data);
+                                        input.setAttribute('value', tdObjSorted[p].data);
+                                        span.innerHTML = tdObjSorted[p].data;
+                                        span.setAttribute('value', tdObjSorted[p].data);
                                     } else {
-                                        let noEditLabel = document.createElement('span');
-                                        noEditLabel.className = 'noEditableField';
-                                        noEditLabel.innerHTML = tdObjSorted[p].data;
-                                        noEditLabel.value = tdObjSorted[p].data;
-                                        if (_cetTable.tooltips) {
-                                            noEditLabel.className = noEditLabel.className + ' ' + cet.table.assignClasses('tooltip');
-                                            noEditLabel.setAttribute('data-position', 'bottom');
-                                            noEditLabel.setAttribute('data-delay', '30');
-                                            td.appendChild(noEditLabel);
-                                            let labelParent = noEditLabel.parentNode.className,
-                                                sliceNum = labelParent.slice(-1),
-                                                thClass = 'th' + sliceNum,
-                                                thText = tableHead.getElementsByClassName(thClass)[0].innerText;
-                                            noEditLabel.setAttribute('data-tooltip', thText + ': ' + tdObjSorted[p].data);
-                                        } else {
-                                            td.appendChild(noEditLabel);
-                                        }
+                                        input.className = ' input_edit';
+                                        input.setAttribute('value', tdObjSorted[p].data);
+                                        span.innerHTML = tdObjSorted[p].data;
+                                        span.setAttribute('value', tdObjSorted[p].data);
+                                    }
+                                    if (tdObjSorted[p].type === 'date') {
+                                        input.className = cet.table.assignClasses('datePicker') + input.className;
+                                        input.type = 'text';
+                                        input.setAttribute('value', tdObjSorted[p].data);
+                                        input.setAttribute('placeholder', tdObjSorted[p].data);
+                                        span.innerHTML = tdObjSorted[p].data;
+                                        span.setAttribute('value', tdObjSorted[p].data);
+                                    } else {
+                                        input.type = tdObjSorted[p].type;
+                                        input.setAttribute('value', tdObjSorted[p].data);
+                                        span.innerHTML = tdObjSorted[p].data;
+                                        span.setAttribute('value', tdObjSorted[p].data);
+                                    }
+
+                                    td.appendChild(input);
+                                    td.appendChild(span);
+                                } else {
+                                    let noEditLabel = document.createElement('span');
+                                    noEditLabel.className = 'noEditableField';
+                                    noEditLabel.innerHTML = tdObjSorted[p].data;
+                                    noEditLabel.value = tdObjSorted[p].data;
+                                    if (_cetTable.tooltips) {
+                                        noEditLabel.className = noEditLabel.className + ' ' + cet.table.assignClasses('tooltip');
+                                        noEditLabel.setAttribute('data-position', 'bottom');
+                                        noEditLabel.setAttribute('data-delay', '30');
+                                        td.appendChild(noEditLabel);
+                                        let labelParent = noEditLabel.parentNode.className,
+                                            sliceNum = labelParent.slice(-1),
+                                            thClass = 'th' + sliceNum,
+                                            thText = tableHead.getElementsByClassName(thClass)[0].innerText;
+                                        noEditLabel.setAttribute('data-tooltip', thText + ': ' + tdObjSorted[p].data);
+                                    } else {
+                                        td.appendChild(noEditLabel);
                                     }
                                 }
-                                tr.appendChild(td);
                             }
-                        }
+                            tr.appendChild(td);
+                        });
+
                         if (pager) {
                             trObj.tr.push(tr);
                             trObj.tbBody = tableBody;
